@@ -15,20 +15,20 @@ const items = (data || []).filter(r =>
   (r.cuisine_types || []).some(t => ['בשרי', 'בשר', 'סטייק', 'סטייקהאוס', 'meat', 'steak'].includes(t))
 )
 
-const pageTitle = 'מסעדות בשר בדובאי | Yalla Dubai'
-const pageDescription = 'מסעדות הבשר והסטייק הטובות ביותר בדובאי. סטייקים מעולים, בשר איכותי וחוויות אוכל בלתי נשכחות.'
+const pageTitle = 'מסעדות בשר בבאלי | Yalla Bali'
+const pageDescription = 'מסעדות הבשר והסטייק הטובות ביותר בבאלי. סטייקים מעולים, בשר איכותי וחוויות אוכל בלתי נשכחות.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מסעדות בשר בדובאי',
+  name: 'מסעדות בשר בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -53,10 +53,10 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות בשר בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות בשר בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי היא גן עדן לאוהבי בשר. מסטייקים מיושנים יבש ועד בשר וואגיו יפני —
-        המסעדות בדובאי מציעות את חתיכות הבשר האיכותיות ביותר בעולם.
+        באלי היא גן עדן לאוהבי בשר. מסטייקים מיושנים יבש ועד בשר וואגיו יפני —
+        המסעדות בבאלי מציעות את חתיכות הבשר האיכותיות ביותר בעולם.
       </p>
     </header>
 
@@ -82,55 +82,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות בשר בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות בשר בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדת הסטייק הכי טובה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">דובאי מציעה מסעדות סטייק ברמה עולמית. מסעדות בשר בדובאי משתנות בסגנון — יוקרה או קז'ואל. בדקו את הרשימה שלנו של מסעדות בשר בדובאי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדת הסטייק הכי טובה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">באלי מציעה מסעדות סטייק ברמה עולמית. מסעדות בשר בבאלי משתנות בסגנון — יוקרה או קז'ואל. בדקו את הרשימה שלנו של מסעדות בשר בבאלי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה סטייק במסעדה טובה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">סטייק בדובאי עולה בין 200 ל-800 דירהם תלוי בחתך. מסעדות סטייק בדובאי פרימיום מציעות בשר וואגיו ביותר."""</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה סטייק במסעדה טובה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">סטייק בבאלי עולה בין 200 ל-800 דירהם תלוי בחתך. מסעדות סטייק בבאלי פרימיום מציעות בשר וואגיו ביותר."""</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות בשר כשרות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, יש מסעדות בשר כשרות בדובאי. בשר כשר בדובאי גדל בשנים האחרונות. בדקו את המסעדות הכשרות בדובאי למידע מעודכן.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות בשר כשרות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, יש מסעדות בשר כשרות בבאלי. בשר כשר בבאלי גדל בשנים האחרונות. בדקו את המסעדות הכשרות בבאלי למידע מעודכן.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי בשר זמינים במסעדות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות בשר בדובאי מציעות סוגים מגוונים — Wagyu, Kobe, Prime, וואגיו יפני. בשר בדובאי יכול להיות בן שנה או יותר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי בשר זמינים במסעדות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות בשר בבאלי מציעות סוגים מגוונים — Wagyu, Kobe, Prime, וואגיו יפני. בשר בבאלי יכול להיות בן שנה או יותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הבדל בין סטייק שונים במסעדות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">סטייק בדובאי מעבד בחתכים שונים — ribeye, filet, NY strip. כל סוג סטייק בדובאי תיאור טעם שונה וברמת טדרנס ייחודית.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הבדל בין סטייק שונים במסעדות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">סטייק בבאלי מעבד בחתכים שונים — ribeye, filet, NY strip. כל סוג סטייק בבאלי תיאור טעם שונה וברמת טדרנס ייחודית.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך משמרים בשר טרוז בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות בשר בדובאי שומרות בשר טרוז בכיללים מקצועיים. בשר בדובאי הטוב ביותר מגיע מצמח שומרים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך משמרים בשר טרוז בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות בשר בבאלי שומרות בשר טרוז בכיללים מקצועיים. בשר בבאלי הטוב ביותר מגיע מצמח שומרים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מקום במסעדות בשר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין במסעדות בשר בדובאי, במיוחד בסופי שבוע. מסעדות בשר מפורסמות בדובאי מתמלאות במהירות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מקום במסעדות בשר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין במסעדות בשר בבאלי, במיוחד בסופי שבוע. מסעדות בשר מפורסמות בבאלי מתמלאות במהירות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש במסעדות בשר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">קוד הלבוש במסעדות בשר בדובאי Smart Casual עד פורמלי. יש מסעדות בשר בדובאי פחות קפדניות מאחרות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש במסעדות בשר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">קוד הלבוש במסעדות בשר בבאלי Smart Casual עד פורמלי. יש מסעדות בשר בבאלי פחות קפדניות מאחרות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ההוספות הטובות ביותר עם בשר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בדובאי מסעדות בשר מציעות הוספות — תפוחי אדמה, ירקות, רוטב. בשר בדובאי משמש בצד ירקות איכותיים ומתובלים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ההוספות הטובות ביותר עם בשר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בבאלי מסעדות בשר מציעות הוספות — תפוחי אדמה, ירקות, רוטב. בשר בבאלי משמש בצד ירקות איכותיים ומתובלים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דרגת הצלה (done) המומלצת לבשר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בדרך כלל, בשר בדובאי מומלץ לתבשל rare עד medium-rare כדי לשמור על הטעם ורכות. שפים במסעדות בשר בדובאי יכולים להתאים את דרגת הצלייה לחוק שלכם.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דרגת הצלה (done) המומלצת לבשר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בדרך כלל, בשר בבאלי מומלץ לתבשל rare עד medium-rare כדי לשמור על הטעם ורכות. שפים במסעדות בשר בבאלי יכולים להתאים את דרגת הצלייה לחוק שלכם.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למסעדת בשר בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה למסעדת בשר בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדת בשר בדובאי 🥩')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדת בשר בבאלי 🥩')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl"

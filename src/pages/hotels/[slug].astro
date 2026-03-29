@@ -26,15 +26,15 @@ const amenities = hotel.amenities ?? hotel.metadata?.amenities ?? []
 const address = hotel.address ?? hotel.metadata?.address
 const checkIn = hotel.check_in ?? hotel.metadata?.check_in
 const checkOut = hotel.check_out ?? hotel.metadata?.check_out
-const bookingUrl = hotel.booking_url ?? `https://www.booking.com/search.html?ss=${encodeURIComponent((hotel.name_en || hotel.name_he) + ' Dubai')}&lang=he`
+const bookingUrl = hotel.booking_url ?? `https://www.booking.com/search.html?ss=${encodeURIComponent((hotel.name_en || hotel.name_he) + ' Bali')}&lang=he`
 
 const reviewCount = hotel.review_count ?? hotel.metadata?.review_count ?? 10
 const googleRating = hotel.rating ?? hotel.metadata?.rating
 
 const contentHtml = hotel.full_content ? await marked(hotel.full_content) : ''
 
-const pageTitle = `${hotel.name_he}${hotel.name_en ? ` — ${hotel.name_en}` : ''} | מלונות דובאי | Yalla Dubai`
-const pageDescription = hotel.excerpt || hotel.description || `${hotel.name_he} — מלון בדובאי`
+const pageTitle = `${hotel.name_he}${hotel.name_en ? ` — ${hotel.name_en}` : ''} | מלונות באלי | Yalla Bali`
+const pageDescription = hotel.excerpt || hotel.description || `${hotel.name_he} — מלון בבאלי`
 
 const hotelSchema = {
   '@context': 'https://schema.org',
@@ -61,7 +61,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/hotels/${hotel.slug}`}
+  canonical={`https://yalla-bali.co.il/hotels/${hotel.slug}`}
   ogImage={hotel.image}
   ogType="article"
   schema={hotelSchema}
@@ -152,7 +152,7 @@ const breadcrumbItems = [
           🏨 הזמינו ב-Booking.com
         </a>
         <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מתעניין במלון ${hotel.name_he} בדובאי 🏨`)}`}
+          href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מתעניין במלון ${hotel.name_he} בבאלי 🏨`)}`}
           target="_blank"
           rel="noopener noreferrer"
           dir="rtl" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

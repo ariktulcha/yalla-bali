@@ -14,20 +14,20 @@ const { data } = await supabaseAdmin
 
 const items = data || []
 
-const pageTitle = "ביץ' קלאבים בדובאי | Yalla Dubai"
-const pageDescription = "ביץ' קלאבים מומלצים בדובאי. בריכות, מוזיקה, אוכל ואווירה — החוויה המושלמת ליום על החוף בדובאי."
+const pageTitle = "ביץ' קלאבים בבאלי | Yalla Bali"
+const pageDescription = "ביץ' קלאבים מומלצים בבאלי. בריכות, מוזיקה, אוכל ואווירה — החוויה המושלמת ליום על החוף בבאלי."
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: "ביץ' קלאבים בדובאי",
+  name: "ביץ' קלאבים בבאלי",
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -52,9 +52,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">ביץ' קלאבים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">ביץ' קלאבים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        ביץ' קלאבים הם חלק בלתי נפרד מהחוויה בדובאי. בריכות מפוארות, מוזיקה מדי-ג'יי,
+        ביץ' קלאבים הם חלק בלתי נפרד מהחוויה בבאלי. בריכות מפוארות, מוזיקה מדי-ג'יי,
         אוכל ושתייה על שפת הים — הנה המקומות שחייבים לבקר בהם.
       </p>
     </header>
@@ -79,14 +79,14 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — ביץ' קלאבים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — ביץ' קלאבים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה כניסה לביץ' קלאב בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה כניסה לביץ' קלאב בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">מחירי כניסה נעים בין 100-500 דירהם, תלוי ביום ובמקום. רוב המקומות מציעים מינימום צריכה שכולל אוכל ושתייה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הביץ' קלאב הכי טוב בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הביץ' קלאב הכי טוב בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">הבחירה תלויה בהעדפה שלכם — יש ביץ' קלאבים שקטים ואלגנטיים ויש כאלה עם מסיבות ומוזיקה חזקה. בדקו את הרשימה שלנו למציאת המתאים לכם.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
@@ -94,40 +94,40 @@ const breadcrumbItems = [
           <p class="mt-2 text-white/60 leading-relaxed">מומלץ מאוד, במיוחד בסופי שבוע ובעונה (נובמבר-מרץ). הזמנה מראש מבטיחה לכם מקום ולפעמים גם מחיר טוב יותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שעות פתיחה של ביץ' קלאבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בדובאי בדרך כלל פתוחים מ-10:00 בבוקר עד שקיעה וחלק מהם ממשיכים כברים בלילה. ביץ' קלאבים בדובאי פתוחים בימים אמצע שבוע וסוף שבוע.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שעות פתיחה של ביץ' קלאבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בבאלי בדרך כלל פתוחים מ-10:00 בבוקר עד שקיעה וחלק מהם ממשיכים כברים בלילה. ביץ' קלאבים בבאלי פתוחים בימים אמצע שבוע וסוף שבוע.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי בריכות בביץ' קלאבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בדובאי מציעים בריכות אינסוף מחוממות, בריכות שחייה קטנות ובריכות עם אזורי יושיבה שקועים. ביץ' קלאבים בדובאי עם בריכות גדולות מעניקים חוויית ספא מלאה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי בריכות בביץ' קלאבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בבאלי מציעים בריכות אינסוף מחוממות, בריכות שחייה קטנות ובריכות עם אזורי יושיבה שקועים. ביץ' קלאבים בבאלי עם בריכות גדולות מעניקים חוויית ספא מלאה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המזון בביץ' קלאבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בדובאי מציעים מתכונים בינלאומיים: פיצה, פסטה, סלטים, פרי ים וקבב. ביץ' קלאבים בדובאי מומלצים מספקים מוקד גאורמה עם מתבחנים בשפים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המזון בביץ' קלאבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בבאלי מציעים מתכונים בינלאומיים: פיצה, פסטה, סלטים, פרי ים וקבב. ביץ' קלאבים בבאלי מומלצים מספקים מוקד גאורמה עם מתבחנים בשפים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מוזיקה בביץ' קלאבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, ביץ' קלאבים בדובאי מעסיקים דיג'יים אורחים וליבים שמגיעים מהשעה שקיעה. ביץ' קלאבים בדובאי עם מוזיקה כזו מעניקים אווירה דיסקוטקית על החוף.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מוזיקה בביץ' קלאבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, ביץ' קלאבים בבאלי מעסיקים דיג'יים אורחים וליבים שמגיעים מהשעה שקיעה. ביץ' קלאבים בבאלי עם מוזיקה כזו מעניקים אווירה דיסקוטקית על החוף.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אזורים טובים לביץ' קלאבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בדובאי נמצאים בפאלם ג'ומיירה, JBR וחוף ג'ומיירה. ביץ' קלאבים בדובאי בפאלם מציעים פרטיות יותר בעוד ב-JBR יותר בתוך הצברה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אזורים טובים לביץ' קלאבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בבאלי נמצאים בפאלם ג'ומיירה, JBR וחוף ג'ומיירה. ביץ' קלאבים בבאלי בפאלם מציעים פרטיות יותר בעוד ב-JBR יותר בתוך הצברה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דרס קוד לביץ' קלאב בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">לביץ' קלאבים בדובאי קוד לבוש קז'ואלי — בגדי ים, כנדליים וטי-שירט בסדר. ביץ' קלאבים בדובאי יוקרתיים דורשים Smart Casual בערב.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דרס קוד לביץ' קלאב בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">לביץ' קלאבים בבאלי קוד לבוש קז'ואלי — בגדי ים, כנדליים וטי-שירט בסדר. ביץ' קלאבים בבאלי יוקרתיים דורשים Smart Casual בערב.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות בביץ' קלאבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בדובאי מציעים שחייה, איור, נשמור בבריכה, טניס חולי וישיבה בשמש. ביץ' קלאבים בדובאי עם מרכזי כושר גם מציעים יוגה על החוף.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות בביץ' קלאבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ביץ' קלאבים בבאלי מציעים שחייה, איור, נשמור בבריכה, טניס חולי וישיבה בשמש. ביץ' קלאבים בבאלי עם מרכזי כושר גם מציעים יוגה על החוף.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה לביץ' קלאב בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה לביץ' קלאב בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent("היי, אני מחפש ביץ' קלאב בדובאי 🏖️")}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent("היי, אני מחפש ביץ' קלאב בבאלי 🏖️")}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

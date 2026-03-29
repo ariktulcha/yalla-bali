@@ -12,20 +12,20 @@ const { data: items } = await supabaseAdmin
 
 const tours = items || []
 
-const title = 'ספארי וטיולים בדובאי | Yalla Dubai'
-const description = 'טיולי מדבר, ספארי, שייט בדאו ועוד טיולים מומלצים בדובאי. הזמנה ישירה, מחירים ופרטים מלאים.'
+const title = 'ספארי וטיולים בבאלי | Yalla Bali'
+const description = 'טיולי מדבר, ספארי, שייט בדאו ועוד טיולים מומלצים בבאלי. הזמנה ישירה, מחירים ופרטים מלאים.'
 
 const schemaItemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'טיולים וספארי בדובאי',
+  name: 'טיולים וספארי בבאלי',
   description,
   numberOfItems: tours.length,
   itemListElement: tours.map((t, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: t.name_he,
-    url: `https://yalla-dubai.co.il/tours/${t.slug}`,
+    url: `https://yalla-bali.co.il/tours/${t.slug}`,
   })),
 }
 
@@ -33,7 +33,7 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: 'https://yalla-dubai.co.il/' },
+    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: 'https://yalla-bali.co.il/' },
     { '@type': 'ListItem', position: 2, name: 'טיולים וספארי' },
   ],
 }
@@ -50,9 +50,9 @@ const breadcrumbSchema = {
         <span class="mx-2">/</span>
         <span class="text-white/60">טיולים וספארי</span>
       </nav>
-      <h1 class="text-4xl md:text-5xl font-black mb-4">ספארי וטיולים בדובאי</h1>
+      <h1 class="text-4xl md:text-5xl font-black mb-4">ספארי וטיולים בבאלי</h1>
       <p class="text-lg text-white/60 max-w-2xl mx-auto">
-        ספארי במדבר, טיולי ג׳יפים, שייט בדאו מסורתי ועוד חוויות שאסור לפספס בדובאי.
+        ספארי במדבר, טיולי ג׳יפים, שייט בדאו מסורתי ועוד חוויות שאסור לפספס בבאלי.
       </p>
       <p class="mt-4 text-teal-400 font-medium">{tours.length} טיולים</p>
     </div>
@@ -79,7 +79,7 @@ const breadcrumbSchema = {
         <span class="inline-block px-4 py-2 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold mb-4">🔜 בקרוב</span>
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">טיולים שאנחנו בונים עבורכם</h2>
         <p class="text-white/70 max-w-2xl mx-auto leading-relaxed">
-          בימים אלו אנחנו מפתחים סיורים מרתקים בדובאי. בעזרתכם נבחר את הטיולים הטובים ביותר לפי הדרישות והעניינים שלכם.
+          בימים אלו אנחנו מפתחים סיורים מרתקים בבאלי. בעזרתכם נבחר את הטיולים הטובים ביותר לפי הדרישות והעניינים שלכם.
         </p>
       </div>
 
@@ -88,8 +88,8 @@ const breadcrumbSchema = {
         <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-8 hover:border-teal-500/40 transition-all">
           <div class="flex items-start justify-between mb-4">
             <div>
-              <h3 class="text-2xl font-bold text-teal-400 mb-2">סיור בעיר העתיקה של דובאי 🏛️</h3>
-              <p class="text-white/60 text-sm mb-4">טיול היסטורי בעיר העתיקה — בסתיו הנושן של דובאי, עם סיפורים מרתקים על עבר המרפא</p>
+              <h3 class="text-2xl font-bold text-teal-400 mb-2">סיור בעיר העתיקה של באלי 🏛️</h3>
+              <p class="text-white/60 text-sm mb-4">טיול היסטורי בעיר העתיקה — בסתיו הנושן של באלי, עם סיפורים מרתקים על עבר המרפא</p>
             </div>
           </div>
           <div class="mb-6 space-y-2">
@@ -107,7 +107,7 @@ const breadcrumbSchema = {
             </div>
           </div>
           <a
-            href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני רוצה לשמוע עוד על סיור בעיר העתיקה של דובאי 🏛️')}`}
+            href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני רוצה לשמוע עוד על סיור בעיר העתיקה של באלי 🏛️')}`}
             target="_blank"
             rel="noopener noreferrer"
             dir="rtl"
@@ -121,8 +121,8 @@ const breadcrumbSchema = {
         <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-8 hover:border-teal-500/40 transition-all">
           <div class="flex items-start justify-between mb-4">
             <div>
-              <h3 class="text-2xl font-bold text-teal-400 mb-2">סיור קולינרי בשווקים של דובאי 🍜</h3>
-              <p class="text-white/60 text-sm mb-4">טיול טעימים דרך שווקי דובאי — אוכל מקומי, תרבות וחוויה אמיתית בדובאי המקומית</p>
+              <h3 class="text-2xl font-bold text-teal-400 mb-2">סיור קולינרי בשווקים של באלי 🍜</h3>
+              <p class="text-white/60 text-sm mb-4">טיול טעימים דרך שווקי באלי — אוכל מקומי, תרבות וחוויה אמיתית בבאלי המקומית</p>
             </div>
           </div>
           <div class="mb-6 space-y-2">
@@ -140,7 +140,7 @@ const breadcrumbSchema = {
             </div>
           </div>
           <a
-            href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מעוניין בסיור קולינרי בשווקים של דובאי 🍜')}`}
+            href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מעוניין בסיור קולינרי בשווקים של באלי 🍜')}`}
             target="_blank"
             rel="noopener noreferrer"
             dir="rtl"
@@ -154,7 +154,7 @@ const breadcrumbSchema = {
       <div class="text-center">
         <p class="text-white/70 mb-4">רוצים להציע טיול משלכם או לדעת כמתי יהיה זמין?</p>
         <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני רוצה לשמוע עוד על הטיולים שלכם בדובאי 🗺️')}`}
+          href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני רוצה לשמוע עוד על הטיולים שלכם בבאלי 🗺️')}`}
           target="_blank"
           rel="noopener noreferrer"
           dir="rtl"

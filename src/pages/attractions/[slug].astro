@@ -29,8 +29,8 @@ const openingHours = attraction.opening_hours ?? attraction.metadata?.opening_ho
 
 const contentHtml = attraction.full_content ? await marked(attraction.full_content) : ''
 
-const pageTitle = `${attraction.name_he}${attraction.name_en ? ` — ${attraction.name_en}` : ''} | אטרקציות בדובאי | Yalla Dubai`
-const pageDescription = attraction.excerpt || attraction.description || `${attraction.name_he} — אטרקציה בדובאי`
+const pageTitle = `${attraction.name_he}${attraction.name_en ? ` — ${attraction.name_en}` : ''} | אטרקציות בבאלי | Yalla Bali`
+const pageDescription = attraction.excerpt || attraction.description || `${attraction.name_he} — אטרקציה בבאלי`
 
 const attractionSchema = {
   '@context': 'https://schema.org',
@@ -58,7 +58,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/attractions/${attraction.slug}`}
+  canonical={`https://yalla-bali.co.il/attractions/${attraction.slug}`}
   ogImage={attraction.image}
   ogType="article"
   schema={attractionSchema}
@@ -141,7 +141,7 @@ const breadcrumbItems = [
           </a>
         )}
         <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מתכנן ביקור ב${attraction.name_he} בדובאי ורוצה עזרה 🎡`)}`}
+          href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מתכנן ביקור ב${attraction.name_he} בבאלי ורוצה עזרה 🎡`)}`}
           target="_blank"
           rel="noopener noreferrer"
           dir="rtl"

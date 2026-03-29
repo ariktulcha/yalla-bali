@@ -38,8 +38,8 @@ if (openingHours) {
 
 const contentHtml = venue.full_content ? await marked(venue.full_content) : ''
 
-const pageTitle = `${venue.name_he}${venue.name_en ? ` — ${venue.name_en}` : ''} | חיי לילה בדובאי | Yalla Dubai`
-const pageDescription = venue.excerpt || venue.description || `${venue.name_he} — חיי לילה בדובאי`
+const pageTitle = `${venue.name_he}${venue.name_en ? ` — ${venue.name_en}` : ''} | חיי לילה בבאלי | Yalla Bali`
+const pageDescription = venue.excerpt || venue.description || `${venue.name_he} — חיי לילה בבאלי`
 
 const venueSchema = {
   '@context': 'https://schema.org',
@@ -63,7 +63,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/nightlife/${venue.slug}`}
+  canonical={`https://yalla-bali.co.il/nightlife/${venue.slug}`}
   ogImage={venue.image}
   ogType="article"
   schema={venueSchema}
@@ -131,9 +131,9 @@ const breadcrumbItems = [
     )}
 
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">אהבתם את {venue.name_he}? רוצים עוד המלצות לחיי לילה בדובאי?</p>
+      <p class="text-white/80 mb-4">אהבתם את {venue.name_he}? רוצים עוד המלצות לחיי לילה בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש המלצות לחיי לילה בדובאי 🍸')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש המלצות לחיי לילה בבאלי 🍸')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

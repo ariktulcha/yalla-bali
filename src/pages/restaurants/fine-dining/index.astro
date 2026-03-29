@@ -15,20 +15,20 @@ const items = (data || []).filter(r =>
   (r.cuisine_types || []).some(t => ['Fine Dining', 'fine dining', 'fine-dining', 'פיין דיינינג', 'מולקולרי', 'מולקולרית'].includes(t))
 )
 
-const pageTitle = 'מסעדות Fine Dining בדובאי | Yalla Dubai'
-const pageDescription = 'מסעדות היוקרה והפיין דיינינג הטובות ביותר בדובאי. חוויות אוכל ברמה עולמית עם שפים מוכשרים ואווירה יוקרתית.'
+const pageTitle = 'מסעדות Fine Dining בבאלי | Yalla Bali'
+const pageDescription = 'מסעדות היוקרה והפיין דיינינג הטובות ביותר בבאלי. חוויות אוכל ברמה עולמית עם שפים מוכשרים ואווירה יוקרתית.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מסעדות Fine Dining בדובאי',
+  name: 'מסעדות Fine Dining בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -53,9 +53,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות Fine Dining בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות Fine Dining בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי היא אחת מבירות הקולינריה של העולם, עם מסעדות פיין דיינינג שמציעות חוויות אוכל בלתי נשכחות.
+        באלי היא אחת מבירות הקולינריה של העולם, עם מסעדות פיין דיינינג שמציעות חוויות אוכל בלתי נשכחות.
         שפים מהשורה הראשונה, עיצוב מרהיב ותפריטים שמשלבים מסורת וחדשנות.
       </p>
     </header>
@@ -82,55 +82,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות Fine Dining בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות Fine Dining בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה ארוחה במסעדת פיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מחירי ארוחה במסעדות פיין דיינינג בדובאי נעים בין 300 ל-1,500 דירהם לאדם. מסעדות פיין דיינינג בדובאי מציעות תפריטי טעימות עם מחירים משתנים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה ארוחה במסעדת פיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מחירי ארוחה במסעדות פיין דיינינג בבאלי נעים בין 300 ל-1,500 דירהם לאדם. מסעדות פיין דיינינג בבאלי מציעות תפריטי טעימות עם מחירים משתנים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך להזמין מקום במסעדת יוקרה בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בהחלט. מסעדות פיין דיינינג מובילות בדובאי דורשות הזמנה מראש, לפעמים שבועות קדימה. יש מסעדות פיין דיינינג בדובאי שמתמלאות רבות חודשים קדימה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך להזמין מקום במסעדת יוקרה בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בהחלט. מסעדות פיין דיינינג מובילות בבאלי דורשות הזמנה מראש, לפעמים שבועות קדימה. יש מסעדות פיין דיינינג בבאלי שמתמלאות רבות חודשים קדימה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש בפיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">רוב מסעדות פיין דיינינג בדובאי דורשות Smart Casual לפחות. קוד הלבוש בדובאי פיין דיינינג: אין כפכפים, מכנסיים קצרים או חולצות גופייה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש בפיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">רוב מסעדות פיין דיינינג בבאלי דורשות Smart Casual לפחות. קוד הלבוש בבאלי פיין דיינינג: אין כפכפים, מכנסיים קצרים או חולצות גופייה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה שפים כוכבי מישלן יש במסעדות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">לדובאי יש מספר מסעדות פיין דיינינג עם שפים בעלי כוכבי מישלן. מסעדות בדובאי של שפים מובילים בעולם מציעות חוויות קולינריות בלתי נשכחות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה שפים כוכבי מישלן יש במסעדות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">לבאלי יש מספר מסעדות פיין דיינינג עם שפים בעלי כוכבי מישלן. מסעדות בבאלי של שפים מובילים בעולם מציעות חוויות קולינריות בלתי נשכחות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו מטבחות מוצגים במסעדות פיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות פיין דיינינג בדובאי מציעות מטבחות מגוונים — צרפתי, איטלקי, עדכני, יפני ועוד. פיין דיינינג בדובאי משלב מטבח בינלאומי בגבוה ביותר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו מטבחות מוצגים במסעדות פיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות פיין דיינינג בבאלי מציעות מטבחות מגוונים — צרפתי, איטלקי, עדכני, יפני ועוד. פיין דיינינג בבאלי משלב מטבח בינלאומי בגבוה ביותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות פיין דיינינג כשרות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">חלק מהמסעדות הפיין דיינינג בדובאי מציעות אפשרויות כשרות. יש מסעדות פיין דיינינג בדובאי שיכולות להתאים לדרישות כשרות בהסכמה מראש.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות פיין דיינינג כשרות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">חלק מהמסעדות הפיין דיינינג בבאלי מציעות אפשרויות כשרות. יש מסעדות פיין דיינינג בבאלי שיכולות להתאים לדרישות כשרות בהסכמה מראש.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מהו הדרס קוד של מטיילים בפיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מטיילים בדובאי לפיין דיינינג מומלצים להתחזות בלבוש פורמלי או Smart Casual. דובאי פיין דיינינג דורשת לבוש עלוב וגמיש.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מהו הדרס קוד של מטיילים בפיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מטיילים בבאלי לפיין דיינינג מומלצים להתחזות בלבוש פורמלי או Smart Casual. באלי פיין דיינינג דורשת לבוש עלוב וגמיש.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הממוצע מחיר וקטגוריה בפיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות פיין דיינינג בדובאי מחולקות לקטגוריות מחיר — מנומסות יותר (300-500 דירהם) עד יוקרתיות (1,000+ דירהם). פיין דיינינג בדובאי מתאים לכל תקציב.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הממוצע מחיר וקטגוריה בפיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות פיין דיינינג בבאלי מחולקות לקטגוריות מחיר — מנומסות יותר (300-500 דירהם) עד יוקרתיות (1,000+ דירהם). פיין דיינינג בבאלי מתאים לכל תקציב.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך בוחרים בין מסעדות פיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בחרו מסעדת פיין דיינינג בדובאי לפי השף, הטבח, האווירה וההערות. מסעדות פיין דיינינג בדובאי הטובות ביותר קיבלו דירוגים גבוהים מטיילים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך בוחרים בין מסעדות פיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בחרו מסעדת פיין דיינינג בבאלי לפי השף, הטבח, האווירה וההערות. מסעדות פיין דיינינג בבאלי הטובות ביותר קיבלו דירוגים גבוהים מטיילים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה כלול בתפריט הטעימות של פיין דיינינג בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">תפריט הטעימות (tasting menu) בפיין דיינינג בדובאי כולל 6-12 מנות קטנות של קאלינריה מושקעת. מסעדות פיין דיינינג בדובאי עם תפריט טעימות מציעות חוויה גסטרונומית בלתי נשכחת.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה כלול בתפריט הטעימות של פיין דיינינג בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">תפריט הטעימות (tasting menu) בפיין דיינינג בבאלי כולל 6-12 מנות קטנות של קאלינריה מושקעת. מסעדות פיין דיינינג בבאלי עם תפריט טעימות מציעות חוויה גסטרונומית בלתי נשכחת.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למסעדת יוקרה בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה למסעדת יוקרה בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדת Fine Dining בדובאי 🍽️')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדת Fine Dining בבאלי 🍽️')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl"

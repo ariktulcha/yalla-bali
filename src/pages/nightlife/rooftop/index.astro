@@ -20,20 +20,20 @@ const items = (data || []).filter(n =>
   )
 )
 
-const pageTitle = 'רופטופ בארים בדובאי | Yalla Dubai'
-const pageDescription = 'רופטופ בארים מובילים בדובאי. שתייה עם נוף פנורמי של קו הרקיע של דובאי — החוויה הכי יפה בעיר.'
+const pageTitle = 'רופטופ בארים בבאלי | Yalla Bali'
+const pageDescription = 'רופטופ בארים מובילים בבאלי. שתייה עם נוף פנורמי של קו הרקיע של באלי — החוויה הכי יפה בעיר.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'רופטופ בארים בדובאי',
+  name: 'רופטופ בארים בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -58,9 +58,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">רופטופ בארים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">רופטופ בארים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי, עם גורדי השחקים שלה, מציעה רופטופ בארים עם הנוף הכי מרשים בעולם.
+        באלי, עם גורדי השחקים שלה, מציעה רופטופ בארים עם הנוף הכי מרשים בעולם.
         קוקטיילים ברמה גבוהה, אווירה רומנטית ופנורמה עוצרת נשימה.
       </p>
     </header>
@@ -85,51 +85,51 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — רופטופ בארים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — רופטופ בארים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הרופטופ בר הכי גבוה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">דובאי מתהדרת במספר רופטופ בארים בגבהים מרשימים. חלקם ממוקמים בקומות 40-70 של מלונות יוקרה, עם נוף פנורמי של כל העיר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הרופטופ בר הכי גבוה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">באלי מתהדרת במספר רופטופ בארים בגבהים מרשימים. חלקם ממוקמים בקומות 40-70 של מלונות יוקרה, עם נוף פנורמי של כל העיר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי הזמן הכי טוב לבקר ברופטופ בר?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">שעת השקיעה (17:00-19:00) היא הזמן המושלם — תוכלו ליהנות מהנוף באור יום ולראות את העיר נדלקת. מומלץ להגיע מוקדם לתפוס מקום טוב.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך הזמנה לרופטופ בר בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך הזמנה לרופטופ בר בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">מומלץ מאוד להזמין מראש, במיוחד בסופי שבוע ובעונת התיירות. רופטופ בארים פופולריים מתמלאים מהר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים של משקאות ברופטופ בר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">משקאות ברופטופ בר בדובאי עולים בין 60-150 דירהם לקוקטייל. רופטופ בארים ביוקרה בדובאי יכולים להיות יקרים יותר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים של משקאות ברופטופ בר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">משקאות ברופטופ בר בבאלי עולים בין 60-150 דירהם לקוקטייל. רופטופ בארים ביוקרה בבאלי יכולים להיות יקרים יותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה רופטופ בר בדובאי טוב לתאריך?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">רופטופ בארים רומנטיים בדובאי: Atlantis Sky Lounge, At.mosphere, Nobu Lounge. אווירה רומנטית ונוף מדהים מעניקים לתאריך את השקיעה הבלתי נשכחת בדובאי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה רופטופ בר בבאלי טוב לתאריך?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">רופטופ בארים רומנטיים בבאלי: Atlantis Sky Lounge, At.mosphere, Nobu Lounge. אווירה רומנטית ונוף מדהים מעניקים לתאריך את השקיעה הבלתי נשכחת בבאלי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטובים ביותר רופטופ בארים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">רופטופ בארים מובילים בדובאי: Cé La Vi, Nobu Lounge, Skyview Bar. רופטופ בארים בדובאי המובילים מציעים קוקטיילים מעולים ונוף עוצר נשימה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטובים ביותר רופטופ בארים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">רופטופ בארים מובילים בבאלי: Cé La Vi, Nobu Lounge, Skyview Bar. רופטופ בארים בבאלי המובילים מציעים קוקטיילים מעולים ונוף עוצר נשימה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש דרס קוד לרופטופ בר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">קוד הלבוש הוא Smart Casual עד Dressy. רופטופ בארים בדובאי לא מקבלים שורטס, כפכפים או גופיות. חשוב להתלבש בהגינות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש דרס קוד לרופטופ בר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">קוד הלבוש הוא Smart Casual עד Dressy. רופטופ בארים בבאלי לא מקבלים שורטס, כפכפים או גופיות. חשוב להתלבש בהגינות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אוכל מוגש ברופטופ בארים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">רופטופ בארים בדובאי מציעים בדרך כלל אפטיזרים ואוכל קל. חלק מהם גם יש מסעדות בתוך הרופטופ בר בדובאי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אוכל מוגש ברופטופ בארים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">רופטופ בארים בבאלי מציעים בדרך כלל אפטיזרים ואוכל קל. חלק מהם גם יש מסעדות בתוך הרופטופ בר בבאלי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזו גיל מינימום לרופטופ בר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">גיל מינימום הוא בדרך כלל 18-21 שנים. רופטופ בארים בדובאי דורשים תעודת זהות בתוקף. רופטופ בארים בדובאי עם אלכוהול דורשים גיל מוגבל.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזו גיל מינימום לרופטופ בר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">גיל מינימום הוא בדרך כלל 18-21 שנים. רופטופ בארים בבאלי דורשים תעודת זהות בתוקף. רופטופ בארים בבאלי עם אלכוהול דורשים גיל מוגבל.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה לרופטופ בר בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה לרופטופ בר בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש רופטופ בר בדובאי 🌃')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש רופטופ בר בבאלי 🌃')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

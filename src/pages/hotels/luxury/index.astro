@@ -11,27 +11,27 @@ const { data } = await supabaseAdmin
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
 
-// Luxury = 5-star hotels (all premium brands in Dubai are 5-star)
+// Luxury = 5-star hotels (all premium brands in Bali are 5-star)
 const LUXURY_BRANDS = ['בורג', 'ארמאני', 'אטלנטיס', 'Four Seasons', 'Mandarin', 'Waldorf', 'Jumeirah', 'Raffles', 'One&Only', 'ואן אנד אונלי', 'קמפינסקי', 'Kempinski', 'ריץ', 'Ritz', 'Park Hyatt', 'Bulgari']
 const items = (data || []).filter(h =>
   h.star_rating >= 5 ||
   LUXURY_BRANDS.some(b => (h.name_he || '').includes(b) || (h.name_en || '').includes(b))
 )
 
-const pageTitle = 'מלונות יוקרה בדובאי | Yalla Dubai'
-const pageDescription = 'מלונות היוקרה המובילים בדובאי. חוויות אירוח ברמה הגבוהה ביותר — סוויטות מפוארות, ספא עולמי ושירות אישי.'
+const pageTitle = 'מלונות יוקרה בבאלי | Yalla Bali'
+const pageDescription = 'מלונות היוקרה המובילים בבאלי. חוויות אירוח ברמה הגבוהה ביותר — סוויטות מפוארות, ספא עולמי ושירות אישי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מלונות יוקרה בדובאי',
+  name: 'מלונות יוקרה בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/hotels/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/hotels/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -57,9 +57,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות יוקרה בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות יוקרה בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי מגדירה מחדש את מושג היוקרה. מלונות כמו בורג' אל ערב ואטלנטיס
+        באלי מגדירה מחדש את מושג היוקרה. מלונות כמו בורג' אל ערב ואטלנטיס
         מציעים חוויה שאין כמותה — סוויטות עם נוף פנורמי, ספא ברמה עולמית ושירות מושלם.
       </p>
     </header>
@@ -85,55 +85,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות יוקרה בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות יוקרה בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מלון היוקרה הכי טוב בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בורג' אל ערב הוא מלון יוקרה בדובאי הדברי. מלונות יוקרה בדובאי אחרים: אטלנטיס, ארמאני, פור סיזנס. בחר מלון יוקרה בדובאי לפי העדפה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מלון היוקרה הכי טוב בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בורג' אל ערב הוא מלון יוקרה בבאלי הדברי. מלונות יוקרה בבאלי אחרים: אטלנטיס, ארמאני, פור סיזנס. בחר מלון יוקרה בבאלי לפי העדפה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה לילה במלון יוקרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בדובאי עולה מ-1,000 דירהם ללילה וקי. מלנות יוקרה בדובאי יכול להגיע ל-20,000 דירהם לסוויטה. מלון יוקרה בדובאי יקר במיוחד.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה לילה במלון יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי עולה מ-1,000 דירהם ללילה וקי. מלנות יוקרה בבאלי יכול להגיע ל-20,000 דירהם לסוויטה. מלון יוקרה בבאלי יקר במיוחד.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה כולל מלון יוקרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בדובאי כולל: ספא, מסעדות, בריכות אינסוף, חוף פרטי. מלון יוקרה בדובאי מספק שירות באטלר וטרנספורט.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה כולל מלון יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי כולל: ספא, מסעדות, בריכות אינסוף, חוף פרטי. מלון יוקרה בבאלי מספק שירות באטלר וטרנספורט.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו מלונות יוקרה בדובאי עם חוף פרטי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בדובאי על חוף: בורג' אל ערב, אטלנטיס, פור סיזנס. מלון יוקרה בדובאי עם חוף פרטי יקר יותר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו מלונות יוקרה בבאלי עם חוף פרטי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי על חוף: בורג' אל ערב, אטלנטיס, פור סיזנס. מלון יוקרה בבאלי עם חוף פרטי יקר יותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה משפחות טובות למלון יוקרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בדובאי מתאים למשפחות עשירות או לחתן וכלה. מלונות יוקרה בדובאי מרוויחים מעמדות מיוחדים לאירועים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה משפחות טובות למלון יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי מתאים למשפחות עשירות או לחתן וכלה. מלונות יוקרה בבאלי מרוויחים מעמדות מיוחדים לאירועים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון יוקרה בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מלון יוקרה בדובאי צריך הזמנה לפחות חודשיים. מלונות יוקרה בדובאי מתמלאים במהירות בעונה גבוהה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון יוקרה בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מלון יוקרה בבאלי צריך הזמנה לפחות חודשיים. מלונות יוקרה בבאלי מתמלאים במהירות בעונה גבוהה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי סוויטות במלונות יוקרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בדובאי מציע: סוויטות מלכותיות, פנטהאוס, סוויטות עם מטבח. מלון יוקרה בדובאי עם סוויטות ממש מפוארות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי סוויטות במלונות יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי מציע: סוויטות מלכותיות, פנטהאוס, סוויטות עם מטבח. מלון יוקרה בבאלי עם סוויטות ממש מפוארות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדות בדובאי מלון יוקרה?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בדובאי כולל מסעדות זכירי. מלון יוקרה בדובאי מציע מטבח צרפתי, איטלקי, אסייתי. כל מלון יוקרה בדובאי עם שפים מעולים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדות בבאלי מלון יוקרה?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי כולל מסעדות זכירי. מלון יוקרה בבאלי מציע מטבח צרפתי, איטלקי, אסייתי. כל מלון יוקרה בבאלי עם שפים מעולים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה בורג' אל ערב מיוחד בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בורג' אל ערב הוא סמל יוקרה בדובאי עם מלון יוקרה בדובאי במוצא. בורג' אל ערב סוויטה עם ברך לים ביל וגלריה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה בורג' אל ערב מיוחד בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בורג' אל ערב הוא סמל יוקרה בבאלי עם מלון יוקרה בבאלי במוצא. בורג' אל ערב סוויטה עם ברך לים ביל וגלריה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ספא מצעה מלונות יוקרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בדובאי מציעים ספא עולמיים עם טיפולים פרימיום. ספא במלונות יוקרה בדובאי כולל עיסוי, טיפולי פנים וטיפולים גוניים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ספא מצעה מלונות יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי מציעים ספא עולמיים עם טיפולים פרימיום. ספא במלונות יוקרה בבאלי כולל עיסוי, טיפולי פנים וטיפולים גוניים.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים עזרה בבחירת מלון יוקרה בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים עזרה בבחירת מלון יוקרה בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון יוקרה בדובאי ✨')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון יוקרה בבאלי ✨')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

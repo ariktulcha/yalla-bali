@@ -20,20 +20,20 @@ const items = (data || []).filter(h =>
   )
 )
 
-const pageTitle = 'מלונות משפחתיים בדובאי | Yalla Dubai'
-const pageDescription = 'מלונות משפחתיים מומלצים בדובאי. מלונות עם מועדוני ילדים, בריכות, חדרים מרווחים ופעילויות לכל המשפחה.'
+const pageTitle = 'מלונות משפחתיים בבאלי | Yalla Bali'
+const pageDescription = 'מלונות משפחתיים מומלצים בבאלי. מלונות עם מועדוני ילדים, בריכות, חדרים מרווחים ופעילויות לכל המשפחה.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מלונות משפחתיים בדובאי',
+  name: 'מלונות משפחתיים בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/hotels/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/hotels/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -59,9 +59,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות משפחתיים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות משפחתיים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        מתכננים טיול משפחתי לדובאי? בחרנו עבורכם את המלונות המתאימים ביותר למשפחות —
+        מתכננים טיול משפחתי לבאלי? בחרנו עבורכם את המלונות המתאימים ביותר למשפחות —
         עם מועדוני ילדים, בריכות שחייה, סוויטות מרווחות ופעילויות לכל הגילאים.
       </p>
     </header>
@@ -87,55 +87,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות משפחתיים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות משפחתיים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האזור הכי טוב למשפחות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בדובאי נמצאים בJBR ופאלם ג'ומיירה. אזורי מלונות משפחתיים בדובאי קרובים לחוף וקל. דאונטאון דובאי טוב למשפחות שרוצות אטרקציות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האזור הכי טוב למשפחות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בבאלי נמצאים בJBR ופאלם ג'ומיירה. אזורי מלונות משפחתיים בבאלי קרובים לחוף וקל. דאונטאון באלי טוב למשפחות שרוצות אטרקציות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם ילדים מתקבלים בכל מלונות משפחתיים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מלונות משפחתיים בדובאי מקבלים ילדים בשמחה. מלונות משפחתיים בדובאי מציעים מועדוני ילדים ופעילויות משפחתיות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם ילדים מתקבלים בכל מלונות משפחתיים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מלונות משפחתיים בבאלי מקבלים ילדים בשמחה. מלונות משפחתיים בבאלי מציעים מועדוני ילדים ופעילויות משפחתיות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מלונות משפחתיים עם פארקי מים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מלונות משפחתיים בדובאי כמו אטלנטיס כוללים פארקי מים. מלונות משפחתיים בדובאי עם פארקים טובים לילדים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מלונות משפחתיים עם פארקי מים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מלונות משפחתיים בבאלי כמו אטלנטיס כוללים פארקי מים. מלונות משפחתיים בבאלי עם פארקים טובים לילדים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים של מלונות משפחתיים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בדובאי עולים בין 250-2,000 דירהם ללילה. מלון משפחתי בדובאי משתנה בעונה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים של מלונות משפחתיים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בבאלי עולים בין 250-2,000 דירהם ללילה. מלון משפחתי בבאלי משתנה בעונה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה סוגי חדרים יש במלונות משפחתיים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בדובאי מציעים: חדרים משפחתיים, סוויטות עם חדרי ישון נפרדים. מלון משפחתי בדובאי מרווח לעולם.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה סוגי חדרים יש במלונות משפחתיים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בבאלי מציעים: חדרים משפחתיים, סוויטות עם חדרי ישון נפרדים. מלון משפחתי בבאלי מרווח לעולם.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הפעילויות למשפחות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בדובאי מציעים: מועדוני ילדים, בריכות, אטרקציות קרובות. מלון משפחתי בדובאי עשוי להיות עם אנימציה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הפעילויות למשפחות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בבאלי מציעים: מועדוני ילדים, בריכות, אטרקציות קרובות. מלון משפחתי בבאלי עשוי להיות עם אנימציה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון משפחתי בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מלון משפחתי בדובאי מוקדם כדי לקבל חדר טוב. מלונות משפחתיים בדובאי פופולריים במהלך חגים וחופשות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון משפחתי בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מלון משפחתי בבאלי מוקדם כדי לקבל חדר טוב. מלונות משפחתיים בבאלי פופולריים במהלך חגים וחופשות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שירותים נוספים של מלונות משפחתיים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בדובאי מציעים: בייביסיטר, אתיקט משפחתי, מסעדות בחירה. שירותי מלון משפחתי בדובאי מתוכננים לנוחות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שירותים נוספים של מלונות משפחתיים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בבאלי מציעים: בייביסיטר, אתיקט משפחתי, מסעדות בחירה. שירותי מלון משפחתי בבאלי מתוכננים לנוחות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מלונות משפחתיים הטובים ביותר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים מובילים בדובאי: אטלנטיס, פור סיזנס, מריוט. כל מלון משפחתי בדובאי זה מעולה עבור משפחות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מלונות משפחתיים הטובים ביותר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים מובילים בבאלי: אטלנטיס, פור סיזנס, מריוט. כל מלון משפחתי בבאלי זה מעולה עבור משפחות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אטרקציות קרובות למלונות משפחתיים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בדובאי קרובים לדובאי מול, פארק קבוצה, אסטוריק מלוני. מלונות משפחתיים בדובאי ממוקומים ליד אטרקציות צעירים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אטרקציות קרובות למלונות משפחתיים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות משפחתיים בבאלי קרובים לבאלי מול, פארק קבוצה, אסטוריק מלוני. מלונות משפחתיים בבאלי ממוקומים ליד אטרקציות צעירים.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">צריכים עזרה בבחירת מלון למשפחה בדובאי?</p>
+      <p class="text-white/80 mb-4">צריכים עזרה בבחירת מלון למשפחה בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון משפחתי בדובאי 👨‍👩‍👧‍👦')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון משפחתי בבאלי 👨‍👩‍👧‍👦')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

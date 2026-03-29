@@ -14,20 +14,20 @@ const { data } = await supabaseAdmin
 
 const items = data || []
 
-const pageTitle = 'מועדונים בדובאי | Yalla Dubai'
-const pageDescription = 'המועדונים הטובים ביותר בדובאי. מועדוני ריקודים, מסיבות ודי-ג\'יים בינלאומיים — חיי הלילה של דובאי במיטבם.'
+const pageTitle = 'מועדונים בבאלי | Yalla Bali'
+const pageDescription = 'המועדונים הטובים ביותר בבאלי. מועדוני ריקודים, מסיבות ודי-ג\'יים בינלאומיים — חיי הלילה של באלי במיטבם.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מועדונים בדובאי',
+  name: 'מועדונים בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -52,9 +52,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מועדונים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מועדונים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        חיי הלילה בדובאי לוהטים ומגוונים. מועדונים עם די-ג'יים בינלאומיים,
+        חיי הלילה בבאלי לוהטים ומגוונים. מועדונים עם די-ג'יים בינלאומיים,
         מערכות סאונד מתקדמות ואווירה שלא תשכחו. הנה המועדונים שחייבים להכיר.
       </p>
     </header>
@@ -79,51 +79,51 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מועדונים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מועדונים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שעות הפעילות של מועדונים בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שעות הפעילות של מועדונים בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">רוב המועדונים פותחים בין 22:00-23:00 ונסגרים בין 3:00-4:00 בלילה. בסופי שבוע (חמישי-שישי) חלק מהמקומות פתוחים עד מאוחר יותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה כניסה למועדון בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כניסה למועדון בדובאי עולה בין 100-300 דירהם, לפעמים כולל שתייה. בלילות מיוחדים עם די-ג'יים בינלאומיים המחיר יכול להיות גבוה יותר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה כניסה למועדון בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כניסה למועדון בבאלי עולה בין 100-300 דירהם, לפעמים כולל שתייה. בלילות מיוחדים עם די-ג'יים בינלאומיים המחיר יכול להיות גבוה יותר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש במועדונים בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש במועדונים בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">קוד הלבוש הוא Smart Casual עד Dressy. נעליים סגורות חובה, ללא כפכפים, שורטס או גופיות. מומלץ להתלבש אלגנטי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המועדונים הטובים ביותר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מועדונים מובילים בדובאי: Hive, STORY, Dady'O. מועדונים בדובאי אלה משכנעים בדיג'יים בינלאומיים, תאורה מתקדמת ואווירה מדהימה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המועדונים הטובים ביותר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מועדונים מובילים בבאלי: Hive, STORY, Dady'O. מועדונים בבאלי אלה משכנעים בדיג'יים בינלאומיים, תאורה מתקדמת ואווירה מדהימה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך הזמנה למועדון בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">הזמנה מראש מומלצת למועדונים בדובאי, במיוחד בחמישי-שישי. מועדונים בדובאי פופולריים מתמלאים מהר וההזמנה יכולה להבטיח מקום משובח.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך הזמנה למועדון בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">הזמנה מראש מומלצת למועדונים בבאלי, במיוחד בחמישי-שישי. מועדונים בבאלי פופולריים מתמלאים מהר וההזמנה יכולה להבטיח מקום משובח.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי המוזיקה במועדונים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בדובאי משדרים: House, Techno, Hip-Hop, وجنرות בינלאומיות. מועדונים בדובאי שונים מתמחים ביוצרים מוזיקה שונה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי המוזיקה במועדונים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בבאלי משדרים: House, Techno, Hip-Hop, وجنرות בינלאומיות. מועדונים בבאלי שונים מתמחים ביוצרים מוזיקה שונה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מערכות הסאונד במועדונים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בדובאי משתמשים בציוד סאונד מתקדם מהיצרנים המובילים בתחום כמו Funktion-One. מערכות הסאונד במועדונים בדובאי מספקות חוויה אקוסטית גבוהה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מערכות הסאונד במועדונים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בבאלי משתמשים בציוד סאונד מתקדם מהיצרנים המובילים בתחום כמו Funktion-One. מערכות הסאונד במועדונים בבאלי מספקות חוויה אקוסטית גבוהה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דיג'יים בינלאומיים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בדובאי מארחים דיג'יים מפורסמים מעולם כמו Mark Knight, Vini Vici וSlushii. דיג'יים בינלאומיים במועדונים בדובאי מופיעים בערבים מיוחדים וכנסי EDM.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דיג'יים בינלאומיים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בבאלי מארחים דיג'יים מפורסמים מעולם כמו Mark Knight, Vini Vici וSlushii. דיג'יים בינלאומיים במועדונים בבאלי מופיעים בערבים מיוחדים וכנסי EDM.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שתייה בדובאי כלכלי טוב במועדונים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בדובאי מציעים פרימיום בכניסה עם שתייה כלולה. בחלק מהמועדונים בדובאי יש Bottle Service בקבוצות גדולות בעלות טובה יותר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שתייה בבאלי כלכלי טוב במועדונים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מועדונים בבאלי מציעים פרימיום בכניסה עם שתייה כלולה. בחלק מהמועדונים בבאלי יש Bottle Service בקבוצות גדולות בעלות טובה יותר.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למועדון בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה למועדון בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מועדון בדובאי 🎶')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מועדון בבאלי 🎶')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

@@ -13,20 +13,20 @@ const { data } = await supabaseAdmin
 
 const items = (data || []).filter(a => a.is_free === true || a.price_range === 'חינם' || a.price_range === 'free')
 
-const pageTitle = 'אטרקציות חינם בדובאי | Yalla Dubai'
-const pageDescription = 'אטרקציות חינם בדובאי שאפשר ליהנות מהן ללא תשלום. חופים, גנים, מזרקות, שווקים ועוד — חוויות בחינם בדובאי.'
+const pageTitle = 'אטרקציות חינם בבאלי | Yalla Bali'
+const pageDescription = 'אטרקציות חינם בבאלי שאפשר ליהנות מהן ללא תשלום. חופים, גנים, מזרקות, שווקים ועוד — חוויות בחינם בבאלי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'אטרקציות חינם בדובאי',
+  name: 'אטרקציות חינם בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/attractions/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/attractions/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -49,10 +49,10 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">אטרקציות חינם בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">אטרקציות חינם בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי לא חייבת להיות יקרה. יש המון אטרקציות חינמיות מדהימות —
-        ממזרקת דובאי דרך חופים יפהפיים ועד שווקים מסורתיים ומופעי אור.
+        באלי לא חייבת להיות יקרה. יש המון אטרקציות חינמיות מדהימות —
+        ממזרקת באלי דרך חופים יפהפיים ועד שווקים מסורתיים ומופעי אור.
       </p>
     </header>
 
@@ -77,51 +77,51 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — אטרקציות חינם בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — אטרקציות חינם בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אפשר לעשות בדובאי בחינם?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">דובאי מציעה הרבה חוויות חינם: מזרקת דובאי, חופים ציבוריים, שוק הזהב ושוק התבלינים, הליכה לאורך מרינה דובאי, גן הפרפרים (לילדים מתחת לגיל 3), ועוד.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אפשר לעשות בבאלי בחינם?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">באלי מציעה הרבה חוויות חינם: מזרקת באלי, חופים ציבוריים, שוק הזהב ושוק התבלינים, הליכה לאורך מרינה באלי, גן הפרפרים (לילדים מתחת לגיל 3), ועוד.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם החופים בדובאי בחינם?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, רוב החופים הציבוריים בדובאי הם בחינם — כולל JBR Beach, Kite Beach ו-La Mer Beach. חופים פרטיים של מלונות דורשים תשלום.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם החופים בבאלי בחינם?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, רוב החופים הציבוריים בבאלי הם בחינם — כולל JBR Beach, Kite Beach ו-La Mer Beach. חופים פרטיים של מלונות דורשים תשלום.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי מופע מזרקת דובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מזרקת דובאי פועלת כל יום מ-18:00 עד 23:00, עם מופע כל 30 דקות. הצפייה חינמית לגמרי ומומלצת מאוד.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי מופע מזרקת באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מזרקת באלי פועלת כל יום מ-18:00 עד 23:00, עם מופע כל 30 דקות. הצפייה חינמית לגמרי ומומלצת מאוד.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה השווקים החינם בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בדובאי כוללות שווקים מסורתיים: שוק הזהב, שוק התבלינים, שוק דבי וסוק אל-בהار. סיור באטרקציות חינם בדובאי הוא חוויה תרבותית עמוקה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה השווקים החינם בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בבאלי כוללות שווקים מסורתיים: שוק הזהב, שוק התבלינים, שוק דבי וסוק אל-בהار. סיור באטרקציות חינם בבאלי הוא חוויה תרבותית עמוקה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקים חינם בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בדובאי כוללות פארקים: Zabeel Park (חינם ביום מסוים), Al Mamzar Beach Park (עם דמי כניסה זעומים). פארקים בדובאי מציעים שדות ירוקים ובריכות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקים חינם בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בבאלי כוללות פארקים: Zabeel Park (חינם ביום מסוים), Al Mamzar Beach Park (עם דמי כניסה זעומים). פארקים בבאלי מציעים שדות ירוקים ובריכות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מוזיאונים חינם בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בדובאי כוללות מוזיאונים: דובאי מוזיאום (ימים מסוימים), בניין הירה (ללא תשלום להיכנס). אטרקציות חינם בדובאי תרבותיות מעניקות הבנה של ההיסטוריה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מוזיאונים חינם בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בבאלי כוללות מוזיאונים: באלי מוזיאום (ימים מסוימים), בניין הירה (ללא תשלום להיכנס). אטרקציות חינם בבאלי תרבותיות מעניקות הבנה של ההיסטוריה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אירועים חינם בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בדובאי כוללות אירועים תרבותיים במשך השנה. קונצרטים בחינם, מופעי אור וארוע חורף בדובאי מקדמים תיירות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אירועים חינם בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בבאלי כוללות אירועים תרבותיים במשך השנה. קונצרטים בחינם, מופעי אור וארוע חורף בבאלי מקדמים תיירות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הזמן הטוב ביותר לבקר באטרקציות חינם בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בדובאי טובות במיוחד בחורף (נובמבר-מרץ) כשהמזג אוויר נעים. אטרקציות חינם בדובאי בקיץ חמות מאוד אך פחות עמוסות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הזמן הטוב ביותר לבקר באטרקציות חינם בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בבאלי טובות במיוחד בחורף (נובמבר-מרץ) כשהמזג אוויר נעים. אטרקציות חינם בבאלי בקיץ חמות מאוד אך פחות עמוסות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך להגיע לאטרקציות חינם בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בדובאי נגישות בתחבורה ציבורית, מוניות וקרנה שכרה. הרכבת מטרו בדובאי מגיעה למרבית אטרקציות חינם בדובאי בעלות נמוכה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך להגיע לאטרקציות חינם בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות חינם בבאלי נגישות בתחבורה ציבורית, מוניות וקרנה שכרה. הרכבת מטרו בבאלי מגיעה למרבית אטרקציות חינם בבאלי בעלות נמוכה.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים לדעת עוד על אטרקציות חינם בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים לדעת עוד על אטרקציות חינם בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש אטרקציות חינם בדובאי 🎡')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש אטרקציות חינם בבאלי 🎡')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl"

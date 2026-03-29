@@ -1,8 +1,8 @@
-# Yalla Dubai — Astro Rebuild Brief
+# Yalla Bali — Astro Rebuild Brief
 
 ## Context
-You are rebuilding the yalla-dubai tourism website from scratch using Astro + Supabase.
-The existing Next.js project is at ~/Projects/yalla-dubai — use it as a REFERENCE for:
+You are rebuilding the yalla-bali tourism website from scratch using Astro + Supabase.
+The existing Next.js project is at ~/Projects/yalla-bali — use it as a REFERENCE for:
 - Special page content (markdown text, UI sections)
 - Component logic and data structures
 - Existing styling patterns
@@ -20,7 +20,7 @@ The existing Bali site (different content types, same approach) is at ~/Projects
 ```
 SUPABASE_URL=https://nsfmucsdxhcywisejxxq.supabase.co
 SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zZm11Y3NkeGhjeXdpc2VqeHhxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDMzOTAwNywiZXhwIjoyMDg5OTE1MDA3fQ.xwTYYmf4r0fd_u8q5RQpNYCnygROD8BA0vY20ehkrBc
-DESTINATION_ID=dubai
+DESTINATION_ID=bali
 ```
 
 Create `.env` with these vars. Create `src/lib/supabase.ts` with a server-side admin client.
@@ -84,7 +84,7 @@ Each category page: fetch filtered items from Supabase + show FAQ section + intr
 Category text/FAQ can be hardcoded for now (or read from metadata if you create a category_pages table — your choice).
 
 ### Special pages (port from existing Next.js code)
-Read ~/Projects/yalla-dubai/src/app/ for content, port to Astro:
+Read ~/Projects/yalla-bali/src/app/ for content, port to Astro:
 - `src/pages/index.astro` — homepage
 - `src/pages/desert-safari.astro`
 - `src/pages/beaches.astro`
@@ -120,7 +120,7 @@ src/components/
 ## SEO & GEO Requirements (CRITICAL)
 
 ### Every page MUST have:
-1. **Unique `<title>`** — e.g. "מסעדת נובו דובאי — מסעדות יפניות | Yalla Dubai"
+1. **Unique `<title>`** — e.g. "מסעדת נובו באלי — מסעדות יפניות | Yalla Bali"
 2. **`<meta name="description">`** — 150-160 chars, Hebrew, direct and factual
 3. **`<link rel="canonical">`** — absolute URL
 4. **Open Graph tags** — og:title, og:description, og:image, og:url
@@ -142,17 +142,17 @@ src/components/
 On every single/detail page ([slug] pages), the entity name (hotel name, restaurant name, attraction name, etc.) MUST appear in:
 - **H2 section headings** — never use generic headings like "מיקום" or "שעות פתיחה". Always include the entity name:
   - BAD: `<h2>מתקנים ושירותים</h2>`
-  - GOOD: `<h2>מתקנים ושירותים בהילטון דובאי דה ווק</h2>`
+  - GOOD: `<h2>מתקנים ושירותים בהילטון באלי דה ווק</h2>`
   - BAD: `<h2>שעות פתיחה</h2>`
-  - GOOD: `<h2>שעות פתיחה — מסעדת נובו דובאי</h2>`
-- **FAQ questions and answers** — every Q&A must mention the entity name + "דובאי":
+  - GOOD: `<h2>שעות פתיחה — מסעדת נובו באלי</h2>`
+- **FAQ questions and answers** — every Q&A must mention the entity name + "באלי":
   - BAD: "כמה עולה לילה?"
-  - GOOD: "כמה עולה לילה במלון הילטון דובאי דה ווק?"
-- **CTA text** — "מוכנים להזמין?" → "מוכנים להזמין את הילטון דובאי?"
+  - GOOD: "כמה עולה לילה במלון הילטון באלי דה ווק?"
+- **CTA text** — "מוכנים להזמין?" → "מוכנים להזמין את הילטון באלי?"
 - **WhatsApp pre-filled messages** — include the entity name
 
 This rule applies to ALL entity types: hotels, restaurants, attractions, nightlife, tours, guides, areas.
-The goal: every section heading on the page reinforces the primary keyword (entity name + דובאי) for search engines.
+The goal: every section heading on the page reinforces the primary keyword (entity name + באלי) for search engines.
 
 ### GEO Optimization:
 - Use clear, direct Hebrew language — no fluff
@@ -177,8 +177,8 @@ Navigation: logo + main sections + WhatsApp CTA.
 Footer: links, social, copyright.
 
 ## WhatsApp Integration
-WhatsApp number for Dubai: `972528211665`
-CTA text: `היי, אני מתכנן טיול לדובאי 🏙️`
+WhatsApp number for Bali: `972528211665`
+CTA text: `היי, אני מתכנן טיול לבאלי 🏙️`
 Show as: floating button bottom-right (gold color) + inline CTAs within pages.
 
 ## Analytics
@@ -204,7 +204,7 @@ import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
   output: 'static',
-  site: 'https://yalla-dubai.co.il',
+  site: 'https://yalla-bali.co.il',
   integrations: [
     tailwind(),
     sitemap(),
@@ -225,5 +225,5 @@ Before finishing, verify:
 - [ ] `.env.example` created with all required vars
 
 ## When Done
-Run: `openclaw system event --text "Done: yalla-dubai Astro build complete — ready for review" --mode now`
+Run: `openclaw system event --text "Done: yalla-bali Astro build complete — ready for review" --mode now`
 

@@ -39,8 +39,8 @@ if (openingHours) {
 
 const contentHtml = restaurant.full_content ? await marked(restaurant.full_content) : ''
 
-const pageTitle = `${restaurant.name_he}${restaurant.name_en ? ` — ${restaurant.name_en}` : ''} | מסעדות דובאי | Yalla Dubai`
-const pageDescription = restaurant.excerpt || restaurant.description || `${restaurant.name_he} — מסעדה בדובאי`
+const pageTitle = `${restaurant.name_he}${restaurant.name_en ? ` — ${restaurant.name_en}` : ''} | מסעדות באלי | Yalla Bali`
+const pageDescription = restaurant.excerpt || restaurant.description || `${restaurant.name_he} — מסעדה בבאלי`
 
 const restaurantSchema = {
   '@context': 'https://schema.org',
@@ -66,7 +66,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/restaurants/${restaurant.slug}`}
+  canonical={`https://yalla-bali.co.il/restaurants/${restaurant.slug}`}
   ogImage={restaurant.image}
   ogType="article"
   schema={restaurantSchema}
@@ -92,7 +92,7 @@ const breadcrumbItems = [
     <div class="flex flex-wrap items-center gap-4 mb-8 text-sm">
       {(restaurant.area || address) && (
         <a
-          href={`https://maps.google.com/?q=${encodeURIComponent((address || restaurant.area || restaurant.name_he) + ', Dubai')}`}
+          href={`https://maps.google.com/?q=${encodeURIComponent((address || restaurant.area || restaurant.name_he) + ', Bali')}`}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 text-white/70 hover:text-teal-400 transition-colors"
@@ -142,8 +142,8 @@ const breadcrumbItems = [
     )}
 
     <div class="bg-gradient-to-br from-teal-900/20 to-teal-800/10 border border-teal-500/30 rounded-2xl p-8 text-center">
-      <h3 class="text-2xl font-black text-teal-400 mb-3">גם לטיול במדבר דובאי? 🏜️</h3>
-      <p class="text-white/70 mb-6">הספארי במדבר הוא החוויה המרכזית שלנו בדובאי — נסיעת ג׳יפים על דיונות, רכיבה על גמלים, שקיעה מדהימה וארוחת BBQ על תל הם.</p>
+      <h3 class="text-2xl font-black text-teal-400 mb-3">גם לטיול במדבר באלי? 🏜️</h3>
+      <p class="text-white/70 mb-6">הספארי במדבר הוא החוויה המרכזית שלנו בבאלי — נסיעת ג׳יפים על דיונות, רכיבה על גמלים, שקיעה מדהימה וארוחת BBQ על תל הם.</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
         <a
           href="/desert-safari"
@@ -152,7 +152,7 @@ const breadcrumbItems = [
           ⛺ ספארי במדבר
         </a>
         <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מעוניין בספארי במדבר דובאי 🏜️')}`}
+          href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מעוניין בספארי במדבר באלי 🏜️')}`}
           target="_blank"
           rel="noopener noreferrer"
           dir="rtl"

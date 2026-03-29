@@ -23,7 +23,7 @@ const title = guide.title_he ?? guide.name_he ?? guide.title ?? guide.name
 const titleEn = guide.title_en ?? guide.name_en
 const category = guide.category ?? guide.metadata?.category
 const readTime = guide.read_time ?? guide.metadata?.read_time
-const author = guide.author ?? guide.metadata?.author ?? 'Yalla Dubai'
+const author = guide.author ?? guide.metadata?.author ?? 'Yalla Bali'
 const datePublished = guide.published_at ?? guide.created_at ?? guide.metadata?.date_published
 
 const contentHtml = guide.full_content ? await marked(guide.full_content) : ''
@@ -47,8 +47,8 @@ const scored = (allGuides ?? []).map((g: any) => ({
 scored.sort((a: any, b: any) => b.score - a.score || Math.random() - 0.5)
 const related = scored.slice(0, 3)
 
-const pageTitle = `${title} | מדריכים לדובאי | Yalla Dubai`
-const rawDesc = guide.meta_description || guide.excerpt || guide.description || `${title} — מדריך מקיף לדובאי`
+const pageTitle = `${title} | מדריכים לבאלי | Yalla Bali`
+const rawDesc = guide.meta_description || guide.excerpt || guide.description || `${title} — מדריך מקיף לבאלי`
 const pageDescription = rawDesc.length > 155 ? rawDesc.substring(0, 152) + '...' : rawDesc
 
 const articleSchema = {
@@ -60,12 +60,12 @@ const articleSchema = {
   url: new URL(`/guides/${guide.slug}`, Astro.site).toString(),
   author: {
     '@type': 'Organization',
-    name: typeof author === 'string' ? author : 'Yalla Dubai',
+    name: typeof author === 'string' ? author : 'Yalla Bali',
   },
   publisher: {
     '@type': 'Organization',
-    name: 'Yalla Dubai',
-    url: 'https://yalla-dubai.co.il',
+    name: 'Yalla Bali',
+    url: 'https://yalla-bali.co.il',
   },
   ...(datePublished ? { datePublished: new Date(datePublished).toISOString() } : {}),
   ...(guide.updated_at ? { dateModified: new Date(guide.updated_at).toISOString() } : {}),
@@ -82,7 +82,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/guides/${guide.slug}`}
+  canonical={`https://yalla-bali.co.il/guides/${guide.slug}`}
   ogImage={guide.image}
   ogType="article"
   schema={articleSchema}
@@ -126,7 +126,7 @@ const breadcrumbItems = [
       )}
       {author && (
         <span class="text-white/40">
-          מאת: {typeof author === 'string' ? author : 'Yalla Dubai'}
+          מאת: {typeof author === 'string' ? author : 'Yalla Bali'}
         </span>
       )}
     </div>
@@ -149,10 +149,10 @@ const breadcrumbItems = [
 
     <!-- WhatsApp CTA -->
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">אהבתם את המדריך? יש לכם שאלות על דובאי? נשמח לעזור!</p>
+      <p class="text-white/80 mb-4">אהבתם את המדריך? יש לכם שאלות על באלי? נשמח לעזור!</p>
       <a
         dir="rtl"
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מתכנן טיול לדובאי ויש לי שאלות 🏙️')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מתכנן טיול לבאלי ויש לי שאלות 🌴')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

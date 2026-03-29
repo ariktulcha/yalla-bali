@@ -21,20 +21,20 @@ const items = (data || []).filter(h =>
   )
 )
 
-const pageTitle = 'מלונות חוף בדובאי | Yalla Dubai'
-const pageDescription = 'מלונות חוף מובילים בדובאי עם גישה ישירה לים. חופים פרטיים, בריכות אינסוף ונוף מדהים לים הערבי.'
+const pageTitle = 'מלונות חוף בבאלי | Yalla Bali'
+const pageDescription = 'מלונות חוף מובילים בבאלי עם גישה ישירה לים. חופים פרטיים, בריכות אינסוף ונוף מדהים לים הערבי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מלונות חוף בדובאי',
+  name: 'מלונות חוף בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/hotels/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/hotels/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -60,9 +60,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות חוף בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות חוף בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי מציעה מלונות חוף מהיפים בעולם, עם חופים פרטיים, מים צלולים
+        באלי מציעה מלונות חוף מהיפים בעולם, עם חופים פרטיים, מים צלולים
         ונוף מרהיב לים הערבי. הנה המלונות המומלצים שלנו על קו החוף.
       </p>
     </header>
@@ -88,55 +88,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות חוף בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות חוף בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">באילו אזורים בדובאי יש מלונות חוף?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בדובאי נמצאים בעיקר בפאלם ג'ומיירה, JBR, חוף ג'ומיירה, מרינה דובאי. כל אזורי המלונות חוף בדובאי הללו הם פופולריים מאד.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">באילו אזורים בבאלי יש מלונות חוף?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי נמצאים בעיקר בפאלם ג'ומיירה, JBR, חוף ג'ומיירה, מרינה באלי. כל אזורי המלונות חוף בבאלי הללו הם פופולריים מאד.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם כל מלונות חוף בדובאי כוללים חוף פרטי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">רוב מלונות חוף 5 כוכבים בדובאי כוללים חוף פרטי. מלונות חוף בדובאי בדרגה נמוכה יותר קרובים לחופים ציבוריים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם כל מלונות חוף בבאלי כוללים חוף פרטי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">רוב מלונות חוף 5 כוכבים בבאלי כוללים חוף פרטי. מלונות חוף בבאלי בדרגה נמוכה יותר קרובים לחופים ציבוריים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה העונה האידאלית למלון חוף בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בדובאי נעימים ביותר בנובמבר-אפריל כשהמזג אוויר אידאלי. בקיץ מלונות חוף בדובאי זולים יותר אבל חם עז.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה העונה האידאלית למלון חוף בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי נעימים ביותר בנובמבר-אפריל כשהמזג אוויר אידאלי. בקיץ מלונות חוף בבאלי זולים יותר אבל חם עז.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים למלון חוף בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון חוף בדובאי עולה בין 300-3,000 דירהם בעונה רגילה. מלונות חוף בדובאי יקרים יותר בחורף וחזקה בקיץ.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים למלון חוף בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון חוף בבאלי עולה בין 300-3,000 דירהם בעונה רגילה. מלונות חוף בבאלי יקרים יותר בחורף וחזקה בקיץ.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה בריכות יש במלונות חוף בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בדובאי בדרך כלל כוללים בריכות אינסוף, בריכות שחייה מחוממות. מלון חוף בדובאי עשוי להיות בבריכה או בים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה בריכות יש במלונות חוף בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי בדרך כלל כוללים בריכות אינסוף, בריכות שחייה מחוממות. מלון חוף בבאלי עשוי להיות בבריכה או בים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה משקקות מוצעות במלונות חוף בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בדובאי מציעים: ספא, מסעדות, ברים על הים. כל מלון חוף בדובאי חייב להציע נוחות היוקרה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה משקקות מוצעות במלונות חוף בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי מציעים: ספא, מסעדות, ברים על הים. כל מלון חוף בבאלי חייב להציע נוחות היוקרה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון חוף בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מלון חוף בדובאי מראש בעיקר בחורף. מלונות חוף בדובאי פופולריים מתמלאים במהירות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון חוף בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מלון חוף בבאלי מראש בעיקר בחורף. מלונות חוף בבאלי פופולריים מתמלאים במהירות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המזג אוויר בדובאי לחוף?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בדובאי אידאליים בחורף (20-25 מעלות). בקיץ בדובאי (40+ מעלות), מלונות חוף בדובאי עדיין יפים אבל חמים מאד.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המזג אוויר בבאלי לחוף?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי אידאליים בחורף (20-25 מעלות). בקיץ בבאלי (40+ מעלות), מלונות חוף בבאלי עדיין יפים אבל חמים מאד.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה מלונות חוף בדובאי הטובים ביותר?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף מובילים בדובאי כוללים את אטלנטיס, פאלם ג'ומיירה, פור סיזנס. מלונות חוף בדובאי אלה מיוחדים בחוף פרטי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה מלונות חוף בבאלי הטובים ביותר?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף מובילים בבאלי כוללים את אטלנטיס, פאלם ג'ומיירה, פור סיזנס. מלונות חוף בבאלי אלה מיוחדים בחוף פרטי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות מימיות בחופי מלונות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בדובאי מציעים: גלישה, צלילה, ג'ט סקי, קנו וסקי מימי. כל מלון חוף בדובאי מציע מערכות פעילויות מימיות שונות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות מימיות בחופי מלונות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי מציעים: גלישה, צלילה, ג'ט סקי, קנו וסקי מימי. כל מלון חוף בבאלי מציע מערכות פעילויות מימיות שונות.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים עזרה בבחירת מלון חוף בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים עזרה בבחירת מלון חוף בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון חוף בדובאי 🏖️')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון חוף בבאלי 🏖️')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

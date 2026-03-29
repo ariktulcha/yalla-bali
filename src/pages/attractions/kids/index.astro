@@ -22,20 +22,20 @@ const items = (data || []).filter(a =>
   )
 )
 
-const pageTitle = 'אטרקציות לילדים בדובאי | Yalla Dubai'
-const pageDescription = 'אטרקציות לילדים ולמשפחות בדובאי. פארקי שעשועים, פארקי מים, גן חיות ועוד — כל מה שצריך לטיול משפחתי מוצלח.'
+const pageTitle = 'אטרקציות לילדים בבאלי | Yalla Bali'
+const pageDescription = 'אטרקציות לילדים ולמשפחות בבאלי. פארקי שעשועים, פארקי מים, גן חיות ועוד — כל מה שצריך לטיול משפחתי מוצלח.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'אטרקציות לילדים בדובאי',
+  name: 'אטרקציות לילדים בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/attractions/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/attractions/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -58,9 +58,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">אטרקציות לילדים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">אטרקציות לילדים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי היא גן עדן לילדים — פארקי שעשועים ענקיים, פארקי מים, אקווריומים,
+        באלי היא גן עדן לילדים — פארקי שעשועים ענקיים, פארקי מים, אקווריומים,
         גן חיות ועוד אינספור פעילויות שיהפכו את הטיול המשפחתי לבלתי נשכח.
       </p>
     </header>
@@ -86,51 +86,51 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — אטרקציות לילדים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — אטרקציות לילדים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האטרקציות הכי טובות לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">האטרקציות המובילות לילדים כוללות: IMG Worlds of Adventure, Legoland, Aquaventure (פארק מים), Dubai Aquarium, KidZania ו-Dubai Garden Glow.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האטרקציות הכי טובות לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">האטרקציות המובילות לילדים כוללות: IMG Worlds of Adventure, Legoland, Aquaventure (פארק מים), Bali Aquarium, KidZania ו-Bali Garden Glow.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מאיזה גיל מתאימות האטרקציות?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">יש אטרקציות לכל גיל — מגיל שנה ועד נוער. פארקי מים מתאימים מגיל 3, פארקי שעשועים מגיל 4-5, ואטרקציות אקסטרים מגיל 12 ומעלה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש אטרקציות ממוזגות לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, הרבה אטרקציות בדובאי ממוזגות לחלוטין — כולל IMG Worlds, KidZania, Ski Dubai ו-Dubai Mall Aquarium. מושלם לימי קיץ חמים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש אטרקציות ממוזגות לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, הרבה אטרקציות בבאלי ממוזגות לחלוטין — כולל IMG Worlds, KidZania, Ski Bali ו-Bali Mall Aquarium. מושלם לימי קיץ חמים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקי מים לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בדובאי כוללות פארקי מים: Aquaventure Water Park, Wild Wadi Water Park. אטרקציות לילדים בדובאי עם מגלשות מים מעניקות הצלה מחום הקיץ.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקי מים לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות פארקי מים: Aquaventure Water Park, Wild Wadi Water Park. אטרקציות לילדים בבאלי עם מגלשות מים מעניקות הצלה מחום הקיץ.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקי שעשועים לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בדובאי כוללות פארקי שעשועים: IMG Worlds of Adventure, Motiongate Dubai, Legoland Dubai. אטרקציות לילדים בדובאי הללו ענקיות עם מגוון רכיבות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקי שעשועים לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות פארקי שעשועים: IMG Worlds of Adventure, Motiongate Bali, Legoland Bali. אטרקציות לילדים בבאלי הללו ענקיות עם מגוון רכיבות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אקווריומים בדובאי לילדים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בדובאי כוללות אקווריומים: Dubai Aquarium & Underwater Zoo בדובאי מול, Atlantis The Palm Aquarium. אטרקציות לילדים בדובאי עם דגים גדולים מרתקות ילדים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אקווריומים בבאלי לילדים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות אקווריומים: Bali Aquarium & Underwater Zoo בבאלי מול, Atlantis The Palm Aquarium. אטרקציות לילדים בבאלי עם דגים גדולים מרתקות ילדים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות חוצות לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בדובאי חוצות כוללות: רכיבה על סוסים, מסלולי אתחום, שטיול בסירה. אטרקציות לילדים בדובאי חוצות מעניקות חוויה בטבע מושלמת.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות חוצות לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי חוצות כוללות: רכיבה על סוסים, מסלולי אתחום, שטיול בסירה. אטרקציות לילדים בבאלי חוצות מעניקות חוויה בטבע מושלמת.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה אטרקציות לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בדובאי בעלות: Legoland מ-180 דירהם, IMG Worlds מ-240 דירהם, Aquaventure מ-300 דירהם. אטרקציות לילדים בדובאי יוקרתיות יכולות להגיע ל-500+ דירהם.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה אטרקציות לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי בעלות: Legoland מ-180 דירהם, IMG Worlds מ-240 דירהם, Aquaventure מ-300 דירהם. אטרקציות לילדים בבאלי יוקרתיות יכולות להגיע ל-500+ דירהם.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה טיפים לביקור באטרקציות לילדים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בדובאי — טיפים: הגיעו מוקדם, הביאו מים ומזון, הימנעו משיא החום. אטרקציות לילדים בדובאי טובות יותר בימים חלשים מעונות ובעונה מתונה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה טיפים לביקור באטרקציות לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי — טיפים: הגיעו מוקדם, הביאו מים ומזון, הימנעו משיא החום. אטרקציות לילדים בבאלי טובות יותר בימים חלשים מעונות ובעונה מתונה.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">מתכננים טיול עם ילדים לדובאי?</p>
+      <p class="text-white/80 mb-4">מתכננים טיול עם ילדים לבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מתכנן טיול עם ילדים לדובאי 👨‍👩‍👧‍👦')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מתכנן טיול עם ילדים לבאלי 👨‍👩‍👧‍👦')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl"

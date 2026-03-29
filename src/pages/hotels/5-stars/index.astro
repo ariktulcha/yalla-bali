@@ -16,20 +16,20 @@ const items = (data || []).filter(h => {
   return h.star_rating === 5 || meta.star_rating === 5 || meta.stars === 5
 })
 
-const pageTitle = 'מלונות 5 כוכבים בדובאי | Yalla Dubai'
-const pageDescription = 'מלונות 5 כוכבים מובילים בדובאי. פינוק, יוקרה ושירות ברמה הגבוהה ביותר. המדריך המלא למלונות חמישה כוכבים בדובאי.'
+const pageTitle = 'מלונות 5 כוכבים בבאלי | Yalla Bali'
+const pageDescription = 'מלונות 5 כוכבים מובילים בבאלי. פינוק, יוקרה ושירות ברמה הגבוהה ביותר. המדריך המלא למלונות חמישה כוכבים בבאלי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מלונות 5 כוכבים בדובאי',
+  name: 'מלונות 5 כוכבים בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/hotels/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/hotels/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -55,9 +55,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות 5 כוכבים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות 5 כוכבים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי ידועה במלונות היוקרה שלה. מלונות 5 כוכבים בדובאי מציעים חוויית אירוח
+        באלי ידועה במלונות היוקרה שלה. מלונות 5 כוכבים בבאלי מציעים חוויית אירוח
         ברמה הגבוהה ביותר בעולם — ספא, בריכות אינסוף, מסעדות גורמה ושירות אישי.
       </p>
     </header>
@@ -83,55 +83,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות 5 כוכבים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות 5 כוכבים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה לילה במלון חמש כוכבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בדובאי מתחילים מ-500 דירהם בעונה נמוכה. מלון 5 כוכבים בדובאי יכול להגיע ל-5,000 דירהם בעונת שיא, תלוי בבחירת החדר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה לילה במלון חמש כוכבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בבאלי מתחילים מ-500 דירהם בעונה נמוכה. מלון 5 כוכבים בבאלי יכול להגיע ל-5,000 דירהם בעונת שיא, תלוי בבחירת החדר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האזור הכי טוב בדובאי למלון 5 כוכבים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אזורי מלונות 5 כוכבים בדובאי המומלצים: דאונטאון (בורג'), מרינה (ים), פאלם ג'ומיירה (חוף פרטי), JBR (אווירה תיירותית). בחרו מלון 5 כוכבים בדובאי לפי מיקום.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האזור הכי טוב בבאלי למלון 5 כוכבים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אזורי מלונות 5 כוכבים בבאלי המומלצים: דאונטאון (בורג'), מרינה (ים), פאלם ג'ומיירה (חוף פרטי), JBR (אווירה תיירותית). בחרו מלון 5 כוכבים בבאלי לפי מיקום.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי הזול ביותר להזמין מלון 5 כוכבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בדובאי זולים בקיץ (יוני-ספטמבר). מלון 5 כוכבים בדובאי יקר בחורף (נובמבר-מרץ). הזמנה מוקדמת של מלון 5 כוכבים בדובאי חוסכת כסף.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי הזול ביותר להזמין מלון 5 כוכבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בבאלי זולים בקיץ (יוני-ספטמבר). מלון 5 כוכבים בבאלי יקר בחורף (נובמבר-מרץ). הזמנה מוקדמת של מלון 5 כוכבים בבאלי חוסכת כסף.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה שירותים כוללים מלונות 5 כוכבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בדובאי כוללים: ספא, מסעדות, בריכות, חוף (במלונות חוף 5 כוכבים בדובאי), קונסיירג'. מלון 5 כוכבים בדובאי מספק שירות עולמי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה שירותים כוללים מלונות 5 כוכבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בבאלי כוללים: ספא, מסעדות, בריכות, חוף (במלונות חוף 5 כוכבים בבאלי), קונסיירג'. מלון 5 כוכבים בבאלי מספק שירות עולמי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ההבדל בין 5 כוכבים ליוקרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון 5 כוכבים בדובאי מציע יוקרה בסטנדרט גבוה. מלון יוקרה בדובאי — כמו בורג' — מעבר ל-5 כוכבים. מלון 5 כוכבים בדובאי עדיין מעולה ברמה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ההבדל בין 5 כוכבים ליוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון 5 כוכבים בבאלי מציע יוקרה בסטנדרט גבוה. מלון יוקרה בבאלי — כמו בורג' — מעבר ל-5 כוכבים. מלון 5 כוכבים בבאלי עדיין מעולה ברמה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מלונות 5 כוכבים כשרים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כמה מלונות 5 כוכבים בדובאי מציעים אפשרויות כשרות. בדקו עם מלון 5 כוכבים בדובאי הספציפי לאפשרויות הכשרות לפני הזמנה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מלונות 5 כוכבים כשרים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כמה מלונות 5 כוכבים בבאלי מציעים אפשרויות כשרות. בדקו עם מלון 5 כוכבים בבאלי הספציפי לאפשרויות הכשרות לפני הזמנה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון 5 כוכבים בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מלון 5 כוכבים בדובאי מראש, במיוחד בעונה גבוהה. מלונות 5 כוכבים בדובאי מתמלאים במהירות בחורף.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מלון 5 כוכבים בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מלון 5 כוכבים בבאלי מראש, במיוחד בעונה גבוהה. מלונות 5 כוכבים בבאלי מתמלאים במהירות בחורף.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי החדרים במלונות 5 כוכבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון 5 כוכבים בדובאי מציע: חדרים סטנדרטיים, סוויטות, וקצין סוויטות. מלון 5 כוכבים בדובאי מציע וריאציות מאד ברמות הנוחות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי החדרים במלונות 5 כוכבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון 5 כוכבים בבאלי מציע: חדרים סטנדרטיים, סוויטות, וקצין סוויטות. מלון 5 כוכבים בבאלי מציע וריאציות מאד ברמות הנוחות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דירוג המלונות 5 כוכבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בדובאי בעלי דירוגים גבוהים על מפות. מלון 5 כוכבים בדובאי מקבל חוות דעות טובות מטיירים בעולם.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דירוג המלונות 5 כוכבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות 5 כוכבים בבאלי בעלי דירוגים גבוהים על מפות. מלון 5 כוכבים בבאלי מקבל חוות דעות טובות מטיירים בעולם.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שירותים של קונסיירג' במלונות 5 כוכבים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון 5 כוכבים בדובאי מספק קונסיירג' שיעזור לכם להזמין רסטורנטים, כרטיסים לאטרקציות וטרנספורט. קונסיירג' במלונות 5 כוכבים בדובאי זמין 24/7.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה שירותים של קונסיירג' במלונות 5 כוכבים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון 5 כוכבים בבאלי מספק קונסיירג' שיעזור לכם להזמין רסטורנטים, כרטיסים לאטרקציות וטרנספורט. קונסיירג' במלונות 5 כוכבים בבאלי זמין 24/7.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">צריכים עזרה בבחירת מלון 5 כוכבים בדובאי?</p>
+      <p class="text-white/80 mb-4">צריכים עזרה בבחירת מלון 5 כוכבים בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון 5 כוכבים בדובאי 🏨')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מלון 5 כוכבים בבאלי 🏨')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

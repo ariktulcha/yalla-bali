@@ -59,7 +59,7 @@ Replace with Layout component:
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/restaurants/${restaurant.slug}`}
+  canonical={`https://yalla-bali.co.il/restaurants/${restaurant.slug}`}
   ogImage={restaurant.image}
 >
   <!-- SchemaOrg inside Layout slot -->

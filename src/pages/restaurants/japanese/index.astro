@@ -15,20 +15,20 @@ const items = (data || []).filter(r =>
   (r.cuisine_types || []).some(t => ['יפנית', 'יפני', 'japanese', 'Japanese', 'איזאקאיה', 'יפני-קוריאני'].includes(t))
 )
 
-const pageTitle = 'מסעדות יפניות בדובאי | Yalla Dubai'
-const pageDescription = 'המסעדות היפניות הטובות ביותר בדובאי — סושי, ראמן, אומאקאסה ועוד. מדריך מקיף למסעדות יפניות מומלצות בדובאי.'
+const pageTitle = 'מסעדות יפניות בבאלי | Yalla Bali'
+const pageDescription = 'המסעדות היפניות הטובות ביותר בבאלי — סושי, ראמן, אומאקאסה ועוד. מדריך מקיף למסעדות יפניות מומלצות בבאלי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מסעדות יפניות בדובאי',
+  name: 'מסעדות יפניות בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -53,9 +53,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות יפניות בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות יפניות בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי מציעה סצנת מסעדות יפניות עשירה ומגוונת — מסושי ברמה הגבוהה ביותר
+        באלי מציעה סצנת מסעדות יפניות עשירה ומגוונת — מסושי ברמה הגבוהה ביותר
         ועד ראמן אותנטי ומסעדות אומאקאסה בלעדיות. הנה הבחירות שלנו.
       </p>
     </header>
@@ -82,55 +82,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות יפניות בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות יפניות בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המסעדה היפנית הכי טובה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">דובאי מציעה מסעדות יפניות ברמה גבוהה מאוד. מסעדות יפניות בדובאי משתנות בתמחות — סושי, אומאקאסה או ראמן. בדקו את הרשימה שלנו של מסעדות יפניות בדובאי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המסעדה היפנית הכי טובה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">באלי מציעה מסעדות יפניות ברמה גבוהה מאוד. מסעדות יפניות בבאלי משתנות בתמחות — סושי, אומאקאסה או ראמן. בדקו את הרשימה שלנו של מסעדות יפניות בבאלי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות יפניות כשרות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">חלק מהמסעדות היפניות בדובאי מציעות תפריטים מותאמים כשרים. מסעדות יפניות בדובאי יכולות להתאים לדרישות כשרות בהסכמה מראש.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות יפניות כשרות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">חלק מהמסעדות היפניות בבאלי מציעות תפריטים מותאמים כשרים. מסעדות יפניות בבאלי יכולות להתאים לדרישות כשרות בהסכמה מראש.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה ארוחה במסעדה יפנית בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ראמן בדובאי מתחיל ב-50 דירהם, סושי בין 150-400 דירהם. אומאקאסה יפנית בדובאי יכול להגיע ל-1,000 דירהם ומעלה לאדם.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה ארוחה במסעדה יפנית בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ראמן בבאלי מתחיל ב-50 דירהם, סושי בין 150-400 דירהם. אומאקאסה יפנית בבאלי יכול להגיע ל-1,000 דירהם ומעלה לאדם.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי סושי יש במסעדות יפניות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות סושי בדובאי מציעות סוגים מגוונים של סושי — ניגירי, מאקי, טמפורה. סושי בדובאי משתמש בדגים신ים ודגים איכותיים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי סושי יש במסעדות יפניות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות סושי בבאלי מציעות סוגים מגוונים של סושי — ניגירי, מאקי, טמפורה. סושי בבאלי משתמש בדגים신ים ודגים איכותיים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה זה אומאקאסה? היש אומאקאסה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אומאקאסה היא חוויית ישיבה בדלפק סביב השף. כן, יש מסעדות אומאקאסה בדובאי המציעות חוויה יפנית אותנטית.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה זה אומאקאסה? היש אומאקאסה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אומאקאסה היא חוויית ישיבה בדלפק סביב השף. כן, יש מסעדות אומאקאסה בבאלי המציעות חוויה יפנית אותנטית.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך אוכלים סושי כמו בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">במסעדות סושי בדובאי אוכלים עם מקלות או ידיים. סושי בדובאי נאכל טרוז, בשילוב עם סוי וואסבי.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך אוכלים סושי כמו בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">במסעדות סושי בבאלי אוכלים עם מקלות או ידיים. סושי בבאלי נאכל טרוז, בשילוב עם סוי וואסבי.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מקום במסעדות יפניות בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מקום במסעדות יפניות בדובאי, במיוחד בסופי שבוע. מסעדות יפניות בדובאי פופולריות מתמלאות במהירות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מקום במסעדות יפניות בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מקום במסעדות יפניות בבאלי, במיוחד בסופי שבוע. מסעדות יפניות בבאלי פופולריות מתמלאות במהירות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטווח המחירי של ראמן בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ראמן בדובאי עולה בין 50-150 דירהם לקערה. מסעדות ראמן בדובאי מציעות מחירים סבירים להן.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטווח המחירי של ראמן בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ראמן בבאלי עולה בין 50-150 דירהם לקערה. מסעדות ראמן בבאלי מציעות מחירים סבירים להן.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">היש מסעדות יפניות רקע בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מסעדות רקע יפניות בדובאי מציעות סיד מהיר ואותנטי. מסעדות קזואל יפניות בדובאי מתאימות לארוחה מהירה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">היש מסעדות יפניות רקע בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מסעדות רקע יפניות בבאלי מציעות סיד מהיר ואותנטי. מסעדות קזואל יפניות בבאלי מתאימות לארוחה מהירה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה וואסבי? האם זה חריף בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">וואסבי הוא תבל יפני חריף המוגש עם סושי. בדובאי, וואסבי בסושי בר יכול להיות מאד חריף. מסעדות יפניות בדובאי מציעות וואסבי בצד כדי שתוכלו להוסיף לפי הטעם.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה וואסבי? האם זה חריף בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">וואסבי הוא תבל יפני חריף המוגש עם סושי. בבאלי, וואסבי בסושי בר יכול להיות מאד חריף. מסעדות יפניות בבאלי מציעות וואסבי בצד כדי שתוכלו להוסיף לפי הטעם.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למסעדה יפנית בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה למסעדה יפנית בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדה יפנית בדובאי 🍣')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדה יפנית בבאלי 🍣')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

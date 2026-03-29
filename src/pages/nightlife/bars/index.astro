@@ -14,20 +14,20 @@ const { data } = await supabaseAdmin
 
 const items = data || []
 
-const pageTitle = 'ברים בדובאי | Yalla Dubai'
-const pageDescription = 'הברים הטובים ביותר בדובאי. מברים אלגנטיים ועד ברים מזדמנים — המדריך המלא לחיי הלילה בדובאי.'
+const pageTitle = 'ברים בבאלי | Yalla Bali'
+const pageDescription = 'הברים הטובים ביותר בבאלי. מברים אלגנטיים ועד ברים מזדמנים — המדריך המלא לחיי הלילה בבאלי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'ברים בדובאי',
+  name: 'ברים בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/nightlife/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -52,9 +52,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">ברים בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">ברים בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי מציעה סצנת ברים מגוונת ומרשימה — מברים על גגות עם נוף מהמם,
+        באלי מציעה סצנת ברים מגוונת ומרשימה — מברים על גגות עם נוף מהמם,
         ברי קוקטיילים אלגנטיים, וברי ספורט בפאבים בסגנון בריטי.
       </p>
     </header>
@@ -79,55 +79,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — ברים בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — ברים בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם מותר לשתות אלכוהול בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מותר לשתות אלכוהול בדובאי בברים, מסעדות ומלונות מורשים. גיל המינימום לשתייה הוא 21. שתייה ברחוב או שכרות בפומבי אסורים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם מותר לשתות אלכוהול בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מותר לשתות אלכוהול בבאלי בברים, מסעדות ומלונות מורשים. גיל המינימום לשתייה הוא 21. שתייה ברחוב או שכרות בפומבי אסורים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה שתייה בבר בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה שתייה בבר בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">בירה עולה בין 40-80 דירהם, קוקטייל בין 60-120 דירהם. יש Happy Hours במקומות רבים עם מחירים מופחתים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש בברים בדובאי?</summary>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש בברים בבאלי?</summary>
           <p class="mt-2 text-white/60 leading-relaxed">רוב הברים היוקרתיים דורשים Smart Casual. ברים קז'ואליים יותר מקבלים לבוש חופשי אבל לא כפכפים או בגדי ים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה זה Happy Hour בברים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">Happy Hour הוא תקופה בברים בדובאי כאשר המשקאות זולים יותר — בדרך כלל בין 4-7 בערב. ברים בדובאי רבים מציעים ל-50% הנחה על קוקטיילים והחטיפים בשעות Happy Hour.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה זה Happy Hour בברים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">Happy Hour הוא תקופה בברים בבאלי כאשר המשקאות זולים יותר — בדרך כלל בין 4-7 בערב. ברים בבאלי רבים מציעים ל-50% הנחה על קוקטיילים והחטיפים בשעות Happy Hour.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה ברים בדובאי טובים לחברים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ברים בדובאי טובים לקבוצות חברים: Barasti, Roof Top Bars בדובאי, וברים בפאלם ג'ומיירה. ברים בדובאי עם אווירה חברתית ותעודלל מוגברים יכולים להזמין שולחנות ובקבוקים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה ברים בבאלי טובים לחברים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ברים בבאלי טובים לקבוצות חברים: Barasti, Roof Top Bars בבאלי, וברים בפאלם ג'ומיירה. ברים בבאלי עם אווירה חברתית ותעודלל מוגברים יכולים להזמין שולחנות ובקבוקים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הברים הטובים ביותר בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ברים המובילים בדובאי: Barasti, Goldfish, Nora Lounge. ברים בדובאי אלה מפורסמים בקוקטיילים משובחים, אווירה מעולה ומוקד שירות ברמה הגבוהה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הברים הטובים ביותר בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ברים המובילים בבאלי: Barasti, Goldfish, Nora Lounge. ברים בבאלי אלה מפורסמים בקוקטיילים משובחים, אווירה מעולה ומוקד שירות ברמה הגבוהה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך הזמנה לברים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ברים בדובאי קז'ואליים לא דורשים הזמנה. ברים בדובאי יוקרתיים או מקומות עם זמן כנסה מומלצת להזמין מראש בעיקר בסוף השבוע.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך הזמנה לברים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ברים בבאלי קז'ואליים לא דורשים הזמנה. ברים בבאלי יוקרתיים או מקומות עם זמן כנסה מומלצת להזמין מראש בעיקר בסוף השבוע.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי הקוקטיילים בברים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ברים בדובאי מציעים: קוקטיילים קלאסיים (Margarita, Mojito), קוקטיילים יצירתיים עם רכיבים אקזוטיים. ברים בדובאי מומלצים משתמשים בספיריטוסים פרימיום וחומרים טריים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה סוגי הקוקטיילים בברים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ברים בבאלי מציעים: קוקטיילים קלאסיים (Margarita, Mojito), קוקטיילים יצירתיים עם רכיבים אקזוטיים. ברים בבאלי מומלצים משתמשים בספיריטוסים פרימיום וחומרים טריים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי ברים בדובאי פתוחים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ברים בדובאי בדרך כלל פתוחים מ-12:00 עד 3:00-4:00 בבוקר. ברים בדובאי במלונות יכולים להיות פתוחים עד מאוחר יותר בסוף השבוע.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מתי ברים בבאלי פתוחים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">ברים בבאלי בדרך כלל פתוחים מ-12:00 עד 3:00-4:00 בבוקר. ברים בבאלי במלונות יכולים להיות פתוחים עד מאוחר יותר בסוף השבוע.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש ברים בדובאי ללא אלכוהול?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, ברים בדובאי מציעים משקאות ללא אלכוהול — קוקטיילים מוקד, מיצים, קפה ותה. ברים בדובאי מצייתים לדרישות אסלאמיות ותומכים באפשרויות עבור מי שלא שותה אלכוהול.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש ברים בבאלי ללא אלכוהול?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, ברים בבאלי מציעים משקאות ללא אלכוהול — קוקטיילים מוקד, מיצים, קפה ותה. ברים בבאלי מצייתים לדרישות אסלאמיות ותומכים באפשרויות עבור מי שלא שותה אלכוהול.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה לבר בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים המלצה לבר בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש בר מומלץ בדובאי 🍸')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש בר מומלץ בבאלי 🍸')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl"

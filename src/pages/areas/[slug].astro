@@ -24,8 +24,8 @@ const nearbyAttractions = area.metadata?.nearby_attractions ?? []
 
 const contentHtml = area.full_content ? await marked(area.full_content) : ''
 
-const pageTitle = `${area.name_he}${area.name_en ? ` — ${area.name_en}` : ''} | אזורים בדובאי | Yalla Dubai`
-const pageDescription = area.excerpt || area.description || `${area.name_he} — אזור בדובאי`
+const pageTitle = `${area.name_he}${area.name_en ? ` — ${area.name_en}` : ''} | אזורים בבאלי | Yalla Bali`
+const pageDescription = area.excerpt || area.description || `${area.name_he} — אזור בבאלי`
 
 const placeSchema = {
   '@context': 'https://schema.org',
@@ -37,7 +37,7 @@ const placeSchema = {
   url: new URL(`/areas/${area.slug}`, Astro.site).toString(),
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Dubai',
+    addressLocality: 'Bali',
     addressCountry: 'AE',
   },
 }
@@ -52,7 +52,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/areas/${area.slug}`}
+  canonical={`https://yalla-bali.co.il/areas/${area.slug}`}
   ogImage={area.image}
   ogType="article"
   schema={placeSchema}
@@ -116,9 +116,9 @@ const breadcrumbItems = [
     )}
 
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים לדעת עוד על {area.name_he} ואזורים נוספים בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים לדעת עוד על {area.name_he} ואזורים נוספים בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מתכנן טיול לדובאי ורוצה לשמוע על אזורים מומלצים 🏙️')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מתכנן טיול לבאלי ורוצה לשמוע על אזורים מומלצים 🌴')}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl"

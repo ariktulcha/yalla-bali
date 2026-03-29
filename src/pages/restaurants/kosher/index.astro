@@ -15,20 +15,20 @@ const items = (data || []).filter(r =>
   (r.cuisine_types || []).some(t => ['כשר', 'kosher', 'Kosher', 'כשרות'].includes(t))
 )
 
-const pageTitle = 'מסעדות כשרות בדובאי | Yalla Dubai'
-const pageDescription = 'רשימת המסעדות הכשרות הטובות ביותר בדובאי. מסעדות עם הכשר למטיילים ישראלים ושומרי כשרות בדובאי.'
+const pageTitle = 'מסעדות כשרות בבאלי | Yalla Bali'
+const pageDescription = 'רשימת המסעדות הכשרות הטובות ביותר בבאלי. מסעדות עם הכשר למטיילים ישראלים ושומרי כשרות בבאלי.'
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'מסעדות כשרות בדובאי',
+  name: 'מסעדות כשרות בבאלי',
   description: pageDescription,
   numberOfItems: items.length,
   itemListElement: items.map((item, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-dubai.co.il').toString(),
+    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
   })),
 }
 
@@ -53,9 +53,9 @@ const breadcrumbItems = [
     </nav>
 
     <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות כשרות בדובאי</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות כשרות בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        דובאי הפכה ליעד מוביל למטיילים ישראלים, ואיתה צמחה סצנת מסעדות כשרות מגוונת.
+        באלי הפכה ליעד מוביל למטיילים ישראלים, ואיתה צמחה סצנת מסעדות כשרות מגוונת.
         כאן תמצאו את המסעדות הכשרות המומלצות ביותר בעיר — ממסעדות בשר ועד אסייתי.
       </p>
     </header>
@@ -82,55 +82,55 @@ const breadcrumbItems = [
     )}
 
     <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות כשרות בדובאי</h2>
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות כשרות בבאלי</h2>
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה מסעדות כשרות יש בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בדובאי יש יותר מ-20 מסעדות כשרות המספקות אחילה כשרה ברמה גבוהה. מסעדות כשרות בדובאי מתאימות לטיול משפחתי ולאירועים עם הכשר מאושר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה מסעדות כשרות יש בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בבאלי יש יותר מ-20 מסעדות כשרות המספקות אחילה כשרה ברמה גבוהה. מסעדות כשרות בבאלי מתאימות לטיול משפחתי ולאירועים עם הכשר מאושר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי הכשור זמינים במסעדות כשרות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">במסעדות כשרות בדובאי תמצאו הכשר מהדרין, הכשר בדיקה, וההכשור של ארגונים מוכרים. כל מסעדה כשרה בדובאי מציינת את רמת ההכשור שלה בבירור.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי הכשור זמינים במסעדות כשרות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">במסעדות כשרות בבאלי תמצאו הכשר מהדרין, הכשר בדיקה, וההכשור של ארגונים מוכרים. כל מסעדה כשרה בבאלי מציינת את רמת ההכשור שלה בבירור.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך להזמין מקום במסעדה כשרה בדובאי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ מאוד להזמין מקום מראש במסעדות כשרות בדובאי, במיוחד בסופי שבוע ובחגים. המסעדות הכשרות בדובאי מתמלאות במהירות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך להזמין מקום במסעדה כשרה בבאלי מראש?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ מאוד להזמין מקום מראש במסעדות כשרות בבאלי, במיוחד בסופי שבוע ובחגים. המסעדות הכשרות בבאלי מתמלאות במהירות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטווח המחירי של אכילה כשרה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בדובאי מציעות אפשרויות במגוון טווחי מחירים — מ-casual עד fine dining. אכילה כשרה בדובאי זמינה בכל תקציב.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטווח המחירי של אכילה כשרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בבאלי מציעות אפשרויות במגוון טווחי מחירים — מ-casual עד fine dining. אכילה כשרה בבאלי זמינה בכל תקציב.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">באילו אזורים בדובאי ממוקמות המסעדות הכשרות?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בדובאי ממוקמות בעיקר בדאון טאון, דובאי מרינה, וג'ומיירה. סצנת המסעדות הכשרות בדובאי משתרעת על מרכזי העיר הגדולים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">באילו אזורים בבאלי ממוקמות המסעדות הכשרות?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בבאלי ממוקמות בעיקר בדאון טאון, באלי מרינה, וג'ומיירה. סצנת המסעדות הכשרות בבאלי משתרעת על מרכזי העיר הגדולים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות כשרות בשרים בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, קיימות מסעדות כשרות בשר בדובאי המתמחות בלחם בשר כשר וסטייקים בהכשור. המסעדות הכשרות בדובאי המתמחות בבשר מציעות בחירה עשירה לשומרי כשרות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות כשרות בשרים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, קיימות מסעדות כשרות בשר בבאלי המתמחות בלחם בשר כשר וסטייקים בהכשור. המסעדות הכשרות בבאלי המתמחות בבשר מציעות בחירה עשירה לשומרי כשרות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות כשרות אסייתיות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בדובאי קיימות מסעדות כשרות יפניות, אוגרות מזרח אסייתיות עם הכשור. מסעדות כשרות בדובאי מציעות מטבח אסיאתי בעל הכשור.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות כשרות אסייתיות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בבאלי קיימות מסעדות כשרות יפניות, אוגרות מזרח אסייתיות עם הכשור. מסעדות כשרות בבאלי מציעות מטבח אסיאתי בעל הכשור.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם ניתן לחגוג אירועים במסעדות כשרות בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מסעדות כשרות בדובאי מציעות אולמות לאירועים פרטיים עם הכשור מלא. אירועים כשרים בדובאי ניתן לקיים במסעדות כשרות מובילות בעיר.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם ניתן לחגוג אירועים במסעדות כשרות בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מסעדות כשרות בבאלי מציעות אולמות לאירועים פרטיים עם הכשור מלא. אירועים כשרים בבאלי ניתן לקיים במסעדות כשרות מובילות בעיר.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם מסעדות כשרות בדובאי מתאימות לתיירים ישראלים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בדובאי נבחרו במיוחד לתיירים ישראלים ומטיילים שומרי כשרות. סצנת המסעדות הכשרות בדובאי מבינה את צרכי התיירים הישראלים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם מסעדות כשרות בבאלי מתאימות לתיירים ישראלים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בבאלי נבחרו במיוחד לתיירים ישראלים ומטיילים שומרי כשרות. סצנת המסעדות הכשרות בבאלי מבינה את צרכי התיירים הישראלים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הדרוג לבחירת מסעדה כשרה טובה בדובאי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בחרו מסעדה כשרה בדובאי על פי סוג ההכשור, חוות דעות, ומטבח. מסעדות כשרות בדובאי מומלצות על פי איכות האוכל, השירות, והאווירה הכשרה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הדרוג לבחירת מסעדה כשרה טובה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">בחרו מסעדה כשרה בבאלי על פי סוג ההכשור, חוות דעות, ומטבח. מסעדות כשרות בבאלי מומלצות על פי איכות האוכל, השירות, והאווירה הכשרה.</p>
         </details>
       </div>
     </section>
 
     <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">צריכים המלצה למסעדה כשרה בדובאי?</p>
+      <p class="text-white/80 mb-4">צריכים המלצה למסעדה כשרה בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדה כשרה בדובאי 🍽️')}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש מסעדה כשרה בבאלי 🍽️')}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

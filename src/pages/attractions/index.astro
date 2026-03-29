@@ -21,7 +21,7 @@ const categoryLinks = [
 // Client-side filter categories (no dedicated pages)
 const attrCategories = [
   { label: 'הכל', key: 'all' },
-  { label: '🏛️ תרבות', key: 'culture', match: ['מוזיאון', 'מסגד', 'Museum', 'Grand Mosque', 'Dubai Museum', 'Etihad Museum', 'Museum of the Future'] },
+  { label: '🏛️ תרבות', key: 'culture', match: ['מוזיאון', 'מסגד', 'Museum', 'Grand Mosque', 'Bali Museum', 'Etihad Museum', 'Museum of the Future'] },
   { label: '🎢 פארקים', key: 'parks', match: ['Park', 'Waterpark', 'LEGOLAND', 'Bollywood', 'Motiongate', 'IMG', 'Wild Wadi', 'Aquaventure'] },
   { label: '🏖️ חופים', key: 'beach', match: ['Beach', 'Marina', 'Waterfront', 'Palm', 'Bluewaters', 'La Mer'] },
   { label: '🏙️ סקיילין', key: 'skyline', match: ['Burj', 'Frame', 'Creek', 'Global Village', 'Downtown'] },
@@ -29,20 +29,20 @@ const attrCategories = [
   { label: '🏜️ מדבר', key: 'desert', match: ['Desert', 'Safari', 'Dune', 'RZR', 'Hatta'] },
 ]
 
-const title = 'אטרקציות בדובאי — המדריך המלא | Yalla Dubai'
-const description = 'כל האטרקציות בדובאי: בורג׳ ח׳ליפה, דובאי מול, אקוונצ׳ר, מדבר, חופים ועוד. מחירים, שעות פתיחה וטיפים.'
+const title = 'אטרקציות בבאלי — המדריך המלא | Yalla Bali'
+const description = 'כל האטרקציות בבאלי: בורג׳ ח׳ליפה, באלי מול, אקוונצ׳ר, מדבר, חופים ועוד. מחירים, שעות פתיחה וטיפים.'
 
 const schemaItemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'אטרקציות בדובאי',
+  name: 'אטרקציות בבאלי',
   description,
   numberOfItems: attractions.length,
   itemListElement: attractions.map((a, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: a.name_he,
-    url: `https://yalla-dubai.co.il/attractions/${a.slug}`,
+    url: `https://yalla-bali.co.il/attractions/${a.slug}`,
   })),
 }
 
@@ -50,7 +50,7 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: 'https://yalla-dubai.co.il/' },
+    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: 'https://yalla-bali.co.il/' },
     { '@type': 'ListItem', position: 2, name: 'אטרקציות' },
   ],
 }
@@ -68,11 +68,11 @@ const breadcrumbSchema = {
         <span class="mx-2">/</span>
         <span class="text-white/60">אטרקציות</span>
       </nav>
-      <h1 class="text-4xl md:text-5xl font-black mb-4">אטרקציות בדובאי</h1>
+      <h1 class="text-4xl md:text-5xl font-black mb-4">אטרקציות בבאלי</h1>
       <p class="text-lg text-white/60 max-w-2xl mx-auto">
-        דובאי מציעה יותר מ-100 אטרקציות עולמיות: בורג׳ חליפה (כמעלית בעולם), מוזיאון העתידות, גן הירוקים בדובאי וסקי במקום מקורה בדברת.
+        באלי מציעה יותר מ-100 אטרקציות עולמיות: בורג׳ חליפה (כמעלית בעולם), מוזיאון העתידות, גן הירוקים בבאלי וסקי במקום מקורה בדברת.
         יש פעילויות לכל גיל — מפארקי שעשועים לילדים עד צלילה בים לתיירים אדוותורוסיים.
-        מצא את אטרקציות החינם בדובאי, קביעות משפחתיות, וחוויות בלתי נשכחות בכל תקציב.
+        מצא את אטרקציות החינם בבאלי, קביעות משפחתיות, וחוויות בלתי נשכחות בכל תקציב.
       </p>
       <p class="mt-3 text-teal-400 font-medium" id="attr-count">{attractions.length} אטרקציות</p>
     </div>

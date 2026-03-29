@@ -30,8 +30,8 @@ const groupSize = tour.group_size ?? tour.metadata?.group_size
 
 const contentHtml = tour.full_content ? await marked(tour.full_content) : ''
 
-const pageTitle = `${tour.name_he}${tour.name_en ? ` — ${tour.name_en}` : ''} | טיולים בדובאי | Yalla Dubai`
-const pageDescription = tour.excerpt || tour.description || `${tour.name_he} — טיול מאורגן בדובאי`
+const pageTitle = `${tour.name_he}${tour.name_en ? ` — ${tour.name_en}` : ''} | טיולים בבאלי | Yalla Bali`
+const pageDescription = tour.excerpt || tour.description || `${tour.name_he} — טיול מאורגן בבאלי`
 
 const tourSchema = {
   '@context': 'https://schema.org',
@@ -62,7 +62,7 @@ const breadcrumbItems = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-dubai.co.il/tours/${tour.slug}`}
+  canonical={`https://yalla-bali.co.il/tours/${tour.slug}`}
   ogImage={tour.image}
   ogType="article"
   schema={tourSchema}
@@ -143,9 +143,9 @@ const breadcrumbItems = [
     )}
 
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים להזמין את {tour.name_he} או לשמוע על טיולים נוספים בדובאי?</p>
+      <p class="text-white/80 mb-4">רוצים להזמין את {tour.name_he} או לשמוע על טיולים נוספים בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מעוניין בטיול ${tour.name_he} בדובאי 🏜️`)}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מעוניין בטיול ${tour.name_he} בבאלי 🏜️`)}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
