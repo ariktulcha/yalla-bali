@@ -1,172 +1,116 @@
 ---
 import Layout from '../components/Layout.astro'
 
-const title = 'חופים בבאלי — המדריך המלא לחופים הכי שווים | Yalla Bali'
-const description = 'מדריך מפורט לחופים בבאלי: JBR Beach, Kite Beach, La Mer, Palm West Beach, Black Palace ועוד. מתקנים, שעות, מחירים, ואיך מגיעים — כל מה שצריך לדעת.'
+const title = 'חופים בבאלי — 7 החופים הכי שווים לביקור | Yalla Bali'
+const description = 'מדריך מפורט לחופים בבאלי: קוטה, סמינייק, קאנגו, נוסה דואה, ג\'ימברן, אולוואטו וסאנור. כל מה שצריך לדעת — גלישה, שקיעות, ריפים, ואיך מגיעים.'
 
 const beaches = [
   {
-    id: 'jbr',
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80&fit=crop',
-    name: 'JBR Beach',
-    nameHe: 'חוף JBR — ג\'ומיירה ביץ\' רזידנס',
-    area: 'באלי מרינה',
-    description: 'JBR Beach הוא החוף הכי תוסס ומוכר בבאלי — ולא בכדי. נמשך לאורך 1.7 ק"מ לאורך The Walk הגדול, עם גישה ישירה לעשרות מסעדות, ברים, חנויות ובתי קפה. החול לבן ורך, המים בצבע טורקיז, והסכייליין של באלי מרינה מאחוריכם יוצר תפאורה שלא תשכחו.\n\nהחוף מלא פעילויות: ג\'ט סקי, גלשנים, שיוט על בננה בוט, ספורט מים מכל הסוגים. יש גם פארק ספלאש לילדים הקטנים. בסוף שבוע האווירה כאן היא ה"הכי באלי שיש" — מגוון אנשים מכל העולם, ביפים עם ספורטים, ואנרגיה שמדבקת.',
-    bestFor: 'כולם — משפחות, זוגות, קבוצות חברים',
-    facilities: ['מקלחות ושירותים', 'חדרי הלבשה', 'השכרת מיטות שיזוף', 'מגוון מסעדות', 'ספורט ימי', 'Splash Pad לילדים', 'WiFi חינם', 'חניה (בתשלום)'],
-    howToGetThere: 'מטרו: תחנת DMCC או JLT, ומשם 10 דקות הליכה. Uber/מונית: "JBR Beach" או "The Walk JBR". חניה: בקניון JBR ובמגדלי המרינה.',
-    tips: 'שישי-שבת זה עמוס עד גדות — הגיעו לפני 9:00 בבוקר או אחרי 17:00. בחורף (נוב-מרץ) האווירה הכי נעימה. The Walk מציע פופ-אפ ובידור חי ברוב ימי שישי בערב.',
+    id: 'kuta',
+    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80&fit=crop',
+    name: 'Kuta Beach',
+    name_he: 'קוטה',
+    area: 'דרום באלי',
+    description: 'קוטה הוא החוף הכי מפורסם בבאלי — ולא בכדי. חוף ארוך ופתוח של כמה קילומטרים, עם גלים מושלמים לגלישה, חול כהה ורך, ושקיעות שצובעות את השמיים בכתום ואדום. זה המקום שכולם חושבים עליו כשאומרים "חוף בבאלי".\n\nהאווירה כאן תוססת ותיירותית: שורות של בתי קפה, בתי גלישה, מסאג\' על החוף, ורוכלים שמציעים כל דבר משרשרות ועד שייקים טריים. סנסט בקוטה הוא אחד הטקסים שחובה לעשות — מאות אנשים מתכנסים מדי ערב לראות את השמש שוקעת לתוך האוקיינוס ההודי.\n\nאם אתם גולשים מתחילים — זה המקום. יש כאן עשרות ספרי גלישה שמציעים שיעורים ראשונים, עם גלים קלים ומורים ידידותיים. וגם אם אתם לא גולשים, פשוט לשבת עם קוקו בידיים ולהביט בגלים זו חוויה בפני עצמה.',
+    bestFor: 'גלישה למתחילים, שקיעות, תיירים ראשי פעם בבאלי',
+    tips: 'שקיעה בקוטה היא חובה — הגיעו כחצי שעה לפני לתפוס מקום. שיעורי גלישה עולים 150,000–200,000 רופיה לשעה, כולל ציוד. הישמרו מגנבי כיסים בעיקר בצד הצפוני של החוף.',
     freeEntry: true,
-    sunbedPrice: '50–150 AED ליום',
-    waterSports: true,
-    openHours: '24/7',
-    parking: 'בתשלום',
+    howToGetThere: 'מנגוראה ראי: 15 דקות ברכב. מ-Seminyak: 20 דקות הליכה לאורך החוף. Grab (האובר המקומי) עולה 30,000–50,000 רופיה מהמרכז.',
   },
   {
-    id: 'kite',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fit=crop&crop=center',
-    name: 'Kite Beach',
-    nameHe: 'חוף העפיפונים — Kite Beach',
-    area: 'ג\'ומיירה',
-    description: 'Kite Beach הוא החוף הכי ספורטיבי ונחשק בבאלי בקרב הדיירים המקומיים. שמו מגיע מהקייטסרפינג שפופולרי כאן, אבל זה הרבה יותר מסתם חוף: מסלול ריצה ואופניים לאורך הים, מגרשי כדורעף חוף, טרמפולינות, ופוד טראקים עם אוכל מצוין במחיר סביר.\n\nהנוף כאן הוא ה"money shot" של באלי — בורג\' אל ערב מצטיירת ישירות מהמים, והשקיעה מכאן היא אחת הכי מרהיבות בעיר. אל תפספסו את ה-Skyline שמשתקף במים בזמן הזהב.',
-    bestFor: 'ספורטיביים, ריצה, שקיעות, צלמים',
-    facilities: ['מסלול ריצה 5 ק"מ', 'מגרשי ספורט', 'פוד טראקים מצוינים', 'מקלחות', 'חדרי הלבשה', 'קייטסרפינג', 'טרמפולינות', 'WiFi חינם', 'חניה חינם'],
-    howToGetThere: 'Uber/מונית: "Kite Beach Jumeirah". אין מטרו קרוב. חניה ציבורית חינם בשפע.',
-    tips: 'זה המקום הכי טוב לצפות בשקיעה מול בורג\' אל ערב — הגיעו שעה לפני. הפוד טראקים פתוחים רק אחה"צ וערב. יש WiFi חינם מהעירייה.',
+    id: 'seminyak',
+    image: 'https://images.unsplash.com/photo-1559628233-100c798642d8?w=1200&q=80&fit=crop',
+    name: 'Seminyak Beach',
+    name_he: 'סמינייק',
+    area: 'דרום באלי',
+    description: 'סמינייק הוא קוטה הגדולה — רק עם יותר סטייל. חוף הים כאן פחות תיירותי ויותר טרנדי: כיסאות שיזוף שמוגשים עם cocktails, מסעדות על שפת הים עם תאורה אמביינטית, ו-beach clubs שמשמיעים מוזיקה כל הערב.\n\nשמות כמו Potato Head, Ku De Ta ו-Finns כבר הפכו לאייקונים של תרבות ה-beach club הבאלינזית. כאן תמצאו את ה-crowd הצעיר, יפה ומסוגנן, עם drinks ביד ורגליים בחול. המחירים קצת יותר גבוהים, אבל האווירה שווה כל שקל.\n\nהגלים בסמינייק מתאימים גם לגולשים מנוסים יותר, אבל החוף פחות "גלישה" ויותר "ויב". בשקיעה, הצבעים כאן מרהיבים במיוחד — אפשר לעמוד על שפת הים עם קוקטייל ולצפות בשמש נכנסת לים.',
+    bestFor: 'beach clubs, צעירים, זוגות, ויב ערב',
+    tips: 'הזמינו מקום ב-Potato Head מראש לסוף שבוע — נגמר מהר. Happy hour ברוב ה-beach clubs בין 16:00–18:00. חנויות האופנה מסביב שוות סיור — מגוון בגדי ים ייחודיים.',
     freeEntry: true,
-    sunbedPrice: 'חינם (ראשון-שרת)',
-    waterSports: true,
-    openHours: '24/7',
-    parking: 'חינם',
+    howToGetThere: 'מ-Kuta: 20 דקות הליכה צפונה לאורך החוף, או 10 דקות ברכב. Grab מהמרכז: 40,000–60,000 רופיה.',
   },
   {
-    id: 'palmwest',
-    image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=80&fit=crop',
-    name: 'Palm West Beach',
-    nameHe: 'פאלם וסט ביץ\' — Palm West Beach',
-    area: 'פאלם ג\'ומיירה',
-    description: 'Palm West Beach הוא החוף הטרנדי ביותר בבאלי ב-2025 — שזירה מושלמת של חוף פרטי-ציבורי, מסעדות ברמה גבוהה, ובר ספיקו מול הים. ממוקם על הגזע של הפאלם ג\'ומיירה, עם נוף ישיר לאינסופי שכולו מים וסקיילין.\n\nהחוף מושך קהל של צעירים ותיירים שרוצים "ה-אינסטגרם שוט" של באלי — ולא בכדי. שביל הטיילות הדקלים, המסעדות הצבעוניות, והנגישות של המקום הופכים אותו להחוף הכי מוצלח בבאלי ב-2-3 השנים האחרונות.',
-    bestFor: 'צעירים, טרנדסטרים, אינסטגרם, אוכל + חוף',
-    facilities: ['מסעדות ובתי קפה', 'ברים', 'מקלחות', 'שביל טיילות', 'מוזיקה חיה (סופ"ש)', 'ספורט ימי', 'חניה'],
-    howToGetThere: 'Uber/מונית: "Palm West Beach". מטרו: תחנת Palm Jumeirah (מונורייל), ומשם Uber. חניה בתשלום באתר.',
-    tips: 'אחרי 17:00 האווירה מתחממת. בסופ"ש יש DJs ומוזיקה חיה. BarSol ו-Wavebreaker הם הבחירות הכי טובות לשתייה מול הים.',
+    id: 'canggu',
+    image: 'https://images.unsplash.com/photo-1530569673472-307dc017a82d?w=1200&q=80&fit=crop',
+    name: 'Canggu Beach (Brawah)',
+    name_he: 'קאנגו (בראווה)',
+    area: 'מרכז-מערב באלי',
+    description: 'קאנגו היא המרכז הבלתי מוכרז של ה-digital nomads ו-surfers בבאלי. שלא תתבלבלו — זה לא חוף תיירותי רגיל. זו קהילה שלמה עם קפה-בארים, co-working spaces, חנויות ויניל, ומסעדות שמגישות acai bowls לצד אוכל באלינזי אותנטי.\n\nחוף בראווה הוא הלב של קאנגו — חול כהה, גלים אגרסיביים ואתגריים, ומגרש גלישה שנחשב אחד הטובים בבאלי. הקהל כאן מגיע עם סרפבורד, חוזר עייף ומאושר, ויושב בשעות אחה"צ בתוך Lazy Cats Cafe או Old Man\'s עם ביר גאלה ביד.\n\nאם אתם מחפשים את הצד ה"מגניב" של באלי — החצי שפחות מופיע בגלויות ויותר ב-Instagram האישי של ה-freelancer האמריקאי שגר כאן שנה — קאנגו היא המקום.',
+    bestFor: 'גולשים מנוסים, digital nomads, אוהבי כפרים, nomad vibes',
+    tips: 'הגלים בקאנגו חזקים — לא מומלץ למתחילים. Old Man\'s הוא הבאר האיקוני — שווה גם אם לא שותים. השכרת אופנוע (50,000–80,000 רופיה ליום) הכי כלכלית להגיע לכאן.',
     freeEntry: true,
-    sunbedPrice: '80–200 AED',
-    waterSports: true,
-    openHours: '08:00–02:00',
-    parking: 'בתשלום',
+    howToGetThere: 'מ-Seminyak: 20 דקות צפונה ברכב. Grab: 50,000–70,000 רופיה ממרכז Kuta/Seminyak. אין תחבורה ציבורית — Grab או אופנוע.',
   },
   {
-    id: 'lamer',
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80&fit=crop',
-    name: 'La Mer',
-    nameHe: 'לה מר — La Mer Beach',
-    area: 'ג\'ומיירה',
-    description: 'La Mer היא לא סתם חוף — זו חוויה שלמה. קומפלקס חוף עירוני מעוצב עם גרפיטי צבעוני, חנויות בוטיק, מסעדות מהרחבי העולם, ופארק המים Laguna. המקום מושך קהל מגוון: משפחות ביום, זוגות ותיירים אחה"צ.\n\nהחוף עצמו נקי ומסודר, עם גישה נוחה ממגרש החניה. מה שהופך את La Mer למיוחד הוא השילוב של חוף + בידור + קניות + אוכל — אפשר לבלות כאן 6-8 שעות ולא להשתעמם לרגע. פארק הלגונה שבפנים מושלם לילדים.',
-    bestFor: 'משפחות, זוגות, אינסטגרם, ילדים',
-    facilities: ['פארק מים Laguna', 'מסעדות בוטיק', 'חנויות', 'מקלחות', 'קולנוע חוץ (עונתי)', 'מגרש משחקים', 'חניה'],
-    howToGetThere: 'Uber/מונית: "La Mer Beach Jumeirah". חניה חינם בכניסה הצפונית. אין מטרו קרוב.',
-    tips: 'הגיעו אחרי 16:00 לאווירה הכי טובה. Laguna Waterpark שוות כניסה אם יש ילדים. ביום שישי בערב יש לעיתים מופעים ואירועים.',
+    id: 'nusadua',
+    image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&q=80&fit=crop',
+    name: 'Nusa Dua Beach',
+    name_he: 'נוסה דואה',
+    area: 'מזרח-דרום באלי',
+    description: 'נוסה דואה הוא עולם אחר לגמרי מהחופים האחרים. מים בצבע תכלת עז ושקטים כמו אגם, חול לבן בהיר, ורמת ניקיון שנדירה בחופי אינדונזיה. האזור הזה הוא מובלעת יוקרה — מלוני five-star כמו St. Regis, Conrad ו-Mulia שולטים בקו החוף.\n\nהשניף הכי גדול של נוסה דואה הוא הריף — מחסום אלמוגים טבעי שמגן על הלגונה מגלים גדולים, מה שיוצר מים שקטים ובטוחים להשחייה. ילדים יכולים לשחק שעות מבלי שהורים יצטרכו לדאוג. זה גם גן עדן לצוללנים קלים — אפשר לראות דגים צבעוניים ישירות מהחוף.\n\nהחוף הציבורי בנוסה דואה (Geger Beach) נגיש לכולם ואין צורך להיות אורח במלון. אווירה שקטה, ים מרגיע, ונוף שגורם לשכוח מהעולם.',
+    bestFor: 'משפחות עם ילדים, זוגות שמחפשים שקט, יוקרה וריף',
+    tips: 'Geger Beach (החוף הציבורי) נגיש ללא עלות. גלישה עם שנורקל מומלצת — ציוד להשכרה על החוף ב-50,000 רופיה. הגיעו בבוקר לפני שהמלונות "ממלאים" את החוף.',
     freeEntry: true,
-    sunbedPrice: '50–120 AED',
-    waterSports: false,
-    openHours: '10:00–24:00',
-    parking: 'חינם',
+    howToGetThere: 'מ-Kuta: 30–40 דקות דרום-מזרח ברכב. Grab: 80,000–120,000 רופיה ממרכז Kuta. יש taxi מאורגן מהשדה — נוח למי שנוחת ומגיע ישר לנוסה דואה.',
   },
   {
-    id: 'blackpalace',
-    image: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1200&q=80&fit=crop',
-    name: 'Black Palace Beach',
-    nameHe: 'Black Palace Beach — החוף הסודי',
-    area: 'אל סופוח',
-    description: 'Black Palace Beach הוא הגן הסודי של באלי — חוף טבעי ללא כל פיתוח מסחרי, ממש מתחת לאפם של המלונות הכי יוקרתיים בעיר. חול לבן נקי, מים שקטים וצלולים, ונוף מרהיב על בורג\' אל ערב, הפאלם, והסקיילין.\n\nהאירוניה הגדולה היא שרוב התיירים בבאלי לא יודעים שהמקום קיים. המקומיים מגיעים לכאן לשקט, לשקיעה, ולצילומים. אין כאן אפילו כיסא אחד למכירה — רק אתם, החול, והים. בגלל זה זה מושלם.',
-    bestFor: 'זוגות, שקט, צילומים, שקיעות',
-    facilities: ['ללא מתקנים — הביאו הכל אתכם'],
-    howToGetThere: 'Uber/מונית: "Black Palace Beach" או "Al Sufouh Beach". חניה ברחוב (חינם). הליכה של 3-5 דקות מהכביש.',
-    tips: 'הביאו: מים, אוכל, שמשייה, מגבת. אין שום דבר בחוף. השקיעות כאן הן אחת מה-TOP של באלי — הגיעו שעה לפני השקיעה.',
+    id: 'jimbaran',
+    image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1200&q=80&fit=crop',
+    name: 'Jimbaran Beach',
+    name_he: 'ג\'ימברן',
+    area: 'דרום-מערב באלי',
+    description: 'ג\'ימברן הוא חוף של דייגים ואוכל — שתי אהבות שמשתלבות בצורה מושלמת. בבוקר תראו ספינות דיג עגונות על החוף, מרשתות ממוינות ויציאה לים. בערב, אותו חוף הופך לשורה ארוכה של מסעדות פירות ים ישר על החול, עם שולחנות ומנורות אמביינטיות.\n\nהסנסט בג\'ימברן הוא אחד הטקסים הכי רומנטיים שיש בבאלי. שולחן לשניים, רגליים על חול, גרפת שרימפס טרי ולובסטר שיצא מהים ממש היום — עם השמש שוקעת מאחורי פסגות ג\'אווה. לא פלא שזה הספוט הרשמי לאחלות נישואין.\n\nשימו לב שבגלל תעבורת הדיג, המים לא כמו ב-Nusa Dua — פחות תכלת, יותר חים. אבל זה בהחלט לא הסיבה שמגיעים לכאן. מגיעים לכאן לאכול ולצפות בשקיעה, ובשתי אלו ג\'ימברן לא מאכזב.',
+    bestFor: 'ארוחת ערב רומנטית, זוגות, חובבי פירות ים, שקיעות',
+    tips: 'הגיעו בשקיעה (17:30–18:30) לארוחת ערב על החוף. המחירים "תיירותיים" — תשאלו כמה עולה לפני שמזמינים. Kedonganan Fish Market בצפון הוא מקום אחר לחלוטין — שוק פירות ים מקומי, זול ואותנטי.',
     freeEntry: true,
-    sunbedPrice: 'אין',
-    waterSports: false,
-    openHours: '24/7',
-    parking: 'חינם',
+    howToGetThere: 'מהשדה (DPS): 10 דקות בלבד — הקרוב ביותר! מ-Kuta: 15–20 דקות דרום ברכב. Grab: 40,000–60,000 רופיה.',
   },
   {
-    id: 'nikki',
-    image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80&fit=crop',
-    name: 'Nikki Beach Bali',
-    nameHe: 'ניקי ביץ\' — חוף המועדון הכי מפורסם',
-    area: 'פאלם ג\'ומיירה',
-    description: 'Nikki Beach הוא חוף-מועדון בינלאומי שהגיע לבאלי, ומציע חוויה פרמיום שחצי מהאינסטגרם שלכם כבר ראה. לבן על לבן: תפאורה, כיסאות שיזוף, ויריעות. DJים עולמיים, שמפניה, ואנשים שנראים כמו יצאו ממגזין.\n\nהחוף עצמו ממוקם מול הים הפתוח, עם נוף לסקיילין של באלי מרחוק. זה לא חוף לכולם — זה חוף לאלה שרוצים חוויה, לא רק שיזוף. כניסה לרוב כוללת מינימום הוצאה.',
-    bestFor: 'לילה חי, אוהבי קלאב, חוויה פרמיום',
-    facilities: ['מיטות שיזוף VIP', 'בר', 'מסעדה', 'DJs', 'בריכה', 'מקלחות'],
-    howToGetThere: 'Uber/מונית: "Nikki Beach Bali, Pearl Jumeira". הגיעו עם Uber — אין חניה נוחה.',
-    tips: 'הזמינו שולחן מראש לסוף שבוע. מינימום הוצאה של 200-400 AED. אל תגיעו לפני 14:00.',
+    id: 'uluwatu',
+    image: 'https://images.unsplash.com/photo-1518544866330-95a2ab4a7a8c?w=1200&q=80&fit=crop',
+    name: 'Uluwatu / Padang Padang',
+    name_he: 'אולוואטו / פאדאנג פאדאנג',
+    area: 'חצי האי בואקן (דרום)',
+    description: 'אולוואטו היא לא חוף — היא ניסיון לחות גבולי. קליפים גבוהים שנופלים לים, גלים שנחשבים בין הגדולים בעולם לגלישה, ומקדש עתיק שיושב על שפת הצוק בדיוק מול השקיעה. זו באלי הדרמטית ביותר שתראו.\n\nהחוף של פאדאנג פאדאנג, כמה דקות נסיעה משם, נראה כאילו הוסתר בכוונה מהעולם — יורדים במדרגות חצובות בסלע, עוברים דרך פתח צר בצוק, ופתאום מגלים חוף זעיר ומופלא עם מים ירוקים-תכולים וצוקים מסביב. זה הספוט שמופיע בכל תמונות ה"best of Bali".\n\nלגולשים: Uluwatu, Bingin ו-Padang Padang הם שלושת המנגנות של חצי האי Bukit. גלי tube ריאלי מהטובים בעולם. לא מתחילים.',
+    bestFor: 'גולשים מנוסים, צלמים, חוויות דרמטיות, Kecak Dance בשקיעה',
+    tips: 'הכנסו למקדש Uluwatu לצפות ב-Kecak Dance עם השקיעה (18:00 בד"כ, 150,000 רופיה). שמרו על חפצים מהקופים — הם גנבים ממש. חוף פאדאנג פאדאנג עולה 20,000 רופיה כניסה.',
     freeEntry: false,
-    sunbedPrice: '150–400 AED (מינימום)',
-    waterSports: false,
-    openHours: '11:00–23:00 (שישי-שבת עד 02:00)',
-    parking: 'מוגבל',
+    howToGetThere: 'מ-Kuta: 45–60 דקות דרומה, דרך חצי האי Bukit. Grab אמין — 80,000–120,000 רופיה. מומלץ לשכור אופנוע לאזור כולו ולקפוץ בין Bingin, Uluwatu ו-Padang Padang.',
   },
   {
-    id: 'mamzar',
-    image: 'https://images.unsplash.com/photo-1583394293297-d0b2a9b37b6f?w=1200&q=80&fit=crop',
-    name: 'Al Mamzar Beach Park',
-    nameHe: 'פארק חוף אל-ממזר — המשפחתי ביותר',
-    area: 'דירה (צפון באלי)',
-    description: 'אל-ממזר הוא הפארק-חוף הכי משפחתי בבאלי, ועם הכי הרבה מה שצריך ביום שלם. 5 חופים שונים, דשאים ירוקים ענקיים, בריכות שחייה מקוטות, בקתות מוצלות, ואזורי ברביקיו.\n\nמה שמייחד את אל-ממזר הוא הגודל — 106 דונם של טבע, ים ומתקנים. ילדים יכולים לשחק שעות לאין קץ. ההורים יכולים להיות עם ספר בצל הדקלים. הכניסה בתשלום סמלי (5 AED לאדם), אבל מה שמקבלים הוא שווה הרבה יותר.',
-    bestFor: 'משפחות עם ילדים, פיקניקים, קבוצות גדולות',
-    facilities: ['5 חופים שונים', 'בריכות שחייה', 'אזורי ברביקיו', 'מגרשי משחקים', 'בקתות מוצלות (200 AED/יום)', 'מסעדה', 'חניה ענקית', 'גלגל ענק'],
-    howToGetThere: 'מטרו: תחנת Al Qiyadah + Uber (10 דקות). Uber/מונית: "Al Mamzar Beach Park". כניסה: 5 AED לאדם, 30 AED לרכב.',
-    tips: 'שלישי הוא "יום נשים וילדים בלבד" — הגיעו ביום אחר אם אתם זוג. שכרו בקתה מוצלת ל-200 AED — שווה כל שקל. שקט ביותר בימי ב\'-ה\'.',
-    freeEntry: false,
-    sunbedPrice: 'כלול בכניסה',
-    waterSports: false,
-    openHours: '08:00–22:00 (שישי-שבת עד 23:00)',
-    parking: 'כלול',
-  },
-  {
-    id: 'jumeirah',
-    image: 'https://images.unsplash.com/photo-1504700610630-ac6aba3536d3?w=1200&q=80&fit=crop',
-    name: 'Jumeirah Public Beach',
-    nameHe: 'חוף ג\'ומיירה הציבורי — Open Beach',
-    area: 'ג\'ומיירה',
-    description: 'Jumeirah Public Beach (המוכר גם כ-Open Beach) הוא החוף הציבורי הוותיק ביותר בבאלי — ומהנגישים ביותר לתיירים שנשארים בלב העיר. ממוקם ישירות מול בורג\' אל ערב, מה שהופך אותו לאחד מנקודות הצילום הטובות ביותר בבאלי.\n\nהחוף ארוך, לבן ורגוע. אין כאן הרבה "אקשן" כמו ב-JBR, אבל זה בדיוק מה שאוהבים אותו — שקט, ים, ונוף מדהים. יש מתקנים בסיסיים ומספיקים.',
-    bestFor: 'צילומים, שקט, זוגות, מי שנשאר בג\'ומיירה',
-    facilities: ['מקלחות', 'חדרי הלבשה', 'כיסאות שיזוף', 'מסעדות בסמוך', 'חניה'],
-    howToGetThere: 'Uber/מונית: "Jumeirah Beach" או "Open Beach Bali". חניה ציבורית בסמוך (2 AED לשעה).',
-    tips: 'בוקר מוקדם — לא עמוס בכלל. השעה הכי טובה לצילום של בורג\' אל ערב היא זריחה או שעה לפני שקיעה.',
+    id: 'sanur',
+    image: 'https://images.unsplash.com/photo-1573790387438-4da905039392?w=1200&q=80&fit=crop',
+    name: 'Sanur Beach',
+    name_he: 'סאנור',
+    area: 'מזרח דרום-באלי',
+    description: 'סאנור הוא ה-antidote לקוטה. שקט, ירוק, מסודר — חוף שמושך משפחות, אנשים בגיל מבוגר יותר, ומי שרוצה להתנתק בלי לאבד נוחות. כאן אין beach clubs רועשים, אין רוכלים אגרסיביים, ואין תנועה כאוטית. רק שביל טיילות נעים לאורך הים, עם עצי קוקוס, ספסלים, ואנשים שמסתכלים על הים.\n\nהנכס הכי גדול של סאנור הוא הזריחה. האי ממוקם בצד המזרחי של באלי, ומה שאומר שהשמש עולה ישר מהים בבוקר — ספקטקל שאוהבי בוקר לא ישכחו בקלות. הריף המגן גם הוא כאן, ומה שיוצר מים שקטים מושלמים לשחייה.\n\nמסאנור נוסעים לנוסה פנידה ו-Nusa Lembongan — המעבורות קצרות ועוזבות כל כמה שעות. אם אתם מתכננים יום-טיול לאיים, סאנור הוא נקודת המוצא הנוחה ביותר.',
+    bestFor: 'משפחות, family-friendly, זריחות, שקט, נקודת מוצא לנוסה פנידה',
+    tips: 'הגיעו ב-6:00–7:00 לזריחה — מרהיב ושקט. המעבורת לנוסה פנידה יוצאת מהנמל בסאנור — הזמינו ביום שלפני. Promenade (שביל הטיילות) מצוין לריצת בוקר.',
     freeEntry: true,
-    sunbedPrice: '30–80 AED',
-    waterSports: false,
-    openHours: '24/7',
-    parking: 'בתשלום קטן',
+    howToGetThere: 'מ-Kuta: 30–40 דקות מזרחה ברכב. Grab: 60,000–80,000 רופיה. מ-Ubud: 40–50 דקות דרומה.',
   },
 ]
 
 const faqs = [
   {
     q: 'מה החוף הכי מתאים למשפחות עם ילדים?',
-    a: 'Al Mamzar Beach Park הוא הכי משפחתי — עם בריכות, גינות, ואזורי ברביקיו. JBR גם מצוין עם ה-Splash Pad לילדים. La Mer שווה עם Laguna Waterpark שבפנים.'
+    a: 'נוסה דואה וסאנור הם המתאימים ביותר — מים שקטים, ריף מגן, ורמת ניקיון גבוהה. קוטה גם בסדר אבל הגלים יותר חזקים. הימנעו מ-Uluwatu וקאנגו עם ילדים קטנים.'
   },
   {
-    q: 'כמה עולה כניסה לחופים בבאלי?',
-    a: 'רוב החופים הציבוריים (JBR, Kite Beach, Black Palace, Palm West Beach, La Mer, Jumeirah) הם חינם. Al Mamzar גובה 5 AED לאדם. חופי מועדונים כמו Nikki Beach דורשים מינימום הוצאה של 200-400 AED.'
+    q: 'מה החוף הכי טוב לגלישה?',
+    a: 'למתחילים: קוטה (גלים קלים + ספרים). לגולשים בינוניים: קאנגו/בראווה. למנוסים: אולוואטו, Bingin, פאדאנג פאדאנג — גלים ריאליים ומאתגרים.'
   },
   {
-    q: 'מתי הכי כדאי לבקר בחוף בבאלי?',
-    a: 'בחורף (נובמבר–מרץ) — כל שעה ביום נפלאה. בקיץ (אפריל–אוקטובר) — רק בוקר מוקדם (עד 10:00) או אחה"צ מאוחר (אחרי 16:30). שקיעה בכל עונה היא חובה.'
+    q: 'מתי הכי כדאי לבקר בחופי באלי?',
+    a: 'עונת הקיץ הבאלינזית (מאי–ספטמבר) היא שיא — ים שקט, שמש, גלים מדהימים. בעונת הגשמים (אוקטובר–מרץ) החופים עדיין יפים אבל לפעמים יש גשמי-קצר בערב. בכל עונה שווה.'
   },
   {
-    q: 'מה מותר ללבוש בחוף בבאלי?',
-    a: 'בגד ים רגיל מותר בכל חופי באלי. ביקיני מלא — בסדר. צינוק — בסדר. אבל: כשעוזבים את החוף חייבים להתכסות. לא הולכים ברחוב בבגד ים.'
+    q: 'האם כניסה לחופים בבאלי עולה כסף?',
+    a: 'רוב החופים חינמיים — קוטה, סמינייק, קאנגו, נוסה דואה (Geger Beach), ג\'ימברן, סאנור. פאדאנג פאדאנג גובה 20,000 רופיה. Beach clubs מדרישים מינימום הוצאה אבל לא חובה להיכנס אליהם.'
   },
   {
-    q: 'איזה חוף הכי קרוב למרכז באלי?',
-    a: 'JBR ו-Kite Beach הם הנגישים ביותר למרכז באלי מרינה. Jumeirah Public Beach קרוב לבורג\' אל ערב ולמלונות ג\'ומיירה. La Mer ו-Black Palace נמצאים גם הם בג\'ומיירה.'
-  },
-  {
-    q: 'האם יש חוף עם WiFi חינם?',
-    a: 'כן — JBR Beach ו-Kite Beach מציעים WiFi עירוני חינם. La Mer ו-Palm West Beach יש WiFi מהמסעדות והעסקים הסמוכים.'
+    q: 'מה הזמן הכי טוב לשקיעה בבאלי?',
+    a: 'השקיעות הכי מפורסמות: קוטה וסמינייק (ים + שמיים), ג\'ימברן (עם פירות ים), אולוואטו (דרמטי על הצוקים). כולן בין 17:30–18:30 בהתאם לחודש.'
   },
 ]
 
@@ -180,7 +124,7 @@ const schema = {
   mainEntityOfPage: 'https://yalla-bali.co.il/beaches',
   inLanguage: 'he',
   datePublished: '2025-01-01',
-  dateModified: '2026-03-24',
+  dateModified: '2026-03-29',
 }
 
 const faqSchema = {
@@ -200,8 +144,8 @@ const faqSchema = {
 
   <!-- Hero -->
   <section class="relative py-20 md:py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-[#0D0D0D]/80 to-[#0D0D0D]"></div>
-    <div style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=70&fit=crop'); background-size: cover; background-position: center;" class="absolute inset-0 opacity-20"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-teal-900/30 via-[#0A1A18]/80 to-[#0A1A18]"></div>
+    <div style="background-image: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1920&q=70&fit=crop'); background-size: cover; background-position: center;" class="absolute inset-0 opacity-20"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
       <nav class="text-sm text-white/40 mb-6">
         <a href="/" class="hover:text-teal-400 transition-colors">דף הבית</a>
@@ -210,16 +154,16 @@ const faqSchema = {
       </nav>
       <h1 class="text-4xl md:text-6xl font-black text-white mb-6">חופים <span class="text-teal-400">בבאלי</span></h1>
       <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-        מ-JBR התוסס ועד Black Palace הסודי — 8 החופים הכי שווים בבאלי. חול לבן, מים חמים, ושקיעות שאי-אפשר לשכוח.
+        מקוטה התוסס ועד אולוואטו הדרמטי — 7 החופים הכי שווים בבאלי. גלים לגלישה, שקיעות שאי אפשר לשכוח, ומים בצבע שלא ראיתם בשום מקום אחר.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-white/50">
-        <span>⭐ 8 חופים</span>
+        <span>🏄 7 חופים</span>
         <span>·</span>
         <span>🆓 6 חינמיים</span>
         <span>·</span>
-        <span>🌊 מים 21–34°C</span>
+        <span>🌊 אוקיינוס הודי</span>
         <span>·</span>
-        <span>☀️ 350 ימי שמש</span>
+        <span>🌅 שקיעות אגדיות</span>
       </div>
     </div>
   </section>
@@ -228,12 +172,12 @@ const faqSchema = {
   <section class="max-w-6xl mx-auto px-4 -mt-6 relative z-20 mb-14">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
       {[
-        { emoji: '🏖️', title: 'חופים ציבוריים', sub: 'כניסה חינם' },
-        { emoji: '🌡️', title: 'מים חמים', sub: '21–34°C כל השנה' },
-        { emoji: '⛱️', title: 'עונת שיא', sub: 'נוב–מרץ' },
-        { emoji: '🚿', title: 'מתקנים', sub: 'מקלחות + שירותים' },
+        { emoji: '🏄', title: 'גלישה', sub: 'מהטובה בעולם' },
+        { emoji: '🌡️', title: 'מים חמים', sub: '26–29°C כל השנה' },
+        { emoji: '🌅', title: 'שקיעות', sub: 'קוטה, סמינייק, אולוואטו' },
+        { emoji: '🐠', title: 'ריפים', sub: 'נוסה דואה וסאנור' },
       ].map(s => (
-        <div class="bg-[#1A1208] border border-teal-500/15 rounded-2xl p-4 text-center">
+        <div class="bg-[#0F2420] border border-teal-500/15 rounded-2xl p-4 text-center">
           <span class="text-2xl block mb-1">{s.emoji}</span>
           <p class="text-white font-bold text-sm">{s.title}</p>
           <p class="text-white/40 text-xs">{s.sub}</p>
@@ -245,17 +189,17 @@ const faqSchema = {
   <!-- Beaches -->
   <section class="max-w-6xl mx-auto px-4 pb-16">
     <h2 class="text-3xl md:text-4xl font-black text-white mb-10 text-center">
-      8 החופים <span class="text-teal-400">הכי שווים</span>
+      7 החופים <span class="text-teal-400">הכי שווים</span>
     </h2>
 
     <div class="space-y-10">
       {beaches.map((beach, i) => (
-        <article class="bg-[#1A1208] border border-teal-500/10 rounded-3xl overflow-hidden hover:border-teal-500/25 transition-all">
+        <article class="bg-[#0F2420] border border-teal-500/10 rounded-3xl overflow-hidden hover:border-teal-500/25 transition-all">
           <!-- Image -->
           <div class="aspect-[21/8] md:aspect-[21/6] overflow-hidden">
             <img
               src={beach.image}
-              alt={beach.nameHe}
+              alt={beach.name_he + ' — חוף בבאלי'}
               loading="lazy"
               decoding="async"
               width="1200"
@@ -270,17 +214,15 @@ const faqSchema = {
               <div>
                 <div class="flex items-center gap-3 mb-2 flex-wrap">
                   <span class="bg-teal-500 text-black font-black text-xs px-2.5 py-1 rounded-full">#{i + 1}</span>
-                  <h3 class="text-2xl font-black text-white">{beach.name}</h3>
+                  <h3 class="text-2xl font-black text-white">{beach.name_he}</h3>
                 </div>
-                <p class="text-teal-400/80 text-sm font-medium">{beach.nameHe}</p>
+                <p class="text-teal-400/80 text-sm font-medium">{beach.name}</p>
                 <p class="text-white/40 text-sm mt-1">📍 {beach.area}</p>
               </div>
               <div class="flex flex-wrap gap-2">
                 <span class={`text-xs font-semibold px-3 py-1.5 rounded-full border ${beach.freeEntry ? 'bg-green-500/15 text-green-400 border-green-500/20' : 'bg-teal-500/15 text-teal-400 border-teal-500/20'}`}>
-                  {beach.freeEntry ? '🆓 כניסה חינם' : '🎟️ כניסה בתשלום'}
+                  {beach.freeEntry ? '🆓 כניסה חינם' : '🎟️ כניסה קטנה'}
                 </span>
-                {beach.waterSports && <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20">🏄 ספורט ימי</span>}
-                <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-white/5 text-white/50 border border-white/10">🕐 {beach.openHours}</span>
               </div>
             </div>
 
@@ -300,18 +242,8 @@ const faqSchema = {
               </div>
               <!-- How to get there -->
               <div class="bg-white/3 rounded-xl p-4">
-                <p class="text-teal-400 font-bold text-xs uppercase tracking-wide mb-2">🚗 הגעה</p>
+                <p class="text-teal-400 font-bold text-xs uppercase tracking-wide mb-2">🛵 הגעה</p>
                 <p class="text-white/70 text-sm">{beach.howToGetThere}</p>
-              </div>
-            </div>
-
-            <!-- Facilities -->
-            <div class="mb-5">
-              <p class="text-white font-bold text-sm mb-2">מתקנים:</p>
-              <div class="flex flex-wrap gap-2">
-                {beach.facilities.map(f => (
-                  <span class="text-xs bg-white/5 text-white/55 px-3 py-1 rounded-full border border-white/8">{f}</span>
-                ))}
               </div>
             </div>
 
@@ -320,10 +252,6 @@ const faqSchema = {
               <p class="text-teal-400 font-bold text-sm mb-1">💡 הטיפ שלנו</p>
               <p class="text-white/65 text-sm leading-relaxed">{beach.tips}</p>
             </div>
-
-            {beach.sunbedPrice !== 'אין' && (
-              <p class="text-white/30 text-xs mt-3">⛱️ מיטות שיזוף: {beach.sunbedPrice} | 🅿️ חניה: {beach.parking}</p>
-            )}
           </div>
         </article>
       ))}
@@ -338,31 +266,31 @@ const faqSchema = {
     <div class="grid md:grid-cols-2 gap-5">
       {[
         {
-          title: '👙 כללי לבוש', 
-          text: 'בגד ים מלא מותר בכל חופי באלי — ביקיני, צינוק, הכל בסדר. חשוב: כשעוזבים את שטח החוף, חייבים להתלבש. אסור לחלוטין לצעוד ברחוב בבגד ים.'
+          title: '👙 כללי לבוש',
+          text: 'בגד ים רגיל מותר בכל חופי באלי. כשעוזבים את שטח החוף לכיוון מקדש או כפר — חובה להתלבש. בגדי שכם חשופות ליד מקדש — לא מכובד. סרונג (בד כריכה) עולה כמה שקלים ויש בכל מקום.'
         },
         {
-          title: '⚠️ בטיחות ים', 
-          text: 'שימו לב לדגלי אזהרה — דגל אדום = כניסה אסורה. יש מצילים ברוב החופים הציבוריים. הזרמים בדרך כלל חלשים, אבל שמרו על ילדים קטנים בכל עת.'
+          title: '⚠️ בטיחות ים',
+          text: 'הגלים בקוטה, קאנגו ואולוואטו חזקים — הזהרו מזרמים. שחו רק בחלקים מסומנים. בנוסה דואה וסאנור המים שקטים ובטוחים. מצילים פעילים בחופים הגדולים בשעות הבוקר-אחה"צ.'
         },
         {
-          title: '🕐 זמנים מומלצים', 
-          text: 'חורף (נוב–מרץ): כל שעה מעולה. קיץ (יוני–ספטמבר): רק בבוקר (עד 10:00) או אחה"צ (אחרי 16:30). שקיעה היא חובה בכל עונה — הגיעו שעה קודם.'
+          title: '🕐 זמנים מומלצים',
+          text: 'בוקר מוקדם (6:00–9:00): שקט ויפהפה, מעט אנשים. שקיעה (17:00–18:30): אירוע חברתי בפני עצמו. הימנעו מ-11:00–15:00 בקיץ — שמש עזה במיוחד.'
         },
         {
           title: '🎒 מה לקחת',
-          text: 'קרם הגנה SPF 50+ (חובה — השמש עזה), מים מרובים, כובע, משקפי שמש, מגבת, סנדלים (החול רותח בקיץ). לחופים ללא מתקנים — הביאו הכל.'
+          text: 'קרם הגנה SPF50+ (הים הטרופי לא מסלח), מים, כובע, סנדלים (חול שחור יכול להיות חם מאוד), ומגבת. לחופי סלע כמו Uluwatu — נעלי מים.'
         },
         {
-          title: '🅿️ חניה',
-          text: 'JBR — בתשלום (2–5 AED לשעה). Kite Beach — חינם. Black Palace — חינם. Al Mamzar — כלול בכניסה. Palm West Beach — בתשלום. La Mer — חינם.'
+          title: '🛵 הגעה לחופים',
+          text: 'Grab (האובר המקומי) הכי נוח ובטוח. השכרת אופנוע (50,000–80,000 רופיה ליום) מאפשרת גמישות. מרכז Kuta/Seminyak — אפשר להגיע רגלי לחוף. אין תחבורה ציבורית נוחה לרוב החופים.'
         },
         {
           title: '🌡️ טמפרטורת הים',
-          text: 'החורף (נוב–מרץ): 20–24°C — מרענן ונעים. אביב/סתיו: 25–30°C — מושלם. קיץ (יוני–ספט): 31–34°C — חם מאוד אבל נעים בים יחסית.'
+          text: 'כל השנה: 26–29°C — מושלם. עונת הגשמים (נוב–מרץ): הגלים עשויים להיות גדולים יותר. עונת הקיץ (מאי–ספטמבר): שמיים נקיים, ים שקט, בוקר מושלם.'
         },
       ].map(tip => (
-        <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-5">
+        <div class="bg-[#0F2420] border border-teal-500/10 rounded-2xl p-5">
           <h3 class="text-white font-bold text-base mb-2">{tip.title}</h3>
           <p class="text-white/60 text-sm leading-relaxed">{tip.text}</p>
         </div>
@@ -375,7 +303,7 @@ const faqSchema = {
     <h2 class="text-3xl font-black text-white mb-8 text-center">שאלות נפוצות על <span class="text-teal-400">חופי באלי</span></h2>
     <div class="space-y-4">
       {faqs.map(faq => (
-        <details class="group bg-[#1A1208] border border-teal-500/10 rounded-xl overflow-hidden">
+        <details class="group bg-[#0F2420] border border-teal-500/10 rounded-xl overflow-hidden">
           <summary class="flex items-center justify-between p-5 cursor-pointer text-white font-bold hover:text-teal-400 transition-colors list-none">
             <span>{faq.q}</span>
             <span class="text-teal-500 text-xl transition-transform group-open:rotate-45">+</span>
@@ -390,15 +318,15 @@ const faqSchema = {
   <section class="py-16 border-t border-white/5">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
-        לחוף גם — ולמדבר <span class="text-teal-400">גם?</span>
+        חוף גם — ועוד הרבה <span class="text-teal-400">יותר?</span>
       </h2>
-      <p class="text-white/60 text-lg mb-8 max-w-xl mx-auto">ספארי במדבר הוא הדבר השני שחייבים לעשות בבאלי אחרי החוף 🏜️</p>
+      <p class="text-white/60 text-lg mb-8 max-w-xl mx-auto">באלי היא הרבה יותר מחופים — מקדשים, אורז-טראסות, Ubud ועוד 🌿</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="/desert-safari" class="bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-teal-500/25">
-          הזמינו ספארי במדבר
+        <a href="/attractions" class="bg-teal-500 hover:bg-teal-400 text-black px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-teal-500/25">
+          כל האטרקציות בבאלי
         </a>
-        <a href="/attractions" class="bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all border border-white/10">
-          כל האטרקציות
+        <a href="/plan" class="bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all border border-white/10">
+          תכנון טיול לבאלי
         </a>
       </div>
     </div>
