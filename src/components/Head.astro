@@ -10,7 +10,8 @@ interface Props {
 const { title, description, canonical, ogImage: ogImageProp, ogType = 'website', heroImage } = Astro.props
 const ogImage = ogImageProp || '/images/heroes/hero-bali.webp'
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString()
-const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).toString()
+const safeOgImage = typeof ogImage === 'string' && ogImage ? ogImage : '/images/heroes/hero-bali.webp'
+const absoluteOgImage = safeOgImage.startsWith('http') ? safeOgImage : new URL(safeOgImage, Astro.site).toString()
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
