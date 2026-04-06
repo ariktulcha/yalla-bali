@@ -13,7 +13,7 @@ const { data: items } = await supabaseAdmin
 const areas = items || []
 
 const title = 'אזורים בבאלי — המדריך המלא | Yalla Bali'
-const description = 'מדריך אזורים בבאלי: דאונטאון, מרינה, ג׳ומיירה, דירה, ביזנס ביי ועוד. מה יש בכל אזור ואיפה כדאי לישון.'
+const description = 'מדריך אזורים בבאלי: סמינייק, קאנגו, אובוד, אולוואטו ועוד. מה יש בכל אזור, איפה כדאי לישון, ומה מתאים לסגנון שלכם.'
 
 const schemaItemList = {
   '@context': 'https://schema.org',
@@ -50,11 +50,39 @@ const breadcrumbSchema = {
         <span class="mx-2">/</span>
         <span class="text-white/60">אזורים</span>
       </nav>
-      <h1 class="text-4xl md:text-5xl font-black mb-4">אזורים בבאלי</h1>
-      <p class="text-lg text-white/60 max-w-2xl mx-auto">
-        הכירו את האזורים המרכזיים בבאלי — מה יש בכל אזור, איפה כדאי לישון ומה שווה לעשות שם.
+      <h1 class="text-4xl md:text-5xl font-black mb-4">אזורים בבאלי — איפה לישון ולעשות</h1>
+      <p class="text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
+        בבאלי יש אזורים שונים לכל סוג של טיול. בחרו לפי סגנון החיים שלכם: אם אתם גולשים, קאנגו היא אתכם;
+        אם אתם מחפשים תרבות, אובוד; אם תיירות יוקרתית, אולוואטו או סמינייק. כל אזור בעל תו משלו — טיפים, אטרקציות, מסעדות, ומחירים.
       </p>
-      <p class="mt-4 text-teal-400 font-medium">{areas.length} אזורים</p>
+      <p class="mt-6 text-teal-400 font-medium text-lg">{areas.length} אזורים בבאלי</p>
+    </div>
+  </section>
+
+  <!-- Area selection guide -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-white mb-8">בחרו אזור לפי סגנון הטיול שלכם</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+        <h3 class="text-white font-bold mb-4">🏄 לגולשים ובחורים</h3>
+        <p class="text-white/70 text-sm mb-4">קאנגו וקוטה — גלים, חיי לילה, בארים, קומוניטי ישראלית בוהמיינית. יום הטיולים, לילה בברים.</p>
+        <a href="/areas/canggu" class="text-teal-400 text-sm hover:underline">חקרו את קאנגו ↙</a>
+      </div>
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+        <h3 class="text-white font-bold mb-4">🧘 לריטריט ויוגה</h3>
+        <p class="text-white/70 text-sm mb-4">אובוד — מקדשים, טבע, יוגה, קוררוב, בישול בתנור. שדות אורז, מדיטציה, אווירה רגועה.</p>
+        <a href="/areas/ubud" class="text-teal-400 text-sm hover:underline">חקרו את אובוד ↙</a>
+      </div>
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+        <h3 class="text-white font-bold mb-4">✨ ליוקרה וצאת לילה</h3>
+        <p class="text-white/70 text-sm mb-4">אולוואטו וסמינייק — בארים גבוהים, beach clubs, מסעדות עד מנשות, שקיעות אפיות.</p>
+        <a href="/areas/uluwatu" class="text-teal-400 text-sm hover:underline">חקרו את אולוואטו ↙</a>
+      </div>
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+        <h3 class="text-white font-bold mb-4">👨‍👩‍👧 למשפחות</h3>
+        <p class="text-white/70 text-sm mb-4">נוסה דואה וג'ימברן — חופים בטוחים, סדרה משפחתית, בתי קפה ילדותיים, עלויות סבירות.</p>
+        <a href="/areas/nusa-dua" class="text-teal-400 text-sm hover:underline">חקרו את נוסה דואה ↙</a>
+      </div>
     </div>
   </section>
 

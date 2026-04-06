@@ -18,7 +18,7 @@ const contactSchema = {
 }
 
 const commonTopics = [
-  { title: 'הזמנת ספארי', desc: 'ספארי ערב, בוקר, VIP — הזמנה מהירה עם אישור מיידי' },
+  { title: 'הזמנת טיול', desc: 'טיולים הרים, יערות, תרבות — הזמנה מהירה עם אישור מיידי' },
   { title: 'תכנון טיול', desc: 'עזרה בבניית מסלול, בחירת מלון, המלצות מותאמות אישית' },
   { title: 'שאלות על באלי', desc: 'ויזה, כשרות, בטיחות, תחבורה — כל שאלה' },
   { title: 'המלצות למסעדות', desc: 'כשר, לא כשר, יוקרתי, תקציבי — נמצא לכם' },
@@ -29,7 +29,7 @@ const commonTopics = [
 
 <Layout
   title="צור קשר - יאללה באלי"
-  description="צרו קשר עם יאללה באלי בווטסאפ או באימייל. נשמח לעזור לכם לתכנן את הטיול המושלם לבאלי, להזמין ספארי במדבר, או לענות על כל שאלה."
+  description="צרו קשר עם יאללה באלי בווטסאפ או באימייל. נשמח לעזור לכם לתכנן את הטיול המושלם לבאלי, להזמין טיולים, או לענות על כל שאלה."
   canonical="https://yalla-bali.co.il/contact"
 >
   <SchemaOrg schema={contactSchema} />
@@ -101,7 +101,7 @@ const commonTopics = [
           <label for="subject" class="block text-white font-bold text-sm mb-2">נושא <span class="text-[#0D9488]">*</span></label>
           <select id="subject" name="subject" required class="w-full bg-[#0D0D0D] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-teal-500/50 focus:outline-none focus:ring-1 focus:ring-teal-500/50 transition-colors">
             <option value="">בחרו נושא</option>
-            <option value="safari">הזמנת ספארי במדבר</option>
+            <option value="tour">הזמנת טיול בבאלי</option>
             <option value="trip-planning">עזרה בתכנון טיול</option>
             <option value="question">שאלה כללית על באלי</option>
             <option value="kosher">שאלה על כשרות</option>

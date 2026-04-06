@@ -21,16 +21,16 @@ const categoryLinks = [
 // Client-side filter categories (no dedicated pages)
 const attrCategories = [
   { label: 'הכל', key: 'all' },
-  { label: '🏛️ תרבות', key: 'culture', match: ['מוזיאון', 'מסגד', 'Museum', 'Grand Mosque', 'Bali Museum', 'Etihad Museum', 'Museum of the Future'] },
-  { label: '🎢 פארקים', key: 'parks', match: ['Park', 'Waterpark', 'LEGOLAND', 'Bollywood', 'Motiongate', 'IMG', 'Wild Wadi', 'Aquaventure'] },
-  { label: '🏖️ חופים', key: 'beach', match: ['Beach', 'Marina', 'Waterfront', 'Palm', 'Bluewaters', 'La Mer'] },
-  { label: '🏙️ סקיילין', key: 'skyline', match: ['Burj', 'Frame', 'Creek', 'Global Village', 'Downtown'] },
-  { label: '🛒 קניות', key: 'shopping', match: ['Mall', 'Souk', 'Market', 'Shopping'] },
-  { label: '🏜️ מדבר', key: 'desert', match: ['Desert', 'Safari', 'Dune', 'RZR', 'Hatta'] },
+  { label: '🛕 תרבות', key: 'culture', match: ['טמפל', 'מסגד', 'Temple', 'Shrine', 'Mosque', 'Bali Museum', 'Cultural'] },
+  { label: '🎢 פארקים', key: 'parks', match: ['Park', 'Waterpark', 'Water Bomb', 'Waterbom', 'Safari', 'Zoo', 'Garden'] },
+  { label: '🏖️ חופים', key: 'beach', match: ['Beach', 'Seminyak', 'Sanur', 'Canggu', 'Jimbaran', 'Uluwatu', 'Coastal'] },
+  { label: '⛰️ הרים', key: 'mountains', match: ['Mount', 'Trek', 'Batur', 'Agung', 'Peak', 'Summit', 'Mountain'] },
+  { label: '🛒 קניות', key: 'shopping', match: ['Market', 'Ubud', 'Gianyar', 'Shopping'] },
+  { label: '🌾 טבע', key: 'nature', match: ['Forest', 'Rice Terrace', 'Tegallalang', 'Monkey', 'Waterfall', 'Garden'] },
 ]
 
 const title = 'אטרקציות בבאלי — המדריך המלא | Yalla Bali'
-const description = 'כל האטרקציות בבאלי: בורג׳ ח׳ליפה, באלי מול, אקוונצ׳ר, מדבר, חופים ועוד. מחירים, שעות פתיחה וטיפים.'
+const description = 'כל האטרקציות בבאלי: טמפלים, הרי געש, טיולי קופים, פארקי מים, חופים ועוד. מחירים, שעות פתיחה וטיפים.'
 
 const schemaItemList = {
   '@context': 'https://schema.org',
@@ -70,9 +70,9 @@ const breadcrumbSchema = {
       </nav>
       <h1 class="text-4xl md:text-5xl font-black mb-4">אטרקציות בבאלי</h1>
       <p class="text-lg text-white/60 max-w-2xl mx-auto">
-        באלי מציעה יותר מ-100 אטרקציות עולמיות: בורג׳ חליפה (כמעלית בעולם), מוזיאון העתידות, גן הירוקים בבאלי וסקי במקום מקורה בדברת.
-        יש פעילויות לכל גיל — מפארקי שעשועים לילדים עד צלילה בים לתיירים אדוותורוסיים.
-        מצא את אטרקציות החינם בבאלי, קביעות משפחתיות, וחוויות בלתי נשכחות בכל תקציב.
+        באלי מציעה יותר מ-100 אטרקציות מדהימות: טמפלים בוודו עתיקים, פארקי מים וטבע, הרי געש, טיולי קופים וחופים מעלומות.
+        יש פעילויות לכל גיל — מטיולי טבע לילדים עד טיולי הרים ודרמטיים לחובבי אדוונצ'ורות.
+        מצא אטרקציות חינם בבאלי, חוויות משפחתיות, וזיכרונות בלתי נשכחים בכל תקציב.
       </p>
       <p class="mt-3 text-teal-400 font-medium" id="attr-count">{attractions.length} אטרקציות</p>
     </div>

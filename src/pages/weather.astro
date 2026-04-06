@@ -3,18 +3,18 @@ import Layout from '../components/Layout.astro'
 import SchemaOrg from '../components/SchemaOrg.astro'
 
 const months = [
-  { month: 'ינואר', temp_high: 24, temp_low: 14, humidity: 65, rain_days: 1, sea_temp: 21, sunshine_hours: 8, recommendation: 'מצוין — מושלם לטיולים וספארי' },
-  { month: 'פברואר', temp_high: 25, temp_low: 15, humidity: 65, rain_days: 1, sea_temp: 21, sunshine_hours: 9, recommendation: 'מצוין — מזג אוויר נעים ויבש' },
-  { month: 'מרץ', temp_high: 28, temp_low: 18, humidity: 60, rain_days: 1, sea_temp: 23, sunshine_hours: 9, recommendation: 'מצוין — מתחמם אבל עדיין נהדר' },
-  { month: 'אפריל', temp_high: 33, temp_low: 21, humidity: 55, rain_days: 0, sea_temp: 26, sunshine_hours: 10, recommendation: 'טוב — חם אבל נסבל, מחירים יורדים' },
-  { month: 'מאי', temp_high: 38, temp_low: 25, humidity: 50, rain_days: 0, sea_temp: 29, sunshine_hours: 11, recommendation: 'חם — פעילויות בוקר וערב בלבד' },
-  { month: 'יוני', temp_high: 40, temp_low: 28, humidity: 55, rain_days: 0, sea_temp: 31, sunshine_hours: 11, recommendation: 'חם מאוד — קניונים ואקוופארקים' },
-  { month: 'יולי', temp_high: 42, temp_low: 30, humidity: 55, rain_days: 0, sea_temp: 33, sunshine_hours: 11, recommendation: 'חם מאוד — מחירים נמוכים מאוד' },
-  { month: 'אוגוסט', temp_high: 43, temp_low: 31, humidity: 60, rain_days: 0, sea_temp: 34, sunshine_hours: 10, recommendation: 'חם מאוד — החודש החם ביותר' },
-  { month: 'ספטמבר', temp_high: 40, temp_low: 28, humidity: 60, rain_days: 0, sea_temp: 33, sunshine_hours: 10, recommendation: 'חם — מתחיל להתקרר לקראת סוף החודש' },
-  { month: 'אוקטובר', temp_high: 36, temp_low: 24, humidity: 55, rain_days: 0, sea_temp: 30, sunshine_hours: 10, recommendation: 'טוב — חם נסבל, מחירים טובים' },
-  { month: 'נובמבר', temp_high: 30, temp_low: 19, humidity: 55, rain_days: 0, sea_temp: 27, sunshine_hours: 9, recommendation: 'מצוין — תחילת העונה המושלמת' },
-  { month: 'דצמבר', temp_high: 26, temp_low: 15, humidity: 60, rain_days: 1, sea_temp: 23, sunshine_hours: 8, recommendation: 'מצוין — עונת השיא, מזג אוויר מושלם' },
+  { month: 'ינואר', temp_high: 31, temp_low: 24, humidity: 75, rain_days: 12, sea_temp: 28, sunshine_hours: 7, recommendation: 'טוב — עונת גשמים, מחירים נמוכים' },
+  { month: 'פברואר', temp_high: 31, temp_low: 24, humidity: 75, rain_days: 11, sea_temp: 28, sunshine_hours: 7, recommendation: 'טוב — עונת גשמים, פחות תורים' },
+  { month: 'מרץ', temp_high: 31, temp_low: 24, humidity: 73, rain_days: 9, sea_temp: 29, sunshine_hours: 8, recommendation: 'טוב — סוף עונת גשמים, מזג אוויר נעים' },
+  { month: 'אפריל', temp_high: 32, temp_low: 24, humidity: 70, rain_days: 6, sea_temp: 29, sunshine_hours: 9, recommendation: 'מצוין — בין־עונה אידיאלית, מחירים סבירים' },
+  { month: 'מאי', temp_high: 32, temp_low: 23, humidity: 65, rain_days: 3, sea_temp: 28, sunshine_hours: 10, recommendation: 'מצוין — תחילת עונה יבשה, מזג נעים' },
+  { month: 'יוני', temp_high: 31, temp_low: 21, humidity: 60, rain_days: 1, sea_temp: 27, sunshine_hours: 10, recommendation: 'מצוין — עונה יבשה, טמפ׳ נוחה, מעט גשם' },
+  { month: 'יולי', temp_high: 30, temp_low: 20, humidity: 60, rain_days: 0, sea_temp: 27, sunshine_hours: 10, recommendation: 'מצוין — הכי יבש והכי קר, מושלם' },
+  { month: 'אוגוסט', temp_high: 31, temp_low: 20, humidity: 60, rain_days: 0, sea_temp: 27, sunshine_hours: 10, recommendation: 'מצוין — עונה יבשה, שמש קבועה' },
+  { month: 'ספטמבר', temp_high: 32, temp_low: 22, humidity: 62, rain_days: 1, sea_temp: 28, sunshine_hours: 9, recommendation: 'מצוין — סוף עונה יבשה, טוב מאוד' },
+  { month: 'אוקטובר', temp_high: 32, temp_low: 23, humidity: 68, rain_days: 4, sea_temp: 29, sunshine_hours: 8, recommendation: 'מצוין — בין־עונה, מעברים לגשומים' },
+  { month: 'נובמבר', temp_high: 32, temp_low: 24, humidity: 72, rain_days: 8, sea_temp: 29, sunshine_hours: 7, recommendation: 'טוב — תחילת עונת גשמים, מחירים עולים' },
+  { month: 'דצמבר', temp_high: 31, temp_low: 24, humidity: 75, rain_days: 11, sea_temp: 28, sunshine_hours: 7, recommendation: 'טוב — עונת גשמים, עונת השיא תיירים' },
 ]
 
 function getTempColor(temp: number) {
@@ -64,21 +64,21 @@ const articleSchema = {
     <div class="grid md:grid-cols-3 gap-4">
       <div class="bg-gradient-to-br from-green-900/30 to-[#1A1208] border border-green-500/20 rounded-2xl p-6 text-center">
         <span class="text-3xl block mb-3">☀️</span>
-        <h3 class="text-lg font-bold text-white mb-1">עונת השיא</h3>
-        <p class="text-green-400 font-bold text-xl mb-2">נובמבר - מרץ</p>
-        <p class="text-white/60 text-sm">מזג אוויר מושלם, 20-30 מעלות. הזמן הכי פופולרי ומומלץ לתיירים.</p>
+        <h3 class="text-lg font-bold text-white mb-1">עונה יבשה (הטובה ביותר)</h3>
+        <p class="text-green-400 font-bold text-xl mb-2">מאי - ספטמבר</p>
+        <p class="text-white/60 text-sm">מזג אוויר מושלם, 30-32 מעלות, אפס גשם כמעט. הזמן הכי פופולרי ומומלץ — מחירים גבוהים.</p>
       </div>
       <div class="bg-gradient-to-br from-teal-900/30 to-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
         <span class="text-3xl block mb-3">🌡️</span>
-        <h3 class="text-lg font-bold text-white mb-1">עונת ביניים</h3>
-        <p class="text-teal-400 font-bold text-xl mb-2">אפריל ואוקטובר</p>
-        <p class="text-white/60 text-sm">חם אבל נסבל, מחירים נמוכים יותר. מומלץ לפעילויות בבוקר ובערב.</p>
+        <h3 class="text-lg font-bold text-white mb-1">עונות בין־ים (טובות)</h3>
+        <p class="text-teal-400 font-bold text-xl mb-2">אפריל, אוקטובר</p>
+        <p class="text-white/60 text-sm">מזג נעים, 32 מעלות, גשם מעט. פשרה בין מחירים למזג — אופציה מעולה.</p>
       </div>
-      <div class="bg-gradient-to-br from-red-900/30 to-[#1A1208] border border-red-500/20 rounded-2xl p-6 text-center">
+      <div class="bg-gradient-to-br from-blue-900/30 to-[#1A1208] border border-blue-500/20 rounded-2xl p-6 text-center">
         <span class="text-3xl block mb-3">💧</span>
-        <h3 class="text-lg font-bold text-white mb-1">עונת התקציב</h3>
-        <p class="text-red-400 font-bold text-xl mb-2">יוני - ספטמבר</p>
-        <p class="text-white/60 text-sm">חם מאוד (40+), אבל מחירים נמוכים. מושלם לקניונים ואקוופארקים.</p>
+        <h3 class="text-lg font-bold text-white mb-1">עונה גשומה (ערעור)</h3>
+        <p class="text-blue-400 font-bold text-xl mb-2">נובמבר - מרץ</p>
+        <p class="text-white/60 text-sm">גשומה אבל לא קפואה. 31 מעלות, מחירים נמוכים ברור. פעילויות פנים קל.</p>
       </div>
     </div>
   </section>
@@ -153,19 +153,19 @@ const articleSchema = {
     <h2 class="text-3xl md:text-4xl font-black text-white mb-8 text-center">מתי הכי טוב <span class="text-teal-400">לטוס לבאלי?</span></h2>
     <div class="space-y-8">
       <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-green-500/20 rounded-2xl p-6 md:p-8">
-        <h3 class="text-2xl font-bold text-green-400 mb-4">נובמבר עד מרץ — העונה המושלמת</h3>
-        <p class="text-white/70 leading-relaxed mb-4">זו העונה הכי פופולרית ולא בכדי. הטמפרטורות נעות בין 20-30 מעלות, מזג האוויר נעים ויבש, והשמש זורחת כמעט כל יום. זה הזמן המושלם לספארי במדבר, טיולי חופים, סיורים בעיר העתיקה, ופעילויות חוץ מכל סוג.</p>
-        <p class="text-white/50 text-sm">שימו לב: זו עונת השיא ולכן מחירי מלונות וטיסות הם הגבוהים ביותר. מומלץ להזמין מראש.</p>
+        <h3 class="text-2xl font-bold text-green-400 mb-4">מאי עד ספטמבר — העונה המושלמת</h3>
+        <p class="text-white/70 leading-relaxed mb-4">זו העונה הכי פופולרית בבאלי ובכל הסיבה. הטמפרטורות נעות בין 30-32 מעלות, מזג האוויר יבש לחלוטין (כמעט אפס גשם), ושמש תוך כל יום. זה הזמן המושלם לטיולים בהרים, טרקים לפסגות, טיולי טבע, סיורים בטמפלים וספארי, ופעילויות חוץ מכל סוג.</p>
+        <p class="text-white/50 text-sm">שימו לב: זו עונת השיא ולכן מחירי מלונות וטיסות הם הגבוהים ביותר בבאלי. מומלץ להזמין טיולים ומלונות מראש.</p>
       </div>
       <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/20 rounded-2xl p-6 md:p-8">
-        <h3 class="text-2xl font-bold text-teal-400 mb-4">אפריל ואוקטובר — עונת הביניים</h3>
-        <p class="text-white/70 leading-relaxed mb-4">חודשים אלה מציעים פשרה טובה בין מזג אוויר סביר למחירים נמוכים יותר. הטמפרטורות נעות סביב 33-36 מעלות — חם, אבל עדיין אפשרי לטייל בבקרים ובערבים.</p>
-        <p class="text-white/70 leading-relaxed">באפריל ובאוקטובר תמצאו מחירי מלונות נמוכים ב-30-40% בהשוואה לעונת השיא, פחות תורים באטרקציות, ועדיין אפשר ליהנות מספארי במדבר בשעות הערב.</p>
+        <h3 class="text-2xl font-bold text-teal-400 mb-4">אפריל ואוקטובר — עונות בין־ים (טובות)</h3>
+        <p class="text-white/70 leading-relaxed mb-4">חודשים אלה מציעים פשרה טובה בין מזג אוויר נעים למחירים סבירים. הטמפרטורות סביב 32 מעלות — חם אבל מעולה. גשם מעט (3-6 ימים בחודש) אבל לא קובע.</p>
+        <p class="text-white/70 leading-relaxed">באפריל ובאוקטובר תמצאו מחירי מלונות נמוכים ב-25-35% בהשוואה לעונת היובשה, פחות תורים בטיולים, אבל עדיין מזג אוויר מעולה לטיולים, טרקים בהרים, וטיולי טבע.</p>
       </div>
-      <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-red-500/20 rounded-2xl p-6 md:p-8">
-        <h3 class="text-2xl font-bold text-red-400 mb-4">יוני עד ספטמבר — חם אבל חסכוני</h3>
-        <p class="text-white/70 leading-relaxed mb-4">הקיץ בבאלי הוא באמת חם — טמפרטורות של 40-45 מעלות עם לחות גבוהה. אבל יש יתרונות משמעותיים: מחירי מלונות נמוכים ב-50-60%, הנחות באטרקציות, וכמעט אין תורים.</p>
-        <p class="text-white/70 leading-relaxed">אם אתם מתכננים לבלות בעיקר בקניונים ממוזגים, אקוופארקים, ספא במלונות, ואטרקציות מקורות — הקיץ יכול להיות אופציה מצוינת במחיר חסכוני.</p>
+      <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-green-500/20 rounded-2xl p-6 md:p-8">
+        <h3 class="text-2xl font-bold text-green-400 mb-4">יוני עד ספטמבר — עונה יבשה עם פחות תיירים</h3>
+        <p class="text-white/70 leading-relaxed mb-4">יולי-אוגוסט הם החודשים היבשים והנוחים ביותר בבאלי — טמפ׳ 30-31°C, אפס גשם כמעט, אבל תיירים רבים. יוני וספטמבר הם קצת יותר יבשים מאפריל אוקטובר, עם מעט גשם (0-1 יום בחודש). טוב לטיולים, טרקים בהרים, וטיולי טבע.</p>
+        <p class="text-white/70 leading-relaxed">יוני וספטמבר מציעים את הפשרה הטובה ביותר — עדיין יבש (טוב לטיולים), פחות תיירים, ומחירים נמוכים יותר מיולי-אוגוסט. מומלץ לטיול טבע וטרקים בחודשים אלה.</p>
       </div>
     </div>
   </section>
@@ -198,15 +198,16 @@ const articleSchema = {
       <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/10 rounded-2xl p-6">
         <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">⛱️ טיפים לעונות ספציפיות</h3>
         <ul class="space-y-3 text-white/70">
-          <li class="flex items-start gap-2"><span class="text-teal-400 mt-1">&#8226;</span><span><strong class="text-white">חורף (נוב-מרץ):</strong> קחו ז'קט קל לערבים וספארי. 14 מעלות בלילה</span></li>
+          <li class="flex items-start gap-2"><span class="text-teal-400 mt-1">&#8226;</span><span><strong class="text-white">עונה גשומה (נוב-מרץ):</strong> קחו גשם בחום — טשרט קל, לא ז'קט. 24 מעלות בלילה</span></li>
+          <li class="flex items-start gap-2"><span class="text-teal-400 mt-1">&#8226;</span><span><strong class="text-white">עונה יבשה (מאי-ספט):</strong> בגדים קלים מאוד, כובע, משקפיים, וקרם שמש חזק</span></li>
           <li class="flex items-start gap-2"><span class="text-teal-400 mt-1">&#8226;</span><span><strong class="text-white">קיץ (יוני-ספט):</strong> הימנעו מפעילויות חוץ בשעות 11:00-16:00</span></li>
           <li class="flex items-start gap-2"><span class="text-teal-400 mt-1">&#8226;</span><span><strong class="text-white">רמדאן:</strong> בתקופת הרמדאן אין לאכול, לשתות או לעשן ברחוב בשעות היום</span></li>
         </ul>
       </div>
       <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/10 rounded-2xl p-6">
         <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">☀️ טיפ חשוב מאיתנו</h3>
-        <p class="text-white/70 leading-relaxed mb-4">לא משנה מתי תטוסו — באלי תמיד מרהיבה. בקיץ תיהנו ממחירים מצוינים ואטרקציות מקורות ברמה עולמית. בחורף תיהנו ממזג אוויר מושלם ופעילויות חוץ.</p>
-        <p class="text-white/70 leading-relaxed">הספארי במדבר מתקיים בכל עונה (יוצאים אחרי 15:00 כשהחום יורד). מומלץ להזמין מראש בעיקר בעונת השיא.</p>
+        <p class="text-white/70 leading-relaxed mb-4">לא משנה מתי תטוסו — באלי תמיד מרהיבה. בעונה יבשה תיהנו ממזג אוויר מושלם לטיולים ופעילויות חוץ. בעונה גשומה תיהנו ממחירים מצוינים וטבע רטוב יותר.</p>
+        <p class="text-white/70 leading-relaxed">בכל עונה יש טיולים בהרים, טרקים לפסגות (בטוב בעונה יבשה), וסיורים בטמפלים (פעילויות מקורות טובות גם בגשום). מומלץ להזמין טיולים ומלונות מראש בעיקר בעונה יבשה (מאי-ספטמבר).</p>
       </div>
     </div>
   </section>
@@ -218,7 +219,7 @@ const articleSchema = {
       <p class="text-white/70 text-lg mb-8 max-w-xl mx-auto">עכשיו שאתם יודעים מתי לטוס, בואו נתכנן את הטיול המושלם שלכם לבאלי</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="/plan" class="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500 text-[#0D0D0D] px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-teal-500/25">תכננו את הטיול</a>
-        <a href="/desert-safari" class="bg-gradient-to-r from-[#0D9488] to-[#D97706] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-[#0D9488]/25">הזמינו ספארי במדבר</a>
+        <a href="/tours" class="bg-gradient-to-r from-[#0D9488] to-[#D97706] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-[#0D9488]/25">טיולים בבאלי</a>
       </div>
     </div>
   </section>

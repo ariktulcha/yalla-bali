@@ -11,8 +11,8 @@ const { data } = await supabaseAdmin
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
 
-// Beach hotels = JBR, Jumeirah, Palm, or "beach" in name/area
-const BEACH_KEYWORDS = ["ביץ'", 'beach', 'חוף', 'פאלם', 'palm', 'ג׳ומיירה', 'jumeirah', 'jbr', 'ים', 'מרינה', 'marina']
+// Beach hotels = Seminyak, Jimbaran, Sanur, Canggu or "beach" in name/area
+const BEACH_KEYWORDS = ["ביץ'", "beach", "חוף", "סמינייק", "seminyak", "ג'ימברן", "jimbaran", "סנור", "sanur", "קאנגו", "canggu", "ים"]
 const items = (data || []).filter(h =>
   BEACH_KEYWORDS.some(kw =>
     (h.name_he || '').toLowerCase().includes(kw.toLowerCase()) ||
@@ -63,7 +63,7 @@ const breadcrumbItems = [
       <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות חוף בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
         באלי מציעה מלונות חוף מהיפים בעולם, עם חופים פרטיים, מים צלולים
-        ונוף מרהיב לים הערבי. הנה המלונות המומלצים שלנו על קו החוף.
+        ונוף מרהיב לים ההודי. הנה המלונות המומלצים שלנו על קו החוף.
       </p>
     </header>
 
@@ -92,7 +92,7 @@ const breadcrumbItems = [
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">באילו אזורים בבאלי יש מלונות חוף?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי נמצאים בעיקר בפאלם ג'ומיירה, JBR, חוף ג'ומיירה, מרינה באלי. כל אזורי המלונות חוף בבאלי הללו הם פופולריים מאד.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי נמצאים בעיקר בסמינייק, ג'ימברן, סנור וקאנגו. כל אזורי המלונות חוף בבאלי הללו הם פופולריים מאד עם חופים יפים ובריכות אינסוף.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם כל מלונות חוף בבאלי כוללים חוף פרטי?</summary>
@@ -104,7 +104,7 @@ const breadcrumbItems = [
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המחירים למלון חוף בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון חוף בבאלי עולה בין 300-3,000 דירהם בעונה רגילה. מלונות חוף בבאלי יקרים יותר בחורף וחזקה בקיץ.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון חוף בבאלי עולה בין 80-400 דולר בעונה רגילה. מלונות חוף בבאלי יקרים יותר בחורף וזולים יותר בקיץ.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה בריכות יש במלונות חוף בבאלי?</summary>
@@ -120,11 +120,11 @@ const breadcrumbItems = [
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המזג אוויר בבאלי לחוף?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי אידאליים בחורף (20-25 מעלות). בקיץ בבאלי (40+ מעלות), מלונות חוף בבאלי עדיין יפים אבל חמים מאד.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף בבאלי אידאליים בחורף (26-28 מעלות). בקיץ בבאלי (28-33 מעלות), מלונות חוף בבאלי עדיין יפים עם אקלים חם ויבש.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה מלונות חוף בבאלי הטובים ביותר?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף מובילים בבאלי כוללים את אטלנטיס, פאלם ג'ומיירה, פור סיזנס. מלונות חוף בבאלי אלה מיוחדים בחוף פרטי.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות חוף מובילים בבאלי כוללים את Four Seasons Jimbaran, AYANA, Mulia ו-W Bali. מלונות חוף בבאלי אלה מיוחדים בחוף פרטי ושירות פאר אקסלנס.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות מימיות בחופי מלונות בבאלי?</summary>

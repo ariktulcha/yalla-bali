@@ -1,55 +1,203 @@
 ---
 import Layout from '../components/Layout.astro'
-const title = 'ויזה לבאלי לישראלים - שירות הוצאת ויזה מהיר | יאללה באלי'
-const description = 'אנחנו מוציאים ויזה לבאלי עבור ישראלים. מהיר, קל, ובמחיר שווה. eVOA + VOA. הגישו עכשיו.'
+import SchemaOrg from '../components/SchemaOrg.astro'
+
+const visaSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'האם ישראלים צריכים ויזה לבאלי?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'כן, ישראלים חייבים ויזה לבאלי. ניתן להוציא בשתי דרכים: eVOA (טקסה לפני הטיסה) או VOA (בשדה).'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'כמה עולה להוציא ויזה לבאלי?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'eVOA עולה $35. אם משתמשים בשירותנו, המחיר הכולל הוא 185 ₪ (כולל עמלת שירות).'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'כמה זמן לוקח להוציא ויזה?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'eVOA: 3-5 ימי עסקים. VOA בשדה: מיידי אבל עם התנאות. מומלץ להגיש eVOA לפחות שבוע לפני הטיסה.'
+      }
+    }
+  ]
+}
+
+const title = 'ויזה לבאלי לישראלים - eVOA + VOA | יאללה באלי'
+const description = 'מדריך מלא להוצאת ויזה לבאלי: eVOA או VOA, תהליך, מסמכים, מחיר, כמה זמן. אנחנו מטפלים בהויזה בשבילכם.'
 ---
 <Layout title={title} description={description}>
-  <main dir="rtl" class="max-w-2xl mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold text-teal-400 mb-4">🛂 ויזה לבאלי — אנחנו מטפלים</h1>
-    <p class="text-gray-300 text-lg mb-8">ישראלים צריכים ויזה לבאלי. אנחנו מגישים עבורכם את ה-eVOA (ויזה אלקטרונית) לפני הטיסה — ונחסוך לכם את הבלגן בשדה.</p>
-    
-    <div class="bg-gray-900 rounded-xl p-6 mb-8 border border-teal-500/30">
-      <h2 class="text-2xl font-bold text-white mb-4">המחיר שלנו</h2>
-      <div class="text-3xl font-bold text-teal-400 mb-2">185 ₪</div>
-      <p class="text-gray-400 text-sm">כולל עמלת שירות + עלות הויזה הממשלתית ($35)</p>
-    </div>
-    
-    <div class="bg-gray-900 rounded-xl p-6 mb-8">
-      <h2 class="text-2xl font-bold text-white mb-4">מה כלול?</h2>
-      <ul class="space-y-3 text-gray-300">
-        <li>✅ הגשת בקשת eVOA לממשלת אינדונזיה</li>
-        <li>✅ בדיקת כל הפרטים לפני ההגשה</li>
-        <li>✅ עדכון שוטף על סטטוס הויזה</li>
-        <li>✅ תמיכה בוואטסאפ בכל שאלה</li>
-      </ul>
-    </div>
-    
-    <div class="bg-gray-900 rounded-xl p-6 mb-8">
-      <h2 class="text-2xl font-bold text-white mb-6">שלחו לנו ישירות בוואטסאפ</h2>
-      <a href="https://wa.me/972528211665?text=שלום%2C%20אני%20מעוניין%20בויזה%20לבאלי" 
-         target="_blank"
-         class="block w-full bg-green-500 hover:bg-green-400 text-white text-center font-bold py-4 px-6 rounded-xl text-xl transition-colors">
-        📱 שלחו לנו בוואטסאפ ←
-      </a>
-      <p class="text-gray-500 text-sm text-center mt-3">זמן תגובה: עד שעה בשעות הפעילות</p>
-    </div>
-    
-    <div class="bg-gray-900 rounded-xl p-6">
-      <h2 class="text-xl font-bold text-white mb-4">שאלות נפוצות</h2>
+  <SchemaOrg schema={visaSchema} />
+  <main class="max-w-4xl mx-auto px-4 py-12">
+
+    <!-- Hero -->
+    <section class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-white mb-4">🛂 ויזה לבאלי לישראלים</h1>
+      <p class="text-xl text-white/70">מדריך מלא: eVOA vs VOA, תהליך, מסמכים והכל מה שצריך לדעת</p>
+    </section>
+
+    <!-- Quick comparison table -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold text-white mb-6">eVOA או VOA? בואו נשווה</h2>
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-teal-500/5 border-b border-teal-500/10">
+            <tr>
+              <th class="text-right py-4 px-4 text-teal-400 font-bold">קריטריון</th>
+              <th class="text-center py-4 px-4 text-teal-400 font-bold">eVOA (תא לפני)</th>
+              <th class="text-center py-4 px-4 text-teal-400 font-bold">VOA (בשדה)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-teal-500/5 hover:bg-teal-500/5">
+              <td class="text-right py-3 px-4 text-white font-medium">עלות</td>
+              <td class="text-center py-3 px-4 text-teal-400">$35 בלבד</td>
+              <td class="text-center py-3 px-4 text-teal-400">$35 בלבד</td>
+            </tr>
+            <tr class="border-b border-teal-500/5 hover:bg-teal-500/5">
+              <td class="text-right py-3 px-4 text-white font-medium">זמן עיבוד</td>
+              <td class="text-center py-3 px-4 text-green-400">3-5 ימי עסקים</td>
+              <td class="text-center py-3 px-4 text-orange-400">מיידי (בשדה)</td>
+            </tr>
+            <tr class="border-b border-teal-500/5 hover:bg-teal-500/5">
+              <td class="text-right py-3 px-4 text-white font-medium">תהליך</td>
+              <td class="text-center py-3 px-4 text-white/70">אונליין מהבית</td>
+              <td class="text-center py-3 px-4 text-white/70">בדלפקי ההגעה</td>
+            </tr>
+            <tr class="border-b border-teal-500/5 hover:bg-teal-500/5">
+              <td class="text-right py-3 px-4 text-white font-medium">שורות</td>
+              <td class="text-center py-3 px-4 text-white/70">בלי</td>
+              <td class="text-center py-3 px-4 text-red-400">ארוכות מאוד</td>
+            </tr>
+            <tr class="hover:bg-teal-500/5">
+              <td class="text-right py-3 px-4 text-white font-medium">יתרון</td>
+              <td class="text-center py-3 px-4 text-teal-400">✅ נוח, ללא חיכוכים</td>
+              <td class="text-center py-3 px-4 text-white/70">מהיר בעת הגעה</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-white/60 text-sm mt-4">💡 המלצה: <strong>eVOA זה הדרך הטובה</strong>. בקלות, ללא חיכוכים, וחוסכים שורות בשדה.</p>
+    </section>
+
+    <!-- How eVOA works -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold text-white mb-6">איך להוציא eVOA בשלבים</h2>
       <div class="space-y-4">
-        <div>
-          <p class="font-semibold text-gray-200">כמה זמן לוקח לקבל את הויזה?</p>
-          <p class="text-gray-400 text-sm mt-1">בדרך כלל 3-5 ימי עסקים. מומלץ להגיש לפחות שבוע לפני הטיסה.</p>
+        {[
+          { step: 1, title: 'כנסו לאתר הממשלה', desc: 'https://visa-indonesia.imigrasi.go.id — זה האתר הרשמי' },
+          { step: 2, title: 'מלאו טופס בקשה', desc: 'פרטים אישיים, דרכון, טיסה, מלון, מטרת ביקור (תיירות)' },
+          { step: 3, title: 'העלו מסמכים', desc: 'תמונה דרכון (bio page), תמונה פנים, תמונה קבלת טיסה' },
+          { step: 4, title: 'שלמו $35', desc: 'דרך כרטיס אשראי או Paypal' },
+          { step: 5, title: 'חכו 3-5 ימי עסקים', desc: 'תקבלו אימייל עם מספר ויזה וQR code' },
+          { step: 6, title: 'הדפיסו את הויזה', desc: 'זה לא חובה, אבל בטוח לתמונה בטלפון בהגעה' },
+        ].map(item => (
+          <div class="flex gap-4 items-start bg-[#1A1208] border border-teal-500/10 rounded-xl p-5">
+            <div class="flex-shrink-0 w-10 h-10 bg-teal-500 text-black font-bold rounded-full flex items-center justify-center text-lg">{item.step}</div>
+            <div>
+              <h3 class="text-white font-bold text-lg">{item.title}</h3>
+              <p class="text-white/60 text-sm mt-1">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Required documents -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold text-white mb-6">📋 מסמכים נדרשים</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+          <h3 class="text-xl font-bold text-teal-400 mb-4">חובה</h3>
+          <ul class="space-y-2 text-white/70">
+            <li>✅ דרכון תקף לפחות 6 חודשים</li>
+            <li>✅ תמונה בגודל דרכון (4x6 ס״מ)</li>
+            <li>✅ קבלת טיסה (booking proof)</li>
+            <li>✅ הזמנת מלון או confirmation</li>
+            <li>✅ סכום כסף כדי להחזיק (לא חובה להוכיח)</li>
+          </ul>
         </div>
-        <div>
-          <p class="font-semibold text-gray-200">האם אפשר גם בלי שירות?</p>
-          <p class="text-gray-400 text-sm mt-1">כן — אפשר ל-VOA בשדה ($35 ישירות). אבל שורות ארוכות, ואנחנו חוסכים לכם את הטרחה.</p>
-        </div>
-        <div>
-          <p class="font-semibold text-gray-200">לכמה זמן הויזה תקפה?</p>
-          <p class="text-gray-400 text-sm mt-1">30 יום, עם אפשרות הארכה ל-30 ימים נוספים (בתוספת עמלה).</p>
+        <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+          <h3 class="text-xl font-bold text-teal-400 mb-4">טיפים חשובים</h3>
+          <ul class="space-y-2 text-white/70">
+            <li>💡 תמונה חייבת להיות אדם בודד, רקע לבן</li>
+            <li>💡 דרכון חייב להיות בתמונה (bio page)</li>
+            <li>💡 הגישו לפחות 7-10 ימים לפני הטיסה</li>
+            <li>💡 אחוז ההשלמה: 99% בהצלחה (נדיר שדוחים)</li>
+            <li>💡 ויזה תקפה ל-60 יום כניסה</li>
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Timeline graphic -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold text-white mb-6">⏰ ציר זמן מומלץ</h2>
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-xl p-6">
+        <div class="space-y-4">
+          {[
+            { days: 'T-30 ימים', action: 'בדקו שדרכון תקף', color: 'teal' },
+            { days: 'T-21 ימים', action: 'הזמינו טיסה ומלון', color: 'teal' },
+            { days: 'T-14 ימים', action: 'בקשו eVOA (היום האחרון המקסימלי)', color: 'amber' },
+            { days: 'T-10 ימים', action: 'קבלו אישור ויזה (בדרך כלל)', color: 'green' },
+            { days: 'T-7 ימים', action: 'הדפיסו ויזה (אופציונלי)', color: 'green' },
+            { days: 'T-1 יום', action: 'אריזה סופית', color: 'blue' },
+            { days: 'ביום הטיסה', action: 'הראו ויזה בזכוכית (QR code מספיק)', color: 'blue' },
+          ].map((item, i) => (
+            <div class="flex items-center gap-4">
+              <div class={`flex-shrink-0 w-24 font-bold text-sm px-3 py-1 rounded-full bg-${item.color}-500/10 text-${item.color}-400`}>{item.days}</div>
+              <div class="flex-1 border-l-2 border-teal-500 pl-4 text-white">{item.action}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing CTA -->
+    <section class="mb-12 bg-gradient-to-r from-teal-500/10 to-transparent border border-teal-500/20 rounded-2xl p-8">
+      <h2 class="text-3xl font-bold text-white mb-3">רוצים שנטפל בזה בשבילכם?</h2>
+      <p class="text-white/70 mb-6">אנחנו מטפלים בכל התהליך — בדיקת מסמכים, הגשה, עדכון סטטוס, תמיכה בוואטסאפ.</p>
+      <div class="bg-[#1A1208] border border-teal-500/30 rounded-xl p-6 mb-6">
+        <div class="text-3xl font-bold text-teal-400 mb-2">185 ₪</div>
+        <p class="text-white/60 text-sm">כולל שירות מלא + עלות hویزه</p>
+      </div>
+      <a href="https://wa.me/972528211665?text=היי%2C%20אני%20רוצה%20להוציא%20ויזה%20לבאלי%20🛂"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-8 py-4 rounded-xl transition-colors">
+        📱 צרו קשר בוואטסאפ
+      </a>
+    </section>
+
+    <!-- Extended FAQ -->
+    <section>
+      <h2 class="text-3xl font-bold text-white mb-6">❓ שאלות נפוצות נוספות</h2>
+      <div class="space-y-4">
+        {[
+          { q: 'מה אם הויזה תידחה?', a: 'נדיר מאוד (פחות מ-1%). אם יקרה, תקבלו הודעה מהממשלה. ניתן לנסות שוב או להוציא VOA בשדה.' },
+          { q: 'איפה בדיוק בדרכון אני רואה את הויזה?', a: 'ไม่ כתוב בדרכון פיזי. אתה מקבל מספר ויזה דיגיטלי, שאתה מראה בגוגל או בנייר בשדה.' },
+          { q: 'האם אני יכול להאריך את הויזה בבאלי?', a: 'כן. בהגעה, תוכל ללכת להמשרד ההגירה (שדה תעופה או נוסה דואה) ולהארכות ל-30 ימים נוספים תמורת ~$35.' },
+          { q: 'מה אם אני לא יכול לצאת?', a: 'ב-VOA תוכל להוציא בשדה. בeVOA תוכל להוציא בשדה גם אם הבקשה נדחתה (שורות ארוכות אבל יש את האפשרות).' },
+          { q: 'כמה זמן הויזה תקפה?', a: '30 יום מתאריך הכניסה. אתה יכול להישאר יותר, אבל צריך להאריך או להוציא ויזה חדשה.' },
+          { q: 'האם אני צריך לחזור עם אותה ויזה?', a: 'לא. אתה משתמש בה רק להכניסה. אחרי שנכנסת, אתה מקבל טמבור בדרכון שלך.' },
+        ].map(item => (
+          <details class="group bg-[#1A1208] border border-teal-500/10 rounded-xl p-5 cursor-pointer hover:border-teal-500/20 transition-all">
+            <summary class="font-bold text-white group-open:text-teal-400 transition-colors">{item.q}</summary>
+            <p class="text-white/60 text-sm mt-3">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
   </main>
 </Layout>

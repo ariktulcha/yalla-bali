@@ -12,7 +12,7 @@ const { data } = await supabaseAdmin
   .eq('published', true)
 
 // Luxury = 5-star hotels (all premium brands in Bali are 5-star)
-const LUXURY_BRANDS = ['בורג', 'ארמאני', 'אטלנטיס', 'Four Seasons', 'Mandarin', 'Waldorf', 'Jumeirah', 'Raffles', 'One&Only', 'ואן אנד אונלי', 'קמפינסקי', 'Kempinski', 'ריץ', 'Ritz', 'Park Hyatt', 'Bulgari']
+const LUXURY_BRANDS = ['Four Seasons', 'Mandarin', 'Waldorf', 'Raffles', 'One&Only', 'ואן אנד אונלי', 'Kempinski', 'Park Hyatt', 'Bulgari', 'AYANA', 'Mulia', 'W Bali']
 const items = (data || []).filter(h =>
   h.star_rating >= 5 ||
   LUXURY_BRANDS.some(b => (h.name_he || '').includes(b) || (h.name_en || '').includes(b))
@@ -59,7 +59,7 @@ const breadcrumbItems = [
     <header class="mb-10 text-center">
       <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות יוקרה בבאלי</h1>
       <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        באלי מגדירה מחדש את מושג היוקרה. מלונות כמו בורג' אל ערב ואטלנטיס
+        באלי מגדירה מחדש את מושג היוקרה. מלונות כמו AYANA, Mulia ו-Four Seasons
         מציעים חוויה שאין כמותה — סוויטות עם נוף פנורמי, ספא ברמה עולמית ושירות מושלם.
       </p>
     </header>
@@ -89,11 +89,11 @@ const breadcrumbItems = [
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מלון היוקרה הכי טוב בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בורג' אל ערב הוא מלון יוקרה בבאלי הדברי. מלונות יוקרה בבאלי אחרים: אטלנטיס, ארמאני, פור סיזנס. בחר מלון יוקרה בבאלי לפי העדפה.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">AYANA הוא מלון יוקרה בבאלי המובחר, כולל ספא עולמי וחופים פרטיים. מלונות יוקרה בבאלי אחרים: Mulia, Four Seasons, W Bali. בחרו מלון יוקרה בבאלי לפי הסגנון שלכם.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה לילה במלון יוקרה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי עולה מ-1,000 דירהם ללילה וקי. מלנות יוקרה בבאלי יכול להגיע ל-20,000 דירהם לסוויטה. מלון יוקרה בבאלי יקר במיוחד.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי עולה מ-400 דולר ללילה. מלונות יוקרה בבאלי יכול להגיע ל-2,000+ דולר לסוויטה בעונת השיא. מלון יוקרה בבאלי בעל מחירים משתנים לפי העונה.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה כולל מלון יוקרה בבאלי?</summary>
@@ -101,7 +101,7 @@ const breadcrumbItems = [
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו מלונות יוקרה בבאלי עם חוף פרטי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי על חוף: בורג' אל ערב, אטלנטיס, פור סיזנס. מלון יוקרה בבאלי עם חוף פרטי יקר יותר.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי על חוף: AYANA, Mulia, Four Seasons Jimbaran. מלון יוקרה בבאלי עם חוף פרטי מציע חוויה ים בלעדית.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איזה משפחות טובות למלון יוקרה בבאלי?</summary>
@@ -116,16 +116,16 @@ const breadcrumbItems = [
           <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי מציע: סוויטות מלכותיות, פנטהאוס, סוויטות עם מטבח. מלון יוקרה בבאלי עם סוויטות ממש מפוארות.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדות בבאלי מלון יוקרה?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי כולל מסעדות זכירי. מלון יוקרה בבאלי מציע מטבח צרפתי, איטלקי, אסייתי. כל מלון יוקרה בבאלי עם שפים מעולים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדות בבאלי במלון יוקרה?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון יוקרה בבאלי כולל מסעדות זכירי ברמה עולמית. מלון יוקרה בבאלי מציע מטבח צרפתי, איטלקי, ואסייתי אותנטי. כל מלון יוקרה בבאלי מופעל על ידי שפים מנוסים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה בורג' אל ערב מיוחד בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בורג' אל ערב הוא סמל יוקרה בבאלי עם מלון יוקרה בבאלי במוצא. בורג' אל ערב סוויטה עם ברך לים ביל וגלריה.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ייחודי בתופעל מלון יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי מציעים ספא באליני, שירות קונסיירג' 24/7, ודיינינג מלא עם שפים בינלאומיים. מלון יוקרה בבאלי מספק חוויה אישית מותאמת לכל אורח.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ספא מצעה מלונות יוקרה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי מציעים ספא עולמיים עם טיפולים פרימיום. ספא במלונות יוקרה בבאלי כולל עיסוי, טיפולי פנים וטיפולים גוניים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ספא מציעה מלונות יוקרה בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות יוקרה בבאלי מציעים ספא עולמיים עם טיפולים פרימיום. ספא במלונות יוקרה בבאלי כולל עיסוי באליני מסורתי, טיפולי פנים וטיפולי גוף מעמיקים.</p>
         </details>
       </div>
     </section>

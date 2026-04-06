@@ -3,6 +3,7 @@ import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import Layout from '../../components/Layout.astro'
 import PhotoGallery from '../../components/PhotoGallery.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
+import FAQSection from '../../components/FAQSection.astro'
 import { marked } from 'marked'
 
 export async function getStaticPaths() {
@@ -57,6 +58,60 @@ const breadcrumbItems = [
   { label: 'טיולים', href: '/tours' },
   { label: tour.name_he },
 ]
+
+// Distance & pricing estimates by area
+const areaDistancePricing: Record<string, { distance: string; grabPrice: string }> = {
+  'סמינייק': { distance: '15-20 ק"מ', grabPrice: '₪60-90' },
+  'seminyak': { distance: '15-20 ק"מ', grabPrice: '₪60-90' },
+  'קאנגו': { distance: '15-18 ק"מ', grabPrice: '₪60-85' },
+  'canggu': { distance: '15-18 ק"מ', grabPrice: '₪60-85' },
+  'אובוד': { distance: '25-30 ק"מ', grabPrice: '₪90-130' },
+  'ubud': { distance: '25-30 ק"מ', grabPrice: '₪90-130' },
+  'ג\'ימברן': { distance: '10-15 ק"מ', grabPrice: '₪50-75' },
+  'jimbaran': { distance: '10-15 ק"מ', grabPrice: '₪50-75' },
+  'אולוואטו': { distance: '18-22 ק"מ', grabPrice: '₪70-100' },
+  'uluwatu': { distance: '18-22 ק"מ', grabPrice: '₪70-100' },
+  'נוסה דואה': { distance: '12-17 ק"מ', grabPrice: '₪55-80' },
+  'nusa-dua': { distance: '12-17 ק"מ', grabPrice: '₪55-80' },
+  'סנור': { distance: '30-35 ק"מ', grabPrice: '₪110-150' },
+  'sanur': { distance: '30-35 ק"מ', grabPrice: '₪110-150' },
+  'קוטה': { distance: '13-16 ק"מ', grabPrice: '₪55-75' },
+  'kuta': { distance: '13-16 ק"מ', grabPrice: '₪55-75' },
+}
+
+const areaKey = (tour.area || '').toLowerCase()
+const distancePricing = areaDistancePricing[areaKey] || { distance: '20-25 ק"מ', grabPrice: '₪70-100' }
+
+const faqItems = [
+  {
+    q: `כמה עולה ${tour.name_he}?`,
+    a: `${typeof price === 'number' ? `המחיר הוא ₪${price} לאדם.` : `${price ? `המחיר הוא בערך ${price}.` : 'המחיר משתנה בהתאם לקבוצה וההעדפות שלכם.'}`} אנחנו מציעים הנחות לקבוצות גדולות. צרו איתנו קשר בווטסאפ לקבלת הצעה מותאמת.`,
+  },
+  {
+    q: `כמה זמן ארוך ${tour.name_he}?`,
+    a: `${duration ? `הטיול הוא בערך ${duration}.` : 'זה תלוי באפשרויות הזמינות.'} זמן הטיול כולל זמן לתחבורה, טיול, ו${includes.length > 0 ? 'כל מה שכלול בחבילה' : 'עצירות'}. אם אתם מעוניינים בטיול מורחב או קצר יותר, תוכלו להתאים זאת כשתזמינו.`,
+  },
+  {
+    q: `האם ${tour.name_he} מחייבת הזמנה מראש?`,
+    a: `כן, מומלץ מאוד להזמין מראש — לפחות 3-7 ימים. זה מאפשר לנו להתכין את כל הפרטים ולוודא שיש מקום לכם. אתם יכולים להזמין בווטסאפ ונחזור אליכם בתוך דקות.`,
+  },
+  {
+    q: `מה כלול ב${tour.name_he}?`,
+    a: `${includes.length > 0 ? `הטיול כולל: ${includes.slice(0, 3).join(', ')} ועוד.` : 'הטיול כולל הובלה, מדריך מקצועי, ופעילויות.'} לעוד פרטים על המדויק שכלול, צרו איתנו קשר בווטסאפ או בעיין בתיאור המלא.`,
+  },
+]
+
+// Related tours in same area
+const { data: areaTours } = await supabaseAdmin
+  .from('tours')
+  .select('slug, name_he, description, image')
+  .eq('destination_id', DESTINATION_ID)
+  .eq('published', true)
+  .eq('area', tour.area)
+  .neq('slug', tour.slug)
+  .limit(3)
+
+const relatedTours = areaTours ?? []
 ---
 
 <Layout
@@ -142,10 +197,72 @@ const breadcrumbItems = [
       <div class="prose prose-invert prose-teal max-w-none mb-8 [&_h2]:text-teal-400 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:border-r-4 [&_h2]:border-teal-500 [&_h2]:pr-3 [&_h3]:text-teal-300 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_a]:text-teal-400 [&_strong]:text-white" set:html={contentHtml} />
     )}
 
-    <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-4">נקודת מפגש והסעה 🚕</h2>
+      <div class="space-y-4 text-white/70">
+        {meetingPoint && (
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+            <div>
+              <p class="font-medium text-white">נקודת מפגש</p>
+              <p class="text-sm">{meetingPoint}</p>
+            </div>
+          </div>
+        )}
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div>
+            <p class="font-medium text-white">הסעה מנמל התעופה</p>
+            <p class="text-sm">משוער: <span class="text-white">{distancePricing.grabPrice}</span> עם Grab/Gojek</p>
+            <p class="text-xs text-white/50 mt-1">* המחיר משוער בלבד. כלול בטיול או לא — בדקו את פרטי הטיול.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <FAQSection items={faqItems} />
+    </div>
+
+    {relatedTours.length > 0 && (
+      <section class="mt-16 pt-8 border-t border-gray-800" dir="rtl">
+        <h2 class="text-2xl font-bold text-white mb-6">🎯 טיולים נוספים בבאלי</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedTours.map((item: any) => (
+            <a
+              href={`/tours/${item.slug}`}
+              class="group bg-gray-900 rounded-xl overflow-hidden hover:bg-gray-800 transition-colors"
+            >
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.name_he}
+                  class="w-full h-40 object-cover group-hover:scale-105 transition-transform"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-40 bg-gray-800 flex items-center justify-center">
+                  <span class="text-4xl">🎯</span>
+                </div>
+              )}
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm leading-tight group-hover:text-teal-400 transition-colors">
+                  {item.name_he}
+                </h3>
+                {item.description && (
+                  <p class="text-gray-400 text-xs mt-1 line-clamp-2">{item.description}</p>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center mt-16">
       <p class="text-white/80 mb-4">רוצים להזמין את {tour.name_he} או לשמוע על טיולים נוספים בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מעוניין בטיול ${tour.name_he} בבאלי 🏜️`)}`}
+        href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אני מעוניין בטיול ${tour.name_he} בבאלי 🎯`)}`}
         target="_blank"
         rel="noopener noreferrer"
         dir="rtl" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"

@@ -11,7 +11,7 @@ const { data } = await supabaseAdmin
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
 
-const KIDS_KEYWORDS = ['ילד', 'ילדים', 'משפחה', 'פארק', 'אקווה', 'zoo', 'גן חיות', 'לגולנד', 'legoland', 'מוטורלנד', 'kidzania', 'סקי']
+const KIDS_KEYWORDS = ['ילד', 'ילדים', 'משפחה', 'פארק', 'אקווה', 'zoo', 'גן חיות', 'waterbom', 'כיף', 'bali safari']
 const items = (data || []).filter(a =>
   a.family_friendly === true ||
   (a.category || '').includes('kids') || (a.category || '').includes('family') ||
@@ -90,7 +90,7 @@ const breadcrumbItems = [
       <div class="space-y-4">
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה האטרקציות הכי טובות לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">האטרקציות המובילות לילדים כוללות: IMG Worlds of Adventure, Legoland, Aquaventure (פארק מים), Bali Aquarium, KidZania ו-Bali Garden Glow.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">האטרקציות המובילות לילדים כוללות: Waterbom Bali (פארק מים), Bali Zoo, Bali Safari & Marine Park, Tegallalang Monkey Forest, Ubud Swing, Monkey Forest Sanctuary.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מאיזה גיל מתאימות האטרקציות?</summary>
@@ -98,31 +98,31 @@ const breadcrumbItems = [
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש אטרקציות ממוזגות לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, הרבה אטרקציות בבאלי ממוזגות לחלוטין — כולל IMG Worlds, KidZania, Ski Bali ו-Bali Mall Aquarium. מושלם לימי קיץ חמים.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, חלק מהאטרקציות בבאלי ממוזגות — כולל Bali Zoo gift shop וקפיטריות בfamilyResorts. אבל רוב הפעילויות בבאלי חיצוניות. כנס לבריכה בק‍שופ בימי חום.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקי מים לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות פארקי מים: Aquaventure Water Park, Wild Wadi Water Park. אטרקציות לילדים בבאלי עם מגלשות מים מעניקות הצלה מחום הקיץ.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות פארקי מים: Waterbom Bali (פארק המים הראשי בבאלי), מלונות resort עם בריכות גדולות וחופים פרטיים. אטרקציות לילדים בבאלי עם מגלשות מים ובריכות מעניקות הצלה מחום הקיץ.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פארקי שעשועים לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות פארקי שעשועים: IMG Worlds of Adventure, Motiongate Bali, Legoland Bali. אטרקציות לילדים בבאלי הללו ענקיות עם מגוון רכיבות.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות חוצה בבאלי לילדים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות פעילויות חוצה: רכיבה על סוסים בטגללאלנג, טיולים בקופים, Ubud Swing (נדנדה בטבע), Mountain biking טיולים. אטרקציות לילדים בבאלי הללו מציעים הרפתקה וחוויה בטבע.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה אקווריומים בבאלי לילדים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות אקווריומים: Bali Aquarium & Underwater Zoo בבאלי מול, Atlantis The Palm Aquarium. אטרקציות לילדים בבאלי עם דגים גדולים מרתקות ילדים.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הגנים לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי כוללות גנים ופארקים: Tegallalang Rice Terraces (תצפית), Orchid Garden (גן סחלבים), Bali Zoo (גן חיות), Monkey Forest Sanctuary. אטרקציות לילדים בבאלי עם חיות דומות מרתקות ילדים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה פעילויות חוצות לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי חוצות כוללות: רכיבה על סוסים, מסלולי אתחום, שטיול בסירה. אטרקציות לילדים בבאלי חוצות מעניקות חוויה בטבע מושלמת.</p>
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הגיל הטוב ביותר לאטרקציות לילדים בבאלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי מתאימות לכל גיל: עד גיל 3 — חופים וגנים רחוקים, גיל 3-7 — Waterbom וטיולים קלים, גיל 7-12 — Zoo וMonkey Forest, גיל 12 ומעלה — טיולים הרים ואופני הרים.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה אטרקציות לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי בעלות: Legoland מ-180 דירהם, IMG Worlds מ-240 דירהם, Aquaventure מ-300 דירהם. אטרקציות לילדים בבאלי יוקרתיות יכולות להגיע ל-500+ דירהם.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי בעלות: Waterbom מ-15-20 דולר, Bali Zoo מ-20-25 דולר, Bali Safari & Marine Park מ-30-40 דולר. אטרקציות לילדים בבאלי זולות יחסית לעולם — רוב תחתות בין 10-50 דולר לנפש.</p>
         </details>
         <details class="group border-b border-teal-500/10 pb-4">
           <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה טיפים לביקור באטרקציות לילדים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי — טיפים: הגיעו מוקדם, הביאו מים ומזון, הימנעו משיא החום. אטרקציות לילדים בבאלי טובות יותר בימים חלשים מעונות ובעונה מתונה.</p>
+          <p class="mt-2 text-white/60 leading-relaxed">אטרקציות לילדים בבאלי — טיפים: הגיעו מוקדם כדי להימנע עומס, הביאו מים וזקיצים (מחמנ שמש חזק), התאקדמו בחורף (נובמבר-מרץ) לטרמפרטורה קלה. הימנעו קיץ (יוני-ספטמבר) כשחם ורטוב.</p>
         </details>
       </div>
     </section>

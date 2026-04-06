@@ -2,6 +2,9 @@
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import Layout from '../../components/Layout.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
+import FAQSection from '../../components/FAQSection.astro'
+import MapEmbed from '../../components/MapEmbed.astro'
+import StreetViewEmbed from '../../components/StreetViewEmbed.astro'
 import { marked } from 'marked'
 
 export async function getStaticPaths() {
@@ -38,7 +41,7 @@ const placeSchema = {
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Bali',
-    addressCountry: 'AE',
+    addressCountry: 'ID',
   },
 }
 
@@ -46,6 +49,25 @@ const breadcrumbItems = [
   { label: 'דף הבית', href: '/' },
   { label: 'אזורים', href: '/areas' },
   { label: area.name_he },
+]
+
+const faqItems = [
+  {
+    q: `מה האטרקציות הכי שוות ב${area.name_he}?`,
+    a: `${area.name_he} היא עמוקה בטבע ותרבות. אתם יוכלו למצוא מנזרים עתיקים, טבע יפה, וחיים מקומיים אמיתיים. צרו איתנו קשר בווטסאפ ואנחנו נוכל להמליץ על אטרקציות ספציפיות בהתאם לעניינים שלכם.`,
+  },
+  {
+    q: `מה הזמן הטוב לבקר ב${area.name_he}?`,
+    a: `הזמן הטוב ביותר הוא בעונה היבשה (מאי עד ספטמבר). בתקופה זו הזמן יותר טוב ויש פחות גשם. אם אתם חובבי ים, אז יוני עד אוגוסט הוא אידיאלי.`,
+  },
+  {
+    q: `כמה זמן כדאי לבלות ב${area.name_he}?`,
+    a: `זה תלוי בקצב שלכם. אם אתם רוצים להשקיע זמן, 2-3 ימים בסביבה זו יתנו לכם חוויה עשירה ואמיתית. יום אחד מספיק לסיור מהיר, אך אפשר להנות בהרבה יותר זמן.`,
+  },
+  {
+    q: `כיצד מגיעים ל${area.name_he}?`,
+    a: `ניתן להגיע דרך Grab או מונית מקומית (בערך 30-60 דקות מנמל התעופה בהתאם לאזור). אנחנו ממליצים לסדר רכב עם נהג כדי שתוכלו להתמקד בנוף ובחוויה. אם אתם רוצים סיור מפונקח, צרו איתנו קשר בווטסאפ.`,
+  },
 ]
 ---
 
@@ -69,6 +91,10 @@ const breadcrumbItems = [
         />
       </div>
     )}
+
+    <MapEmbed areaName={area.name_he} areaNameEn={area.name_en} zoom={13} height="450px" />
+
+    <StreetViewEmbed areaName={area.name_he} areaNameEn={area.name_en} />
 
     <header class="mb-8">
       <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">{area.name_he}</h1>
@@ -114,6 +140,10 @@ const breadcrumbItems = [
     {contentHtml && (
       <div class="prose prose-invert prose-teal max-w-none mb-8 [&_h2]:text-teal-400 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:border-r-4 [&_h2]:border-teal-500 [&_h2]:pr-3 [&_h3]:text-teal-300 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_a]:text-teal-400 [&_strong]:text-white" set:html={contentHtml} />
     )}
+
+    <div class="mb-8">
+      <FAQSection items={faqItems} />
+    </div>
 
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
       <p class="text-white/80 mb-4">רוצים לדעת עוד על {area.name_he} ואזורים נוספים בבאלי?</p>

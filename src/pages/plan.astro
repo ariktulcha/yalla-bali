@@ -1,14 +1,27 @@
 ---
 import Layout from '../components/Layout.astro'
+import SchemaOrg from '../components/SchemaOrg.astro'
+
+const planSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'תכנן את הטיול המושלם לבאלי',
+  description: 'מדריך תכנון מלא לבאלי עם מסלולים מומלצים לפי מספר ימים וסגנון טיול',
+  author: { '@type': 'Organization', name: 'Yalla Bali' },
+  publisher: { '@type': 'Organization', name: 'Yalla Bali' },
+  datePublished: '2025-01-01',
+  dateModified: '2026-04-05',
+}
 ---
 <Layout title="תכנן את החופשה המושלמת בבאלי | יאללה באלי" description="תכנן את הטיול לבאלי: מסלולים מומלצים, לו״ז לפי ימים, עצות מקצועיות לישראלים">
+  <SchemaOrg schema={planSchema} />
 <main dir="rtl" class="max-w-5xl mx-auto px-4 py-12">
 
   <!-- Hero -->
   <div class="text-center mb-16">
     <div class="text-6xl mb-4">🌴</div>
     <h1 class="text-5xl font-bold text-white mb-4">תכנן את באלי שלך</h1>
-    <p class="text-gray-400 text-xl">כמה ימים יש לכם? נבנה לכם את המסלול המושלם</p>
+    <p class="text-white/70 text-xl">כמה ימים יש לכם? נבנה לכם את המסלול המושלם</p>
   </div>
 
   <!-- Duration picker — visual cards -->
@@ -16,16 +29,19 @@ import Layout from '../components/Layout.astro'
     <h2 class="text-2xl font-bold text-white mb-6 text-center">כמה זמן אתם בבאלי?</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {[
-        {days:'5 ימים', emoji:'⚡', desc:'נקודות השיא'},
-        {days:'7 ימים', emoji:'🌊', desc:'שבוע מושלם'},
-        {days:'10 ימים', emoji:'🏄', desc:'להכיר לעומק'},
-        {days:'14+ ימים', emoji:'🧘', desc:'חיים בבאלי'},
+        {days:'5 ימים', emoji:'⚡', desc:'נקודות השיא', id:'5'},
+        {days:'7 ימים', emoji:'🌊', desc:'שבוע מושלם', id:'7'},
+        {days:'10 ימים', emoji:'🏄', desc:'להכיר לעומק', id:'10'},
+        {days:'14+ ימים', emoji:'🧘', desc:'חיים בבאלי', id:'14'},
       ].map(t => (
-        <div class="bg-gray-900 rounded-xl p-6 text-center cursor-pointer hover:border-teal-500 border border-gray-800 hover:bg-gray-800 transition-all">
+        <button
+          data-days={t.id}
+          class="duration-btn bg-[#1A1208] rounded-xl p-6 text-center cursor-pointer hover:border-teal-500 border border-teal-500/10 hover:bg-teal-500/5 transition-all text-white"
+        >
           <div class="text-4xl mb-3">{t.emoji}</div>
-          <div class="text-white font-bold text-lg">{t.days}</div>
-          <div class="text-gray-400 text-sm mt-1">{t.desc}</div>
-        </div>
+          <div class="font-bold text-lg">{t.days}</div>
+          <div class="text-white/60 text-sm mt-1">{t.desc}</div>
+        </button>
       ))}
     </div>
   </section>
@@ -35,48 +51,79 @@ import Layout from '../components/Layout.astro'
     <h2 class="text-2xl font-bold text-white mb-6 text-center">מה הסגנון שלכם?</h2>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       {[
-        {type:'🏄 גולשים', desc:'גלים, חוף, קאנגו', color:'blue'},
-        {type:'🧘 ריטריט', desc:'יוגה, מדיטציה, אובוד', color:'purple'},
-        {type:'🎉 מסיבות', desc:'קוטה, חיי לילה, ברים', color:'pink'},
-        {type:'🏛️ תרבות', desc:'מקדשים, אמנות, היסטוריה', color:'amber'},
-        {type:'🤿 הרפתקה', desc:'צלילה, מפלות, וולקאנו', color:'teal'},
-        {type:'👨‍👩‍👧 משפחה', desc:'בטוח, נוח, מושלם', color:'green'},
+        {type:'🏄 גולשים', desc:'גלים, חוף, קאנגו', id:'surf'},
+        {type:'🧘 ריטריט', desc:'יוגה, מדיטציה, אובוד', id:'retreat'},
+        {type:'🎉 מסיבות', desc:'קוטה, חיי לילה, ברים', id:'party'},
+        {type:'🏛️ תרבות', desc:'מקדשים, אמנות, היסטוריה', id:'culture'},
+        {type:'🤿 הרפתקה', desc:'צלילה, מפלות, וולקאנו', id:'adventure'},
+        {type:'👨‍👩‍👧 משפחה', desc:'בטוח, נוח, מושלם', id:'family'},
       ].map(t => (
-        <div class="bg-gray-900 rounded-xl p-5 cursor-pointer hover:bg-gray-800 border border-gray-800 hover:border-teal-500 transition-all">
+        <button
+          data-style={t.id}
+          class="style-btn bg-[#1A1208] rounded-xl p-5 cursor-pointer hover:bg-teal-500/5 border border-teal-500/10 hover:border-teal-500 transition-all text-white"
+        >
           <div class="text-2xl mb-2">{t.type}</div>
-          <div class="text-gray-400 text-sm">{t.desc}</div>
-        </div>
+          <div class="text-white/60 text-sm">{t.desc}</div>
+        </button>
       ))}
     </div>
   </section>
 
-  <!-- 3 pre-built itineraries as timeline cards -->
+  <!-- Pre-built itineraries — show based on selection -->
   <section class="mb-16">
     <h2 class="text-2xl font-bold text-white mb-8 text-center">מסלולים מוכנים</h2>
 
-    <!-- 7-day itinerary -->
-    <div class="bg-gray-900 rounded-2xl p-8 mb-6 border border-gray-800">
+    <!-- 5-day itinerary -->
+    <div data-itinerary="5" class="itinerary-card hidden bg-[#1A1208] rounded-2xl p-8 mb-6 border border-teal-500/10 hover:border-teal-500/30 transition-all">
       <div class="flex items-center gap-3 mb-6">
-        <div class="text-3xl">🗓️</div>
+        <div class="text-3xl">⚡</div>
         <div>
-          <h3 class="text-xl font-bold text-white">שבוע קלאסי בבאלי</h3>
-          <p class="text-gray-400 text-sm">7 ימים — הכי פופולרי אצל ישראלים</p>
+          <h3 class="text-xl font-bold text-white">5 ימים — אתוריות בברק</h3>
+          <p class="text-white/60 text-sm">לחזוקים, לא משקיעים בטיסה הארוכה</p>
         </div>
       </div>
       <div class="space-y-4">
         {[
-          {day:'יום 1', place:'נחיתה + קאנגו', emoji:'✈️', note:'הגעה, check-in, ערב ראשון בבאלי'},
-          {day:'יום 2-3', place:'קאנגו + גלישה', emoji:'🏄', note:'שיעור גלישה, בייק, קפה, sunset'},
-          {day:'יום 4', place:'אובוד', emoji:'🌾', note:'שדות אורז, מקדש, שוק, יוגה'},
-          {day:'יום 5', place:'נוסה פניידה', emoji:'🏝️', note:'day trip — Kelingking, Broken Beach'},
-          {day:'יום 6', place:'אולוואטו', emoji:'🌅', note:'גלישה, Kecak בשקיעה, ארוחת ים'},
-          {day:'יום 7', place:'טיסה חזרה', emoji:'✈️', note:'בוקר חופשי, checkout, נמל תעופה'},
+          {day:'יום 1', place:'נחיתה + קאנגו', emoji:'✈️', note:'הגעה בבוקר, check-in, ערב בחופי קאנגו'},
+          {day:'יום 2', place:'קאנגו + גלישה', emoji:'🏄', note:'שיעור גלישה בבוקר, lunch בשוק, sunset bar'},
+          {day:'יום 3', place:'טיול בהרים + אובוד', emoji:'🌾', note:'Tegallalang, מקדשים, ערב בקאנגו'},
+          {day:'יום 4', place:'נוסה פניידה', emoji:'🏝️', note:'Day trip — Kelingking Beach, Broken Beach'},
+          {day:'יום 5', place:'checkout ונמל תעופה', emoji:'✈️', note:'ארוחת בוקר, קניות אחרונות, טיסה'},
         ].map(d => (
           <div class="flex gap-4 items-start">
             <div class="text-2xl w-8 flex-shrink-0">{d.emoji}</div>
             <div class="flex-1 border-r-2 border-teal-500 pr-4">
               <div class="font-bold text-white text-sm">{d.day} — {d.place}</div>
-              <div class="text-gray-400 text-sm mt-1">{d.note}</div>
+              <div class="text-white/70 text-sm mt-1">{d.note}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 7-day itinerary -->
+    <div data-itinerary="7" class="itinerary-card hidden bg-[#1A1208] rounded-2xl p-8 mb-6 border border-teal-500/10 hover:border-teal-500/30 transition-all">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="text-3xl">🌊</div>
+        <div>
+          <h3 class="text-xl font-bold text-white">שבוע קלאסי בבאלי</h3>
+          <p class="text-white/60 text-sm">7 ימים — הכי פופולרי אצל ישראלים</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        {[
+          {day:'יום 1', place:'נחיתה + קאנגו', emoji:'✈️', note:'הגעה בבוקר, check-in וילה או בוטיק, massage, ערב בקאנגו'},
+          {day:'יום 2-3', place:'קאנגו — גלישה', emoji:'🏄', note:'שיעור גלישה, Padang Padang Beach, bintang surf spot, nightlife'},
+          {day:'יום 4', place:'אובוד — תרבות', emoji:'🌾', note:'Tegallalang Rice Fields, Goa Gajah (Elephant Cave), שוק אובוד'},
+          {day:'יום 5', place:'נוסה פניידה — יום שלם', emoji:'🏝️', note:'Day trip: Kelingking Beach, Angel Billabong, Broken Beach + צלילה'},
+          {day:'יום 6', place:'אולוואטו — sunset', emoji:'🌅', note:'Uluwatu Temple, Kecak Dance ב-18:30, ארוחת ים בשקיעה'},
+          {day:'יום 7', place:'checkout ונמל תעופה', emoji:'✈️', note:'בוקר חופשי, קניות אחרונות, נמל תעופה'},
+        ].map(d => (
+          <div class="flex gap-4 items-start">
+            <div class="text-2xl w-8 flex-shrink-0">{d.emoji}</div>
+            <div class="flex-1 border-r-2 border-teal-500 pr-4">
+              <div class="font-bold text-white text-sm">{d.day} — {d.place}</div>
+              <div class="text-white/70 text-sm mt-1">{d.note}</div>
             </div>
           </div>
         ))}
@@ -84,33 +131,70 @@ import Layout from '../components/Layout.astro'
     </div>
 
     <!-- 10-day itinerary -->
-    <div class="bg-gray-900 rounded-2xl p-8 border border-gray-800">
+    <div data-itinerary="10" class="itinerary-card hidden bg-[#1A1208] rounded-2xl p-8 mb-6 border border-teal-500/10 hover:border-teal-500/30 transition-all">
       <div class="flex items-center gap-3 mb-6">
-        <div class="text-3xl">🗓️</div>
+        <div class="text-3xl">🏄</div>
         <div>
-          <h3 class="text-xl font-bold text-white">10 ימים — לטייל לעומק</h3>
-          <p class="text-gray-400 text-sm">למי שרוצה יותר מהרגיל</p>
+          <h3 class="text-xl font-bold text-white">10 ימים — להכיר לעומק</h3>
+          <p class="text-white/60 text-sm">צלילה, טיולים בהרים, תרבות והוקיה של באלי</p>
         </div>
       </div>
       <div class="space-y-4">
         {[
-          {day:'יום 1', place:'נחיתה + כוטה/לגיאן', emoji:'✈️', note:'הגעה, מנוחה, קניות'},
-          {day:'יום 2-4', place:'קאנגו', emoji:'🏄', note:'גלישה, nomad life, nightlife'},
-          {day:'יום 5', place:'הר בטור — Sunrise Trek', emoji:'🌋', note:'יציאה ב-02:00, שקיעת שמש מהפסגה'},
-          {day:'יום 6-7', place:'אובוד', emoji:'🌾', note:'ריטריט יוגה, מקדשים, בישול בלינזי'},
-          {day:'יום 8', place:'נוסה פניידה', emoji:'🏝️', note:'Kelingking + Angel Billabong'},
-          {day:'יום 9', place:'אמד', emoji:'🤿', note:'צלילה על אוניית USAT Liberty'},
-          {day:'יום 10', place:'אולוואטו + הטיסה', emoji:'🌅', note:'Kecak ואז נמל תעופה'},
+          {day:'יום 1', place:'נחיתה + קאנגו', emoji:'✈️', note:'הגעה, check-in, מנוחה מן הטיסה, ערב בקאנגו'},
+          {day:'יום 2-3', place:'קאנגו — גלישה', emoji:'🏄', note:'שיעורי גלישה, Padang Padang Beach, local cafes, nightlife Ku De Ta'},
+          {day:'יום 4-5', place:'אובוד — ריטריט', emoji:'🌾', note:'Tegallalang, בישול בלינזי בוקר, יוגה, monkey forest, Temple ערב'},
+          {day:'יום 6', place:'הר בטור — Sunrise Trek', emoji:'🌋', note:'יציאה בחצות, trek להר בטור, שקיעה מהפסגה, ארוחת בוקר בכפר'},
+          {day:'יום 7', place:'נוסה פניידה — יום מלא', emoji:'🏝️', note:'Kelingking, Angel Billabong, Broken Beach, צלילה (2 dives), sunset'},
+          {day:'יום 8', place:'אמד — צלילה', emoji:'🤿', note:'USAT Liberty Wreck Dive, Amed reef, day pass בנחל מקומי'},
+          {day:'יום 9', place:'אולוואטו — ערב ממלכתי', emoji:'🌅', note:'Uluwatu Temple, Kecak Fire Dance, ארוחת ים בשקיעה, bar למעלה'},
+          {day:'יום 10', place:'checkout ונמל תעופה', emoji:'✈️', note:'בוקר חופשי, קניות סופיות בשוק, נמל תעופה'},
         ].map(d => (
           <div class="flex gap-4 items-start">
             <div class="text-2xl w-8 flex-shrink-0">{d.emoji}</div>
             <div class="flex-1 border-r-2 border-teal-500 pr-4">
               <div class="font-bold text-white text-sm">{d.day} — {d.place}</div>
-              <div class="text-gray-400 text-sm mt-1">{d.note}</div>
+              <div class="text-white/70 text-sm mt-1">{d.note}</div>
             </div>
           </div>
         ))}
       </div>
+    </div>
+
+    <!-- 14+ day itinerary -->
+    <div data-itinerary="14" class="itinerary-card hidden bg-[#1A1208] rounded-2xl p-8 border border-teal-500/10 hover:border-teal-500/30 transition-all">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="text-3xl">🧘</div>
+        <div>
+          <h3 class="text-xl font-bold text-white">14+ ימים — כמו גרים בבאלי</h3>
+          <p class="text-white/60 text-sm">מלונות חודשיים, מקומות חיים, קהילה ישראלית, מסלולים לא סטנדרטיים</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        {[
+          {day:'ימים 1-3', place:'קאנגו', emoji:'🏄', note:'Settlement, villa/co-living, מציאת אתם, קפה, קומוניטי ישראלית'},
+          {day:'ימים 4-6', place:'אובוד — ריטריט', emoji:'🌾', note:'ריטריט יוגה שבועי, שיעורים, meditation, workshop בישול'},
+          {day:'יום 7', place:'הר בטור + Bratan Temple', emoji:'🌋', note:'Sunrise trek, Bedugul, Lake Temple, Strawberry farms'},
+          {day:'ימים 8-9', place:'צפון באלי', emoji:'🌿', note:'Lovina, Singaraja, hot springs, מפלות, חיי לילה רגועים'},
+          {day:'יום 10', place:'אמד — צלילה מתקדמת', emoji:'🤿', note:'Advanced diving, Japanese Garden, drift diving'},
+          {day:'יום 11', place:'Lombok — טיול יומי', emoji:'🏝️', note:'Gili islands, צלילה במפלס גבוה, חוף לבן'},
+          {day:'יום 12', place:'אולוואטו', emoji:'🌅', note:'Kecak Dance, Pengubengan viewpoint, infinity clubs'},
+          {day:'יום 13', place:'יום חופשי/עבודה דיגיטלית', emoji:'💻', note:'Co-working, קפה, משפחה'},
+          {day:'יום 14', place:'checkout', emoji:'✈️', note:'טיסה — או הארכת שהות!'},
+        ].map(d => (
+          <div class="flex gap-4 items-start">
+            <div class="text-2xl w-8 flex-shrink-0">{d.emoji}</div>
+            <div class="flex-1 border-r-2 border-teal-500 pr-4">
+              <div class="font-bold text-white text-sm">{d.day} — {d.place}</div>
+              <div class="text-white/70 text-sm mt-1">{d.note}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div id="itinerary-placeholder" class="text-center py-12">
+      <p class="text-white/60 text-lg">👆 בחרו את מספר הימים שלכם בחלק העליון</p>
     </div>
   </section>
 
@@ -119,32 +203,150 @@ import Layout from '../components/Layout.astro'
     <h2 class="text-2xl font-bold text-white mb-6 text-center">💰 אומדן תקציב לזוג</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {[
-        {type:'תרמיל', budget:'$80-120/יום', weekly:'~2,200 ₪', emoji:'🎒', items:['הוסטל/חדר פשוט','warung + שוק','Grab + קטנוע','פעילויות בחינם']},
-        {type:'מאוזן', budget:'$150-250/יום', weekly:'~4,000 ₪', emoji:'🌿', items:['וילה/בוטיק','מסעדות טובות','Grab comf.','טיולים מאורגנים']},
-        {type:'יוקרה', budget:'$300+/יום', weekly:'~7,500 ₪', emoji:'✨', items:['ריזורט/וילה פרטית','מסעדות פרמיום','נהג פרטי','ספא + ריטריטים']},
+        {type:'תרמיל', budget:'₪200-300/יום', weekly:'₪1,400-2,100', emoji:'🎒', items:['הוסטל/חדר פשוט','warung + שוק','Grab + קטנוע','פעילויות בחינם']},
+        {type:'מאוזן', budget:'₪450-750/יום', weekly:'₪3,150-5,250', emoji:'🌿', items:['וילה/בוטיק','מסעדות טובות','Grab comfort','טיולים מאורגנים']},
+        {type:'יוקרה', budget:'₪900+/יום', weekly:'₪6,300+', emoji:'✨', items:['ריזורט/וילה פרטית','מסעדות פרמיום','נהג פרטי','ספא + ריטריטים']},
       ].map(b => (
-        <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <div class="bg-[#1A1208] rounded-xl p-6 border border-teal-500/10">
           <div class="text-3xl mb-3">{b.emoji}</div>
           <div class="text-white font-bold text-lg mb-1">{b.type}</div>
           <div class="text-teal-400 font-bold text-xl mb-1">{b.budget}</div>
-          <div class="text-gray-500 text-sm mb-4">לזוג: {b.weekly}</div>
+          <div class="text-white/60 text-sm mb-4">לזוג: {b.weekly}</div>
           <ul class="space-y-2">
-            {b.items.map(i => <li class="text-gray-400 text-sm">• {i}</li>)}
+            {b.items.map(i => <li class="text-white/70 text-sm">✓ {i}</li>)}
           </ul>
         </div>
       ))}
     </div>
   </section>
 
+  <!-- Pro tips section -->
+  <section class="mb-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-8">
+    <h2 class="text-2xl font-bold text-white mb-6">💡 עצות מקצועיות לתכנון</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-white font-bold mb-3">🚗 תחבורה</h3>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li>• Grab זול יותר מטקסי רגילים</li>
+          <li>• קטנוע דיום: ₪20-30 (אחראות)</li>
+          <li>• נהג לאורך כל היום: ₪200-300</li>
+          <li>• Day tours כוללים הנעה</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">🏨 מלונות</h3>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li>• Booking.com/Agoda לרוב זול</li>
+          <li>• וילות פרטיות זולות יותר מ-hotels</li>
+          <li>• שכרו חודשי עבור הנחות 30%</li>
+          <li>• קנגו הכי פופולרי לצעירים</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">🍽️ אוכל</h3>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li>• Warung: ₪20-40 ארוחה</li>
+          <li>• מסעדות טובות: ₪50-150</li>
+          <li>• ישראלית בקאנגו: ₪50-80</li>
+          <li>• בחרו בדברים טריים, תמיד!</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">📱 מידע חשוב</h3>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li>• ויזה מראש: eVOA (185 ₪)</li>
+          <li>• SIM מקומי בנמל (3GB: ₪10)</li>
+          <li>• דולר שימושי כמו שקל</li>
+          <li>• ATM בכל מקום, בטוח</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- Visa CTA -->
-  <section class="bg-teal-900/30 border border-teal-500/40 rounded-2xl p-8 text-center">
+  <section class="bg-gradient-to-r from-teal-500/10 to-transparent border border-teal-500/20 rounded-2xl p-8 text-center mb-16">
     <div class="text-4xl mb-4">🛂</div>
     <h2 class="text-2xl font-bold text-white mb-3">אל תשכחו ויזה לפני הטיסה!</h2>
-    <p class="text-gray-400 mb-6">ישראלים חייבים ויזה לבאלי. אנחנו מגישים עבורכם — 185 ₪ בלבד.</p>
-    <a href="/visa" class="inline-block bg-teal-500 hover:bg-teal-400 text-white font-bold py-3 px-8 rounded-xl transition-colors">
-      לפרטים ולהרשמה ←
+    <p class="text-white/70 mb-6">ישראלים חייבים ויזה לבאלי. מגישים eVOA תוך 3-5 ימים — 185 ₪ בלבד (כולל עלות הויזה).</p>
+    <a href="/visa" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-xl transition-colors">
+      מדריך הויזה המלא ←
+    </a>
+  </section>
+
+  <!-- FAQ / Planing questions -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-8 text-center">שאלות נפוצות בתכנון</h2>
+    <div class="space-y-4">
+      {[
+        { q: 'מתי הכי טוב לטוס לבאלי?', a: 'עונה יבשה (מאי-ספטמבר) הכי טובה — שמש, חוף, גלים. עונה גשומה (נוב-מרץ) יותר זול אבל בעיות בגלישה.' },
+        { q: 'כמה זמן לוקח להגיע מנמל לקאנגו?', a: 'בסביב שעה וחצי בתנועה רגילה. Grab: ₪70-100. הזמינו נהג מלון או בחצי יום.' },
+        { q: 'האם אני יכול להפליג לנוסה פניידה בעצמי?', a: 'כן! סירות יוצאות מ-Sanur כל בוקר. ₪80-120 הלוך חזור, 1.5 שעות.' },
+        { q: 'מה הטובה ביותר לשדה קשה?', a: 'Tegallalang Rice Terraces (אובוד), Monkey Forest (אובוד), במקומות טבעיים. שדה בא גם לילה, בחרו בוקר.' },
+        { q: 'כמה דולר\₪ צריך לקחת?', a: 'ATM בכל מקום. קחו קרטיס חיוב + ₪800-1200 למזומן דחוק. דולר גם טוב (דירוג 1$=IDR 16K).' },
+        { q: 'איזה סייח טוב ל-beginners?', a: 'Padang Padang ו-Uluwatu מדורגים מ-beginner עד advanced. המצביעו על מורה בחנות סערה.' },
+      ].map(item => (
+        <details class="group bg-[#1A1208] border border-teal-500/10 rounded-xl p-5 cursor-pointer hover:border-teal-500/20 transition-all">
+          <summary class="font-bold text-white group-open:text-teal-400 transition-colors">{item.q}</summary>
+          <p class="text-white/70 text-sm mt-3">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA for help -->
+  <section class="text-center py-12">
+    <h2 class="text-2xl font-bold text-white mb-4">צריכים עזרה בתכנון?</h2>
+    <p class="text-white/70 mb-6">אנחנו משפחת יאללה באלי — שלחו לנו וואטסאפ ונעזור לתכנן לפי תחומי עניין שלכם</p>
+    <a href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני צריך עזרה בתכנון טיול לבאלי 🗺️')}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-8 py-4 rounded-xl transition-colors">
+      📱 צרו קשר בווטסאפ
     </a>
   </section>
 
 </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const durationBtns = document.querySelectorAll('.duration-btn');
+    const styleBtns = document.querySelectorAll('.style-btn');
+    const itineraryCards = document.querySelectorAll('.itinerary-card');
+    const placeholder = document.getElementById('itinerary-placeholder');
+
+    let selectedDays = null;
+    let selectedStyle = null;
+
+    function updateItinerary() {
+      itineraryCards.forEach(card => {
+        card.classList.add('hidden');
+      });
+
+      if (selectedDays) {
+        placeholder.classList.add('hidden');
+        const matchingCard = document.querySelector(`[data-itinerary="${selectedDays}"]`);
+        if (matchingCard) {
+          matchingCard.classList.remove('hidden');
+        }
+      } else {
+        placeholder.classList.remove('hidden');
+      }
+    }
+
+    durationBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        durationBtns.forEach(b => b.classList.remove('bg-teal-500/5', 'border-teal-500'));
+        btn.classList.add('bg-teal-500/5', 'border-teal-500');
+        selectedDays = btn.dataset.days;
+        updateItinerary();
+      });
+    });
+
+    styleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        styleBtns.forEach(b => b.classList.remove('bg-teal-500/5', 'border-teal-500'));
+        btn.classList.add('bg-teal-500/5', 'border-teal-500');
+        selectedStyle = btn.dataset.style;
+      });
+    });
+  });
+</script>
+
 </Layout>

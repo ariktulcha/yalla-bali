@@ -51,10 +51,40 @@ const breadcrumbSchema = {
         <span class="text-white/60">מדריכים</span>
       </nav>
       <h1 class="text-4xl md:text-5xl font-black mb-4">מדריכים ומאמרים על באלי</h1>
-      <p class="text-lg text-white/60 max-w-2xl mx-auto">
-        מדריכים מעמיקים שיעזרו לכם לתכנן את הטיול המושלם לבאלי — טיפים, המלצות ומידע מעשי.
+      <p class="text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
+        אוסף מקיף של מדריכים בעברית שיעזרו לכם לתכנן את הטיול המושלם לבאלי.
+        מטיפים מעשיים לטיסה, דרך אדטה של מסלולים ופעילויות, ועד מדריכים עמוקים על תרבות ובטיחות.
+        כל מדריך נכתב מנסיון ישיר על ידי חובבי באלי.
       </p>
-      <p class="mt-4 text-teal-400 font-medium">{guides.length} מדריכים</p>
+      <p class="mt-6 text-teal-400 font-medium text-lg">{guides.length} מדריכים מעמיקים</p>
+    </div>
+  </section>
+
+  <!-- Category filters -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-white mb-6">חפשו לפי נושא</h2>
+    <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap data-category='all'">
+        הכל ({guides.length})
+      </button>
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap" data-category="pre-trip">
+        🛫 לפני הטיסה
+      </button>
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap" data-category="transportation">
+        🚗 תחבורה
+      </button>
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap" data-category="money">
+        💰 כסף וחוקים
+      </button>
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap" data-category="health">
+        🏥 בריאות
+      </button>
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap" data-category="culture">
+        🏛️ תרבות
+      </button>
+      <button class="filter-btn flex-none px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap" data-category="food">
+        🍜 אוכל
+      </button>
     </div>
   </section>
 
@@ -62,11 +92,42 @@ const breadcrumbSchema = {
     {guides.length > 0 ? (
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {guides.map((guide) => (
-          <GuideCard {...guide} />
+          <div class="guide-item" data-category={guide.category || 'other'}>
+            <GuideCard {...guide} />
+          </div>
         ))}
       </div>
     ) : (
       <p class="text-center text-white/40 py-12">לא נמצאו מדריכים כרגע.</p>
     )}
   </section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const guideItems = document.querySelectorAll('.guide-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-teal-500', 'text-black', 'font-bold');
+          b.classList.add('bg-white/5', 'text-white/60', 'font-medium');
+        });
+        btn.classList.remove('bg-white/5', 'text-white/60', 'font-medium');
+        btn.classList.add('bg-teal-500', 'text-black', 'font-bold');
+
+        // Filter guides
+        const category = btn.dataset.category;
+        guideItems.forEach(item => {
+          if (category === 'all' || item.dataset.category === category) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
 </Layout>

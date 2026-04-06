@@ -3,6 +3,7 @@ import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import Layout from '../../components/Layout.astro'
 import PhotoGallery from '../../components/PhotoGallery.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
+import FAQSection from '../../components/FAQSection.astro'
 import { marked } from 'marked'
 
 export async function getStaticPaths() {
@@ -57,6 +58,60 @@ const breadcrumbItems = [
   { label: 'דף הבית', href: '/' },
   { label: 'חיי לילה', href: '/nightlife' },
   { label: venue.name_he },
+]
+
+// Distance & pricing estimates by area
+const areaDistancePricing: Record<string, { distance: string; grabPrice: string }> = {
+  'סמינייק': { distance: '15-20 ק"מ', grabPrice: '₪60-90' },
+  'seminyak': { distance: '15-20 ק"מ', grabPrice: '₪60-90' },
+  'קאנגו': { distance: '15-18 ק"מ', grabPrice: '₪60-85' },
+  'canggu': { distance: '15-18 ק"מ', grabPrice: '₪60-85' },
+  'אובוד': { distance: '25-30 ק"מ', grabPrice: '₪90-130' },
+  'ubud': { distance: '25-30 ק"מ', grabPrice: '₪90-130' },
+  'ג\'ימברן': { distance: '10-15 ק"מ', grabPrice: '₪50-75' },
+  'jimbaran': { distance: '10-15 ק"מ', grabPrice: '₪50-75' },
+  'אולוואטו': { distance: '18-22 ק"מ', grabPrice: '₪70-100' },
+  'uluwatu': { distance: '18-22 ק"מ', grabPrice: '₪70-100' },
+  'נוסה דואה': { distance: '12-17 ק"מ', grabPrice: '₪55-80' },
+  'nusa-dua': { distance: '12-17 ק"מ', grabPrice: '₪55-80' },
+  'סנור': { distance: '30-35 ק"מ', grabPrice: '₪110-150' },
+  'sanur': { distance: '30-35 ק"מ', grabPrice: '₪110-150' },
+  'קוטה': { distance: '13-16 ק"מ', grabPrice: '₪55-75' },
+  'kuta': { distance: '13-16 ק"מ', grabPrice: '₪55-75' },
+}
+
+const areaKey = (venue.area || '').toLowerCase()
+const distancePricing = areaDistancePricing[areaKey] || { distance: '20-25 ק"מ', grabPrice: '₪70-100' }
+
+// Related nightlife venues in same area
+const { data: areaNightlife } = await supabaseAdmin
+  .from('nightlife')
+  .select('slug, name_he, description, image')
+  .eq('destination_id', DESTINATION_ID)
+  .eq('published', true)
+  .eq('area', venue.area)
+  .neq('slug', venue.slug)
+  .limit(3)
+
+const relatedNightlife = areaNightlife ?? []
+
+const faqItems = [
+  {
+    q: `מה גיל הכניסה ל${venue.name_he}?`,
+    a: `בבאלי, גיל הכניסה הרשמי להמון מקומות הוא 18 שנים, אך חלק מהמקומות העדיפים יותר דורשים 21+. בדקו את דרישות הגיל של ${venue.name_he} מראש. אנחנו ממליצים להביא תעודה זהות תקפה בכל מקרה.`,
+  },
+  {
+    q: `האם ${venue.name_he} מחייבת הזמנה מראש?`,
+    a: `זה תלוי בלילה ובגודל הקבוצה. בימי פעילות (ימי שישי, שבת), מומלץ להזמין מראש. אם אתם קבוצה קטנה, בדרך כלל אתם יוכלו להיכנס בלא הזמנה. צרו איתנו קשר בווטסאפ אם אתם רוצים להזמין שולחן.`,
+  },
+  {
+    q: `מה קוד הלבוש ב${venue.name_he}?`,
+    a: `${dressCode ? `קוד הלבוש ב${venue.name_he} הוא: ${dressCode}. ` : ''}בדרך כלל, במקומות בבאלי דורשים casual-smart: לא טנקטופ או שורטס בשבילים סטנדרטיים, אך בחיים ללא נעליים ניתן בדרך כלל. בקתות/בארים חוף יותר רופפים.`,
+  },
+  {
+    q: `כמה בערך עולה שתייה ב${venue.name_he}?`,
+    a: `${priceRange ? `טווח מחירים: ${priceRange}. ` : ''}בבאלי, שתייה בחיים ללא רחוב הרבה פחות יקרה מאשר בחו"ל. משקה בודד בדרך כלל עולה בין ₪20-₪60 בהתאם לסוג המשקה ומיקום המקום.`,
+  },
 ]
 ---
 
@@ -130,7 +185,83 @@ const breadcrumbItems = [
       <div class="prose prose-invert prose-teal max-w-none mb-8 [&_h2]:text-teal-400 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:border-r-4 [&_h2]:border-teal-500 [&_h2]:pr-3 [&_h3]:text-teal-300 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_a]:text-teal-400 [&_strong]:text-white" set:html={contentHtml} />
     )}
 
-    <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-4">כיצד מגיעים ל{venue.name_he}? 🚕</h2>
+      <div class="space-y-4 text-white/70">
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+          <div>
+            <p class="font-medium text-white">מנמל התעופה Ngurah Rai (DPS)</p>
+            <p class="text-sm">מרחק משוער: <span class="text-white">{distancePricing.distance}</span></p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div>
+            <p class="font-medium text-white">Grab/Gojek Taxi</p>
+            <p class="text-sm">משוער: <span class="text-white">{distancePricing.grabPrice}</span> להובלה מהנמל</p>
+            <p class="text-xs text-white/50 mt-1">* המחירים הם משוער בלבד. בדקו את היישום עבור תמחור חיוני.</p>
+          </div>
+        </div>
+        {(address || venue.area) && (
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 003 16.382V5.618a1 1 0 011.447-.894L9 7.5m0 0l6.553-3.276A1 1 0 0117 5.618v10.764a1 1 0 01-1.447.894L9 7.5m0 0L3 10m6-6v6m6-6v6"/></svg>
+            <div>
+              <p class="font-medium text-white">Maps</p>
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent((address || venue.area || venue.name_he) + ', Bali')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-teal-400 hover:text-teal-300 text-sm transition-colors"
+              >
+                פתחו ב-Google Maps ↗
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <FAQSection items={faqItems} />
+    </div>
+
+    {relatedNightlife.length > 0 && (
+      <section class="mt-16 pt-8 border-t border-gray-800" dir="rtl">
+        <h2 class="text-2xl font-bold text-white mb-6">🌙 מקומות לילה נוספים ב{venue.area}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedNightlife.map((item: any) => (
+            <a
+              href={`/nightlife/${item.slug}`}
+              class="group bg-gray-900 rounded-xl overflow-hidden hover:bg-gray-800 transition-colors"
+            >
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.name_he}
+                  class="w-full h-40 object-cover group-hover:scale-105 transition-transform"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-40 bg-gray-800 flex items-center justify-center">
+                  <span class="text-4xl">🌙</span>
+                </div>
+              )}
+              <div class="p-4">
+                <h3 class="text-white font-semibold text-sm leading-tight group-hover:text-teal-400 transition-colors">
+                  {item.name_he}
+                </h3>
+                {item.description && (
+                  <p class="text-gray-400 text-xs mt-1 line-clamp-2">{item.description}</p>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center mt-16">
       <p class="text-white/80 mb-4">אהבתם את {venue.name_he}? רוצים עוד המלצות לחיי לילה בבאלי?</p>
       <a
         href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אני מחפש המלצות לחיי לילה בבאלי 🍸')}`}

@@ -2,6 +2,7 @@
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import Layout from '../../components/Layout.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
+import FAQSection from '../../components/FAQSection.astro'
 import { marked } from 'marked'
 
 export async function getStaticPaths() {
@@ -77,6 +78,25 @@ const breadcrumbItems = [
   { label: 'מדריכים', href: '/guides' },
   { label: title },
 ]
+
+const faqItems = [
+  {
+    q: `האם המידע במדריך "${title}" עדכני?`,
+    a: `כן, מדריך זה עדכן ל-${new Date().getFullYear()}. אנחנו משדרגים את כל המדריכים שלנו באופן קבוע. אם גיליתם שום מידע שגוי או מיושן, אנא צרו איתנו קשר בווטסאפ ונטרוט את זה מיד.`,
+  },
+  {
+    q: `האם יש מידע נוסף על הנושא של המדריך?`,
+    a: `בוודאי! אתם יכולים לבקר בדף "מדריכים" כדי לראות את כל המאמרים שלנו, או לחפש בנושאים קשורים. יש לנו מאות עמודים של תוכן על באלי. אם אתם מחפשים מידע ספציפי, שלחו לנו הודעה בווטסאפ ונוכל להמליץ עליו.`,
+  },
+  {
+    q: `איך אוכל להעתיק/להדפיס את המדריך?`,
+    a: `אתם יכולים בחופשיות להעתיק ולהדפיס את המדריך לשימוש אישי. אנחנו רק מבקשים שתזכרו את Yalla Bali בעת שיתוף. אם אתם רוצים להשתמש בתוכן שלנו לצרכים מסחריים, אנא צרו איתנו קשר.`,
+  },
+  {
+    q: `אהבתם את המדריך? איך אוכל לתמוך ביאללה באלי?`,
+    a: `תודה על שאהבתם! הדרך הטובה ביותר לתמוך בנו היא לשתף את המדריך עם חברים, להשאיר ביקורת חיובית, או להשתמש בליכי ההפניה שלנו כשאתם מזמינים טיולים או מלונות. זה עוזר לנו רבות!`,
+  },
+]
 ---
 
 <Layout
@@ -146,6 +166,10 @@ const breadcrumbItems = [
     {contentHtml && (
       <div class="prose prose-invert prose-teal prose-lg max-w-none mb-8 [&_h2]:text-teal-400 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:border-r-4 [&_h2]:border-teal-500 [&_h2]:pr-3 [&_h3]:text-teal-300 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_a]:text-teal-400 [&_strong]:text-white" set:html={contentHtml} />
     )}
+
+    <div class="mb-8">
+      <FAQSection items={faqItems} />
+    </div>
 
     <!-- WhatsApp CTA -->
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
