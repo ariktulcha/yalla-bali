@@ -1,4 +1,5 @@
-const AFFILIATE_ID = import.meta.env.BOOKING_AFFILIATE_ID ?? ''
+const AFFILIATE_ID =
+  import.meta.env.BOOKING_AFFILIATE_ID ?? process.env.BOOKING_AFFILIATE_ID ?? ''
 
 export function withBookingAffiliate(url: string): string {
   try {
