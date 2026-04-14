@@ -4,7 +4,7 @@
  * When cloning for a new destination:
  * 1. Copy this file
  * 2. Change all values below
- * 3. Done — Layout, Head, WhatsApp, footer, all read from here
+ * 3. Done — Layout, Head, footer, all read from here
  */
 
 export const site = {
@@ -14,14 +14,9 @@ export const site = {
   brandPrefix: 'יאללה',          // The white part of the logo
   tagline: 'YOUR BALI GUIDE',
   taglineHe: 'המדריך הישראלי לבאלי',
-  domain: 'yalla-bali.co.il',
+  domain: 'ibalibali.com',
   destinationName: 'באלי',       // Used in "מלונות ב{destinationName}"
   destinationNameEn: 'Bali',
-
-  whatsapp: {
-    phone: '972528211665',
-    defaultMessage: 'היי, אנחנו מתכננים טיול לבאלי 🌴',
-  },
 
   socials: {
     instagram: 'https://instagram.com/yallabaliil',
@@ -67,8 +62,6 @@ export const site = {
   // Footer columns
   footer: {
     description: 'המדריך המלא שלכם לבאלי — מסעדות, מלונות, אטרקציות וחוויות בלתי נשכחות.',
-    ctaTitle: 'צריכים עזרה בתכנון הטיול?',
-    ctaSubtitle: 'דברו איתנו בוואטסאפ — מענה מהיר ואישי',
     columns: [
       {
         title: 'ויזה וטיולים',
@@ -119,14 +112,22 @@ export const site = {
   },
 } as const
 
-// Helper: build WhatsApp URL
-export function waUrl(message?: string): string {
-  const msg = message || site.whatsapp.defaultMessage
-  return `https://wa.me/${site.whatsapp.phone}?text=${encodeURIComponent(msg)}`
-}
-
-// Helper: build page title with brand suffix
+// Helper: build page title with brand suffix.
+// Strategy to keep title ≤ 70 chars:
+//   1) Try full: prefix + entity-type suffix + brand
+//   2) If too long, drop the entity-type suffix
+//   3) If still too long, also strip "— name_en" tail from prefix (everything after " — ")
 export function pageTitle(prefix: string, entityType?: keyof typeof site.titleSuffix): string {
-  const suffix = entityType ? `${site.titleSuffix[entityType]} ב${site.destinationName}` : ''
-  return `${prefix}${suffix ? ` | ${suffix}` : ''} | ${site.brand}`
+  const fullSuffix = entityType ? ` | ${site.titleSuffix[entityType]} ב${site.destinationName}` : ''
+  const brandSuffix = ` | ${site.brand}`
+
+  const full = prefix + fullSuffix + brandSuffix
+  if (full.length <= 70) return full
+
+  const noMid = prefix + brandSuffix
+  if (noMid.length <= 70) return noMid
+
+  // Strip "— English name" tail (em-dash splitter used by entity templates)
+  const heOnly = prefix.split(' — ')[0]
+  return `${heOnly}${brandSuffix}`
 }

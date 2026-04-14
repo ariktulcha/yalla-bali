@@ -10,17 +10,31 @@
  *
  * Requires:
  *   - Google Places API key with "Places API (New)" enabled
- *   - SUPABASE_SERVICE_KEY env var (or hardcoded below)
+ *   - SUPABASE_URL + SUPABASE_SERVICE_KEY env vars (from .env or exported)
  */
 
 import { createClient } from '@supabase/supabase-js'
 
 // ─── Config ─────────────────────────────────────────────────────────────────
-const SUPABASE_URL   = 'https://nsfmucsdxhcywisejxxq.supabase.co'
-const SUPABASE_KEY   = process.env.SUPABASE_SERVICE_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zZm11Y3NkeGhjeXdpc2VqeHhxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDMzOTAwNywiZXhwIjoyMDg5OTE1MDA3fQ.xwTYYmf4r0fd_u8q5RQpNYCnygROD8BA0vY20ehkrBc'
+// Load .env manually if present so the script works both with and without dotenv
+try {
+  const fs = await import('node:fs')
+  const envText = fs.readFileSync('.env', 'utf8')
+  for (const line of envText.split('\n')) {
+    const [k, ...v] = line.split('=')
+    if (k && v.length && !process.env[k.trim()]) process.env[k.trim()] = v.join('=').trim()
+  }
+} catch {}
+
+const SUPABASE_URL   = process.env.SUPABASE_URL
+const SUPABASE_KEY   = process.env.SUPABASE_SERVICE_KEY
 const GOOGLE_KEY     = process.env.GOOGLE_PLACES_KEY
-const DESTINATION_ID = 'bali'
+const DESTINATION_ID = process.env.DESTINATION_ID || 'bali'
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('❌  Missing SUPABASE_URL or SUPABASE_SERVICE_KEY env vars')
+  process.exit(1)
+}
 const PHOTOS_COUNT   = 4           // photos per place (+ main image = 5 total)
 const BUCKET         = 'place-photos'
 const MAX_WIDTH      = 1200        // photo width in pixels

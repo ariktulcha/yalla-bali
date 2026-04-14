@@ -4,9 +4,9 @@ import SchemaOrg from '../components/SchemaOrg.astro'
 
 const services = [
   { icon: '📖', title: 'מדריכים מפורטים', description: 'מאות עמודים של תוכן מקורי בעברית: אטרקציות, מסעדות, מלונות, אזורים, חופים, שווקים ועוד. כל מדריך נכתב מניסיון אישי ומתעדכן באופן שוטף.' },
-  { icon: '🧭', title: 'טיולים ואטרקציות', description: 'אנחנו מארגנים טיולים מודרכים בבאלי — מטרק לפסגת הר הבאטור ועד טיולי יום לנוסה פניידה. הזמנה קלה בווטסאפ, מחירים שקופים, ושירות בעברית.' },
+  { icon: '🧭', title: 'אטרקציות וטיולים', description: 'מידע מפורט על האטרקציות, הטיולים והפעילויות הטובות ביותר בבאלי — מטרק לפסגת הר הבאטור ועד טיולי יום לנוסה פניידה. כל ההמלצות בעברית.' },
   { icon: '📍', title: 'תכנון טיול', description: 'כלי תכנון טיול חכם שבונה לכם מסלול מותאם אישית לפי מספר ימים, סגנון טיול ותחומי עניין. כולל המלצות למסעדות, אטרקציות וזמני ביקור אופטימליים.' },
-  { icon: '📱', title: 'שירות אישי בווטסאפ', description: 'שאלה? בעיה? צריכים המלצה? שלחו לנו הודעה בווטסאפ ונחזור אליכם תוך דקות. אנחנו זמינים לכל שאלה — לפני, במהלך ואחרי הטיול.' },
+  { icon: '✉️', title: 'מענה במייל', description: 'שאלה? התלבטות? צריכים המלצה? שלחו לנו מייל ונחזור אליכם עם מידע, המלצות וטיפים — לפני, במהלך ואחרי הטיול.' },
 ]
 
 const values = [
@@ -22,8 +22,8 @@ const articleSchema = {
   headline: 'אודות יאללה באלי',
   description: 'יאללה באלי - המדריך המלא לבאלי בעברית.',
   author: { '@type': 'Organization', name: 'Yalla Bali' },
-  publisher: { '@type': 'Organization', name: 'Yalla Bali', url: 'https://yalla-bali.co.il' },
-  mainEntityOfPage: 'https://yalla-bali.co.il/about',
+  publisher: { '@type': 'Organization', name: 'Yalla Bali', url: 'https://ibalibali.com' },
+  mainEntityOfPage: 'https://ibalibali.com/about',
   inLanguage: 'he',
   datePublished: '2025-01-01',
   dateModified: '2026-03-01',
@@ -33,14 +33,14 @@ const articleSchema = {
 <Layout
   title="אודות יאללה באלי"
   description="יאללה באלי - המדריך המלא לבאלי בעברית. מי אנחנו, מה המשימה שלנו, ואיך אנחנו עוזרים לתיירים ישראלים לתכנן את הטיול המושלם לבאלי."
-  canonical="https://yalla-bali.co.il/about"
+  canonical="https://ibalibali.com/about"
 >
   <SchemaOrg schema={articleSchema} />
 
   <section class="relative py-20 md:py-28 bg-gradient-to-b from-[#1A1208] to-[#0D0D0D]">
     <div class="absolute inset-0 opacity-10"><div class="absolute inset-0 bg-gradient-to-br from-teal-900/20 to-transparent"></div></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">אודות <span class="text-teal-400">יאללה באלי</span></h1>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">אודות <span class="text-teal-400">יאללה באלי</span></h1>
       <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">המדריך המלא לבאלי בעברית. עוזרים לתיירים ישראלים לתכנן ולחוות את הטיול המושלם בבאלי.</p>
     </div>
   </section>
@@ -60,13 +60,12 @@ const articleSchema = {
           אנחנו לא עותקים מויקיפדיה או טריפ אדווייזר — אנחנו כותבים מנסיון חי.
         </p>
         <p>
-          בנוסף למדריכים, אנחנו מארגנים <strong class="text-white">טיולים מודרכים בבאלי</strong> — הטיולים הכי מבוקשים בהרים, טבע, תרבות
-          ודיונג'. הזמנה קלה בווטסאפ, שירות בעברית, מחירים שקופים, ומדריכים שמכירים את באלי כמו כיסם שלהם.
-          הטיולים שלנו מתאימים לישראלים — אנחנו מבינים את הצרכים שלכם.
+          בנוסף למדריכים, אנחנו מספקים <strong class="text-white">מידע מפורט על טיולים ואטרקציות בבאלי</strong> — מהטיולים הכי מבוקשים בהרים, טבע ותרבות
+          ועד המלצות מקומיות אותנטיות. כל המידע בעברית, מעודכן ומדויק, ונכתב על ידי אנשים שמכירים את באלי כמו כיסם שלהם.
         </p>
         <p>
           המטרה שלנו <strong class="text-white">פשוטה וברורה</strong>: שכל ישראלי שמגיע לבאלי ייהנה מטיול מושלם — עם כל המידע שצריך,
-          בשפה שלו, בעברית, עם תמיכה אישית בכל שלב. ממש לפני הטיסה (ויזה, הכנה), במהלך הטיול (המלצות, טיולים, בעיות), ואפילו אחרי (זכרונות, חוות דעות).
+          בשפה שלו, בעברית. ממש לפני הטיסה (ויזה, הכנה), במהלך הטיול (המלצות, טיולים, בעיות), ואפילו אחרי (זכרונות, חוות דעות).
         </p>
       </div>
     </div>
@@ -125,18 +124,12 @@ const articleSchema = {
 
   <section class="max-w-4xl mx-auto px-4 py-12">
     <h2 class="text-3xl md:text-4xl font-black text-white mb-8 text-center">צרו <span class="text-teal-400">קשר</span></h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <a href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מתעניינים בטיול לבאלי')}`} target="_blank" rel="noopener noreferrer" class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-green-500/20 hover:border-green-500/40 rounded-2xl p-6 text-center transition-all group">
-        <span class="text-4xl block mb-3 group-hover:scale-110 transition-transform">📱</span>
-        <h3 class="text-xl font-bold text-white mb-2">וואטסאפ</h3>
-        <p class="text-white/60 text-sm mb-3">הדרך הכי מהירה לתשובות. זמינים כל יום.</p>
-        <span class="text-green-400 font-bold">שלחו הודעה</span>
-      </a>
-      <a href="mailto:info@yalla-bali.co.il" class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/20 hover:border-teal-500/40 rounded-2xl p-6 text-center transition-all group">
+    <div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
+      <a href="mailto:info@ibalibali.com" class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/20 hover:border-teal-500/40 rounded-2xl p-6 text-center transition-all group">
         <span class="text-4xl block mb-3 group-hover:scale-110 transition-transform">@</span>
         <h3 class="text-xl font-bold text-white mb-2">אימייל</h3>
         <p class="text-white/60 text-sm mb-3">לשאלות מפורטות, שיתופי פעולה ופניות עסקיות.</p>
-        <span class="text-teal-400 font-bold" dir="ltr">info@yalla-bali.co.il</span>
+        <span class="text-teal-400 font-bold" dir="ltr">info@ibalibali.com</span>
       </a>
     </div>
   </section>

@@ -1,7 +1,7 @@
 ---
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import { pickMetaDescription } from '../../lib/seo'
-import { site, waUrl } from '../../config/site'
+import { site, pageTitle as buildPageTitle } from '../../config/site'
 import Layout from '../../components/Layout.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
 import FAQSection from '../../components/FAQSection.astro'
@@ -29,29 +29,34 @@ const readTime = guide.read_time ?? guide.metadata?.read_time
 const author = guide.author ?? guide.metadata?.author ?? site.brand
 const datePublished = guide.published_at ?? guide.created_at ?? guide.metadata?.date_published
 
-const contentHtml = guide.full_content ? await marked(guide.full_content) : ''
+// Strip leading H1 from markdown content — the page already renders an <h1> from the title.
+// This prevents duplicate H1 tags which hurt SEO.
+const stripLeadingH1 = (md: string) => md.replace(/^\s*#\s+[^\n]+\n+/, '')
+const contentHtml = guide.full_content ? await marked(stripLeadingH1(guide.full_content)) : ''
 
-// Related guides — keyword-based slug matching
+// Related guides — category + keyword matching
 const currentSlug = guide.slug
+const currentCategory = guide.category ?? guide.metadata?.category
 const keywords = currentSlug.split('-').filter((w: string) => w.length > 3)
 
 const { data: allGuides } = await supabaseAdmin
   .from('guides')
-  .select('slug, name_he, excerpt_he, hero_image_url')
+  .select('slug, name_he, excerpt, image, category')
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
   .neq('slug', currentSlug)
   .limit(56)
 
-const scored = (allGuides ?? []).map((g: any) => ({
-  ...g,
-  score: keywords.filter((k: string) => g.slug.includes(k)).length,
-}))
+const scored = (allGuides ?? []).map((g: any) => {
+  const keywordScore = keywords.filter((k: string) => g.slug.includes(k)).length
+  const categoryBonus = (currentCategory && g.category === currentCategory) ? 3 : 0
+  return { ...g, score: keywordScore + categoryBonus }
+})
 scored.sort((a: any, b: any) => b.score - a.score || Math.random() - 0.5)
 const related = scored.slice(0, 3)
 
-const pageTitle = `${title} | מדריכים ל${site.destinationName} | ${site.brand}`
-const pageDescription = pickMetaDescription(guide, `מדריך מקיף ל${site.destinationName}`)
+const pageTitle = guide.meta_title || buildPageTitle(title, 'guide')
+const pageDescription = guide.meta_description || pickMetaDescription(guide, `מדריך מקיף ל${site.destinationName}`)
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -67,7 +72,7 @@ const articleSchema = {
   publisher: {
     '@type': 'Organization',
     name: site.brand,
-    url: 'https://yalla-bali.co.il',
+    url: 'https://ibalibali.com',
   },
   ...(datePublished ? { datePublished: new Date(datePublished).toISOString() } : {}),
   ...(guide.updated_at ? { dateModified: new Date(guide.updated_at).toISOString() } : {}),
@@ -80,30 +85,33 @@ const breadcrumbItems = [
   { label: title },
 ]
 
-const faqItems = [
-  {
-    q: `האם המידע במדריך "${title}" עדכני?`,
-    a: `כן, מדריך זה עדכן ל-${new Date().getFullYear()}. אנחנו משדרגים את כל המדריכים שלנו באופן קבוע. אם גיליתם שום מידע שגוי או מיושן, אנא צרו איתנו קשר בווטסאפ ונטרוט את זה מיד.`,
-  },
-  {
-    q: `האם יש מידע נוסף על הנושא של המדריך?`,
-    a: `בוודאי! אתם יכולים לבקר בדף "מדריכים" כדי לראות את כל המאמרים שלנו, או לחפש בנושאים קשורים. יש לנו מאות עמודים של תוכן על באלי. אם אתם מחפשים מידע ספציפי, שלחו לנו הודעה בווטסאפ ונוכל להמליץ עליו.`,
-  },
-  {
-    q: `איך אוכל להעתיק/להדפיס את המדריך?`,
-    a: `אתם יכולים בחופשיות להעתיק ולהדפיס את המדריך לשימוש אישי. אנחנו רק מבקשים שתזכרו את ${site.brand} בעת שיתוף. אם אתם רוצים להשתמש בתוכן שלנו לצרכים מסחריים, אנא צרו איתנו קשר.`,
-  },
-  {
-    q: `אהבתם את המדריך? איך אוכל לתמוך ביאללה באלי?`,
-    a: `תודה על שאהבתם! הדרך הטובה ביותר לתמוך בנו היא לשתף את המדריך עם חברים, להשאיר ביקורת חיובית, או להשתמש בליכי ההפניה שלנו כשאתם מזמינים טיולים או מלונות. זה עוזר לנו רבות!`,
-  },
-]
+const dbFaq = Array.isArray(guide.faq) ? guide.faq : []
+const faqItems = dbFaq.length > 0
+  ? dbFaq.map((item: any) => ({ q: item.q, a: item.a }))
+  : [
+      {
+        q: `האם המידע במדריך "${title}" על באלי עדכני?`,
+        a: `כן, המדריך "${title}" מעודכן ל-${new Date().getFullYear()}. אנחנו מעדכנים את כל המדריכים שלנו על באלי באופן קבוע כדי שהמידע יישאר אמין ומדויק.`,
+      },
+      {
+        q: `האם יש מידע נוסף על הנושא "${title}" באתר?`,
+        a: `בוודאי! בנוסף ל"${title}", אתם יכולים לבקר בדף "מדריכים" כדי לראות את כל המאמרים שלנו על באלי, או לחפש בנושאים קשורים. יש לנו מאות עמודים של תוכן על באלי.`,
+      },
+      {
+        q: `האם אפשר להדפיס את המדריך "${title}" לשימוש אישי?`,
+        a: `אתם יכולים בחופשיות להעתיק ולהדפיס את "${title}" לשימוש אישי בטיול לבאלי. אנחנו רק מבקשים שתזכרו את ${site.brand} בעת שיתוף.`,
+      },
+      {
+        q: `אהבתם את המדריך "${title}"? איך אפשר לתמוך ב${site.brand}?`,
+        a: `תודה שאהבתם את "${title}"! הדרך הטובה ביותר לתמוך בנו היא לשתף את המדריך עם חברים שמתכננים טיול לבאלי, להשאיר ביקורת חיובית, או להשתמש בלינקי ההפניה שלנו כשאתם מזמינים טיולים או מלונות בבאלי. זה עוזר לנו רבות!`,
+      },
+    ]
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-bali.co.il/guides/${guide.slug}`}
+  canonical={`https://ibalibali.com/guides/${guide.slug}`}
   ogImage={guide.image}
   ogType="article"
   schema={articleSchema}
@@ -154,12 +162,14 @@ const faqItems = [
 
     {guide.description && !guide.full_content && (
       <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-teal-400 mb-3">על המדריך — {title}</h2>
         <p class="text-white/80 leading-relaxed">{guide.description}</p>
       </div>
     )}
 
     {guide.excerpt && guide.full_content && (
       <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-teal-400 mb-3">תקציר המדריך — {title}</h2>
         <p class="text-lg text-white/80 leading-relaxed font-medium">{guide.excerpt}</p>
       </div>
     )}
@@ -168,53 +178,66 @@ const faqItems = [
       <div class="prose prose-invert prose-teal prose-lg max-w-none mb-8 [&_h2]:text-teal-400 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:border-r-4 [&_h2]:border-teal-500 [&_h2]:pr-3 [&_h3]:text-teal-300 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_a]:text-teal-400 [&_strong]:text-white" set:html={contentHtml} />
     )}
 
-    <div class="mb-8">
-      <FAQSection items={faqItems} />
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-3">סיכום — {title}</h2>
+      <p class="text-white/80 leading-relaxed">
+        המדריך "{title}" נועד לספק לכם את כל המידע הדרוש בתכנון טיול לבאלי. עיינו במדריכים נוספים באתר כדי להעמיק עוד בנושאים שמעניינים אתכם.
+      </p>
     </div>
 
-    <!-- WhatsApp CTA -->
-    <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">אהבתם את המדריך? יש לכם שאלות על באלי? נשמח לעזור!</p>
-      <a
-        dir="rtl"
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מתכננים טיול לבאלי ויש לנו שאלות 🌴')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>דברו איתנו בווטסאפ</span>
-      </a>
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-3">למה "{title}" חשוב לטיול לבאלי</h2>
+      <p class="text-white/80 leading-relaxed">
+        "{title}" הוא אחד הנושאים שישראלים רבים שואלים עליהם לפני טיסה לבאלי. המדריך הזה מסכם את הידע העדכני ביותר בנושא ומנגיש אותו בעברית, כדי שתוכלו להתמקד בחוויה עצמה ולא בחיפוש מידע באנגלית או באינדונזית.
+      </p>
+    </div>
+
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-3">טיפים מעשיים מתוך "{title}"</h2>
+      <p class="text-white/80 leading-relaxed">
+        המידע ב"{title}" מבוסס על ניסיון בפועל של מטיילים ישראלים בבאלי ועל בדיקות שטח מעודכנות. אנחנו ב{site.brand} מעדכנים את "{title}" באופן קבוע בהתאם לשינויים במחירים, בחוקים ובעונות, כדי שהמידע יישאר אמין ומדויק ככל האפשר.
+      </p>
+    </div>
+
+    <div class="mb-8">
+      <FAQSection items={faqItems} entityName={`המדריך "${title}"`} />
     </div>
 
     <!-- Related Articles -->
     {related.length > 0 && (
-      <section class="mt-16 pt-8 border-t border-gray-800" dir="rtl">
-        <h2 class="text-2xl font-bold text-white mb-6">📚 מאמרים קשורים</h2>
+      <section class="mt-16 pt-8 border-t border-white/10">
+        <h2 class="text-2xl font-bold text-white mb-6">מאמרים נוספים הקשורים ל"{title}"</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {related.map((article: any) => (
             <a
               href={`/guides/${article.slug}`}
-              class="group bg-gray-900 rounded-xl overflow-hidden hover:bg-gray-800 transition-colors"
+              class="group bg-[#1A1208] border border-teal-500/10 hover:border-teal-500/30 rounded-2xl overflow-hidden transition-all"
             >
-              {article.hero_image_url ? (
-                <img
-                  src={article.hero_image_url}
-                  alt={article.name_he}
-                  class="w-full h-40 object-cover group-hover:scale-105 transition-transform"
-                  loading="lazy"
-                />
-              ) : (
-                <div class="w-full h-40 bg-gray-800 flex items-center justify-center">
-                  <span class="text-4xl">🌍</span>
-                </div>
-              )}
+              <div class="aspect-[16/9] overflow-hidden relative">
+                {article.image ? (
+                  <img
+                    src={article.image}
+                    alt={article.name_he}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-teal-500/20 to-teal-900/20 flex items-center justify-center">
+                    <span class="text-4xl">📖</span>
+                  </div>
+                )}
+                {article.category && (
+                  <span class="absolute top-3 start-3 text-xs px-2.5 py-1 rounded-full bg-teal-500/90 text-black font-medium">
+                    {article.category}
+                  </span>
+                )}
+              </div>
               <div class="p-4">
-                <h3 class="text-white font-semibold text-sm leading-tight group-hover:text-teal-400 transition-colors">
+                <h3 class="text-white font-semibold leading-tight group-hover:text-teal-400 transition-colors">
                   {article.name_he}
                 </h3>
-                {article.excerpt_he && (
-                  <p class="text-gray-400 text-xs mt-1 line-clamp-2">{article.excerpt_he}</p>
+                {article.excerpt && (
+                  <p class="text-white/60 text-sm mt-2 line-clamp-2">{article.excerpt}</p>
                 )}
               </div>
             </a>

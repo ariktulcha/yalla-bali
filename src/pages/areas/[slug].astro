@@ -1,7 +1,7 @@
 ---
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import { pickMetaDescription } from '../../lib/seo'
-import { site, waUrl } from '../../config/site'
+import { site, pageTitle as buildPageTitle } from '../../config/site'
 import Layout from '../../components/Layout.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
 import FAQSection from '../../components/FAQSection.astro'
@@ -26,11 +26,13 @@ const { area } = Astro.props
 
 const highlights = area.highlights ?? area.metadata?.highlights ?? []
 const nearbyAttractions = area.metadata?.nearby_attractions ?? []
+const bestFor = Array.isArray(area.best_for) ? area.best_for : []
 
 const contentHtml = area.full_content ? await marked(area.full_content) : ''
 
-const pageTitle = `${area.name_he}${area.name_en ? ` — ${area.name_en}` : ''} | אזורים ב${site.destinationName} | ${site.brand}`
-const pageDescription = pickMetaDescription(area, `אזור ב${site.destinationName}`)
+const titlePrefix = `${area.name_he}${area.name_en ? ` — ${area.name_en}` : ''}`
+const pageTitle = area.meta_title || buildPageTitle(titlePrefix, 'area')
+const pageDescription = area.meta_description || pickMetaDescription(area, `אזור ב${site.destinationName}`)
 
 const placeSchema = {
   '@context': 'https://schema.org',
@@ -53,30 +55,33 @@ const breadcrumbItems = [
   { label: area.name_he },
 ]
 
-const faqItems = [
-  {
-    q: `מה האטרקציות הכי שוות ב${area.name_he}?`,
-    a: `${area.name_he} היא עמוקה בטבע ותרבות. אתם יוכלו למצוא מנזרים עתיקים, טבע יפה, וחיים מקומיים אמיתיים. צרו איתנו קשר בווטסאפ ואנחנו נוכל להמליץ על אטרקציות ספציפיות בהתאם לעניינים שלכם.`,
-  },
-  {
-    q: `מה הזמן הטוב לבקר ב${area.name_he}?`,
-    a: `הזמן הטוב ביותר הוא בעונה היבשה (מאי עד ספטמבר). בתקופה זו הזמן יותר טוב ויש פחות גשם. אם אתם חובבי ים, אז יוני עד אוגוסט הוא אידיאלי.`,
-  },
-  {
-    q: `כמה זמן כדאי לבלות ב${area.name_he}?`,
-    a: `זה תלוי בקצב שלכם. אם אתם רוצים להשקיע זמן, 2-3 ימים בסביבה זו יתנו לכם חוויה עשירה ואמיתית. יום אחד מספיק לסיור מהיר, אך אפשר להנות בהרבה יותר זמן.`,
-  },
-  {
-    q: `כיצד מגיעים ל${area.name_he}?`,
-    a: `ניתן להגיע דרך Grab או מונית מקומית (בערך 30-60 דקות מנמל התעופה בהתאם לאזור). אנחנו ממליצים לסדר רכב עם נהג כדי שתוכלו להתמקד בנוף ובחוויה. אם אתם רוצים סיור מפונקח, צרו איתנו קשר בווטסאפ.`,
-  },
-]
+const dbFaq = Array.isArray(area.faq) ? area.faq : []
+const faqItems = dbFaq.length > 0
+  ? dbFaq.map((item: any) => ({ q: item.q, a: item.a }))
+  : [
+      {
+        q: `מה האטרקציות הכי שוות ב${area.name_he} בבאלי?`,
+        a: `${area.name_he} בבאלי היא עמוסה בטבע ותרבות. תוכלו למצוא מקדשים עתיקים, נופי טבע מרהיבים וחיים מקומיים אמיתיים. עיינו בדף האטרקציות באתר כדי לראות את כל ההמלצות לאזור ${area.name_he}.`,
+      },
+      {
+        q: `מה הזמן הטוב ביותר לבקר ב${area.name_he} בבאלי?`,
+        a: `הזמן הטוב ביותר לבקר ב${area.name_he} הוא בעונה היבשה של באלי (מאי עד ספטמבר). בתקופה זו האקלים נעים יותר ויש פחות גשם. אם אתם חובבי ים, אז יוני עד אוגוסט הוא אידיאלי לחופי באלי.`,
+      },
+      {
+        q: `כמה זמן כדאי לבלות ב${area.name_he}?`,
+        a: `זה תלוי בקצב שלכם בבאלי. אם אתם רוצים להעמיק, 2-3 ימים ב${area.name_he} יתנו לכם חוויה עשירה ואמיתית. יום אחד מספיק לסיור מהיר, אך אפשר להנות בהרבה יותר זמן באזור.`,
+      },
+      {
+        q: `כיצד מגיעים ל${area.name_he} בבאלי?`,
+        a: `ניתן להגיע ל${area.name_he} דרך Grab או מונית מקומית (בערך 30-60 דקות מנמל התעופה הבינלאומי של באלי בהתאם לאזור). מומלץ לסדר רכב עם נהג כדי שתוכלו להתמקד בנוף ובחוויה.`,
+      },
+    ]
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-bali.co.il/areas/${area.slug}`}
+  canonical={`https://ibalibali.com/areas/${area.slug}`}
   ogImage={area.image}
   ogType="article"
   schema={placeSchema}
@@ -94,7 +99,7 @@ const faqItems = [
       </div>
     )}
 
-    <MapEmbed areaName={area.name_he} areaNameEn={area.name_en} zoom={13} height="450px" />
+    <MapEmbed areaName={area.name_he} areaNameEn={area.name_en} zoom={13} height="350px" />
 
     <StreetViewEmbed areaName={area.name_he} areaNameEn={area.name_en} />
 
@@ -107,9 +112,43 @@ const faqItems = [
 
     {area.description && (
       <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-teal-400 mb-3">על {area.name_he} בבאלי</h2>
         <p class="text-white/80 leading-relaxed">{area.description}</p>
       </div>
     )}
+
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-4">כיצד מגיעים ל{area.name_he}? 🚕</h2>
+      <p class="text-white/80 leading-relaxed">
+        ניתן להגיע ל{area.name_he} מנמל התעופה הבינלאומי של באלי (Ngurah Rai - DPS) באמצעות Grab, Gojek או רכב פרטי עם נהג. זמן הנסיעה משתנה לפי האזור, אך בדרך כלל נע בין 30 ל-90 דקות.
+      </p>
+    </div>
+
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-4">למי מתאים {area.name_he}?</h2>
+      {area.vibe && (
+        <p class="text-white/80 leading-relaxed mb-4">
+          <span class="text-teal-300 font-bold">אווירה:</span> {area.vibe}
+        </p>
+      )}
+      {bestFor.length > 0 ? (
+        <div>
+          <p class="text-white/80 mb-3">{area.name_he} מתאימה במיוחד ל:</p>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {bestFor.map((target: string) => (
+              <li class="flex items-start gap-2 text-white/70 text-sm">
+                <svg class="w-4 h-4 text-teal-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                {target}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p class="text-white/80 leading-relaxed">
+          {area.name_he} בבאלי הוא יעד מצוין לתיירים שמחפשים שילוב של נופים, תרבות וחוויות אותנטיות. האזור מתאים לזוגות, משפחות ותיירים עצמאיים כאחד.
+        </p>
+      )}
+    </div>
 
     {highlights.length > 0 && (
       <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
@@ -144,20 +183,16 @@ const faqItems = [
     )}
 
     <div class="mb-8">
-      <FAQSection items={faqItems} />
+      <FAQSection items={faqItems} entityName={area.name_he} />
     </div>
 
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים לדעת עוד על {area.name_he} ואזורים נוספים בבאלי?</p>
+      <p class="text-white/80 mb-4">רוצים לדעת עוד על אזורים נוספים בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מתכננים טיול לבאלי ורוצים לשמוע על אזורים מומלצים 🌴')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        dir="rtl"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
+        href="/areas"
+        class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#0D0D0D] font-bold px-6 py-3 rounded-full transition-colors"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>דברו איתנו בווטסאפ</span>
+        🌴 לכל האזורים בבאלי
       </a>
     </div>
   </div>

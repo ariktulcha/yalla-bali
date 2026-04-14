@@ -23,6 +23,13 @@ dist/
 .vscode/
 .idea/
 *.sublime-workspace
+.claude/
 
 # testing
 coverage/
+test-results/
+playwright-report/
+
+# generated audit output
+audit-report.json
+audit-report.md

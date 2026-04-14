@@ -35,7 +35,7 @@ GOOGLE_MAPS_API_KEY=your-actual-api-key-here
 
 For security, restrict your API key to:
 
-- **HTTP referrers**: Add your domain (e.g., `https://yalla-bali.co.il/*`)
+- **HTTP referrers**: Add your domain (e.g., `https://ibalibali.com/*`)
 - **APIs**: Restrict to only Maps Embed API and Street View Static API
 
 This prevents your key from being used on other websites.

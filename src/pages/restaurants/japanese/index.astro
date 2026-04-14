@@ -1,142 +1,47 @@
 ---
-import Layout from '../../../components/Layout.astro'
-import SchemaOrg from '../../../components/SchemaOrg.astro'
-import Breadcrumb from '../../../components/Breadcrumb.astro'
-import RestaurantCard from '../../../components/Cards/RestaurantCard.astro'
+import RestaurantCategoryLayout from '../../../components/RestaurantCategoryLayout.astro'
 import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
 
 const { data } = await supabaseAdmin
   .from('restaurants')
-  .select('*')
+  .select('name_he, name_en, slug, image, area, cuisine_types, price_range, rating, excerpt')
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
+  .order('rating', { ascending: false })
 
+const matchTerms = [
+  'יפנית', 'יפני', 'japanese', 'Japanese',
+  'סושי', 'איזאקאיה', 'איזקאיה',
+  'טפניאקי', 'יקיניקו', 'גיוקאטסו', 'אומקאסה', 'קאיסקי',
+  'סשימי', 'יפני-קוריאני',
+]
 const items = (data || []).filter(r =>
-  (r.cuisine_types || []).some(t => ['יפנית', 'יפני', 'japanese', 'Japanese', 'איזאקאיה', 'יפני-קוריאני'].includes(t))
+  (r.cuisine_types || []).some(t => matchTerms.some(term => t.includes(term)))
 )
 
-const pageTitle = 'מסעדות יפניות בבאלי | Yalla Bali'
-const pageDescription = 'המסעדות היפניות הטובות ביותר בבאלי — סושי, ראמן, אומאקאסה ועוד. מדריך מקיף למסעדות יפניות מומלצות בבאלי.'
-
-const itemListSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'מסעדות יפניות בבאלי',
-  description: pageDescription,
-  numberOfItems: items.length,
-  itemListElement: items.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
-  })),
-}
-
-const breadcrumbItems = [
-  { label: 'דף הבית', href: '/' },
-  { label: 'מסעדות', href: '/restaurants' },
-  { label: 'יפניות' },
+const faq = [
+  { q: 'מהן מסעדות הסושי והיפניות הטובות ביותר בבאלי?', a: 'מסעדות הסושי והיפניות הטובות ביותר בבאלי כוללות את טאקומי (סמיניאק, אומקאסה ברמה עולמית), סושימי (סושי טריין כיף למשפחות), רייג\'ין (טפניאקי), שיצ\'ירין (גיוקאטסו וטפניאקי), קאג\'ין (סושי אינטימי) ואדוגין במוליה נוסה דואה.' },
+  { q: 'כמה עולה אומקאסה בבאלי?', a: 'אומקאסה בבאלי עולה בין 1,500,000 ל-2,500,000 רופי לאדם (400-680 ש"ח). טאקומי היא היקרה עם 18 מנות ב-2,500,000 רופי. יש אופציות זולות יותר כמו סושימי במחירי סושי טריין (20,000-50,000 רופי לצלחת).' },
+  { q: 'איפה הכי טוב לאכול סושי בבאלי?', a: 'הריכוז העיקרי של מסעדות סושי טובות בבאלי הוא בסמיניאק, במיוחד על פטיטנגט (טאקומי, רייג\'ין, שיצ\'ירין, קאג\'ין). באי הדרומי יש גם את אדוגין במלון מוליה בנוסה דואה עם רמה בינלאומית.' },
+  { q: 'האם צריך להזמין מקום במסעדה יפנית בבאלי מראש?', a: 'כן, מומלץ מאוד להזמין מקום מראש במסעדות יפנית פיין דיינינג בבאלי כמו טאקומי ואדוגין — לעיתים שבועות מראש. במסעדות כמו סושימי וריושי אפשר להגיע ללא הזמנה.' },
+  { q: 'האם יש אומקאסה טבעוני או צמחוני בבאלי?', a: 'רוב מסעדות האומקאסה בבאלי מתמקדות בדגים טריים ובשר, אבל ניתן ליצור קשר מראש עם טאקומי או אדוגין כדי להתאים תפריט טבעוני. גם שיצ\'ירין מציעה אופציות ירק על הטפניאקי.' },
+  { q: 'מה ההבדל בין סושי טריין לסושי בר בבאלי?', a: 'סושי טריין (כמו סושימי) זה קונספט שבו צלחות סובבות על סרט נע והצרכן לוקח מה שרוצה — זול וכיף למשפחות. סושי בר (כמו קאג\'ין) זה חוויה אינטימית מול השף שמכין את הסושי בזמן אמת — איכות גבוהה יותר, אווירה שקטה.' },
+  { q: 'מה זה גיוקאטסו?', a: 'גיוקאטסו (Gyukatsu) הוא קציצת בקר ואגיו עטופה בפירורי פאנקו ומטוגנת קצרה — הבשר בפנים רזה ורך. מסעדת שיצ\'ירין בסמיניאק מתמחה בגיוקאטסו, חוויה ייחודית שלא רואים בדרך כלל בישראל.' },
+  { q: 'האם מסעדות יפניות בבאלי מתאימות למשפחות?', a: 'סושימי (סושי טריין), ריושי והאדוגין הן מצוינות למשפחות עם ילדים — אווירה קז\'ואלית ותפריט מגוון. אומקאסה אינטימית (טאקומי, קאג\'ין) פחות מתאימה לילדים קטנים בגלל אורך הארוחה.' },
+  { q: 'מה זה אומקאסה?', a: 'אומקאסה (Omakase) היא חוויית טעימה יפנית שבה הצרכן מפקיד את הבחירה בידי השף — 15-20 מנות של הסושי וסשימי הטוב ביותר באותו יום. בבאלי, טאקומי ואדוגין מציעות את חוויות האומקאסה הטובות ביותר.' },
+  { q: 'האם יש מסעדות יפניות באלי עם ג\'אז חי?', a: 'ריושי סמיניאק (House of Jazz) מציעה ג\'אז חי בימי שני ושישי מ-21:00. זו מסעדה ותיקה (משנות ה-90) עם תפריט סושי וסשימי במחירים הוגנים ואווירה נוסטלגית.' },
 ]
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <SchemaOrg schema={itemListSchema} />
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <Breadcrumb items={breadcrumbItems} />
-
-    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
-      <a href="/restaurants/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
-      <a href="/restaurants/kosher/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">✡ כשר</a>
-      <a href="/restaurants/fine-dining/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">Fine Dining</a>
-      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">🍣 יפנית</span>
-      <a href="/restaurants/meat/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🥩 בשרים</a>
-    </nav>
-
-    <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות יפניות בבאלי</h1>
-      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        באלי מציעה סצנת מסעדות יפניות עשירה ומגוונת — מסושי ברמה הגבוהה ביותר
-        ועד ראמן אותנטי ומסעדות אומאקאסה בלעדיות. הנה הבחירות שלנו.
-      </p>
-    </header>
-
-    {items.length > 0 ? (
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(item => (
-          <RestaurantCard
-            name_he={item.name_he}
-            name_en={item.name_en}
-            slug={item.slug}
-            image={item.image}
-            area={item.area}
-            cuisine_types={item.cuisine_types}
-            price_range={item.price_range}
-            rating={item.rating}
-          />
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-16">
-        <p class="text-white/40 text-lg">לא נמצאו מסעדות יפניות כרגע. חזרו בקרוב!</p>
-      </div>
-    )}
-
-    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות יפניות בבאלי</h2>
-      <div class="space-y-4">
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה המסעדה היפנית הכי טובה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">באלי מציעה מסעדות יפניות ברמה גבוהה מאוד. מסעדות יפניות בבאלי משתנות בתמחות — סושי, אומאקאסה או ראמן. בדקו את הרשימה שלנו של מסעדות יפניות בבאלי.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות יפניות כשרות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">חלק מהמסעדות היפניות בבאלי מציעות תפריטים מותאמים כשרים. מסעדות יפניות בבאלי יכולות להתאים לדרישות כשרות בהסכמה מראש.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה ארוחה במסעדה יפנית בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ראמן בבאלי מתחיל ב-$5-8, סושי בין $12-25. אומאקאסה יפנית בבאלי יכול להגיע ל-$40-80 ומעלה לאדם.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי סושי יש במסעדות יפניות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות סושי בבאלי מציעות סוגים מגוונים של סושי — ניגירי, מאקי, טמפורה. סושי בבאלי משתמש בדגים טריים ודגים איכותיים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה זה אומאקאסה? היש אומאקאסה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">אומאקאסה היא חוויית ישיבה בדלפק סביב השף. כן, יש מסעדות אומאקאסה בבאלי המציעות חוויה יפנית אותנטית.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך אוכלים סושי כמו שצריך?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">במסעדות סושי בבאלי אוכלים עם מקלות או ידיים. סושי נאכל בחלקה אחת, בשילוב עם סוי וואסבי.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מקום במסעדות יפניות בבאלי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין מקום במסעדות יפניות בבאלי, במיוחד בסופי שבוע. מסעדות יפניות בבאלי פופולריות מתמלאות במהירות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטווח המחירי של ראמן בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">ראמן בבאלי עולה בין $5-12 לקערה. מסעדות ראמן בבאלי מציעות מחירים סבירים ומנות משביעות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות יפניות קז'ואליות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מסעדות קז'ואליות יפניות בבאלי מציעות אוכל מהיר ואותנטי. מסעדות קלות יפניות בבאלי מתאימות לארוחה מהירה במחירים סבירים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה וואסבי? האם זה חריף בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">וואסבי הוא תבל יפני חריף המוגש עם סושי. בבאלי, וואסבי בסושי בר יכול להיות מאד חריף. מסעדות יפניות בבאלי מציעות וואסבי בצד כדי שתוכלו להוסיף לפי הטעם.</p>
-        </details>
-      </div>
-    </section>
-
-    <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למסעדה יפנית בבאלי?</p>
-      <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מחפשים מסעדה יפנית בבאלי 🍣')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-      >
-        דברו איתנו בווטסאפ
-      </a>
-    </div>
-  </main>
-</Layout>
+<RestaurantCategoryLayout
+  pageTitle="מסעדות יפניות וסושי בבאלי | יאללה באלי"
+  pageDescription="מדריך למסעדות היפניות הטובות ביותר בבאלי: טאקומי, סושימי, רייג׳ין, שיצ׳ירין, קאג׳ין, ריושי ואדוגין. סושי, אומקאסה, טפניאקי וגיוקאטסו ברמה עולמית."
+  h1="מסעדות יפניות וסושי בבאלי"
+  intro="באלי מציעה סצנת מסעדות יפנית ברמה עולמית — מהאומקאסה המובילה באי בטאקומי, דרך הטפניאקי המרהיב ברייג׳ין, ועד הסושי טריין הכיפי לכל המשפחה בסושימי. הרוב המוחלט מרוכז בסמיניאק, אזור פטיטנגט, אבל יש גם אופציות יוקרה בנוסה דואה."
+  items={items}
+  faq={faq}
+  categorySlug="japanese"
+  breadcrumbLabel="יפנית"
+  schemaName="מסעדות יפניות בבאלי"
+  faqHeading="שאלות נפוצות — מסעדות יפניות בבאלי"
+/>

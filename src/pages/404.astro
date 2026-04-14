@@ -2,21 +2,24 @@
 import Layout from '../components/Layout.astro'
 ---
 
-<Layout title="הדף לא נמצא | Yalla Bali" description="הדף שחיפשתם לא נמצא בבאלי. חזרו לעמוד הבית או בחרו בטיול אחר.">
+<Layout
+  title="הדף לא נמצא — 404 | Yalla Bali"
+  description="הדף שחיפשתם בנושא טיול לבאלי לא נמצא באתר Yalla Bali. חזרו לעמוד הבית, גלו את האטרקציות, מלונות ומסעדות שלנו, או צרו קשר במייל לעזרה בתכנון."
+>
   <div class="min-h-[70vh] flex items-center justify-center px-4">
     <div class="max-w-2xl mx-auto text-center">
       <!-- 404 Number -->
       <div class="mb-8">
-        <h1 class="text-9xl md:text-[10rem] font-black text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-teal-400">
+        <h1 class="text-7xl sm:text-8xl md:text-[10rem] font-black text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-teal-400">
           404
         </h1>
       </div>
 
       <!-- Heading -->
-      <h2 class="text-4xl md:text-5xl font-black text-white mb-4">הדף לא נמצא</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-4">הדף לא נמצא</h2>
 
       <!-- Subtext -->
-      <p class="text-xl text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
+      <p class="text-lg sm:text-xl text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
         נראה שהתעיתם... אבל באלי מחכה לכם! 🌴
       </p>
 
@@ -48,17 +51,15 @@ import Layout from '../components/Layout.astro'
         </a>
       </div>
 
-      <!-- WhatsApp CTA -->
+      <!-- Contact CTA -->
       <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-8">
         <p class="text-white/80 mb-4">צריכים עזרה בתכנון הטיול?</p>
         <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מחפשים עזרה בתכנון טיול לבאלי 🌴')}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/contact"
           dir="rtl"
-          class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-8 py-3 rounded-full transition-all"
+          class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#0D0D0D] font-bold px-8 py-3 rounded-full transition-all"
         >
-          💬 דברו איתנו בווטסאפ
+          ✉️ צרו איתנו קשר
         </a>
       </div>
     </div>

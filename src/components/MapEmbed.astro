@@ -6,7 +6,7 @@ interface Props {
   height?: string
 }
 
-const { areaName, areaNameEn = '', zoom = 14, height = '400px' } = Astro.props
+const { areaName, areaNameEn = '', zoom = 14, height = '300px' } = Astro.props
 
 const apiKey = import.meta.env.GOOGLE_MAPS_API_KEY
 const query = areaNameEn ? `${areaNameEn},+Bali` : `${areaName},+Bali`
@@ -25,6 +25,7 @@ const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${enc
       referrerPolicy="no-referrer-when-downgrade"
       src={mapUrl}
       title={`Google Map of ${areaName}`}
+      class="min-h-[250px] max-h-[450px]"
     />
   </div>
 ) : (

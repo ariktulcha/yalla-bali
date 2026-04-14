@@ -1,6 +1,9 @@
 ---
 import Layout from '../../components/Layout.astro'
 import RestaurantCard from '../../components/Cards/RestaurantCard.astro'
+import RestaurantCategoryNav from '../../components/RestaurantCategoryNav.astro'
+import Breadcrumb from '../../components/Breadcrumb.astro'
+import SchemaOrg from '../../components/SchemaOrg.astro'
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 
 const { data: items } = await supabaseAdmin
@@ -8,30 +11,16 @@ const { data: items } = await supabaseAdmin
   .select('name_he, name_en, slug, image, area, cuisine_types, price_range, rating, excerpt')
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
-  .order('name_he')
+  .order('rating', { ascending: false })
 
 const restaurants = items || []
 
-const title = 'מסעדות בבאלי — המדריך המלא | Yalla Bali'
-const description = 'מדריך מסעדות בבאלי: מסעדות כשרות, יפניות, בשרים, פיין דיינינג ועוד. המלצות אמיתיות עם כתובות, מחירים ודירוגים.'
+const title = 'מסעדות בבאלי — המדריך המלא | יאללה באלי'
+const description = 'מדריך מסעדות מקיף בבאלי לפי איזורים וסגנונות — סמיניאק, אובוד, צ׳נגו, כשר, יפנית, פיין דיינינג, טבעוני ועוד. המלצות אמיתיות עם כתובות, מחירים ודירוגים.'
 
-// Category pages (real URLs for SEO)
-const categoryLinks = [
-  { label: '🌿 ורונג׳', href: '/restaurants/?area=all&type=warung' },
-  { label: '🐟 פירות ים', href: '/restaurants/?area=all&type=seafood' },
-  { label: '🥗 טבעוני', href: '/restaurants/?area=all&type=vegan' },
-  { label: '💎 פיין דיינינג', href: '/restaurants/fine-dining/' },
-]
-
-// Client-side filter categories (by area and cuisine type)
-const categories = [
-  { label: 'הכל', key: 'all' },
-  { label: '🌅 סמינייק', key: 'seminyak', match: ['seminyak', 'סמינייק'] },
-  { label: '🏄 קאנגו', key: 'canggu', match: ['canggu', 'קאנגו'] },
-  { label: '🌿 אובוד', key: 'ubud', match: ['ubud', 'אובוד'] },
-  { label: '🏖️ קוטה', key: 'kuta', match: ['kuta', 'קוטה'] },
-  { label: '🐟 ג׳ימברן', key: 'jimbaran', match: ['jimbaran', 'ג׳ימברן'] },
-  { label: '🪨 אולוואטו', key: 'uluwatu', match: ['uluwatu', 'אולוואטו'] },
+const breadcrumbItems = [
+  { label: 'דף הבית', href: '/' },
+  { label: 'מסעדות' },
 ]
 
 const schemaItemList = {
@@ -40,146 +29,51 @@ const schemaItemList = {
   name: 'מסעדות בבאלי',
   description,
   numberOfItems: restaurants.length,
-  itemListElement: restaurants.map((r, i) => ({
+  itemListElement: restaurants.slice(0, 30).map((r, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: r.name_he,
-    url: `https://yalla-bali.co.il/restaurants/${r.slug}`,
+    url: `https://ibalibali.com/restaurants/${r.slug}`,
   })),
 }
-
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: 'https://yalla-bali.co.il/' },
-    { '@type': 'ListItem', position: 2, name: 'מסעדות' },
-  ],
-}
-
-// Attach cuisines as data-attribute values (for JS filter)
-const restaurantsWithData = restaurants.map(r => ({
-  ...r,
-  cuisineData: JSON.stringify(r.cuisine_types || []),
-}))
 ---
 
 <Layout title={title} description={description}>
-  <script type="application/ld+json" set:html={JSON.stringify(schemaItemList)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <SchemaOrg schema={schemaItemList} />
 
-  <!-- Hero -->
-  <section class="relative py-16 px-4 bg-gradient-to-b from-teal-500/10 to-transparent">
-    <div class="max-w-6xl mx-auto text-center">
-      <nav class="text-sm text-white/40 mb-6">
-        <a href="/" class="hover:text-teal-400 transition-colors">דף הבית</a>
-        <span class="mx-2">/</span>
-        <span class="text-white/60">מסעדות</span>
-      </nav>
-      <h1 class="text-4xl md:text-5xl font-black mb-4">מסעדות בבאלי</h1>
-      <p class="text-lg text-white/60 max-w-2xl mx-auto">
-        באלי מארחת מעל 4,000 מסעדות — מדובי-מישלן עד מסעדות מזון רחוב ממושלם.
-        צאו למסעדת יפנית מובילה בעולם, ביסטרו צרפתי אלגנטי, או לטחון בשר מומלץ בבאלי.
-        כל מטבח בעולם בתוך העיר: יהודי כשר, איטלקי אותנטי, מזרח תיכוני מסורתי וקולינריה ח'יו.
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <RestaurantCategoryNav currentSlug="all" />
+
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-5xl font-black text-white mb-4">מסעדות בבאלי</h1>
+      <p class="text-white/60 max-w-3xl mx-auto leading-relaxed">
+        באלי מארחת אלפי מסעדות — מפיין דיינינג מהמובילות באסיה ועד ווארונגים מקומיים אותנטיים.
+        מטבח יפני, איטלקי, צרפתי, ישראלי, טבעוני וכשר-סטייל — הכל כאן.
+        בחרו באיזור או סגנון בניווט למעלה, או גלו את כל המסעדות ברשימה למטה.
       </p>
-      <p class="mt-3 text-teal-400 font-medium" id="restaurant-count">{restaurants.length} מסעדות</p>
-    </div>
-  </section>
+      <p class="mt-3 text-teal-400 font-medium text-sm">{restaurants.length} מסעדות</p>
+    </header>
 
-  <!-- Category Links (SEO pages) + Filter Pills -->
-  <div class="sticky top-0 z-30 bg-[#0D0D0D]/95 backdrop-blur-sm border-b border-teal-500/10">
-    <div class="max-w-6xl mx-auto px-4 py-3 overflow-x-auto scrollbar-hide">
-      <div class="flex gap-2 min-w-max" dir="rtl">
-        <span class="px-4 py-2 rounded-full text-sm font-bold bg-teal-500 text-black">הכל</span>
-        {categoryLinks.map((cat) => (
-          <a
-            href={cat.href}
-            class="px-4 py-2 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap"
-          >
-            {cat.label}
-          </a>
-        ))}
-        {categories.filter(c => c.key !== 'all').map((cat) => (
-          <button
-            class="category-pill px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
-            data-category={cat.key}
-            data-match={JSON.stringify(cat.match)}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  <!-- Grid -->
-  <section class="max-w-6xl mx-auto px-4 py-8 pb-20">
     {restaurants.length > 0 ? (
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="restaurants-grid">
-        {restaurantsWithData.map((restaurant) => (
-          <div
-            class="restaurant-item"
-            data-cuisines={restaurant.cuisineData}
-          >
-            <RestaurantCard {...restaurant} />
-          </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {restaurants.map(r => (
+          <RestaurantCard
+            name_he={r.name_he}
+            name_en={r.name_en}
+            slug={r.slug}
+            image={r.image}
+            area={r.area}
+            cuisine_types={r.cuisine_types}
+            price_range={r.price_range}
+            rating={r.rating}
+            excerpt={r.excerpt}
+          />
         ))}
       </div>
-      <p class="text-center text-white/30 py-8 hidden" id="no-results">לא נמצאו מסעדות בקטגוריה זו</p>
     ) : (
       <p class="text-center text-white/40 py-12">לא נמצאו מסעדות כרגע.</p>
     )}
-  </section>
+  </main>
 </Layout>
-
-<style>
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const pills = document.querySelectorAll<HTMLButtonElement>('.category-pill')
-    const items = document.querySelectorAll<HTMLElement>('.restaurant-item')
-    const countEl = document.getElementById('restaurant-count')
-    const noResults = document.getElementById('no-results')
-
-    // Pre-parse data once instead of on every click
-    const itemCuisines = new Map<HTMLElement, string[]>()
-    items.forEach(item => {
-      itemCuisines.set(item, JSON.parse(item.dataset.cuisines || '[]'))
-    })
-    const pillMatches = new Map<HTMLButtonElement, string[]>()
-    pills.forEach(pill => {
-      const raw = pill.dataset.match
-      pillMatches.set(pill, raw ? JSON.parse(raw) : [])
-    })
-
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        pills.forEach(p => {
-          p.classList.remove('bg-teal-500', 'text-black')
-          p.classList.add('bg-white/5', 'text-white/60')
-        })
-        pill.classList.remove('bg-white/5', 'text-white/60')
-        pill.classList.add('bg-teal-500', 'text-black')
-
-        const category = pill.dataset.category
-        const matchTerms = pillMatches.get(pill) || []
-
-        let visible = 0
-        items.forEach(item => {
-          const cuisines = itemCuisines.get(item) || []
-          const show = category === 'all' || matchTerms.some(term =>
-            cuisines.some(c => c.toLowerCase().includes(term.toLowerCase()))
-          )
-          item.style.display = show ? '' : 'none'
-          if (show) visible++
-        })
-
-        if (countEl) countEl.textContent = `${visible} מסעדות`
-        if (noResults) noResults.classList.toggle('hidden', visible > 0)
-      })
-    })
-  })
-</script>

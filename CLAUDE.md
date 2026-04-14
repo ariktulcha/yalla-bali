@@ -17,13 +17,12 @@ The existing Bali site (different content types, same approach) is at ~/Projects
 - **@astrojs/sitemap** for auto sitemap
 
 ## Supabase Config
-```
-SUPABASE_URL=https://nsfmucsdxhcywisejxxq.supabase.co
-SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zZm11Y3NkeGhjeXdpc2VqeHhxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDMzOTAwNywiZXhwIjoyMDg5OTE1MDA3fQ.xwTYYmf4r0fd_u8q5RQpNYCnygROD8BA0vY20ehkrBc
-DESTINATION_ID=bali
-```
+Secrets live in `.env` (gitignored) — see `.env.example` for the full list of required vars:
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_KEY` (server-side only, never exposed to the client)
+- `DESTINATION_ID=bali`
 
-Create `.env` with these vars. Create `src/lib/supabase.ts` with a server-side admin client.
+Create `src/lib/supabase.ts` with a server-side admin client that reads from these env vars.
 
 ## Supabase Tables
 All tables have `destination_id` text column. Always filter `.eq('destination_id', DESTINATION_ID)`.
@@ -86,16 +85,14 @@ Category text/FAQ can be hardcoded for now (or read from metadata if you create 
 ### Special pages (port from existing Next.js code)
 Read ~/Projects/yalla-bali/src/app/ for content, port to Astro:
 - `src/pages/index.astro` — homepage
-- `src/pages/desert-safari.astro`
 - `src/pages/beaches.astro`
-- `src/pages/kosher.astro`
 - `src/pages/plan.astro`
 - `src/pages/faq.astro`
 - `src/pages/weather.astro`
 - `src/pages/about.astro`
 - `src/pages/contact.astro`
-- `src/pages/markets.astro`
 - `src/pages/shopping.astro`
+- `src/pages/visa.astro`
 
 ## Components to Build
 
@@ -162,11 +159,12 @@ The goal: every section heading on the page reinforces the primary keyword (enti
 - Avoid burying facts in long paragraphs — use lists and structured markup
 
 ## Design System
-Dark theme. Colors from existing site:
+Dark theme with dual-accent color scheme. Colors from existing site:
 - Background: #0D0D0D (main), #1A1208 (card)
-- Primary: amber-500 (#F59E0B), amber-400
+- Primary accent: teal-500 (#0D9488) — used in Layout/Nav/borders
+- Secondary accent: amber-500 (#F59E0B), amber-400 — used in homepage/tours
 - Text: white, white/80, white/60, white/40
-- Borders: amber-500/20, amber-500/10
+- Borders: teal-500/20, teal-500/10 (or amber for amber-themed sections)
 
 Font: system-ui + Inter for Latin, system RTL fonts for Hebrew.
 
@@ -204,7 +202,7 @@ import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
   output: 'static',
-  site: 'https://yalla-bali.co.il',
+  site: 'https://ibalibali.com',
   integrations: [
     tailwind(),
     sitemap(),

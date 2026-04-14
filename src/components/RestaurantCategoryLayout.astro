@@ -1,0 +1,128 @@
+---
+import Layout from './Layout.astro'
+import SchemaOrg from './SchemaOrg.astro'
+import Breadcrumb from './Breadcrumb.astro'
+import RestaurantCard from './Cards/RestaurantCard.astro'
+import RestaurantCategoryNav from './RestaurantCategoryNav.astro'
+
+export interface FAQItem {
+  q: string
+  a: string
+}
+
+export interface Props {
+  pageTitle: string
+  pageDescription: string
+  h1: string
+  intro: string
+  items: any[]
+  faq: FAQItem[]
+  categorySlug: string
+  breadcrumbLabel: string
+  schemaName: string
+  faqHeading: string
+  emptyMessage?: string
+}
+
+const {
+  pageTitle,
+  pageDescription,
+  h1,
+  intro,
+  items,
+  faq,
+  categorySlug,
+  breadcrumbLabel,
+  schemaName,
+  faqHeading,
+  emptyMessage = 'לא נמצאו מסעדות בקטגוריה זו כרגע. חזרו בקרוב!',
+} = Astro.props
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: schemaName,
+  description: pageDescription,
+  numberOfItems: items.length,
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name_he,
+    url: new URL(`/restaurants/${item.slug}`, 'https://ibalibali.com').toString(),
+  })),
+}
+
+const faqSchema = faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+} : null
+
+const breadcrumbItems = [
+  { label: 'דף הבית', href: '/' },
+  { label: 'מסעדות', href: '/restaurants' },
+  { label: breadcrumbLabel },
+]
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SchemaOrg schema={itemListSchema} />
+  {faqSchema && <SchemaOrg schema={faqSchema} />}
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <RestaurantCategoryNav currentSlug={categorySlug} />
+
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">{h1}</h1>
+      <p class="text-white/60 max-w-3xl mx-auto leading-relaxed" set:html={intro} />
+      <p class="mt-3 text-teal-400 font-medium text-sm">{items.length} מסעדות</p>
+    </header>
+
+    {items.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map(item => (
+          <RestaurantCard
+            name_he={item.name_he}
+            name_en={item.name_en}
+            slug={item.slug}
+            image={item.image}
+            area={item.area}
+            cuisine_types={item.cuisine_types}
+            price_range={item.price_range}
+            rating={item.rating}
+            excerpt={item.excerpt}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <p class="text-white/40 text-lg">{emptyMessage}</p>
+      </div>
+    )}
+
+    {faq.length > 0 && (
+      <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
+        <h2 class="text-2xl font-bold text-teal-400 mb-6">{faqHeading}</h2>
+        <div class="space-y-4">
+          {faq.map(item => (
+            <details class="group border-b border-teal-500/10 pb-4">
+              <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">
+                {item.q}
+              </summary>
+              <p class="mt-2 text-white/60 leading-relaxed">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</Layout>

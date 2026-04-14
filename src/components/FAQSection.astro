@@ -3,9 +3,11 @@ import SchemaOrg from './SchemaOrg.astro'
 
 interface Props {
   items: { q: string; a: string }[]
+  entityName?: string
 }
 
-const { items } = Astro.props
+const { items, entityName } = Astro.props
+const heading = entityName ? `שאלות נפוצות על ${entityName}` : 'שאלות נפוצות'
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -21,7 +23,7 @@ const faqSchema = {
 }
 ---
 <section class="mx-auto max-w-3xl">
-  <h2 class="mb-8 text-center text-3xl font-bold text-white">שאלות נפוצות</h2>
+  <h2 class="mb-8 text-center text-3xl font-bold text-white">{heading}</h2>
   <div class="space-y-3">
     {items.map((item) => (
       <details class="group rounded-xl border border-teal-500/20 bg-[#1A1208] transition-all duration-300 hover:border-teal-500/40">

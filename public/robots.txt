@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yalla-bali.co.il/sitemap-index.xml
+Sitemap: https://ibalibali.com/sitemap-index.xml

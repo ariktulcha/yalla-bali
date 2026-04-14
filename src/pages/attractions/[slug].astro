@@ -1,7 +1,7 @@
 ---
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import { pickMetaDescription } from '../../lib/seo'
-import { site, waUrl } from '../../config/site'
+import { site, pageTitle as buildPageTitle } from '../../config/site'
 import Layout from '../../components/Layout.astro'
 import PhotoGallery from '../../components/PhotoGallery.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
@@ -32,8 +32,9 @@ const openingHours = attraction.opening_hours ?? attraction.metadata?.opening_ho
 
 const contentHtml = attraction.full_content ? await marked(attraction.full_content) : ''
 
-const pageTitle = `${attraction.name_he}${attraction.name_en ? ` — ${attraction.name_en}` : ''} | אטרקציות ב${site.destinationName} | ${site.brand}`
-const pageDescription = pickMetaDescription(attraction, `אטרקציה ב${site.destinationName}`)
+const titlePrefix = `${attraction.name_he}${attraction.name_en ? ` — ${attraction.name_en}` : ''}`
+const pageTitle = attraction.meta_title || buildPageTitle(titlePrefix, 'attraction')
+const pageDescription = attraction.meta_description || pickMetaDescription(attraction, `אטרקציה ב${site.destinationName}`)
 
 const attractionSchema = {
   '@context': 'https://schema.org',
@@ -92,30 +93,33 @@ const { data: areaAttractions } = await supabaseAdmin
 
 const relatedAttractions = areaAttractions ?? []
 
-const faqItems = [
-  {
-    q: `כמה עולה כרטיס ל${attraction.name_he}?`,
-    a: `${price ? `המחיר הוא בערך ${price}.` : `המחיר משתנה בהתאם לסוג הכרטיס שתבחרו.`} אתם יכולים לקנות כרטיסים ישירות דרך Tiqets או אתרי הזמנות אחרים. מומלץ להשוות מחירים בקורים שונים.`,
-  },
-  {
-    q: `כמה זמן מומלץ לבלות ב${attraction.name_he}?`,
-    a: `${duration ? `בדרך כלל מומלץ לבלות כ-${duration} באתר.` : `זה תלוי במה אתם רוצים לעשות.`} אם אתם רוצים ליהנות מכל האטרקציות, תכננו יותר זמן. אם יש לכם זמן מוגבל, אתם עדיין יוכלו ליהנות מהנקודות ההיילייט.`,
-  },
-  {
-    q: `האם ${attraction.name_he} מתאימה לילדים?`,
-    a: `כן, ${attraction.name_he} היא אטרקציה משפחתית מצוינת. ילדים מכל הגילאים יוכלו ליהנות מהאתר. בדקו אם יש הגבלות גיל לפעילויות מסוימות, וודאו שילדיכם לובשים בגדים ונעליים נוחות.`,
-  },
-  {
-    q: `מה הזמן הטוב ביותר לבקר ב${attraction.name_he}?`,
-    a: `הזמן הטוב ביותר בדרך כלל הוא בבוקר מוקדם (7-8 בבוקר) או לאחר 15:00. בזמנים אלה, כמות המבקרים קטנה יותר, והמזג האוויר בדרך כלל יותר נוח. אם אתם כמו להימנע מגשם, בחרו בעונה היבשה (מאי עד ספטמבר).`,
-  },
-]
+const dbFaq = Array.isArray(attraction.faq) ? attraction.faq : []
+const faqItems = dbFaq.length > 0
+  ? dbFaq.map((item: any) => ({ q: item.q, a: item.a }))
+  : [
+      {
+        q: `כמה עולה כרטיס ל${attraction.name_he} בבאלי?`,
+        a: `${price ? `המחיר ל${attraction.name_he} הוא בערך ${price}.` : `המחיר ל${attraction.name_he} משתנה בהתאם לסוג הכרטיס שתבחרו.`} אתם יכולים לקנות כרטיסים ישירות דרך Tiqets או אתרי הזמנות אחרים. מומלץ להשוות מחירים בכמה אתרים.`,
+      },
+      {
+        q: `כמה זמן מומלץ לבלות ב${attraction.name_he}?`,
+        a: `${duration ? `בדרך כלל מומלץ לבלות כ-${duration} ב${attraction.name_he}.` : `זה תלוי במה אתם רוצים לעשות ב${attraction.name_he}.`} אם אתם רוצים ליהנות מכל האטרקציות, תכננו יותר זמן. אם יש לכם זמן מוגבל בבאלי, אתם עדיין תוכלו ליהנות מהנקודות ההיילייט.`,
+      },
+      {
+        q: `האם ${attraction.name_he} מתאימה לילדים?`,
+        a: `כן, ${attraction.name_he} היא אטרקציה משפחתית מצוינת בבאלי. ילדים מכל הגילאים יוכלו ליהנות מהאתר. בדקו אם יש הגבלות גיל לפעילויות מסוימות, וודאו שילדיכם לובשים בגדים ונעליים נוחות.`,
+      },
+      {
+        q: `מה הזמן הטוב ביותר לבקר ב${attraction.name_he} בבאלי?`,
+        a: `הזמן הטוב ביותר לבקר ב${attraction.name_he} בדרך כלל הוא בבוקר מוקדם (7-8 בבוקר) או לאחר 15:00. בזמנים אלה כמות המבקרים קטנה יותר, ומזג האוויר נעים יותר. כדי להימנע מגשם, בחרו בעונה היבשה של באלי (מאי עד ספטמבר).`,
+      },
+    ]
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-bali.co.il/attractions/${attraction.slug}`}
+  canonical={`https://ibalibali.com/attractions/${attraction.slug}`}
   ogImage={attraction.image}
   ogType="article"
   schema={attractionSchema}
@@ -173,7 +177,20 @@ const faqItems = [
 
     {attraction.description && (
       <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-teal-400 mb-3">על {attraction.name_he} בבאלי</h2>
         <p class="text-white/80 leading-relaxed">{attraction.description}</p>
+      </div>
+    )}
+
+    {(price || duration || openingHours) && (
+      <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-teal-400 mb-4">פרטים שימושיים — {attraction.name_he}</h2>
+        <ul class="space-y-2 text-white/80">
+          {price && <li><span class="text-teal-400 font-medium">מחיר:</span> {price}</li>}
+          {duration && <li><span class="text-teal-400 font-medium">משך מומלץ:</span> {duration}</li>}
+          {openingHours && <li><span class="text-teal-400 font-medium">שעות פתיחה:</span> {openingHours}</li>}
+          {attraction.area && <li><span class="text-teal-400 font-medium">אזור בבאלי:</span> {attraction.area}</li>}
+        </ul>
       </div>
     )}
 
@@ -218,13 +235,30 @@ const faqItems = [
       <div class="prose prose-invert prose-teal max-w-none mb-8 [&_h2]:text-teal-400 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:border-r-4 [&_h2]:border-teal-500 [&_h2]:pr-3 [&_h3]:text-teal-300 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_a]:text-teal-400 [&_strong]:text-white" set:html={contentHtml} />
     )}
 
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-3">טיפים לביקור ב{attraction.name_he}</h2>
+      <ul class="space-y-2 text-white/80">
+        <li>• הגיעו ל{attraction.name_he} מוקדם בבוקר כדי להימנע מצפיפות ולצלם תמונות יפות.</li>
+        <li>• לבשו בגדים וכובע מתאים לאקלים הטרופי של באלי, והביאו מים.</li>
+        <li>• הכינו מראש את הכסף למכירת הכרטיסים ל{attraction.name_he}.</li>
+        <li>• הכבוד לכללי המקום {attraction.name_he} — בבאלי מקובל לכבד את המסורת המקומית.</li>
+      </ul>
+    </div>
+
+    <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+      <h2 class="text-xl font-bold text-teal-400 mb-3">למה כדאי לבקר ב{attraction.name_he}</h2>
+      <p class="text-white/80 leading-relaxed">
+        {attraction.name_he} היא אחת האטרקציות המומלצות בבאלי. הביקור ב{attraction.name_he} יעניק לכם חוויה אותנטית של התרבות, הטבע והנופים של האי. שלבו את {attraction.name_he} כחלק מהמסלול שלכם בבאלי לחוויה בלתי נשכחת.
+      </p>
+    </div>
+
     <div class="mb-8">
-      <FAQSection items={faqItems} />
+      <FAQSection items={faqItems} entityName={attraction.name_he} />
     </div>
 
     {relatedAttractions.length > 0 && (
       <section class="mt-16 pt-8 border-t border-gray-800" dir="rtl">
-        <h2 class="text-2xl font-bold text-white mb-6">🏛️ אטרקציות נוספות ב{attraction.area}</h2>
+        <h2 class="text-2xl font-bold text-white mb-6">🏛️ אטרקציות בסביבת {attraction.name_he}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {relatedAttractions.map((item: any) => (
             <a
@@ -257,12 +291,11 @@ const faqItems = [
       </section>
     )}
 
-    <!-- Buy Tickets + WhatsApp CTA -->
-    <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center mt-16">
-      <p class="text-white/80 mb-2 font-semibold">מוכנים לבקר ב{attraction.name_he}?</p>
-      <p class="text-white/50 text-sm mb-5">קנו כרטיסים ישירות דרך Tiqets — מחירים שקופים, ביטול גמיש</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        {attraction.booking_url && (
+    {attraction.booking_url && (
+      <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center mt-16">
+        <p class="text-white/80 mb-2 font-semibold">מוכנים לבקר ב{attraction.name_he}?</p>
+        <p class="text-white/50 text-sm mb-5">קנו כרטיסים ישירות דרך Tiqets — מחירים שקופים, ביטול גמיש</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={attraction.booking_url}
             target="_blank"
@@ -272,18 +305,8 @@ const faqItems = [
           >
             🎟️ קנו כרטיסים — Tiqets
           </a>
-        )}
-        <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אנחנו מתכננים ביקור ב${attraction.name_he} בבאלי ורוצים עזרה 🎡`)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          dir="rtl"
-          class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          <span>דברו איתנו בווטסאפ</span>
-        </a>
+        </div>
       </div>
-    </div>
+    )}
   </div>
 </Layout>

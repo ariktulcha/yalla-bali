@@ -22,7 +22,7 @@ const faqItems = [
   },
   {
     q: 'איך מגיעים מישראל לבאלי?',
-    a: 'אין טיסות ישירות מישראל לבאלי (שדה DPS — נגוראה ראי). הדרך הנפוצה: עצירה אחת בסינגפור (Singapore Airlines, Scoot), קואלה לומפור (AirAsia, Malaysia Airlines), בנגקוק (Thai Airways), הונג קונג (Cathay Pacific), או דובאי/אבו דאבי (Emirates, Etihad). זמן טיסה כולל: 14–18 שעות. מחירים: 1,800–3,500 ש"ח הלוך-חזור תלוי בעונה. מומלץ להזמין 2–3 חודשים מראש בעונת השיא.'
+    a: 'אין טיסות ישירות מישראל לבאלי (שדה DPS — נגוראה ראי). הדרך הנפוצה: עצירה אחת בסינגפור (Singapore Airlines, Scoot), קואלה לומפור (AirAsia, Malaysia Airlines), בנגקוק (Thai Airways), הונג קונג (Cathay Pacific), או איסטנבול (Turkish Airlines). זמן טיסה כולל: 14–18 שעות. מחירים: 1,800–3,500 ש"ח הלוך-חזור תלוי בעונה. מומלץ להזמין 2–3 חודשים מראש בעונת השיא.'
   },
   {
     q: 'מה המטבע בבאלי וכמה עומד שקל מול רופיה?',
@@ -93,13 +93,13 @@ const relatedPages = [
 <Layout
   title="שאלות ותשובות על טיול לבאלי | Yalla Bali"
   description="כל השאלות והתשובות על טיול לבאלי: ויזה, בטיחות, מזג אוויר, הגעה מישראל, מטבע רופיה, עלויות, אוכל טבעוני, WiFi, חשמל, עונות ועוד. המדריך המלא לתייר הישראלי."
-  canonical="https://yalla-bali.co.il/faq"
+  canonical="https://ibalibali.com/faq"
 >
 
   <section class="relative py-20 md:py-28 bg-gradient-to-b from-[#0F2420] to-[#0A1A18]">
     <div class="absolute inset-0 opacity-10"><div class="absolute inset-0 bg-gradient-to-br from-teal-900/20 to-transparent"></div></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">שאלות <span class="text-teal-400">ותשובות</span></h1>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">שאלות <span class="text-teal-400">ותשובות</span></h1>
       <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">כל מה שרציתם לדעת על טיול לבאלי — ויזה, בטיחות, כסף, הגעה מישראל, אוכל ועוד. {faqItems.length} שאלות עם תשובות מפורטות.</p>
     </div>
   </section>
@@ -117,15 +117,6 @@ const relatedPages = [
 
   <section class="max-w-4xl mx-auto px-4 py-12">
     <FAQSection items={faqItems} />
-  </section>
-
-  <section class="max-w-4xl mx-auto px-4 py-12">
-    <div class="bg-gradient-to-br from-[#0F2420] to-[#0A1A18] border border-teal-500/20 rounded-2xl p-6 md:p-8 text-center">
-      <span class="text-4xl block mb-4">❓</span>
-      <h2 class="text-2xl font-bold text-white mb-3">עדיין יש שאלות?</h2>
-      <p class="text-white/60 mb-6 max-w-md mx-auto">לא מצאתם את התשובה? שלחו לנו הודעה בווטסאפ ונחזור אליכם תוך דקות</p>
-      <a href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, יש לי שאלה על טיול לבאלי')}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all">📱 שאלו אותנו בווטסאפ</a>
-    </div>
   </section>
 
   <section class="max-w-4xl mx-auto px-4 py-12">

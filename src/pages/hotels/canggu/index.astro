@@ -1,0 +1,116 @@
+---
+import Layout from '../../../components/Layout.astro'
+import SchemaOrg from '../../../components/SchemaOrg.astro'
+import Breadcrumb from '../../../components/Breadcrumb.astro'
+import HotelCard from '../../../components/Cards/HotelCard.astro'
+import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
+
+const { data } = await supabaseAdmin
+  .from('hotels')
+  .select('*')
+  .eq('destination_id', DESTINATION_ID)
+  .eq('published', true)
+
+const items = (data || []).filter(h =>
+  (h.area || '').toLowerCase().includes('canggu') ||
+  (h.name_en || '').toLowerCase().includes('canggu')
+)
+
+const pageTitle = 'מלונות בקאנגו באלי — המלצות ודירוגים | Yalla Bali'
+const pageDescription = 'מלונות מומלצים בקאנגו, באלי. ריזורטים מודרניים, וילות גלישה, בריכות אינסוף וחיי לילה תוססים בקאנגו באלי.'
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'מלונות בקאנגו באלי',
+  description: pageDescription,
+  numberOfItems: items.length,
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name_he,
+    url: new URL(`/hotels/${item.slug}`, 'https://ibalibali.com').toString(),
+  })),
+}
+
+const breadcrumbItems = [
+  { label: 'דף הבית', href: '/' },
+  { label: 'מלונות', href: '/hotels' },
+  { label: 'מלונות בקאנגו' },
+]
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SchemaOrg schema={itemListSchema} />
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
+      <a href="/hotels/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
+      <a href="/hotels/ubud/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌿 אובוד</a>
+      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">🏄 קאנגו</span>
+      <a href="/hotels/seminyak/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌅 סמינייק</a>
+      <a href="/hotels/uluwatu/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🪨 אולוואטו</a>
+      <a href="/hotels/jimbaran/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🐟 ג׳ימברן</a>
+      <a href="/hotels/nusa-dua/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌴 נוסה דואה</a>
+      <a href="/hotels/sanur/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🎣 סנור</a>
+      <a href="/hotels/kuta/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🏖️ קוטה</a>
+    </nav>
+
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות בקאנגו באלי</h1>
+      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
+        קאנגו הוא האזור הכי טרנדי בבאלי — גלישה, קפה, ברים מגניבים וחופים מושלמים.
+        מלונות בקאנגו באלי מציעים סגנון מודרני, בריכות אינסוף ואווירה צעירה ותוססת.
+      </p>
+    </header>
+
+    {items.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map(item => (
+          <HotelCard
+            name_he={item.name_he}
+            name_en={item.name_en}
+            slug={item.slug}
+            image={item.image}
+            area={item.area}
+            star_rating={item.star_rating}
+            price_range={item.price_range}
+            booking_url={item.booking_url}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <p class="text-white/40 text-lg">לא נמצאו מלונות בקאנגו כרגע. חזרו בקרוב!</p>
+      </div>
+    )}
+
+    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות בקאנגו באלי</h2>
+      <div class="space-y-4">
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מיוחד במלונות בקאנגו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בקאנגו באלי ידועים בסגנון מודרני ובוהו-שיק, קרבה לחופי גלישה ולסצנת קפה ומסעדות תוססת. מלונות בקאנגו באלי מושלמים לגולשים, נוודים דיגיטליים וזוגות צעירים.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה מלון בקאנגו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון בקאנגו באלי עולה בין 40 ל-350 דולר ללילה. וילות פרטיות בקאנגו באלי נעות בין 100-500 דולר, וגסטהאוסים בקאנגו זמינים מ-25 דולר.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מלונות בקאנגו באלי על החוף?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מלונות רבים בקאנגו באלי נמצאים צמוד לחוף. מלונות בקאנגו באלי ליד חוף Batu Bolong ו-Echo Beach הם הפופולריים ביותר לגלישה ושקיעות.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה יש לעשות ליד מלונות בקאנגו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בקאנגו באלי קרובים לחופי גלישה, בתי קפה מעוצבים, מסעדות, beach clubs ומקדש טנה לוט. קאנגו באלי מציעה גם שיעורי יוגה, ספא ושווקים מקומיים.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">לאיזה סוג תיירים מתאימים מלונות בקאנגו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בקאנגו באלי מושלמים לגולשים, נוודים דיגיטליים, זוגות צעירים וחובבי אוכל. מלונות בקאנגו באלי פחות מתאימים למשפחות עם ילדים קטנים בגלל הגלים החזקים.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+</Layout>

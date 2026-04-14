@@ -1,0 +1,116 @@
+---
+import Layout from '../../../components/Layout.astro'
+import SchemaOrg from '../../../components/SchemaOrg.astro'
+import Breadcrumb from '../../../components/Breadcrumb.astro'
+import HotelCard from '../../../components/Cards/HotelCard.astro'
+import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
+
+const { data } = await supabaseAdmin
+  .from('hotels')
+  .select('*')
+  .eq('destination_id', DESTINATION_ID)
+  .eq('published', true)
+
+const items = (data || []).filter(h =>
+  (h.area || '').toLowerCase().includes('uluwatu') ||
+  (h.name_en || '').toLowerCase().includes('uluwatu')
+)
+
+const pageTitle = 'מלונות באולוואטו באלי — המלצות ודירוגים | Yalla Bali'
+const pageDescription = 'מלונות מומלצים באולוואטו, באלי. ריזורטים על צוקים, נוף מרהיב לאוקיינוס, גלישה ומקדש אולוואטו המפורסם.'
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'מלונות באולוואטו באלי',
+  description: pageDescription,
+  numberOfItems: items.length,
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name_he,
+    url: new URL(`/hotels/${item.slug}`, 'https://ibalibali.com').toString(),
+  })),
+}
+
+const breadcrumbItems = [
+  { label: 'דף הבית', href: '/' },
+  { label: 'מלונות', href: '/hotels' },
+  { label: 'מלונות באולוואטו' },
+]
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SchemaOrg schema={itemListSchema} />
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
+      <a href="/hotels/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
+      <a href="/hotels/ubud/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌿 אובוד</a>
+      <a href="/hotels/canggu/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🏄 קאנגו</a>
+      <a href="/hotels/seminyak/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌅 סמינייק</a>
+      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">🪨 אולוואטו</span>
+      <a href="/hotels/jimbaran/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🐟 ג׳ימברן</a>
+      <a href="/hotels/nusa-dua/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌴 נוסה דואה</a>
+      <a href="/hotels/sanur/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🎣 סנור</a>
+      <a href="/hotels/kuta/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🏖️ קוטה</a>
+    </nav>
+
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות באולוואטו באלי</h1>
+      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
+        אולוואטו הוא אזור הצוקים הדרמטי של באלי — נוף מרהיב לאוקיינוס ההודי, מקדש עתיק וגלים אגדיים.
+        מלונות באולוואטו באלי מציעים פרטיות מוחלטת, בריכות אינסוף על הצוק ושקיעות מהיפות בעולם.
+      </p>
+    </header>
+
+    {items.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map(item => (
+          <HotelCard
+            name_he={item.name_he}
+            name_en={item.name_en}
+            slug={item.slug}
+            image={item.image}
+            area={item.area}
+            star_rating={item.star_rating}
+            price_range={item.price_range}
+            booking_url={item.booking_url}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <p class="text-white/40 text-lg">לא נמצאו מלונות באולוואטו כרגע. חזרו בקרוב!</p>
+      </div>
+    )}
+
+    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות באולוואטו באלי</h2>
+      <div class="space-y-4">
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מיוחד במלונות באולוואטו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות באולוואטו באלי בנויים על צוקים גבוהים מעל האוקיינוס עם נוף מרהיב. מלונות באולוואטו באלי מציעים פרטיות, שקט ושקיעות שאי אפשר לשכוח.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה מלון באולוואטו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון באולוואטו באלי עולה בין 80 ל-600 דולר ללילה. וילות על הצוק באולוואטו באלי הן מהיוקרתיות ביותר בבאלי, עם מחירים שיכולים להגיע ל-1000 דולר.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם אולוואטו באלי מתאים לזוגות?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">אולוואטו באלי מושלם לזוגות ורומנטיקה. מלונות באולוואטו באלי מציעים ארוחות פרטיות על הצוק, ספא לזוגות ואווירה אינטימית. אולוואטו באלי הוא גם יעד חתונות פופולרי.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה יש לעשות ליד מלונות באולוואטו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות באולוואטו באלי קרובים למקדש אולוואטו, חופי גלישה כמו Padang Padang, beach clubs כמו Single Fin ו-Sundays, ומופע ריקוד קצ׳אק בשקיעה.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך רכב במלון באולוואטו באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ לשכור קטנוע או רכב כשמתארחים במלון באולוואטו באלי. האזור פחות מרכזי ממלונות בסמינייק או קאנגו באלי, אבל השקט שווה את זה.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+</Layout>

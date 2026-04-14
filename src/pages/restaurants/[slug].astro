@@ -1,7 +1,7 @@
 ---
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import { pickMetaDescription } from '../../lib/seo'
-import { site, waUrl } from '../../config/site'
+import { site, pageTitle as buildPageTitle } from '../../config/site'
 import Layout from '../../components/Layout.astro'
 import PhotoGallery from '../../components/PhotoGallery.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
@@ -42,8 +42,9 @@ if (openingHours) {
 
 const contentHtml = restaurant.full_content ? await marked(restaurant.full_content) : ''
 
-const pageTitle = `${restaurant.name_he}${restaurant.name_en ? ` — ${restaurant.name_en}` : ''} | מסעדות ב${site.destinationName} | ${site.brand}`
-const pageDescription = pickMetaDescription(restaurant, `מסעדה ב${site.destinationName}`)
+const titlePrefix = `${restaurant.name_he}${restaurant.name_en ? ` — ${restaurant.name_en}` : ''}`
+const pageTitle = restaurant.meta_title || buildPageTitle(titlePrefix, 'restaurant')
+const pageDescription = restaurant.meta_description || pickMetaDescription(restaurant, `מסעדה ב${site.destinationName}`)
 
 const restaurantSchema = {
   '@context': 'https://schema.org',
@@ -88,24 +89,41 @@ const areaDistancePricing: Record<string, { distance: string; grabPrice: string 
 const areaKey = (restaurant.area || '').toLowerCase()
 const distancePricing = areaDistancePricing[areaKey] || { distance: '20-25 ק"מ', grabPrice: '₪70-100' }
 
-const faqItems = [
-  {
-    q: `האם ${restaurant.name_he} מחייבת הזמנה מראש?`,
-    a: `זה תלוי בגודל הקבוצה שלכם ובעונה. לקבוצות גדולות וביום שישי בלילה מומלץ מאוד לעשות הזמנה מראש. אתם יכולים להיצרות איתנו בווטסאפ כדי להזמין שולחן או לבדוק זמינות.`,
-  },
-  {
-    q: `האם ${restaurant.name_he} מתאימה לצמחוניים וטבעונים?`,
-    a: `כן, ${restaurant.name_he} מציע אפשרויות צמחוניות וטבעוניות בתפריט. מומלץ להודיע בעת הזמנה כדי שהמסעדה תהיה מוכנה לצרכיכם המיוחדים. אם יש דיאטות נוספות (ללא גלוטן, אלרגיות), בודקו זאת אתנו.`,
-  },
-  {
-    q: `כמה בערך עולה ארוחה ב${restaurant.name_he}?`,
-    a: `${priceRange ? `טווח מחירים: ${priceRange}.` : `זה תלוי בתפריט שתבחרו.`} מומלץ לבדוק את התפריט המעדכן ברשת החברתית של המסעדה או לפנות אלינו ישירות בווטסאפ לפרטים על מחירים.`,
-  },
-  {
-    q: `האם ${restaurant.name_he} פתוחה בשישי בלילה?`,
-    a: `כן, רוב המסעדות בבאלי פתוחות בימי שישי. לכן אנו ממליצים להזמין שולחן מראש כי הביקוש גבוה בערב זה. בדקו את שעות הפתיחה של ${restaurant.name_he} וודאו שהמסעדה פתוחה בשעה המועדפת עליכם.`,
-  },
-]
+const dbFaq = Array.isArray(restaurant.faq) ? restaurant.faq : []
+const faqMentionsName = dbFaq.filter((it: any) => (it.q || '').includes(restaurant.name_he)).length
+const needsEnrichment = faqMentionsName < 2 && dbFaq.length > 0
+const faqIntro = needsEnrichment
+  ? [{
+      q: `מה כדאי לדעת על ${restaurant.name_he} בבאלי?`,
+      a: restaurant.description || `${restaurant.name_he} היא מסעדה מומלצת בבאלי${restaurant.area ? `, באזור ${restaurant.area}` : ''}. פרטים נוספים על התפריט, השעות והתמחור של ${restaurant.name_he} מובאים בשאלות הבאות.`,
+    }]
+  : []
+const faqOutro = needsEnrichment
+  ? [{
+      q: `איך מזמינים שולחן או מגיעים ל${restaurant.name_he} בבאלי?`,
+      a: `כדי להזמין שולחן או לקבל פרטים עדכניים על ${restaurant.name_he}, מומלץ לפנות ישירות למסעדה דרך הרשתות החברתיות. ניתן להגיע ל${restaurant.name_he} עם Grab, Gojek או רכב פרטי — זמן הנסיעה משתנה לפי אזור היציאה בבאלי.`,
+    }]
+  : []
+const faqItems = dbFaq.length > 0
+  ? [...faqIntro, ...dbFaq.map((item: any) => ({ q: item.q, a: item.a })), ...faqOutro]
+  : [
+      {
+        q: `האם צריך להזמין מראש שולחן ב${restaurant.name_he} בבאלי?`,
+        a: `זה תלוי בגודל הקבוצה שלכם ובעונה. ב${restaurant.name_he}, לקבוצות גדולות וביום שישי בלילה מומלץ מאוד לעשות הזמנה מראש. ניתן ליצור קשר ישירות עם המסעדה כדי להזמין שולחן או לבדוק זמינות.`,
+      },
+      {
+        q: `האם ${restaurant.name_he} מתאימה לצמחוניים וטבעונים?`,
+        a: `כן, ${restaurant.name_he} מציעה אפשרויות צמחוניות וטבעוניות בתפריט. מומלץ להודיע בעת ההזמנה כדי שהמסעדה תהיה מוכנה לצרכיכם המיוחדים. אם יש דיאטות נוספות (ללא גלוטן, אלרגיות), כדאי לציין זאת מראש.`,
+      },
+      {
+        q: `כמה עולה ארוחה ב${restaurant.name_he} בבאלי?`,
+        a: `${priceRange ? `טווח המחירים ב${restaurant.name_he} הוא: ${priceRange}.` : `המחיר ב${restaurant.name_he} תלוי בתפריט שתבחרו.`} מומלץ לבדוק את התפריט המעודכן ברשת החברתית של המסעדה לפרטים עדכניים על מחירים בבאלי.`,
+      },
+      {
+        q: `האם ${restaurant.name_he} פתוחה בסוף השבוע?`,
+        a: `כן, רוב המסעדות בבאלי פתוחות בסופי שבוע, כולל ${restaurant.name_he}. אנו ממליצים להזמין שולחן מראש כי הביקוש גבוה בערבי שישי ושבת. בדקו את שעות הפתיחה של ${restaurant.name_he} וודאו שהמסעדה פתוחה בשעה המועדפת עליכם.`,
+      },
+    ]
 
 // Related restaurants in same area
 const { data: allRestaurants } = await supabaseAdmin
@@ -123,7 +141,7 @@ const related = allRestaurants ?? []
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-bali.co.il/restaurants/${restaurant.slug}`}
+  canonical={`https://ibalibali.com/restaurants/${restaurant.slug}`}
   ogImage={restaurant.image}
   ogType="article"
   schema={restaurantSchema}
@@ -181,6 +199,7 @@ const related = allRestaurants ?? []
 
     {restaurant.description && (
       <div class="bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-teal-400 mb-3">על {restaurant.name_he} בבאלי</h2>
         <p class="text-white/80 leading-relaxed">{restaurant.description}</p>
       </div>
     )}
@@ -236,7 +255,7 @@ const related = allRestaurants ?? []
     )}
 
     <div class="mb-8">
-      <FAQSection items={faqItems} />
+      <FAQSection items={faqItems} entityName={restaurant.name_he} />
     </div>
 
     {related.length > 0 && (
@@ -275,24 +294,14 @@ const related = allRestaurants ?? []
     )}
 
     <div class="bg-gradient-to-br from-teal-900/20 to-teal-800/10 border border-teal-500/30 rounded-2xl p-8 text-center mt-16">
-      <h3 class="text-2xl font-black text-teal-400 mb-3">מוכנים להזמין את {restaurant.name_he}? 🍽️</h3>
-      <p class="text-white/70 mb-6">למצוא מסעדה טובה בבאלי זה קל — אנחנו כאן כדי לעזור לכם להזמין, לתכנן את הטיול, או לתת המלצות נוספות.</p>
+      <h3 class="text-2xl font-black text-teal-400 mb-3">מחפשים עוד חוויות בבאלי? 🍽️</h3>
+      <p class="text-white/70 mb-6">גלו טיולים, אטרקציות ומסעדות נוספות שיעזרו לכם לתכנן את הטיול המושלם בבאלי.</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
         <a
           href="/tours"
           class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-[#0D0D0D] font-bold px-8 py-3 rounded-full transition-colors"
         >
           🎯 טיולים בבאלי
-        </a>
-        <a
-          href={`https://wa.me/972528211665?text=${encodeURIComponent(`היי, אנחנו רוצים להזמין את ${restaurant.name_he} בבאלי 🍽️`)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          dir="rtl"
-          class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          <span>הזמינו בווטסאפ</span>
         </a>
       </div>
     </div>

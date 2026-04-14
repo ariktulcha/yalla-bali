@@ -1,143 +1,46 @@
 ---
-import Layout from '../../../components/Layout.astro'
-import SchemaOrg from '../../../components/SchemaOrg.astro'
-import Breadcrumb from '../../../components/Breadcrumb.astro'
-import RestaurantCard from '../../../components/Cards/RestaurantCard.astro'
+import RestaurantCategoryLayout from '../../../components/RestaurantCategoryLayout.astro'
 import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
 
 const { data } = await supabaseAdmin
   .from('restaurants')
-  .select('*')
+  .select('name_he, name_en, slug, image, area, cuisine_types, price_range, rating, excerpt')
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
+  .order('rating', { ascending: false })
 
+const matchTerms = [
+  'Fine Dining', 'fine dining', 'fine-dining', 'פיין דיינינג',
+  'מולקולרי', 'מולקולרית', 'גורמה אירופית', 'טאפאס גורמה',
+  'קינוחים גורמה', 'פיוז\'ן צרפתי-אסייתי', 'אינדונזי מודרני',
+]
 const items = (data || []).filter(r =>
-  (r.cuisine_types || []).some(t => ['Fine Dining', 'fine dining', 'fine-dining', 'פיין דיינינג', 'מולקולרי', 'מולקולרית'].includes(t))
+  (r.cuisine_types || []).some(t => matchTerms.some(term => t.includes(term)))
 )
 
-const pageTitle = 'מסעדות Fine Dining בבאלי | Yalla Bali'
-const pageDescription = 'מסעדות היוקרה והפיין דיינינג הטובות ביותר בבאלי. חוויות אוכל ברמה עולמית עם שפים מוכשרים ואווירה יוקרתית.'
-
-const itemListSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'מסעדות Fine Dining בבאלי',
-  description: pageDescription,
-  numberOfItems: items.length,
-  itemListElement: items.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
-  })),
-}
-
-const breadcrumbItems = [
-  { label: 'דף הבית', href: '/' },
-  { label: 'מסעדות', href: '/restaurants' },
-  { label: 'Fine Dining' },
+const faq = [
+  { q: 'מהן המסעדות הפיין דיינינג המובילות בבאלי?', a: 'מסעדות הפיין דיינינג המובילות בבאלי כוללות את לוקאבור NXT (אובוד, זוכת פרס Sustainable של אסיה 50), אפריטיף (אובוד), מוזאיק (אובוד), Room4Dessert ומג\'קאווי בסמיניאק. כל אחת מציעה חוויית טעימה ייחודית.' },
+  { q: 'כמה עולה ארוחת פיין דיינינג בבאלי?', a: 'תפריט טעימה במסעדות פיין דיינינג בבאלי נע בין 1,500,000 ל-5,500,000 רופי לאדם (400-1,500 ש"ח). לוקאבור NXT היא היקרה ביותר עם תפריט 20 מנות, ומג\'קאווי הוא הזול יחסית עם תפריט 5 מנות.' },
+  { q: 'האם צריך להזמין מקום בפיין דיינינג בבאלי מראש?', a: 'בהחלט. מסעדות פיין דיינינג מובילות בבאלי דורשות הזמנה מראש, לפעמים חודשים קדימה. לוקאבור NXT ואפריטיף נוטות להתמלא 2-3 חודשים מראש, במיוחד בעונת השיא (יולי-אוגוסט, דצמבר-ינואר).' },
+  { q: 'מה קוד הלבוש בפיין דיינינג בבאלי?', a: 'רוב מסעדות פיין דיינינג בבאלי דורשות Smart Casual או Cocktail Attire. לא לובשים כפכפים, מכנסיים קצרים או חולצות גופייה. באפריטיף ומוזאיק מומלץ מאוד ללבוש חולצה מכופתרת ונעליים סגורות.' },
+  { q: 'כמה כוכבי מישלן יש לבאלי?', a: 'אין מדריך מישלן רשמי לאינדונזיה עדיין, אבל מספר מסעדות פיין דיינינג בבאלי נחשבות לרמת מישלן. לוקאבור NXT זכתה בפרס Sustainable של אסיה 50 הטובים 2025, ואפריטיף נחשבת לקרובה ביותר ל-3 כוכבי מישלן באי.' },
+  { q: 'איזו מסעדת פיין דיינינג באלי הכי מתאימה לזוג?', a: 'לערב רומנטי בפיין דיינינג באלי, מטיס בסמיניאק (צרפתי-ים תיכוני בפביליון מעל ברכה), אפריטיף (קסטל קולוניאלי), ומאורי (איטלקי מודרני) הן הבחירות הטובות ביותר. כולן מציעות שולחנות זוגיים אינטימיים.' },
+  { q: 'האם יש מסעדות פיין דיינינג באלי עם תפריט צמחוני?', a: 'כן, מסעדות פיין דיינינג בבאלי מציעות תפריטי טעימה צמחוניים וטבעוניים. לוקאבור NXT מפורסמת בגישה היפר-מקומית לצמחי הארכיפלג, ואפריטיף מציעה דגוסטסיון צמחוני וטבעוני מלא. גם מוזאיק מתאימה את התפריט.' },
+  { q: 'באיזה אזור של באלי יש את מסעדות הפיין דיינינג הטובות?', a: 'אובוד היא הבירה של פיין דיינינג בבאלי — לוקאבור NXT, אפריטיף, מוזאיק ו-Room4Dessert כולן שם. בסמיניאק יש מג\'קאווי ומאורי. הבחירה תלויה באווירה שמחפשים: ג\'ונגל (אובוד) או ים (סמיניאק).' },
+  { q: 'מה כלול בתפריט טעימה בפיין דיינינג בבאלי?', a: 'תפריט טעימה בפיין דיינינג בבאלי כולל 5-20 מנות קטנות, לרוב עם זיווגי יין או קוקטיילים אופציונליים. באפריטיף התפריט נמשך 3-4 שעות, ובלוקאבור NXT החוויה נמשכת 4-5 שעות ויש אפשרות לינה בבקתות.' },
+  { q: 'איך בוחרים בין מסעדות פיין דיינינג באלי?', a: 'בחרו מסעדת פיין דיינינג בבאלי לפי: סגנון המטבח (מודרני אינדונזי = לוקאבור, אירופי = אפריטיף, צרפתי = מטיס, איטלקי = מאורי), האווירה (ג\'ונגל או ים), התקציב, והזמינות. לכל אחת יש חוויה ייחודית.' },
 ]
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <SchemaOrg schema={itemListSchema} />
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <Breadcrumb items={breadcrumbItems} />
-
-    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
-      <a href="/restaurants/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
-      <a href="/restaurants/kosher/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">✡ כשר</a>
-      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">Fine Dining</span>
-      <a href="/restaurants/japanese/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🍣 יפנית</a>
-      <a href="/restaurants/meat/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🥩 בשרים</a>
-    </nav>
-
-    <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות Fine Dining בבאלי</h1>
-      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        באלי היא אחת מבירות הקולינריה של העולם, עם מסעדות פיין דיינינג שמציעות חוויות אוכל בלתי נשכחות.
-        שפים מהשורה הראשונה, עיצוב מרהיב ותפריטים שמשלבים מסורת וחדשנות.
-      </p>
-    </header>
-
-    {items.length > 0 ? (
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(item => (
-          <RestaurantCard
-            name_he={item.name_he}
-            name_en={item.name_en}
-            slug={item.slug}
-            image={item.image}
-            area={item.area}
-            cuisine_types={item.cuisine_types}
-            price_range={item.price_range}
-            rating={item.rating}
-          />
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-16">
-        <p class="text-white/40 text-lg">לא נמצאו מסעדות פיין דיינינג כרגע. חזרו בקרוב!</p>
-      </div>
-    )}
-
-    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות Fine Dining בבאלי</h2>
-      <div class="space-y-4">
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה ארוחה במסעדת פיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מחירי ארוחה במסעדות פיין דיינינג בבאלי נעים בין 40 ל-200 דולר לאדם. מסעדות פיין דיינינג בבאלי מציעות תפריטי טעימות עם מחירים משתנים בהתאם לרמה.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך להזמין מקום במסעדת יוקרה בבאלי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בהחלט. מסעדות פיין דיינינג מובילות בבאלי דורשות הזמנה מראש, לפעמים שבועות קדימה. יש מסעדות פיין דיינינג בבאלי שמתמלאות רבות חודשים קדימה.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש בפיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">רוב מסעדות פיין דיינינג בבאלי דורשות Smart Casual לפחות. קוד הלבוש בבאלי פיין דיינינג: אין כפכפים, מכנסיים קצרים או חולצות גופייה.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה שפים כוכבי מישלן יש במסעדות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">לבאלי יש מספר מסעדות פיין דיינינג עם שפים בעלי כוכבי מישלן. מסעדות בבאלי של שפים מובילים בעולם מציעות חוויות קולינריות בלתי נשכחות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו מטבחות מוצגים במסעדות פיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות פיין דיינינג בבאלי מציעות מטבחות מגוונים — צרפתי, איטלקי, עדכני, יפני ועוד. פיין דיינינג בבאלי משלב מטבח בינלאומי בגבוה ביותר.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות פיין דיינינג כשרות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">חלק מהמסעדות הפיין דיינינג בבאלי מציעות אפשרויות כשרות. יש מסעדות פיין דיינינג בבאלי שיכולות להתאים לדרישות כשרות בהסכמה מראש.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מהו קוד הלבוש של מטיילים בפיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מטיילים בבאלי לפיין דיינינג מומלצים בלבוש חכם ועדין (Smart Casual או Cocktail Attire). באלי פיין דיינינג דורשת הימנעות מביגוד ספורטיבי וכפכפים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הממוצע מחיר וקטגוריה בפיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות פיין דיינינג בבאלי מחולקות לקטגוריות מחיר — מסעדות בינוניות (40-80 דולר) עד יוקרתיות (150+ דולר). פיין דיינינג בבאלי מתאים לכל תקציב.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך בוחרים בין מסעדות פיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בחרו מסעדת פיין דיינינג בבאלי לפי השף, הטבח, האווירה וההערות. מסעדות פיין דיינינג בבאלי הטובות ביותר קיבלו דירוגים גבוהים מטיילים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה כלול בתפריט הטעימות של פיין דיינינג בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">תפריט הטעימות (tasting menu) בפיין דיינינג בבאלי כולל 6-12 מנות קטנות של קאלינריה מושקעת. מסעדות פיין דיינינג בבאלי עם תפריט טעימות מציעות חוויה גסטרונומית בלתי נשכחת.</p>
-        </details>
-      </div>
-    </section>
-
-    <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למסעדת יוקרה בבאלי?</p>
-      <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מחפשים מסעדת Fine Dining בבאלי 🍽️')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        dir="rtl"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-      >
-        דברו איתנו בווטסאפ
-      </a>
-    </div>
-  </main>
-</Layout>
+<RestaurantCategoryLayout
+  pageTitle="מסעדות Fine Dining בבאלי | יאללה באלי"
+  pageDescription="מדריך למסעדות הפיין דיינינג הטובות ביותר בבאלי: לוקאבור NXT, אפריטיף, מוזאיק, מטיס ומאורי. חוויות טעימה ברמה עולמית, תפריטי טעימה, מחירים וטיפים להזמנה."
+  h1="מסעדות Fine Dining בבאלי"
+  intro="באלי היא אחת מבירות הפיין דיינינג של אסיה, עם מסעדות שמציעות חוויות אוכל בלתי נשכחות. מאובוד ועד סמיניאק — שפים מהשורה הראשונה, תפריטי טעימה יצירתיים, עיצוב מרהיב ותפריטים שמשלבים מסורת עם חדשנות."
+  items={items}
+  faq={faq}
+  categorySlug="fine-dining"
+  breadcrumbLabel="Fine Dining"
+  schemaName="מסעדות Fine Dining בבאלי"
+  faqHeading="שאלות נפוצות — מסעדות Fine Dining בבאלי"
+/>

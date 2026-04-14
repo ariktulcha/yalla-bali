@@ -35,7 +35,7 @@ const itemListSchema = {
     '@type': 'ListItem',
     position: index + 1,
     name: item.name_he,
-    url: new URL(`/attractions/${item.slug}`, 'https://yalla-bali.co.il').toString(),
+    url: new URL(`/attractions/${item.slug}`, 'https://ibalibali.com').toString(),
   })),
 }
 
@@ -127,17 +127,5 @@ const breadcrumbItems = [
       </div>
     </section>
 
-    <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">מתכננים טיול עם ילדים לבאלי?</p>
-      <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מתכננים טיול עם ילדים לבאלי 👨‍👩‍👧‍👦')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        dir="rtl"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-      >
-        דברו איתנו בווטסאפ
-      </a>
-    </div>
   </main>
 </Layout>

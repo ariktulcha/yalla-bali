@@ -1,0 +1,82 @@
+---
+// Shared navigation component for all restaurant category pages
+// Shows two rows of pills: Areas (10) + Cuisines (9)
+export interface Props {
+  currentSlug?: string  // e.g. 'seminyak', 'kosher', 'all'
+}
+
+const { currentSlug = 'all' } = Astro.props
+
+const areas = [
+  { label: 'הכל', slug: 'all', href: '/restaurants/', emoji: '' },
+  { label: 'סמיניאק', slug: 'seminyak', href: '/restaurants/seminyak/', emoji: '🌅' },
+  { label: 'צ׳נגו', slug: 'canggu', href: '/restaurants/canggu/', emoji: '🏄' },
+  { label: 'אובוד', slug: 'ubud', href: '/restaurants/ubud/', emoji: '🌿' },
+  { label: 'קוטה', slug: 'kuta', href: '/restaurants/kuta/', emoji: '🏖️' },
+  { label: 'אולוואטו', slug: 'uluwatu', href: '/restaurants/uluwatu/', emoji: '🪨' },
+  { label: 'ג׳ימבאראן', slug: 'jimbaran', href: '/restaurants/jimbaran/', emoji: '🐟' },
+  { label: 'סאנור', slug: 'sanur', href: '/restaurants/sanur/', emoji: '🌊' },
+  { label: 'נוסה דואה', slug: 'nusa-dua', href: '/restaurants/nusa-dua/', emoji: '🏨' },
+  { label: 'נוסה פנידה', slug: 'nusa-penida', href: '/restaurants/nusa-penida/', emoji: '🏝️' },
+  { label: 'אמד', slug: 'amed', href: '/restaurants/amed/', emoji: '🤿' },
+]
+
+const cuisines = [
+  { label: 'כשר', slug: 'kosher', href: '/restaurants/kosher/', emoji: '✡' },
+  { label: 'Fine Dining', slug: 'fine-dining', href: '/restaurants/fine-dining/', emoji: '💎' },
+  { label: 'בשרים', slug: 'meat', href: '/restaurants/meat/', emoji: '🥩' },
+  { label: 'יפנית', slug: 'japanese', href: '/restaurants/japanese/', emoji: '🍣' },
+  { label: 'פירות ים', slug: 'seafood', href: '/restaurants/seafood/', emoji: '🐟' },
+  { label: 'באלינזי', slug: 'balinese', href: '/restaurants/balinese/', emoji: '🌿' },
+  { label: 'אינדונזי', slug: 'indonesian', href: '/restaurants/indonesian/', emoji: '🍛' },
+  { label: 'טבעוני', slug: 'vegan', href: '/restaurants/vegan/', emoji: '🥗' },
+  { label: 'ים תיכוני', slug: 'mediterranean', href: '/restaurants/mediterranean/', emoji: '🍝' },
+]
+---
+
+<nav class="restaurant-category-nav mb-8 space-y-3">
+  <!-- Row 1: Areas -->
+  <div class="flex items-center gap-2">
+    <span class="flex-none text-xs text-white/40 font-medium pe-2 hidden sm:inline">לפי איזור:</span>
+    <div class="flex gap-2 overflow-x-auto scrollbar-hide flex-1 pb-1">
+      {areas.map(item => (
+        <a
+          href={item.href}
+          class:list={[
+            'flex-none px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all',
+            item.slug === currentSlug
+              ? 'bg-teal-500 text-black font-bold'
+              : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+          ]}
+        >
+          {item.emoji} {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Row 2: Cuisines -->
+  <div class="flex items-center gap-2">
+    <span class="flex-none text-xs text-white/40 font-medium pe-2 hidden sm:inline">לפי סגנון:</span>
+    <div class="flex gap-2 overflow-x-auto scrollbar-hide flex-1 pb-1">
+      {cuisines.map(item => (
+        <a
+          href={item.href}
+          class:list={[
+            'flex-none px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all',
+            item.slug === currentSlug
+              ? 'bg-amber-500 text-black font-bold'
+              : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+          ]}
+        >
+          {item.emoji} {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

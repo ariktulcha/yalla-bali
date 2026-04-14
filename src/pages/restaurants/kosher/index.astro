@@ -1,142 +1,42 @@
 ---
-import Layout from '../../../components/Layout.astro'
-import SchemaOrg from '../../../components/SchemaOrg.astro'
-import Breadcrumb from '../../../components/Breadcrumb.astro'
-import RestaurantCard from '../../../components/Cards/RestaurantCard.astro'
+import RestaurantCategoryLayout from '../../../components/RestaurantCategoryLayout.astro'
 import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
 
 const { data } = await supabaseAdmin
   .from('restaurants')
-  .select('*')
+  .select('name_he, name_en, slug, image, area, cuisine_types, price_range, rating, excerpt')
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
+  .order('rating', { ascending: false })
 
+const matchTerms = ['כשר', 'kosher', 'Kosher', 'כשרות', 'ישראלי', 'חב"ד', 'חלאל', 'לבנוני', 'ערבי', 'מרוקאי', 'מזרח תיכוני']
 const items = (data || []).filter(r =>
-  (r.cuisine_types || []).some(t => ['כשר', 'kosher', 'Kosher', 'כשרות'].includes(t))
+  (r.cuisine_types || []).some(t => matchTerms.some(term => t.includes(term)))
 )
 
-const pageTitle = 'מסעדות כשרות בבאלי | Yalla Bali'
-const pageDescription = 'רשימת המסעדות הכשרות הטובות ביותר בבאלי. מסעדות עם הכשר למטיילים ישראלים ושומרי כשרות בבאלי.'
-
-const itemListSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'מסעדות כשרות בבאלי',
-  description: pageDescription,
-  numberOfItems: items.length,
-  itemListElement: items.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
-  })),
-}
-
-const breadcrumbItems = [
-  { label: 'דף הבית', href: '/' },
-  { label: 'מסעדות', href: '/restaurants' },
-  { label: 'כשר' },
+const faq = [
+  { q: 'האם יש מסעדות כשרות מהדרין בבאלי?', a: 'בבאלי אין מסעדות עם תעודת כשרות מהדרין רשמית. האפשרות היחידה לארוחה כשרה אמיתית היא בית חב"ד באלי בסמיניאק, שמארגן ארוחות שבת וחג בהזמנה מראש דרך מייל kosherinbali@gmail.com.' },
+  { q: 'אילו מסעדות בבאלי ידידותיות לישראלים שומרי כשרות?', a: 'מסעדות "כשר-סטייל" בבאלי כוללות את סבבה (צ\'נגו, ישראלי), זולה (סמיניאק, צמחוני 100%), מארוש ואל מדינה (חלאל לבנוני/ערבי בצ\'נגו), וטאג\'ין (מרוקאי בסמיניאק). כל אלה ללא חזיר ועם תפריטים מוכרים לישראלים.' },
+  { q: 'איך מזמינים ארוחת שבת בבית חב"ד באלי?', a: 'מזמינים ארוחת שבת בבית חב"ד באלי דרך מייל kosherinbali@gmail.com לפחות 48 שעות מראש. התרומה המומלצת היא כ-25-35 דולר לאדם, ונכנסת לתחזוקת בית חב"ד.' },
+  { q: 'איפה הריכוז העיקרי של מסעדות כשר-סטייל בבאלי?', a: 'הריכוז העיקרי של מסעדות כשר-סטייל בבאלי הוא בסמיניאק וצ\'נגו — שני האזורים שבהם מתרכזת הקהילה הישראלית הגדולה. בסאנור יש פחות אופציות אבל כן יש מסעדות צמחוניות מתאימות.' },
+  { q: 'האם מסעדות חלאל בבאלי מתאימות לשומרי כשרות?', a: 'מסעדות חלאל בבאלי (כמו אל מדינה ומארוש) הן אופציה טובה לישראלים ששומרים על כשרות חלקית — אין חזיר, אין פירות ים בעייתיים, והבשר נשחט לפי דיני האסלאם. אבל זה לא תחליף לכשרות מהדרין.' },
+  { q: 'האם יש מסעדות צמחוניות בבאלי שמתאימות לכשרות?', a: 'כן, יש מסעדות טבעוניות וצמחוניות מצוינות בבאלי שמתאימות לכשרות — הכל פרווה (ללא בשר וללא חלב). זולה גן עדן צמחוני בסמיניאק, סאיורי הילינג פוד באובוד, מוקסה אובוד והשיידי שאק בצ\'נגו הן בחירות בטוחות.' },
+  { q: 'כמה עולה ארוחה כשרה בבאלי?', a: 'ארוחת שבת בבית חב"ד באלי עולה כ-25-35 דולר לאדם. ארוחה במסעדת כשר-סטייל (כמו סבבה או טאג\'ין) עולה 200,000-400,000 רופי לאדם (50-110 ש"ח). מחירים סבירים יחסית לישראל.' },
+  { q: 'האם הקהילה הישראלית בבאלי מארגנת ארוחות חג?', a: 'כן, בית חב"ד באלי מארגן ארוחות שבת, ראש השנה, יום כיפור, סוכות, חנוכה ופסח. ליל הסדר בבאלי הוא חוויה מיוחדת עם עשרות ישראלים שחוגגים יחד. תיאום מראש דרך chabadbali.org.' },
+  { q: 'האם ישראלים יכולים להזמין ארוחות פרטיות לחג?', a: 'כן, ניתן ליצור קשר עם בית חב"ד באלי ולהזמין ארוחה פרטית לחג עם המשפחה או חבורה ישראלית. הם גם מספקים שירות קייטרינג כשר לאירועים פרטיים.' },
+  { q: 'האם יש סופרים עם מוצרים כשרים בבאלי?', a: 'בבאלי קשה למצוא סופרים עם תעודת כשרות. ניתן למצוא יין כשר בחנויות מובחרות, וכמה מוצרי יבוא יש בסופרים גדולים. בית חב"ד יכול להמליץ על מוצרים מתאימים.' },
 ]
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <SchemaOrg schema={itemListSchema} />
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <Breadcrumb items={breadcrumbItems} />
-
-    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
-      <a href="/restaurants/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
-      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">✡ כשר</span>
-      <a href="/restaurants/fine-dining/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">Fine Dining</a>
-      <a href="/restaurants/japanese/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🍣 יפנית</a>
-      <a href="/restaurants/meat/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🥩 בשרים</a>
-    </nav>
-
-    <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות כשרות בבאלי</h1>
-      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        באלי הפכה ליעד מוביל למטיילים ישראלים, ואיתה צמחה סצנת מסעדות כשרות מגוונת.
-        כאן תמצאו את המסעדות הכשרות המומלצות ביותר בעיר — ממסעדות בשר ועד אסייתי.
-      </p>
-    </header>
-
-    {items.length > 0 ? (
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(item => (
-          <RestaurantCard
-            name_he={item.name_he}
-            name_en={item.name_en}
-            slug={item.slug}
-            image={item.image}
-            area={item.area}
-            cuisine_types={item.cuisine_types}
-            price_range={item.price_range}
-            rating={item.rating}
-          />
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-16">
-        <p class="text-white/40 text-lg">לא נמצאו מסעדות כשרות כרגע. חזרו בקרוב!</p>
-      </div>
-    )}
-
-    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות כשרות בבאלי</h2>
-      <div class="space-y-4">
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה מסעדות כשרות יש בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בבאלי יש יותר מ-20 מסעדות כשרות המספקות אכילה כשרה ברמה גבוהה. מסעדות כשרות בבאלי מתאימות לטיול משפחתי ולאירועים עם הכשר מאושר.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי הכשור זמינים במסעדות כשרות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">במסעדות כשרות בבאלי תמצאו הכשר מהדרין, הכשר בדיקה, וההכשור של ארגונים מוכרים. כל מסעדה כשרה בבאלי מציינת את רמת ההכשור שלה בבירור.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם צריך להזמין מקום במסעדה כשרה בבאלי מראש?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ מאוד להזמין מקום מראש במסעדות כשרות בבאלי, במיוחד בסופי שבוע ובחגים. המסעדות הכשרות בבאלי מתמלאות במהירות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הטווח המחירי של אכילה כשרה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בבאלי מציעות אפשרויות במגוון טווחי מחירים — מ-casual עד fine dining. אכילה כשרה בבאלי זמינה בכל תקציב.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">באילו אזורים בבאלי ממוקמות המסעדות הכשרות?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בבאלי ממוקמות בעיקר בסמינייק, קאנגו וסנור. סצנת המסעדות הכשרות בבאלי משתרעת על אזורים תיירותיים מרכזיים עם הרבה אפשרויות לטיילים ישראלים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות כשרות בשרים בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, קיימות מסעדות כשרות בשר בבאלי המתמחות בבשר כשר באיכות גבוהה וסטייקים בהכשור. המסעדות הכשרות בבאלי המתמחות בבשר מציעות בחירה עשירה לשומרי כשרות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם יש מסעדות כשרות אסייתיות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בבאלי קיימות מסעדות כשרות יפניות ומסעדות עם מטבח מזרח אסייתי בהכשור. מסעדות כשרות בבאלי מציעות מטבח אסיאתי בעל הכשור.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם ניתן לחגוג אירועים במסעדות כשרות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מסעדות כשרות בבאלי מציעות אולמות לאירועים פרטיים עם הכשור מלא. אירועים כשרים בבאלי ניתן לקיים במסעדות כשרות מובילות בעיר.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם מסעדות כשרות בבאלי מתאימות לתיירים ישראלים?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות כשרות בבאלי נבחרו במיוחד לתיירים ישראלים ומטיילים שומרי כשרות. סצנת המסעדות הכשרות בבאלי מבינה את צרכי התיירים הישראלים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הדרך לבחירת מסעדה כשרה טובה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בחרו מסעדה כשרה בבאלי על פי סוג ההכשור, חוות דעות, ומטבח. מסעדות כשרות בבאלי מומלצות על פי איכות האוכל, השירות, והאווירה הכשרה.</p>
-        </details>
-      </div>
-    </section>
-
-    <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">צריכים המלצה למסעדה כשרה בבאלי?</p>
-      <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מחפשים מסעדה כשרה בבאלי 🍽️')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-      >
-        דברו איתנו בווטסאפ
-      </a>
-    </div>
-  </main>
-</Layout>
+<RestaurantCategoryLayout
+  pageTitle="מסעדות כשרות בבאלי — מדריך מלא | יאללה באלי"
+  pageDescription="מדריך מסעדות כשרות וכשר-סטייל בבאלי: בית חב״ד באלי, מסעדות ישראליות, מזרח תיכוניות וטבעוניות. כל מה שחשוב לדעת לפני שמזמינים ארוחה כשרה בבאלי."
+  h1="מסעדות כשרות בבאלי"
+  intro="באלי אינה מציעה מסעדות עם תעודת כשרות מהדרין רשמית, אך יש פתרונות נהדרים לישראלים שומרי כשרות. בית חב״ד באלי הוא הפתרון לארוחות כשרות אמיתיות בהזמנה מראש, ולצידו רשת של מסעדות &quot;כשר-סטייל&quot; — ישראליות, חלאליות, צמחוניות ומרוקאיות — שמתאימות לישראלים שומרי כשרות חלקית."
+  items={items}
+  faq={faq}
+  categorySlug="kosher"
+  breadcrumbLabel="כשר"
+  schemaName="מסעדות כשרות בבאלי"
+  faqHeading="שאלות נפוצות — מסעדות כשרות בבאלי"
+/>

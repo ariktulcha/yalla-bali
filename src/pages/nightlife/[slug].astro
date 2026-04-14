@@ -1,7 +1,7 @@
 ---
 import { supabaseAdmin, DESTINATION_ID } from '../../lib/supabase'
 import { pickMetaDescription } from '../../lib/seo'
-import { site, waUrl } from '../../config/site'
+import { site, pageTitle as buildPageTitle } from '../../config/site'
 import Layout from '../../components/Layout.astro'
 import PhotoGallery from '../../components/PhotoGallery.astro'
 import Breadcrumb from '../../components/Breadcrumb.astro'
@@ -41,8 +41,9 @@ if (openingHours) {
 
 const contentHtml = venue.full_content ? await marked(venue.full_content) : ''
 
-const pageTitle = `${venue.name_he}${venue.name_en ? ` — ${venue.name_en}` : ''} | חיי לילה ב${site.destinationName} | ${site.brand}`
-const pageDescription = pickMetaDescription(venue, `חיי לילה ב${site.destinationName}`)
+const titlePrefix = `${venue.name_he}${venue.name_en ? ` — ${venue.name_en}` : ''}`
+const pageTitle = venue.meta_title || buildPageTitle(titlePrefix, 'nightlife')
+const pageDescription = venue.meta_description || pickMetaDescription(venue, `חיי לילה ב${site.destinationName}`)
 
 const venueSchema = {
   '@context': 'https://schema.org',
@@ -97,30 +98,50 @@ const { data: areaNightlife } = await supabaseAdmin
 
 const relatedNightlife = areaNightlife ?? []
 
-const faqItems = [
-  {
-    q: `מה גיל הכניסה ל${venue.name_he}?`,
-    a: `בבאלי, גיל הכניסה הרשמי להמון מקומות הוא 18 שנים, אך חלק מהמקומות העדיפים יותר דורשים 21+. בדקו את דרישות הגיל של ${venue.name_he} מראש. אנחנו ממליצים להביא תעודה זהות תקפה בכל מקרה.`,
-  },
-  {
-    q: `האם ${venue.name_he} מחייבת הזמנה מראש?`,
-    a: `זה תלוי בלילה ובגודל הקבוצה. בימי פעילות (ימי שישי, שבת), מומלץ להזמין מראש. אם אתם קבוצה קטנה, בדרך כלל אתם יוכלו להיכנס בלא הזמנה. צרו איתנו קשר בווטסאפ אם אתם רוצים להזמין שולחן.`,
-  },
-  {
-    q: `מה קוד הלבוש ב${venue.name_he}?`,
-    a: `${dressCode ? `קוד הלבוש ב${venue.name_he} הוא: ${dressCode}. ` : ''}בדרך כלל, במקומות בבאלי דורשים casual-smart: לא טנקטופ או שורטס בשבילים סטנדרטיים, אך בחיים ללא נעליים ניתן בדרך כלל. בקתות/בארים חוף יותר רופפים.`,
-  },
-  {
-    q: `כמה בערך עולה שתייה ב${venue.name_he}?`,
-    a: `${priceRange ? `טווח מחירים: ${priceRange}. ` : ''}בבאלי, שתייה בחיים ללא רחוב הרבה פחות יקרה מאשר בחו"ל. משקה בודד בדרך כלל עולה בין ₪20-₪60 בהתאם לסוג המשקה ומיקום המקום.`,
-  },
-]
+const dbFaq = Array.isArray(venue.faq) ? venue.faq : []
+// If DB faq questions don't mention the venue name (handwritten "short" style),
+// wrap them with an intro + outro Q&A that includes Name+באלי for SEO, keeping
+// the handwritten tone intact in the middle.
+const faqMentionsName = dbFaq.filter((it: any) => (it.q || '').includes(venue.name_he)).length
+const needsEnrichment = faqMentionsName < 2 && dbFaq.length > 0
+const faqIntro = needsEnrichment
+  ? [{
+      q: `מה כדאי לדעת על ${venue.name_he} בבאלי?`,
+      a: venue.description || `${venue.name_he} הוא אחד המקומות המומלצים לחיי לילה בבאלי${venue.area ? ` ב${venue.area}` : ''}. מידע מפורט על שעות פתיחה, דרס קוד ותמחור ב${venue.name_he} מובא בשאלות הבאות.`,
+    }]
+  : []
+const faqOutro = needsEnrichment
+  ? [{
+      q: `איך מזמינים שולחן או מגיעים ל${venue.name_he} בבאלי?`,
+      a: `כדי להזמין שולחן או לקבל פרטים עדכניים על ${venue.name_he}, מומלץ לפנות ישירות למקום דרך הרשתות החברתיות שלו. נהג מקומי או Grab ייקח אתכם ישירות ל${venue.name_he} — זמן הנסיעה תלוי באזור ההתחלה בבאלי.`,
+    }]
+  : []
+const faqItems = dbFaq.length > 0
+  ? [...faqIntro, ...dbFaq.map((item: any) => ({ q: item.q, a: item.a })), ...faqOutro]
+  : [
+      {
+        q: `מה גיל הכניסה ל${venue.name_he} בבאלי?`,
+        a: `בבאלי, גיל הכניסה הרשמי לרוב המקומות הוא 18, אך חלק מהמקומות הסלקטיביים יותר דורשים 21+. בדקו את דרישות הגיל של ${venue.name_he} מראש. אנחנו ממליצים להביא תעודת זהות תקפה בכל מקרה.`,
+      },
+      {
+        q: `האם ${venue.name_he} דורש הזמנה מראש?`,
+        a: `זה תלוי בלילה ובגודל הקבוצה. בימי שישי ושבת מומלץ להזמין שולחן ב${venue.name_he} מראש. אם אתם קבוצה קטנה, בדרך כלל תוכלו להיכנס בלי הזמנה. כדי להזמין שולחן, פנו ישירות למקום דרך הרשתות החברתיות שלו.`,
+      },
+      {
+        q: `מה קוד הלבוש ב${venue.name_he}?`,
+        a: `${dressCode ? `קוד הלבוש ב${venue.name_he} הוא: ${dressCode}. ` : ''}בדרך כלל מקומות חיי לילה בבאלי דורשים smart-casual: לא טנקטופ או שורטס במקומות סטנדרטיים. ביץ' קלאבים ובארי חוף יותר רגועים בקוד הלבוש.`,
+      },
+      {
+        q: `כמה עולה שתייה ב${venue.name_he} בבאלי?`,
+        a: `${priceRange ? `טווח המחירים ב${venue.name_he} הוא: ${priceRange}. ` : ''}בבאלי, שתייה בחיי הלילה הרבה פחות יקרה מאשר בחו"ל. משקה בודד ב${venue.name_he} בדרך כלל עולה בין ₪20-₪60 בהתאם לסוג המשקה ומיקום המקום.`,
+      },
+    ]
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  canonical={`https://yalla-bali.co.il/nightlife/${venue.slug}`}
+  canonical={`https://ibalibali.com/nightlife/${venue.slug}`}
   ogImage={venue.image}
   ogType="article"
   schema={venueSchema}
@@ -225,7 +246,7 @@ const faqItems = [
     </div>
 
     <div class="mb-8">
-      <FAQSection items={faqItems} />
+      <FAQSection items={faqItems} entityName={venue.name_he} />
     </div>
 
     {relatedNightlife.length > 0 && (
@@ -266,13 +287,10 @@ const faqItems = [
     <div class="bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center mt-16">
       <p class="text-white/80 mb-4">אהבתם את {venue.name_he}? רוצים עוד המלצות לחיי לילה בבאלי?</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מחפשים המלצות לחיי לילה בבאלי 🍸')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        dir="rtl" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
+        href="/nightlife"
+        class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#0D0D0D] font-bold px-6 py-3 rounded-full transition-colors"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>דברו איתנו בווטסאפ</span>
+        🌙 לכל מקומות הלילה בבאלי
       </a>
     </div>
   </div>

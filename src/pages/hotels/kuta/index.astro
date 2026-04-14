@@ -1,0 +1,116 @@
+---
+import Layout from '../../../components/Layout.astro'
+import SchemaOrg from '../../../components/SchemaOrg.astro'
+import Breadcrumb from '../../../components/Breadcrumb.astro'
+import HotelCard from '../../../components/Cards/HotelCard.astro'
+import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
+
+const { data } = await supabaseAdmin
+  .from('hotels')
+  .select('*')
+  .eq('destination_id', DESTINATION_ID)
+  .eq('published', true)
+
+const items = (data || []).filter(h =>
+  (h.area || '').toLowerCase().includes('kuta') ||
+  (h.name_en || '').toLowerCase().includes('kuta')
+)
+
+const pageTitle = 'מלונות בקוטה באלי — המלצות ודירוגים | Yalla Bali'
+const pageDescription = 'מלונות מומלצים בקוטה, באלי. מלונות במחירים נוחים, קרבה לשדה התעופה, חוף גלישה, קניות וחיי לילה תוססים בקוטה באלי.'
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'מלונות בקוטה באלי',
+  description: pageDescription,
+  numberOfItems: items.length,
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name_he,
+    url: new URL(`/hotels/${item.slug}`, 'https://ibalibali.com').toString(),
+  })),
+}
+
+const breadcrumbItems = [
+  { label: 'דף הבית', href: '/' },
+  { label: 'מלונות', href: '/hotels' },
+  { label: 'מלונות בקוטה' },
+]
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SchemaOrg schema={itemListSchema} />
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
+      <a href="/hotels/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
+      <a href="/hotels/ubud/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌿 אובוד</a>
+      <a href="/hotels/canggu/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🏄 קאנגו</a>
+      <a href="/hotels/seminyak/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌅 סמינייק</a>
+      <a href="/hotels/uluwatu/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🪨 אולוואטו</a>
+      <a href="/hotels/jimbaran/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🐟 ג׳ימברן</a>
+      <a href="/hotels/nusa-dua/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌴 נוסה דואה</a>
+      <a href="/hotels/sanur/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🎣 סנור</a>
+      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">🏖️ קוטה</span>
+    </nav>
+
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות בקוטה באלי</h1>
+      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
+        קוטה הוא האזור הכי ידוע בבאלי — חוף גלישה ארוך, קניונים, חיי לילה ומחירים נוחים.
+        מלונות בקוטה באלי מושלמים לתיירים שרוצים להיות קרובים לשדה התעופה ולכל הפעולה.
+      </p>
+    </header>
+
+    {items.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map(item => (
+          <HotelCard
+            name_he={item.name_he}
+            name_en={item.name_en}
+            slug={item.slug}
+            image={item.image}
+            area={item.area}
+            star_rating={item.star_rating}
+            price_range={item.price_range}
+            booking_url={item.booking_url}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <p class="text-white/40 text-lg">לא נמצאו מלונות בקוטה כרגע. חזרו בקרוב!</p>
+      </div>
+    )}
+
+    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות בקוטה באלי</h2>
+      <div class="space-y-4">
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מיוחד במלונות בקוטה באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בקוטה באלי מציעים מחירים נוחים, קרבה לשדה התעופה ונגישות לחוף גלישה ארוך. קוטה באלי הוא האזור הכי פופולרי לתיירים שמגיעים לראשונה לבאלי.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה מלון בקוטה באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון בקוטה באלי עולה בין 20 ל-150 דולר ללילה. קוטה באלי מציע את מלונות הבאדג׳ט הטובים ביותר בבאלי, עם אפשרויות זולות ואיכותיות.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם קוטה באלי מתאים לגולשים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">כן, מלונות בקוטה באלי מושלמים לגולשים מתחילים. חוף קוטה באלי ידוע בגלים קלים ובתי ספר לגלישה רבים. גולשים מנוסים יעדיפו מלונות באולוואטו או קאנגו באלי.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה יש לעשות ליד מלונות בקוטה באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בקוטה באלי קרובים ל-Waterbom Bali, קניון Discovery, חוף הגלישה, שוק הלילה ופארק המים. חיי הלילה בקוטה באלי תוססים עם ברים ומועדונים.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איפה קוטה באלי ביחס לשדה התעופה?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בקוטה באלי נמצאים 5-10 דקות בלבד משדה התעופה. קוטה באלי הוא האזור הכי קרוב לשדה התעופה, מושלם ללילה אחרון או ראשון בבאלי.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+</Layout>

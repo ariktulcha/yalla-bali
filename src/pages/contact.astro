@@ -6,13 +6,13 @@ const contactSchema = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'צור קשר - יאללה באלי',
-  description: 'צרו קשר עם יאללה באלי בווטסאפ או באימייל.',
-  url: 'https://yalla-bali.co.il/contact',
+  description: 'צרו קשר עם יאללה באלי באימייל.',
+  url: 'https://ibalibali.com/contact',
   mainEntity: {
     '@type': 'Organization',
     name: 'Yalla Bali',
-    url: 'https://yalla-bali.co.il',
-    email: 'info@yalla-bali.co.il',
+    url: 'https://ibalibali.com',
+    email: 'info@ibalibali.com',
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', availableLanguage: ['Hebrew', 'English', 'Arabic'] },
   },
 }
@@ -29,47 +29,32 @@ const commonTopics = [
 
 <Layout
   title="צור קשר - יאללה באלי"
-  description="צרו קשר עם יאללה באלי בווטסאפ או באימייל. נשמח לעזור לכם לתכנן את הטיול המושלם לבאלי, להזמין טיולים, או לענות על כל שאלה."
-  canonical="https://yalla-bali.co.il/contact"
+  description="צרו קשר עם יאללה באלי באימייל. נשמח לעזור לכם לתכנן את הטיול המושלם לבאלי או לענות על כל שאלה."
+  canonical="https://ibalibali.com/contact"
 >
   <SchemaOrg schema={contactSchema} />
 
   <section class="relative py-20 md:py-28 bg-gradient-to-b from-[#1A1208] to-[#0D0D0D]">
     <div class="absolute inset-0 opacity-10"><div class="absolute inset-0 bg-gradient-to-br from-teal-900/20 to-transparent"></div></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">צרו <span class="text-teal-400">קשר</span></h1>
-      <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">נשמח לעזור לכם לתכנן את הטיול המושלם לבאלי. שלחו הודעה בווטסאפ ונחזור אליכם תוך דקות.</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">צרו <span class="text-teal-400">קשר</span></h1>
+      <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">נשמח לעזור לכם לתכנן את הטיול המושלם לבאלי. שלחו לנו אימייל או מלאו את הטופס למטה.</p>
     </div>
   </section>
 
-  <!-- WhatsApp Primary CTA -->
-  <section class="max-w-4xl mx-auto px-4 -mt-8 relative z-20 mb-12">
-    <a href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מתעניינים בטיול לבאלי')}`} target="_blank" rel="noopener noreferrer" dir="rtl" class="block bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 rounded-2xl p-8 md:p-10 text-center transition-all shadow-lg shadow-green-600/20 group">
-      <span class="text-5xl block mb-4 group-hover:scale-110 transition-transform">💬</span>
-      <h2 class="text-3xl md:text-4xl font-black text-white mb-3">שלחו הודעה בווטסאפ</h2>
-      <p class="text-white/90 text-lg mb-4 max-w-md mx-auto">הדרך הכי מהירה לתשובות. שלחו הודעה ונחזור אליכם תוך דקות.</p>
-      <div class="flex flex-wrap justify-center gap-4 text-white/80 text-sm">
-        <span class="flex items-center gap-1.5">⏰ זמינים כל יום</span>
-        <span class="flex items-center gap-1.5">📱 מענה מהיר</span>
-        <span class="flex items-center gap-1.5">🌍 עברית, אנגלית, ערבית</span>
-      </div>
-    </a>
-  </section>
-
   <!-- Contact Methods -->
-  <section class="max-w-4xl mx-auto px-4 py-8">
+  <section class="max-w-4xl mx-auto px-4 py-12">
     <div class="grid md:grid-cols-2 gap-6">
-      <a href="mailto:info@yalla-bali.co.il" class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/20 hover:border-teal-500/40 rounded-2xl p-6 text-center transition-all group">
+      <a href="mailto:info@ibalibali.com" class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/20 hover:border-teal-500/40 rounded-2xl p-6 text-center transition-all group">
         <span class="text-4xl block mb-3 group-hover:scale-110 transition-transform">📧</span>
         <h3 class="text-xl font-bold text-white mb-2">אימייל</h3>
         <p class="text-white/60 text-sm mb-3">לשאלות מפורטות, שיתופי פעולה ופניות עסקיות</p>
-        <span class="text-teal-400 font-bold" dir="ltr">info@yalla-bali.co.il</span>
+        <span class="text-teal-400 font-bold" dir="ltr">info@ibalibali.com</span>
       </a>
       <div class="bg-gradient-to-br from-[#1A1208] to-[#0D0D0D] border border-teal-500/10 rounded-2xl p-6 text-center">
         <span class="text-4xl block mb-3">⏰</span>
         <h3 class="text-xl font-bold text-white mb-2">זמני מענה</h3>
         <div class="space-y-2 text-sm">
-          <div class="flex justify-between text-white/60"><span>וואטסאפ:</span><span class="text-green-400 font-bold">תוך דקות</span></div>
           <div class="flex justify-between text-white/60"><span>אימייל:</span><span class="text-teal-400 font-bold">עד 24 שעות</span></div>
           <div class="flex justify-between text-white/60"><span>שעות פעילות:</span><span class="text-white font-bold">כל יום, 08:00-23:00</span></div>
         </div>
@@ -118,9 +103,6 @@ const commonTopics = [
           <button type="submit" class="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500 text-[#0D0D0D] px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-teal-500/25">
             📩 שלחו הודעה
           </button>
-          <p class="text-white/40 text-sm">
-            או פשוט שלחו הודעה ב<a href="https://wa.me/972528211665" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:underline mx-1">וואטסאפ</a>— יותר מהיר!
-          </p>
         </div>
       </form>
     </div>

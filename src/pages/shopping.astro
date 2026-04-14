@@ -1,20 +1,69 @@
 ---
 import Layout from '../components/Layout.astro'
 import SchemaOrg from '../components/SchemaOrg.astro'
+import FAQSection from '../components/FAQSection.astro'
 
-const title = 'קניות בבאלי — שווקים, בוטיקים ומה לקנות | Yalla Bali'
-const description = 'מדריך קניות בבאלי: שוק אומנות סוקוואטי, מרכז אובוד, שוק Seminyak, בוטיקים בקאנגו ועוד. מה לקנות, איפה לקנות ואיך לא להיפגע.'
+const title = 'קניות בבאלי — שווקים, בוטיקים, מיקוח ומה לקנות (מדריך 2026) | Yalla Bali'
+const description = 'מדריך הקניות המלא בבאלי: שוק סוקוואטי, אובוד, Seminyak Village, קאנגו, Beachwalk Kuta, Discovery Mall, מיקוח, הונאות להימנע ומה לקנות — הכל עברית.'
+
+const pageUrl = new URL('/shopping', Astro.site).toString()
 
 const shoppingSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
-  description,
-  image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&fit=crop',
-  url: new URL('/shopping', Astro.site).toString(),
-  author: { '@type': 'Organization', name: 'Yalla Bali' },
-  publisher: { '@type': 'Organization', name: 'Yalla Bali' },
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: title,
+      description,
+      image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80&fit=crop',
+      url: pageUrl,
+      author: { '@type': 'Organization', name: 'Yalla Bali' },
+      publisher: { '@type': 'Organization', name: 'Yalla Bali' },
+      datePublished: '2026-01-15',
+      dateModified: '2026-04-12',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'בית', item: new URL('/', Astro.site).toString() },
+        { '@type': 'ListItem', position: 2, name: 'קניות בבאלי', item: pageUrl },
+      ],
+    },
+  ],
 }
+
+const quickAreas = [
+  {
+    name: 'סמיניאק',
+    slug: 'seminyak',
+    icon: '🛍️',
+    bestFor: 'בוטיקים עיצוביים, מותגי סרף בינלאומיים, קניות עם A/C',
+  },
+  {
+    name: 'קאנגו',
+    slug: 'canggu',
+    icon: '🏄',
+    bestFor: 'ה-vibe של הנוודים הדיגיטליים, בגדים קז׳ואלים, עיצוב לבית',
+  },
+  {
+    name: 'אובוד',
+    slug: 'ubud',
+    icon: '🎨',
+    bestFor: 'אמנות מקומית, תכשיטי כסף, טקסטיל באטיק, מזכרות אותנטיות',
+  },
+  {
+    name: 'קוטה',
+    slug: 'kuta',
+    icon: '🏬',
+    bestFor: 'קניונים גדולים, מותגים בינלאומיים, קניות אחרי החוף',
+  },
+  {
+    name: 'נוסה דואה',
+    slug: 'nusa-dua',
+    icon: '💎',
+    bestFor: 'יוקרה, מותגי פרימיום, שופינג מתוכנן ונקי',
+  },
+]
 
 const markets = [
   {
@@ -42,11 +91,23 @@ const markets = [
     icon: '🏛️',
   },
   {
+    image: 'https://images.unsplash.com/photo-1516684402620-34ed5a3b7ff8?w=800&q=80&fit=crop',
+    name: 'Tegallalang Handicraft Center',
+    nameHe: 'Tegallalang Handicraft — בירת הראטן והבמבוק',
+    area: 'Tegallalang, north of Ubud',
+    description: 'רחוב שלם של חנויות אומנות לאורך הדרך מאובוד למרפסות האורז המפורסמות. כאן תמצאו את מיטב מוצרי הראטן, הבמבוק, והעץ — תיקים, סלסלות, מנורות, רהיטים ומראות. הרבה חנויות מייצרות במקום, כך שאפשר להזמין פריטים בהתאמה אישית ולשלוח לישראל.',
+    bestFor: 'ריהוט, עיצוב לבית, פריטים גדולים',
+    tips: 'חברו את הביקור לסיור במרפסות האורז של Tegallalang — זה על הדרך. למשלוחים לישראל, בקשו הצעת מחיר בכתב מראש.',
+    openHours: '09:00-18:00 יומי',
+    area_tag: 'גיאניאר',
+    icon: '🪵',
+  },
+  {
     image: 'https://images.unsplash.com/photo-1537365587684-f490102e1225?w=800&q=80&fit=crop',
     name: 'Seminyak Village',
     nameHe: 'Seminyak Village — קניון בוטיק',
     area: 'Seminyak',
-    description: 'לא שוק — בוטיק מול מאורגן עם מותגים בינלאומיים ומקומיים. Seminyak Village הוא המקום לקניות נוחות ומאורגנות עם A/C, קפה ואווירה נעימה. תמצאו מותגי סרפ, בגדי ים, תכשיטים עיצוביים ומסעדות טובות.',
+    description: 'לא שוק — בוטיק מול מאורגן עם מותגים בינלאומיים ומקומיים. Seminyak Village הוא המקום לקניות נוחות ומאורגנות עם A/C, קפה ואווירה נעימה. תמצאו מותגי סרף, בגדי ים, תכשיטים עיצוביים ומסעדות טובות.',
     bestFor: 'קניות נוחות בלי להתמקח',
     tips: 'חנויות כגון Biasa ו-Magali Pascal מוכרות עיצוב באלינזי איכותי שאי אפשר למצוא בשום מקום אחר.',
     openHours: '10:00-22:00 יומי',
@@ -67,15 +128,39 @@ const markets = [
   },
   {
     image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80&fit=crop',
-    name: 'Kuta Beach Walk Mall',
-    nameHe: 'Beachwalk Mall קוטה — הקניון הגדול',
+    name: 'Beachwalk Mall Kuta',
+    nameHe: 'Beachwalk Mall קוטה — הקניון על החוף',
     area: 'Kuta',
-    description: 'Beachwalk הוא הקניון הגדול והמרכזי ביותר בבאלי לתיירים. ממוקם ממש ליד חוף קוטה עם גישה נוחה. תמצאו Zara, H&M, Mango, מותגים ספורטיביים, קינמת ומסעדות. אידיאלי לקניות בוקר כשהחוף עדיין שקט.',
+    description: 'Beachwalk הוא הקניון הגדול והמרכזי ביותר בבאלי לתיירים. ממוקם ממש ליד חוף קוטה עם גישה נוחה. תמצאו Zara, H&M, Mango, מותגים ספורטיביים, קולנוע ומסעדות. עיצוב פתוח עם גנים ונוף לים — אידיאלי לקניות בוקר כשהחוף עדיין שקט.',
     bestFor: 'מותגים בינלאומיים, קניות עם A/C',
     tips: 'החנויות פתוחות עד 22:00 — כדאי לקנות אחרי שובע מן החוף.',
     openHours: '10:00-22:00 יומי',
     area_tag: 'קוטה',
     icon: '🏬',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1567958451986-2de427a4a0be?w=800&q=80&fit=crop',
+    name: 'Discovery Shopping Mall',
+    nameHe: 'Discovery Mall — אמפיתיאטרון על חוף קוטה',
+    area: 'Kuta',
+    description: 'הקניון השני בגודלו בקוטה, עם אמפיתיאטרון שיושב ממש על החול. שלוש קומות של חנויות, מסעדות ואירועים חיים. הוא פחות יוקרתי מ-Beachwalk אבל יותר אותנטי, עם שילוב יפה של מותגי חוץ ומותגים מקומיים (Batik Keris, Sogo).',
+    bestFor: 'קניות בתקציב בינוני, קולנוע, אירועי בידור',
+    tips: 'בערב נערכים כאן קונצרטים חינם על שפת הים — כדאי לסיים את יום הקניות עם שקיעה ומוזיקה.',
+    openHours: '10:00-22:00 יומי',
+    area_tag: 'קוטה',
+    icon: '🎭',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80&fit=crop',
+    name: 'Mal Bali Galeria',
+    nameHe: 'Mal Bali Galeria — הקניון של המקומיים',
+    area: 'Simpang Dewa Ruci, Kuta',
+    description: 'הקניון האהוב על תושבי באלי עצמם — כלומר המחירים הוגנים והמבחר שימושי. ממוקם בצומת המרכזי של Dewa Ruci, נוח להגיע מכל דרום באלי. מכיל Hypermart (סופרמרקט גדול), ACE Hardware (לכל מה שחסר לכם בדירה), ומותגי אופנה בינלאומיים במחירים נמוכים יותר מ-Beachwalk.',
+    bestFor: 'קניות יומיום, סופר, אלקטרוניקה במחירים הוגנים',
+    tips: 'יש כאן קולנוע XXI עם סרטים חדשים באנגלית. כרטיסים עולים פחות מחצי מחיר ישראל.',
+    openHours: '10:00-22:00 יומי',
+    area_tag: 'דרום באלי',
+    icon: '🏪',
   },
   {
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&fit=crop',
@@ -89,17 +174,142 @@ const markets = [
     area_tag: 'ג\'יאניאר',
     icon: '💎',
   },
+  {
+    image: 'https://images.unsplash.com/photo-1519735777090-ec97162dc266?w=800&q=80&fit=crop',
+    name: 'Bali Collection Nusa Dua',
+    nameHe: 'Bali Collection — היוקרה של נוסה דואה',
+    area: 'Nusa Dua',
+    description: 'מרכז הקניות של אזור נוסה דואה היוקרתי. מותגי פרימיום בינלאומיים, מסעדות מעולות, ספא, ו-Wi-Fi חינם בכל השטח. מסביב יש מלונות 5 כוכבים, ולכן הקהל פה חלקי והאווירה נקייה. יש מופעי מוזיקה חיה בערב.',
+    bestFor: 'קניות יוקרה, אוכל, אורחים של מלונות Nusa Dua',
+    tips: 'מחירים לא ניתנים למיקוח — זה לא שוק. אבל האיכות והנוחות מצדיקות. חניה חינם למבקרים.',
+    openHours: '10:00-22:00 יומי',
+    area_tag: 'נוסה דואה',
+    icon: '💼',
+  },
 ]
 
 const whatToBuy = [
   { emoji: '👗', item: 'בגדי באטיק', desc: 'בד צבוע ביד בסגנון מסורתי — שמלות, חולצות, מטפחות' },
   { emoji: '🪵', item: 'פסלי עץ', desc: 'גנש, דמויות הינדיות, פסלי גן — עץ טיק ועץ פיקוס' },
   { emoji: '💍', item: 'תכשיטי כסף', desc: 'מ-Celuk — 925 sterling, עיצובים מסורתיים ומודרניים' },
+  { emoji: '👜', item: 'תיקי ראטן', desc: 'עבודת יד של אומנים מקומיים — טרנד אופנה עולמי, מקוריים רק בבאלי' },
   { emoji: '🧘', item: 'ציוד יוגה', desc: 'מחצלות, בגדי יוגה, קריסטלים, שמן קוקוס אורגני' },
-  { emoji: '🎨', item: 'ציורים', desc: 'סצינות אורז, אלי, ריקודים — ציור יד על בד' },
-  { emoji: '🌿', item: 'תמרוקים טבעיים', desc: 'שמן קוקוס, שמן ג\'ינג\'ר, בר-מוצרי טיפוח אורגניים' },
-  { emoji: '☕', item: 'קפה לואק', desc: 'הקפה הכי יקר בעולם — בדקו אמינות לפני הקנייה' },
+  { emoji: '🎨', item: 'ציורים', desc: 'סצינות אורז, אלים, ריקודים — ציור יד על בד מאובוד ובאטואן' },
+  { emoji: '🌿', item: 'תמרוקים טבעיים', desc: 'שמן קוקוס, שמן ג\'ינג\'ר, סבוני גליצרין בעבודת יד' },
+  { emoji: '☕', item: 'קפה Kintamani', desc: 'מגידולי הר הגעש — עדין יותר מקפה Luwak, אתי וזול יותר' },
+  { emoji: '🙏', item: 'Canang Sari דקורטיבי', desc: 'סלסילת מנחה באלינזית — סמל תרבותי מובהק, מתנה ייחודית' },
   { emoji: '🏺', item: 'קרמיקה ועבודות יד', desc: 'כוסות, צלחות ואביזרי עיצוב מאולמות האמנים' },
+  { emoji: '☕', item: 'קפה לואק', desc: 'הקפה הכי יקר בעולם — דרשו אישור "ethical wild" לפני הקנייה' },
+  { emoji: '🍪', item: 'חטיפים מקומיים', desc: 'Pia Legong, Kacang Disco, Krupuk — מתנות קטנות וזולות' },
+]
+
+const bargainingRules = [
+  {
+    n: '1',
+    title: 'הצעה ראשונה: 30-50% ממחיר הפתיחה',
+    body: 'מחיר הפתיחה של המוכרים גבוה פי 3-5 מהמחיר הסביר. התחילו בשליש עד חצי, ותנו מקום להתקדם לאמצע.',
+  },
+  {
+    n: '2',
+    title: 'חיוך תמיד — זה משחק, לא קרב',
+    body: 'התרבות הבאלינזית מעריכה נימוס ואדיבות. מיקוח אגרסיבי או כעוס יקבל מחיר גרוע יותר, לא טוב יותר. שמרו על טון חברי.',
+  },
+  {
+    n: '3',
+    title: 'ההליכה היא כלי הנשק שלכם',
+    body: 'אם המוכר לא זז מהמחיר — צאו מהדוכן בנימוס. 9 מתוך 10 מוכרים יקראו לכם חזרה ויציעו מחיר חדש. זה הטריק הכי אפקטיבי.',
+  },
+  {
+    n: '4',
+    title: 'מזומן ביד = רצינות',
+    body: 'להוציא את הסכום המוצע ולהחזיק אותו נראה מראה ביד זה אות של עסקה סגורה. מוכרים יעדיפו עסקה מיידית ב-80% על פני אולי ב-100%.',
+  },
+  {
+    n: '5',
+    title: 'בוקר מוקדם = מזל טוב',
+    body: 'באלינזים מאמינים שהעסקה הראשונה של היום מביאה מזל לכל היום ("penglaris"). לכן הם יותר גמישים במחיר בשעות 08:00-10:00.',
+  },
+  {
+    n: '6',
+    title: 'איפה לא למקוח',
+    body: 'לא מתמקחים במסעדות, בתי קפה, מיני-מרקטים (Indomaret, Circle K), תחנות דלק, Grab/Gojek וקניונים מודרניים. שם המחיר סופי — וכל ניסיון למקוח נתפס כחוסר נימוס.',
+  },
+]
+
+const scams = [
+  {
+    icon: '💱',
+    title: 'Money Changers — הונאת הספירה',
+    body: 'חלק ממחליפי הכסף מציעים שער עלית (הכי טוב בעיר!) ואז "מתבלבלים" בספירה או משתמשים במכונות ספירה מתוכנתות. **תמיד** ספרו את הכסף ידנית לפני שעוזבים. העדיפו סניפים של BMC או Central Kuta — רשתות מהימנות.',
+  },
+  {
+    icon: '🎭',
+    title: 'תכשיטים מזויפים — כסף שאינו כסף',
+    body: 'הרבה "תכשיטי כסף" בשווקים הם נחושת מצופה. הסימן החד-משמעי: חותמת 925 או Sterling חרוטה על הפריט. ללא חותמת = לא כסף אמיתי. הדרך הבטוחה: לקנות רק בכפר Celuk או בחנויות מוסמכות.',
+  },
+  {
+    icon: '☕',
+    title: 'קפה Luwak לא אתי או מזויף',
+    body: 'חלק ממגדלי הלואק מחזיקים את החיות בכלובים קטנים ומזינים אותן בכפייה — מנוגד לטבע. בנוסף, קפה רב שנמכר כ"Luwak" הוא סתם ערבוב רגיל. דרשו "wild Luwak" עם תעודה, ובקרו במטעים שמציגים בגאווה שהחיות חופשיות.',
+  },
+  {
+    icon: '🏪',
+    title: '"Local Price" — הפאקדוקס',
+    body: 'חנויות שצועקות "מחיר מקומי!" או "הכי זול בבאלי!" בדרך כלל יקרות יותר משווקים רגילים. המחיר האמיתי מגיע ממיקוח שקט, לא מצעקות. הפשוט מכלל: אם צריך לשכנע אתכם שזה זול — זה לא זול.',
+  },
+  {
+    icon: '💳',
+    title: 'עמלות כרטיס אשראי',
+    body: 'חלק מהחנויות מוסיפות "credit card fee" של 3-5% ללא הודעה. שאלו מראש לפני שאתם מוציאים כרטיס. במקומות רבים עדיף להוציא מזומן מכספומט (עמלה קבועה של 25,000-50,000 IDR) מאשר לשלם בכרטיס עם עמלה.',
+  },
+  {
+    icon: '🚚',
+    title: 'משלוח "זול" שלא מגיע',
+    body: 'מוכרי רהיטים מציעים משלוח לישראל במחיר אטרקטיבי, ואז מעלים את המחיר אחרי התשלום או שהמשלוח לא מגיע. בקשו הצעת מחיר בכתב כולל מע"מ ועמלות מכס, שלמו רק על DHL/FedEx מזוהה, ושמרו קבלות.',
+  },
+]
+
+const faqs = [
+  {
+    q: 'איפה הכי זול לקנות מזכרות בבאלי?',
+    a: 'השוק הזול ביותר בבאלי הוא Sukawati Art Market באזור גיאניאר — כאן קונים סיטונאים שמוכרים אחר כך בשאר השווקים. בואו בבוקר מוקדם (לפני 9:00), התכוננו למקוח אגרסיבי, והביאו מזומן. לרהיטים ועיצוב לבית — Tegallalang Handicraft Center הוא הכתובת.',
+  },
+  {
+    q: 'כמה מזומן צריך לקחת לשווקים בבאלי?',
+    a: 'לשווקים מסורתיים מומלץ לקחת 500,000-1,500,000 רופיה (כ-120-350 ש"ח) ליום קניות, במזומן ביד. השווקים לא מקבלים כרטיסי אשראי, וגם אם מקבלים — העמלה גבוהה. כספומטים פזורים בכל בעבאלי עם עמלה של 25,000-50,000 IDR להורדה.',
+  },
+  {
+    q: 'האם אפשר לשלם באשראי בחנויות ובשווקים של באלי?',
+    a: 'בקניונים המודרניים (Beachwalk, Discovery, Bali Collection, Seminyak Village) כמעט תמיד אפשר לשלם בכרטיס אשראי, לעיתים עם עמלה של 3%. בשווקים מסורתיים (סוקוואטי, אובוד) הכל במזומן בלבד. בחנויות בוטיק בקאנגו וסמינייק יש גם תשלום דיגיטלי דרך GoPay/OVO.',
+  },
+  {
+    q: 'מה השעה הכי טובה לקניות בשווקי באלי?',
+    a: 'הזמן האופטימלי לשווקים מסורתיים בבאלי הוא 08:00-10:00 בבוקר. באלינזים מאמינים ש"penglaris" — העסקה הראשונה של היום — מביאה מזל לשאר היום, ולכן הם גמישים יותר במחיר. בנוסף, החום עדיין סביר וההצבה טרייה. אחר הצהריים (15:00-17:00) זה זמן טוב שני כי מוכרים רוצים לסגור עסקאות לפני הסגירה.',
+  },
+  {
+    q: 'איך מזהים תכשיטי כסף אמיתיים בבאלי?',
+    a: 'חפשו חותמת 925 או "Sterling" חרוטה על הפריט — זה תקן בינלאומי לכסף 92.5%. ללא חותמת, זה כמעט בוודאות לא כסף אמיתי בבאלי. המקום הכי בטוח לקנות תכשיטי כסף הוא כפר Celuk שבאזור גיאניאר — כל הכפר הוא צורפים משפחתיים בדור חמישי. בשווקים רגילים: היזהרו מ"כסף" שנמכר בזול מדי.',
+  },
+  {
+    q: 'האם כדאי לשלוח רהיטים מבאלי לישראל?',
+    a: 'כדאי אם אתם קונים פריטים גדולים של ראטן, במבוק או עץ טיק — המחיר בבאלי נמוך ב-60-80% מישראל גם אחרי משלוח. ב-Tegallalang Handicraft יש חנויות שמתמחות במשלוחים בינלאומיים. בקשו הצעת מחיר בכתב הכוללת מע"מ, ביטוח ומכס ישראלי (12-17% ממחיר הפריט). חשוב לוודא שהעץ מגיע עם תעודת fumigation כדי לעבור מכס בישראל.',
+  },
+  {
+    q: 'מה מקובל להביא כמתנה מבאלי?',
+    a: 'מתנות פופולריות מבאלי: תיקי ראטן (לנשים), תכשיטי כסף מ-Celuk (מתנה אישית), סבונים וסקראבים טבעיים של Sensatia או Utama Spice (מתנה קטנה ואיכותית), קפה Kintamani טחון (לאוהבי קפה), חטיפי Pia Legong (מתנה חביבה במשרד), ופסלי גנש קטנים. לקנייה של מתנות רבות בבת אחת — שוק סוקוואטי הוא הכי משתלם.',
+  },
+  {
+    q: 'איך מתמקחים בבאלי בלי להיות לא מנומסים?',
+    a: 'המיקוח בבאלי הוא משחק חברי — חייכו תמיד, השתמשו ב"Selamat pagi" (בוקר טוב), והציעו 30-50% ממחיר הפתיחה. אם המוכר לא זז, התחילו לצאת בנימוס ("terima kasih" — תודה) — ב-90% מהמקרים יקראו לכם חזרה עם מחיר טוב יותר. אל תתמקחו בקול רם או בכעס, ואל תתמקחו בכלל במסעדות, מיני-מרקט, Grab/Gojek או קניונים.',
+  },
+  {
+    q: 'כמה עולה כוס קפה Luwak אמיתי בבאלי?',
+    a: 'כוס קפה Luwak אמיתי ואתי בבאלי עולה 50,000-80,000 רופיה (כ-12-19 ש"ח). חבילה של 100 גרם פולים עולה 200,000-400,000 רופיה. אם מציעים לכם Luwak בהרבה פחות מזה — כמעט בוודאות זה מזויף או מעורב. בקרו במטע שמציג את החיות חופשיות, ודרשו תעודה. ל-Luwak אותנטי: Satria Agrowisata ו-Bali Pulina.',
+  },
+  {
+    q: 'האם יש חנויות בלי מיקוח בבאלי לקניות נוחות?',
+    a: 'כן, במיוחד לאלה שלא רוצים להתמקח: Seminyak Village (קניון בוטיק), Beachwalk Mall Kuta, Discovery Mall, Mal Bali Galeria, Bali Collection Nusa Dua — כל הקניונים עם מחירי תווית קבועים. גם חנויות בוטיק רבות בקאנגו ובסמינייק (כגון Biasa, Magali Pascal, The Bali Craft) מוכרות במחיר קבוע. היתרון: A/C, איכות מובטחת וחזרות. החיסרון: מחיר גבוה יותר מהשווקים.',
+  },
 ]
 ---
 
@@ -108,13 +318,31 @@ const whatToBuy = [
   <section class="relative py-16 md:py-24 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-teal-900/30 to-transparent pointer-events-none" />
     <div class="mx-auto max-w-7xl px-4 sm:px-6 text-center">
-      <p class="text-teal-400 font-semibold tracking-widest uppercase text-sm mb-3">קניות בבאלי</p>
-      <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
-        שווקים, בוטיקים <span class="text-teal-400">ומה לקנות</span>
+      <p class="text-teal-400 font-semibold tracking-widest uppercase text-sm mb-3">קניות בבאלי · מדריך 2026</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
+        שווקים, בוטיקים, מיקוח <span class="text-teal-400">ומה לקנות בבאלי</span>
       </h1>
       <p class="text-white/60 max-w-2xl mx-auto text-lg">
-        מהשוק הסיטונאי בסוקוואטי ועד בוטיקי הסרפרים בקאנגו — המדריך המלא לקניות בבאלי
+        מהשוק הסיטונאי בסוקוואטי ועד בוטיקי הסרפרים בקאנגו — המדריך המלא לקניות בבאלי כולל מיקוח, הונאות ושאלות נפוצות
       </p>
+    </div>
+  </section>
+
+  <!-- Quick Area Guide -->
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-16">
+    <h2 class="text-2xl font-black text-white mb-2">📍 איפה לקנות מה בבאלי?</h2>
+    <p class="text-white/60 mb-6">מדריך מהיר לפי אזורים — לכל אזור אופי קניות שונה</p>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+      {quickAreas.map(area => (
+        <a
+          href={`/areas/${area.slug}`}
+          class="block bg-white/5 border border-white/10 rounded-xl p-4 hover:border-teal-500/40 hover:bg-teal-500/5 transition-colors"
+        >
+          <div class="text-3xl mb-2">{area.icon}</div>
+          <div class="font-bold text-white text-sm mb-1">{area.name}</div>
+          <div class="text-white/50 text-xs leading-relaxed">{area.bestFor}</div>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -134,7 +362,7 @@ const whatToBuy = [
 
   <!-- Markets & Malls -->
   <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-20">
-    <h2 class="text-2xl font-black text-white mb-8">📍 שווקים ומרכזי קניות</h2>
+    <h2 class="text-2xl font-black text-white mb-8">🏪 שווקים ומרכזי קניות בבאלי</h2>
     <div class="space-y-8">
       {markets.map((market, i) => (
         <div class={`flex flex-col md:flex-row gap-6 bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden hover:border-teal-500/20 transition-colors ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
@@ -164,37 +392,80 @@ const whatToBuy = [
     </div>
   </section>
 
+  <!-- Bargaining Guide -->
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-20">
+    <div class="bg-gradient-to-br from-teal-900/20 to-teal-800/5 border border-teal-500/20 rounded-2xl p-8">
+      <h2 class="text-2xl font-black text-white mb-2">⚖️ מיקוח בבאלי: המדריך המלא</h2>
+      <p class="text-white/60 mb-8">6 הכללים שיחסכו לכם מאות דולרים לאורך הטיול</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        {bargainingRules.map(rule => (
+          <div class="flex gap-4 bg-white/[0.03] border border-white/10 rounded-xl p-5">
+            <div class="shrink-0 w-10 h-10 rounded-full bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400 font-black">
+              {rule.n}
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-base mb-1.5">{rule.title}</h3>
+              <p class="text-white/60 text-sm leading-relaxed">{rule.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Scam Warnings -->
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-20">
+    <div class="bg-red-950/20 border border-red-500/20 rounded-2xl p-8">
+      <h2 class="text-2xl font-black text-white mb-2">⚠️ הונאות קניות בבאלי: להימנע בכל מחיר</h2>
+      <p class="text-white/60 mb-8">6 ההונאות הנפוצות ביותר מול תיירים — ואיך לזהות אותן</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        {scams.map(scam => (
+          <div class="bg-white/[0.03] border border-red-500/10 rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-2xl">{scam.icon}</span>
+              <h3 class="font-bold text-white text-base">{scam.title}</h3>
+            </div>
+            <p class="text-white/60 text-sm leading-relaxed" set:html={scam.body.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')}></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Tips section -->
   <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-20">
     <div class="bg-teal-500/10 border border-teal-500/20 rounded-2xl p-8">
       <h2 class="text-xl font-black text-white mb-6">💡 טיפים לקניות חכמות בבאלי</h2>
       <div class="grid md:grid-cols-2 gap-4 text-sm text-white/70 leading-relaxed">
         <div class="space-y-3">
-          <p>⚖️ <strong class="text-white">מיקוח זה חובה</strong> — בשווקים מסורתיים, מחיר הפתיחה גבוה פי 3-5. המיקוח הוא חלק מהתרבות, לא חוסר נימוס.</p>
-          <p>💵 <strong class="text-white">מזומן שולט</strong> — שווקים מסורתיים עובדים עם מזומן בלבד. קחו רופיות לפני שיוצאים.</p>
-          <p>🌡️ <strong class="text-white">בוקר מוקדם</strong> — מוכרים בשווקים מרוצים יותר ומאפשרים הנחות גדולות יותר בשעות הפתיחה.</p>
+          <p>💵 <strong class="text-white">מזומן שולט בשווקים</strong> — שווקים מסורתיים עובדים עם מזומן בלבד. קחו 500K-1.5M IDR ביום ומזומן קטן (10K, 20K) למיקוח.</p>
+          <p>🏧 <strong class="text-white">כספומטים זולים יותר מכרטיס</strong> — משיכה מכספומט: עמלה קבועה 25-50K IDR. כרטיס אשראי בחנויות: עמלה של 3-5% על כל רכישה.</p>
+          <p>📱 <strong class="text-white">GoPay ו-OVO לחנויות בוטיק</strong> — בקאנגו ובסמינייק הרבה חנויות מקבלות תשלום דיגיטלי. כדאי להתקין GoPay עם כרטיס זר.</p>
         </div>
         <div class="space-y-3">
-          <p>🔍 <strong class="text-white">בדקו כסף אמיתי</strong> — תכשיטי כסף: חפשו חותמת 925 ו-Sterling. בלי חותמת = לא כסף אמיתי.</p>
-          <p>☕ <strong class="text-white">קפה לואק</strong> — וודאו שהוא "ethical" (חופשי, לא כלוא) לפני הקנייה. מחיר הוגן: 50,000-80,000 IDR לכוס.</p>
-          <p>🧳 <strong class="text-white">שקלו תוספת משקל</strong> — פסלי עץ ורהיטי ראטן כבדים. בדקו מחיר משלוח לישראל לפני שאתם קונים הרבה.</p>
+          <p>🌡️ <strong class="text-white">בוקר מוקדם לשווקים</strong> — הטמפרטורה סבירה, הסחורה טרייה, והמוכרים גמישים במחיר בגלל "penglaris" (מזל של עסקה ראשונה).</p>
+          <p>🧳 <strong class="text-white">שקלו תוספת משקל</strong> — פסלי עץ ורהיטי ראטן כבדים. בדקו מחיר משלוח לישראל מראש ב-Tegallalang לפני שקונים פריטים גדולים.</p>
+          <p>🎁 <strong class="text-white">"Oleh-Oleh" — מתנות מבאלי</strong> — Pia Legong וחטיפי Kacang Disco הם מתנות מושלמות למשרד — קטנות, זולות, ואותנטיות.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-20">
+    <FAQSection items={faqs} entityName="קניות בבאלי" />
+  </section>
+
   <!-- CTA -->
   <section class="mx-auto max-w-7xl px-4 sm:px-6 mb-20 text-center">
     <div class="bg-gradient-to-r from-teal-900/40 to-teal-800/20 border border-teal-500/20 rounded-2xl p-10">
-      <h2 class="text-2xl font-black text-white mb-3">צריכים עזרה עם הטיול?</h2>
-      <p class="text-white/60 mb-6">מסלולים, ויזה, הזמנות — הכל בווטסאפ</p>
+      <h2 class="text-2xl font-black text-white mb-3">צריכים עזרה עם הקניות בבאלי?</h2>
+      <p class="text-white/60 mb-6">מסלולים, המלצות חנויות, ויזה והזמנות — צרו קשר ונשמח לעזור</p>
       <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מתכננים טיול לבאלי ורוצים עזרה עם הקניות והמסלול')}`}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/contact"
         class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-black font-bold px-8 py-3 rounded-xl transition-colors"
       >
-        💬 שלחו הודעה בווטסאפ
+        ✉️ צרו קשר
       </a>
     </div>
   </section>

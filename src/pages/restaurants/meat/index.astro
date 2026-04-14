@@ -1,143 +1,46 @@
 ---
-import Layout from '../../../components/Layout.astro'
-import SchemaOrg from '../../../components/SchemaOrg.astro'
-import Breadcrumb from '../../../components/Breadcrumb.astro'
-import RestaurantCard from '../../../components/Cards/RestaurantCard.astro'
+import RestaurantCategoryLayout from '../../../components/RestaurantCategoryLayout.astro'
 import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
 
 const { data } = await supabaseAdmin
   .from('restaurants')
-  .select('*')
+  .select('name_he, name_en, slug, image, area, cuisine_types, price_range, rating, excerpt')
   .eq('destination_id', DESTINATION_ID)
   .eq('published', true)
+  .order('rating', { ascending: false })
 
+const matchTerms = [
+  'בשרים', 'בשרי', 'בשר', 'סטייקהאוס', 'סטייק',
+  'meat', 'steak', 'BBQ', 'ברביקיו',
+  'גריל בשרים', 'גריל', 'יקיניקו', 'טקסני',
+]
 const items = (data || []).filter(r =>
-  (r.cuisine_types || []).some(t => ['בשרי', 'בשר', 'סטייק', 'סטייקהאוס', 'meat', 'steak'].includes(t))
+  (r.cuisine_types || []).some(t => matchTerms.some(term => t.includes(term)))
 )
 
-const pageTitle = 'מסעדות בשר בבאלי | Yalla Bali'
-const pageDescription = 'מסעדות הבשר והסטייק הטובות ביותר בבאלי. סטייקים מעולים, בשר איכותי וחוויות אוכל בלתי נשכחות.'
-
-const itemListSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'מסעדות בשר בבאלי',
-  description: pageDescription,
-  numberOfItems: items.length,
-  itemListElement: items.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.name_he,
-    url: new URL(`/restaurants/${item.slug}`, 'https://yalla-bali.co.il').toString(),
-  })),
-}
-
-const breadcrumbItems = [
-  { label: 'דף הבית', href: '/' },
-  { label: 'מסעדות', href: '/restaurants' },
-  { label: 'בשר' },
+const faq = [
+  { q: 'מהן מסעדות הבשר הטובות ביותר בבאלי?', a: 'מסעדות הבשר המובילות בבאלי כוללות את בוי אנד קאו (סטייקהאוס יוקרה עם dry-aging בסמיניאק), נאוטי נוריז (צלעות חזיר אגדיות בסמיניאק ואובוד), סמוקהאוס BBQ (בריסקט טקסני), ודה גראמפי באצ\'ר (שילוב סטייקהאוס ומעשנת קפה-עץ).' },
+  { q: 'כמה עולה ארוחה בסטייקהאוס בבאלי?', a: 'ארוחה בסטייקהאוס יוקרה בבאלי (כמו בוי אנד קאו או גראמפי באצ\'ר) עולה 500,000-1,000,000 רופי לאדם (140-270 ש"ח). במסעדות BBQ יותר קז\'ואלית (נאוטי נוריז, סמוקהאוס) המחירים נעים 300,000-600,000 רופי לאדם.' },
+  { q: 'מה החזיר בבאלי?', a: 'חזיר הוא חלק מרכזי מהמטבח הבאלינזי — מדובר בחזיר מקומי איכותי. הצלעות של נאוטי נוריז מפורסמות בעולם ואנתוני בורדיין הציג אותן ב-CNN. שומרי כשרות יכולים להתמקד במסעדות BBQ בקר או ואגיו (בוי אנד קאו).' },
+  { q: 'איפה הכי טוב לאכול צלעות BBQ בבאלי?', a: 'נאוטי נוריז הוא המוסד האגדי של צלעות חזיר BBQ בבאלי — הסניף המקורי באובוד מ-1995 והסניף הסמיניאקי. את הצלעות בגחלים פתוחות, עם המרטיני המפורסם של בורדיין. בעיני רבים זו חובה לכל מטייל.' },
+  { q: 'מה זה dry-aged ואיפה יש בבאלי?', a: 'dry-aged זה בשר שיושן במערה מיוחדת למשך 28-60 יום, מה שמרכז את הטעמים ומרכך את הבשר. בוי אנד קאו בסמיניאק היא בוטיק הבשר הראשון בבאלי עם מערת dry-aging, ומגישה ריב-איי, סטריפלוין וטומהוק ואגיו ברמה עולמית.' },
+  { q: 'האם יש סטייקים כשרים בבאלי?', a: 'בבאלי אין סטייקהאוסים עם תעודת כשרות. בית חב"ד באלי יכול לארגן ארוחות בשר כשרות בהזמנה מראש. למטיילים שומרי כשרות חלקית, מסעדות חלאל (אל מדינה, מארוש) מציעות מנגל בקר וטלה ללא חזיר.' },
+  { q: 'מה זה סמוקהאוס BBQ?', a: 'סמוקהאוס זה מטבח ברביקיו אמריקאי-טקסני קלאסי: בריסקט (חזה בקר) מעושן 12 שעות, צלעות חזיר St. Louis, חזיר מפוצל (Pulled Pork) ו-Burnt Ends. בסמוקהאוס BBQ ובדה גראמפי באצ\'ר בסמיניאק יש את הגרסה הכי אותנטית בבאלי.' },
+  { q: 'האם צריך להזמין מקום במסעדות בשר בבאלי מראש?', a: 'בוי אנד קאו דורשת הזמנה מראש (היא מדורגת #3 בטריפאדווייזר סמיניאק). נאוטי נוריז וסמוקהאוס BBQ ניתן להגיע ללא הזמנה בשעות רגילות, אבל בסופי שבוע כדאי להזמין. במיוחד בעונת השיא.' },
+  { q: 'מה לבחור — נאוטי נוריז סמיניאק או אובוד?', a: 'הסניף המקורי של נאוטי נוריז באובוד (משנת 1995) הוא אגדי יותר עם אווירת ווארונג אותנטית וריח הגחלים הפתוחות. הסניף הסמיניאקי נוח יותר למי שיושב בסמיניאק. שני הסניפים מגישים את אותן הצלעות המפורסמות.' },
+  { q: 'האם יש מסעדות ואגיו בבאלי?', a: 'כן, בוי אנד קאו מתמחה בואגיו פרימיום (Tomahawk, Striploin). גם במסעדות יפניות כמו טאקומי, רייג\'ין ואדוגין מגישים ואגיו A5 בטפניאקי. זו חוויה יקרה אבל ייחודית.' },
 ]
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <SchemaOrg schema={itemListSchema} />
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <Breadcrumb items={breadcrumbItems} />
-
-    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
-      <a href="/restaurants/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
-      <a href="/restaurants/kosher/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">✡ כשר</a>
-      <a href="/restaurants/fine-dining/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">Fine Dining</a>
-      <a href="/restaurants/japanese/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🍣 יפנית</a>
-      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">🥩 בשרים</span>
-    </nav>
-
-    <header class="mb-10 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מסעדות בשר בבאלי</h1>
-      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
-        באלי היא גן עדן לאוהבי בשר. מסטייקים מיושנים יבש ועד בשר וואגיו יפני —
-        המסעדות בבאלי מציעות את חתיכות הבשר האיכותיות ביותר בעולם.
-      </p>
-    </header>
-
-    {items.length > 0 ? (
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(item => (
-          <RestaurantCard
-            name_he={item.name_he}
-            name_en={item.name_en}
-            slug={item.slug}
-            image={item.image}
-            area={item.area}
-            cuisine_types={item.cuisine_types}
-            price_range={item.price_range}
-            rating={item.rating}
-          />
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-16">
-        <p class="text-white/40 text-lg">לא נמצאו מסעדות בשר כרגע. חזרו בקרוב!</p>
-      </div>
-    )}
-
-    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
-      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מסעדות בשר בבאלי</h2>
-      <div class="space-y-4">
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מסעדת הסטייק הכי טובה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">באלי מציעה מסעדות סטייק ברמה עולמית. מסעדות בשר בבאלי משתנות בסגנון — יוקרה או קז'ואל. בדקו את הרשימה שלנו של מסעדות בשר בבאלי.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה סטייק במסעדה טובה בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">סטייק בבאלי עולה בין $20-80 תלוי בחתך ובאיכות. מסעדות סטייק פרימיום בבאלי מציעות בשר Wagyu יפני בעלות גבוהה יותר.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">יש מסעדות בשר כשרות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, יש מסעדות בשר כשרות בבאלי. בשר כשר בבאלי גדל בשנים האחרונות. בדקו את המסעדות הכשרות בבאלי למידע מעודכן.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">אילו סוגי בשר זמינים במסעדות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות בשר בבאלי מציעות סוגים מגוונים — Wagyu, Kobe, Prime, וואגיו יפני. בשר בבאלי יכול להיות בן שנה או יותר.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה הבדל בין סטייק שונים במסעדות בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">סטייק בבאלי מוגש בחתכים שונים — ribeye, filet, NY strip. לכל סוג סטייק יש טעם שונה וברמת רכות ייחודית.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איך משמרים בשר טרוז בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">מסעדות בשר בבאלי שומרות בשר טרוז במקררים מקצועיים בטמפרטורה מדוייקת. בשר איכותי בבאלי מגיע משומרים מהימנים בעולם.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">צריך להזמין מקום במסעדות בשר בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">כן, מומלץ להזמין במסעדות בשר בבאלי, במיוחד בסופי שבוע. מסעדות בשר מפורסמות בבאלי מתמלאות במהירות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה קוד הלבוש במסעדות בשר בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">קוד הלבוש במסעדות בשר בבאלי Smart Casual עד פורמלי. יש מסעדות בשר בבאלי פחות קפדניות מאחרות.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה ההוספות הטובות ביותר עם בשר בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בבאלי מסעדות בשר מציעות הוספות — תפוחי אדמה, ירקות, רוטב. בשר בבאלי משמש בצד ירקות איכותיים ומתובלים.</p>
-        </details>
-        <details class="group border-b border-teal-500/10 pb-4">
-          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה דרגת הצלה (done) המומלצת לבשר בבאלי?</summary>
-          <p class="mt-2 text-white/60 leading-relaxed">בדרך כלל, בשר בבאלי מומלץ לתבשל rare עד medium-rare כדי לשמור על הטעם ורכות. שפים במסעדות בשר בבאלי יכולים להתאים את דרגת הצלייה לחוק שלכם.</p>
-        </details>
-      </div>
-    </section>
-
-    <div class="mt-10 bg-[#1A1208] border border-teal-500/20 rounded-2xl p-6 text-center">
-      <p class="text-white/80 mb-4">רוצים המלצה למסעדת בשר בבאלי?</p>
-      <a
-        href={`https://wa.me/972528211665?text=${encodeURIComponent('היי, אנחנו מחפשים מסעדת בשר בבאלי 🥩')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        dir="rtl"
-        class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-full hover:bg-[#1ebe5d] transition-colors"
-      >
-        דברו איתנו בווטסאפ
-      </a>
-    </div>
-  </main>
-</Layout>
+<RestaurantCategoryLayout
+  pageTitle="מסעדות בשר וסטייקהאוס בבאלי | יאללה באלי"
+  pageDescription="מדריך למסעדות הבשר הטובות ביותר בבאלי: בוי אנד קאו (סטייקהאוס dry-aged), נאוטי נוריז (צלעות BBQ אגדיות), סמוקהאוס BBQ וגראמפי באצ׳ר. מחירים, המלצות וטיפים."
+  h1="מסעדות בשר וסטייקהאוס בבאלי"
+  intro="באלי הפכה ליעד מוביל לחובבי בשר — מהצלעות האגדיות של נאוטי נוריז (שאנתוני בורדיין הציג ב-CNN), דרך הסטייקים dry-aged בבוי אנד קאו, ועד לבריסקט הטקסני המעושן בסמוקהאוס BBQ. הרוב המוחלט מרוכז בסמיניאק ואובוד."
+  items={items}
+  faq={faq}
+  categorySlug="meat"
+  breadcrumbLabel="בשרים"
+  schemaName="מסעדות בשר בבאלי"
+  faqHeading="שאלות נפוצות — מסעדות בשר בבאלי"
+/>

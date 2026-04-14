@@ -1,0 +1,116 @@
+---
+import Layout from '../../../components/Layout.astro'
+import SchemaOrg from '../../../components/SchemaOrg.astro'
+import Breadcrumb from '../../../components/Breadcrumb.astro'
+import HotelCard from '../../../components/Cards/HotelCard.astro'
+import { supabaseAdmin, DESTINATION_ID } from '../../../lib/supabase'
+
+const { data } = await supabaseAdmin
+  .from('hotels')
+  .select('*')
+  .eq('destination_id', DESTINATION_ID)
+  .eq('published', true)
+
+const items = (data || []).filter(h =>
+  (h.area || '').toLowerCase().includes('sanur') ||
+  (h.name_en || '').toLowerCase().includes('sanur')
+)
+
+const pageTitle = 'מלונות בסנור באלי — המלצות ודירוגים | Yalla Bali'
+const pageDescription = 'מלונות מומלצים בסנור, באלי. אזור שקט ורגוע עם חוף מוגן, מושלם למשפחות ולזוגות שמחפשים אווירה אותנטית בבאלי.'
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'מלונות בסנור באלי',
+  description: pageDescription,
+  numberOfItems: items.length,
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name_he,
+    url: new URL(`/hotels/${item.slug}`, 'https://ibalibali.com').toString(),
+  })),
+}
+
+const breadcrumbItems = [
+  { label: 'דף הבית', href: '/' },
+  { label: 'מלונות', href: '/hotels' },
+  { label: 'מלונות בסנור' },
+]
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <SchemaOrg schema={itemListSchema} />
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumb items={breadcrumbItems} />
+
+    <nav class="flex gap-2 overflow-x-auto scrollbar-hide mb-8 pb-1">
+      <a href="/hotels/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">הכל</a>
+      <a href="/hotels/ubud/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌿 אובוד</a>
+      <a href="/hotels/canggu/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🏄 קאנגו</a>
+      <a href="/hotels/seminyak/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌅 סמינייק</a>
+      <a href="/hotels/uluwatu/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🪨 אולוואטו</a>
+      <a href="/hotels/jimbaran/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🐟 ג׳ימברן</a>
+      <a href="/hotels/nusa-dua/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🌴 נוסה דואה</a>
+      <span class="flex-none px-4 py-1.5 rounded-full text-sm font-bold bg-teal-500 text-black whitespace-nowrap">🎣 סנור</span>
+      <a href="/hotels/kuta/" class="flex-none px-4 py-1.5 rounded-full text-sm font-medium bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all whitespace-nowrap">🏖️ קוטה</a>
+    </nav>
+
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">מלונות בסנור באלי</h1>
+      <p class="text-white/60 max-w-2xl mx-auto leading-relaxed">
+        סנור הוא אזור שקט ואותנטי בצד המזרחי של באלי — חוף מוגן בלי גלים, טיילת חופית ואווירה רגועה.
+        מלונות בסנור באלי מושלמים למשפחות, לזוגות מבוגרים ולמי שמחפש את באלי האמיתית.
+      </p>
+    </header>
+
+    {items.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {items.map(item => (
+          <HotelCard
+            name_he={item.name_he}
+            name_en={item.name_en}
+            slug={item.slug}
+            image={item.image}
+            area={item.area}
+            star_rating={item.star_rating}
+            price_range={item.price_range}
+            booking_url={item.booking_url}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16">
+        <p class="text-white/40 text-lg">לא נמצאו מלונות בסנור כרגע. חזרו בקרוב!</p>
+      </div>
+    )}
+
+    <section class="mt-16 bg-[#1A1208] border border-teal-500/10 rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-teal-400 mb-6">שאלות נפוצות — מלונות בסנור באלי</h2>
+      <div class="space-y-4">
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה מיוחד במלונות בסנור באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בסנור באלי מציעים אווירה שקטה ואותנטית, חוף מוגן בלי גלים חזקים וטיילת חופית יפה. סנור באלי הוא מהאזורים הכי וותיקים ומבוססים לתיירות בבאלי.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">כמה עולה מלון בסנור באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלון בסנור באלי עולה בין 30 ל-250 דולר ללילה. סנור באלי מציע יחס מחיר-איכות מצוין עם מלונות טובים במחירים נמוכים יחסית לאזורים אחרים בבאלי.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">האם סנור באלי מתאים למשפחות?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">סנור באלי מושלם למשפחות. מלונות בסנור באלי על חוף מוגן עם מים רדודים ורגועים — אידאלי לילדים. הטיילת בסנור באלי מצוינת לרכיבה על אופניים עם המשפחה.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">מה יש לעשות ליד מלונות בסנור באלי?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בסנור באלי קרובים לטיילת החוף, שוק הלילה של סנור, מוזיאון לה מאייר וספורט ימי. מסנור באלי יוצאות סירות מהירות לנוסה פנידה ולמברגן.</p>
+        </details>
+        <details class="group border-b border-teal-500/10 pb-4">
+          <summary class="cursor-pointer text-white font-medium group-open:text-teal-400 transition-colors">איפה סנור באלי ביחס לאזורים אחרים?</summary>
+          <p class="mt-2 text-white/60 leading-relaxed">מלונות בסנור באלי נמצאים כ-30 דקות משדה התעופה ו-45 דקות מאובוד. סנור באלי במזרח האי, בצד השקט — הפוך מסמינייק וקאנגו.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+</Layout>

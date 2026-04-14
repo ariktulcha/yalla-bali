@@ -120,8 +120,8 @@ const schema = {
   headline: title,
   description,
   author: { '@type': 'Organization', name: 'Yalla Bali' },
-  publisher: { '@type': 'Organization', name: 'Yalla Bali', url: 'https://yalla-bali.co.il' },
-  mainEntityOfPage: 'https://yalla-bali.co.il/beaches',
+  publisher: { '@type': 'Organization', name: 'Yalla Bali', url: 'https://ibalibali.com' },
+  mainEntityOfPage: 'https://ibalibali.com/beaches',
   inLanguage: 'he',
   datePublished: '2025-01-01',
   dateModified: '2026-03-29',
@@ -138,7 +138,7 @@ const faqSchema = {
 }
 ---
 
-<Layout {title} {description} canonical="https://yalla-bali.co.il/beaches">
+<Layout {title} {description} canonical="https://ibalibali.com/beaches">
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -152,7 +152,7 @@ const faqSchema = {
         <span class="mx-2">/</span>
         <span class="text-white/60">חופים</span>
       </nav>
-      <h1 class="text-4xl md:text-6xl font-black text-white mb-6">חופים <span class="text-teal-400">בבאלי</span></h1>
+      <h1 class="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6">חופים <span class="text-teal-400">בבאלי</span></h1>
       <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
         מקוטה התוסס ועד אולוואטו הדרמטי — 7 החופים הכי שווים בבאלי. גלים לגלישה, שקיעות שאי אפשר לשכוח, ומים בצבע שלא ראיתם בשום מקום אחר.
       </p>
